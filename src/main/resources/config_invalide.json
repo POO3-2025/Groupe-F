@@ -1,0 +1,9 @@
+{
+  "DBType": "sqlserver",
+  "BDCredentials": {
+    "HostName": "localhost",
+    "UserName": "sa",
+    "Password": "wrongpassword",
+    "DBName": "GAME"
+  }
+}
