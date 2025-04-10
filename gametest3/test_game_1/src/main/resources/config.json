@@ -1,0 +1,54 @@
+{
+  "Databases": {
+    "sqlservertest": {
+      "ConnectionType": "DB",
+      "DBType": "sqlserver",
+      "DBCredentials": {
+        "HostName": "127.0.0.1",
+        "UserName": "sa",
+        "Password": "1234",
+        "DBName": "GAMETEST"
+      }
+    },
+    "sqlserverprod": {
+      "ConnectionType": "DB",
+      "DBType": "sqlserver",
+      "DBCredentials": {
+        "HostName": "127.0.0.1",
+        "UserName": "sa",
+        "Password": "1234",
+        "DBName": "GAMEPROD"
+      }
+    },
+    "mysql": {
+      "ConnectionType": "DB",
+      "DBType": "mysql",
+      "DBCredentials": {
+        "HostName": "127.0.0.1",
+        "UserName": "sa",
+        "Password": "1234",
+        "DBName": "GAMEPROD"
+      }
+    },
+    "mysqlTEST": {
+      "ConnectionType": "DB",
+      "DBType": "mysql",
+      "DBCredentials": {
+        "HostName": "127.0.0.1",
+        "UserName": "sa",
+        "Password": "1234",
+        "DBName": "GAMETEST"
+      }
+    },
+    "nosql": {
+      "ConnectionType": "DB",
+      "DBType": "nosql",
+      "DBCredentials": {
+        "HostName": "localhost",
+        "UserName": "sa",
+        "Password": "1234",
+        "DBName": "INVENTORY"
+      }
+    }
+  }
+}
