@@ -5,9 +5,10 @@
       "DBType": "mysql",
       "DBCredentials": {
         "HostName": "127.0.0.1",
-        "UserName": "sa",
-        "Password": "1234",
-        "DBName": "GAMEPROD"
+        "UserName": "root",
+        "Password": "",
+        "DBName": "gameprod",
+        "port": 3306
       }
     },
     "mysqlTEST": {
@@ -15,9 +16,10 @@
       "DBType": "mysql",
       "DBCredentials": {
         "HostName": "127.0.0.1",
-        "UserName": "sa",
-        "Password": "1234",
-        "DBName": "GAMETEST"
+        "UserName": "root",
+        "Password": "",
+        "DBName": "GAMETEST",
+        "port": 3306
       }
     },
     "nosql": {

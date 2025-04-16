@@ -1,36 +1,63 @@
 package be.helha.labos.collection.Item;
 
 
-import be.helha.labos.DBNosql.MongoDB;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.bson.types.ObjectId;
+public class Sword extends Weapon {
+    public enum SwordMaterial {
+        GOLD(15f, "Or"),
+        SILVER(13f, "Argent"),
+        FIRE(20f, "Feu"),
+        STEEL(10f, "Acier");
 
+        private final String material;
+        private final float damage;
 
-public class Sword extends Item {
+        SwordMaterial(float damage, String material) {
+            this.damage = damage;
+            this.material = material;
+        }
 
-    private int damage ;
-    private String type;
+        public String getMaterial() {
+            return material;
+        }
 
+        public float getDamage() {
+            return damage;
+        }
+    }
+
+    private SwordMaterial material;
+
+    // Default constructor needed for MongoDB
     public Sword() {
-        super();
+        super((int) SwordMaterial.STEEL.getDamage(), WeaponType.SWORD);
+        this.material = SwordMaterial.STEEL;
+        super.material = SwordMaterial.STEEL.material;
     }
 
-    public Sword(int damage) {
-        this.damage = damage;
-        this.type = "Sword";
+    public Sword(SwordMaterial material) {
+        super((int) material.getDamage(), WeaponType.SWORD);
+        this.material = material;
+        super.material = material.getMaterial();
     }
 
-    public int getDamage() {
-        return damage;
-    }
-    public void setDamage(int damage) {
-        this.damage = damage;
+    @Override
+    protected String getMaterialName() {
+        return material.getMaterial();
     }
 
-    public String getType() {
-        return type;
+    public SwordMaterial getMaterial() {
+        return material;
     }
-    public void setType(String type) {
-        this.type = type;
+
+    public void setMaterial(SwordMaterial material) {
+        this.material = material;
+        super.material = material.getMaterial();
+        setDamage((int) material.getDamage());
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s (Matériau: %s, Dégâts: %d)",
+                weaponType.getName(), material.getMaterial(), getDamage());
     }
 }

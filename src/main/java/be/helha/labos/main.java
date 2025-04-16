@@ -1,19 +1,21 @@
 package be.helha.labos;
 
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
+import be.helha.labos.DB.*;
 
+import be.helha.labos.collection.Character.*;
 import be.helha.labos.collection.Item.Item;
 import be.helha.labos.collection.Item.Potion;
 import be.helha.labos.collection.Item.Shield;
 import be.helha.labos.collection.Item.Sword;
-import be.helha.labos.collection.*;
+import be.helha.labos.collection.User;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
 
-import java.util.List;
+import java.io.ObjectInputFilter;
+import java.sql.Connection;
 
-import static be.helha.labos.collection.User.*;
+import static be.helha.labos.DBNosql.MongoDB.readAllCollections;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
@@ -24,19 +26,27 @@ public class main {
         MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
         try {
 
-            MongoCollection <Item>Itemcollection = mongoDatabase.getCollection("items", Item.class);
+            MongoCollection<Item> Itemcollection = mongoDatabase.getCollection("items", Item.class);
+            MongoCollection<Character> Charactercollection = mongoDatabase.getCollection("characters", Character.class);
 
-            Sword sword = new Sword(25);
 
-            Shield shield = new Shield(1,50);
+            Sword sword = new Sword();
+            Sword fireSword = new Sword(Sword.SwordMaterial.FIRE);
 
-            Potion potion = new Potion (20,15);
+            Shield shield = new Shield(1, 50);
+
+            Potion potion = new Potion(20, 15);
+
+            //Archer archer = new Archer();
 
 
             // Insertion du document
-            /*Itemcollection.insertOne(sword);
-            Itemcollection.insertOne(shield);
-            Itemcollection.insertOne(potion);*/
+            //Itemcollection.insertOne(sword);
+
+            //Itemcollection.insertOne(shield);
+            //Itemcollection.insertOne(potion);
+
+            //Charactercollection.insertOne(archer);
 
             //User user = new User("Doe","John");
             //user.save;
@@ -53,18 +63,28 @@ public class main {
                     new Document("$set", new Document("type", "Sword")));*/
 
             System.out.println("\n\n");
-            //readAllCollections(mongoDatabase);
+           //readAllCollections(mongoDatabase);
 
-            List<Document> users = readAllUser(mongoDatabase);
+            /*List<Document> users = readAllUser(mongoDatabase);
             for (Document User : users) {
                 System.out.println(User.toJson());
-            }
+            }*/
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
 
         }
 
         connexionDbNosql.closeConnection();
+
+        User_DAO dao = new User_DAO();
+        User nouvelUser = new User("JohnDoe", "1234", 1);
+        boolean success = dao.ajouterUser(nouvelUser);
+
+        if (success) {
+            System.out.println("Utilisateur ajouté !");
+        } else {
+            System.out.println("Erreur lors de l'ajout.");
+        }
     }
 }

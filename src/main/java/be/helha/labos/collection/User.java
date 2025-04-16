@@ -13,63 +13,38 @@ import java.util.List;
 
 public class User {
 
-    @JsonProperty("_id")
-    protected ObjectId id;
-    String nom;
-    String Prenom;
+    private String pseudo;
+    private String password;
+    private int IdPersonnage;
 
-    private Connexion_DB_Nosql connexionDbNosql;
-    private MongoDatabase mongoDatabase;
-    private MongoCollection<Document> userCollection;
-
-    public User() {} // par défaut
-
-    public User(String nom, String Prenom) {
-
-        connexionDbNosql = Connexion_DB_Nosql.getInstance();
-        mongoDatabase = connexionDbNosql.getDatabase();
-        userCollection = mongoDatabase.getCollection("users");
-
-        this.nom = nom;
-        this.Prenom = Prenom;
-    }
-    public void save(){
-        // Création d'un inventaire
-        Inventaire inventaire = new Inventaire();
-
-        // Création de l'utilisateur
-        Document user = new Document("nom", nom)
-                .append("prenom", Prenom)
-                .append("inventory_id", inventaire.getId()); // Référence à l'inventaire par _id
-
-        // Insertion de l'utilisateur dans la collection 'users'
-        InsertOneResult userResult = userCollection.insertOne(user);
-        System.out.println(userResult);
-        }
-
-    public ObjectId getId() {
-        return id;
-    }
-    public void setId(ObjectId id) {
-        this.id = id;
+    public User(String pseudo, String password, int idPersonnage) {
+        this.pseudo = pseudo;
+        this.password = password;
+        this.IdPersonnage = idPersonnage;
     }
 
-    @JsonProperty("nom")
-    public String getNom() {
-        return nom;
+    public String getPseudo() {
+        return pseudo;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
     }
 
-    @JsonProperty("prenom")
-    public String getPrenom() {
-        return Prenom;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPrenom(String prenom) {
-        Prenom = prenom;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getIdPersonnage() {
+        return IdPersonnage;
+    }
+
+    public void setIdPersonnage(int idPersonnage) {
+        IdPersonnage = idPersonnage;
     }
 
     // Méthode permettant de supprimer un user ainsi que son inventaire
