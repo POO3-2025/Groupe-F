@@ -1,10 +1,13 @@
 package be.helha.labos.DB;
 
 
+import java.util.Map;
+
 /**
  * Classe représentant la configuration nécessaire pour établir une connexion à la base de données.
  */
 public class Configuration {
+
    /**
     * Type de connexion à utiliser.
     */
@@ -18,7 +21,7 @@ public class Configuration {
    /**
     * Informations d'identification pour la connexion à la base de données.
     */
-   public Credentials BDCredentials;
+   public Credentials DBCredentials;
 
 
     public String getConnectionType() {
@@ -29,7 +32,7 @@ public class Configuration {
         return DBType;
     }
 
-    public Credentials getBDCredentials() {
-        return BDCredentials;
+    public Credentials getDBCredentials() {
+        return DBCredentials;
     }
 }

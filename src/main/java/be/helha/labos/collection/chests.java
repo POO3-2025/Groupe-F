@@ -13,9 +13,7 @@ import java.util.List;
 
 public class chests {
 
-    /**
-     *
-     */
+
     @JsonProperty("_id")
     protected ObjectId id;
 
@@ -24,10 +22,7 @@ public class chests {
     private static MongoCollection<Document> collection = mongoDatabase.getCollection("chests");
     private List<Document> chestsSlots;
 
-    /**
-     *
-     * @param inventoryId
-     */
+
     public chests( ObjectId inventoryId) {
 
         // Création d'un coffre de 10 slots

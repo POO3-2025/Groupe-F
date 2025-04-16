@@ -25,14 +25,14 @@ public class Affichage {
 
             // Construction de l'URL de connexion
             String url = "jdbc:" + configuration.getDBType() + "://" +
-                    configuration.getBDCredentials().getHost() +
-                    ":" + configuration.getBDCredentials().getPort() +
-                    "/" + configuration.getBDCredentials().getDatabase();
+                    configuration.getDBCredentials().getHost() +
+                    ":" + configuration.getDBCredentials().getPort() +
+                    "/" + configuration.getDBCredentials().getDatabase();
 
             // Connexion à la base de données
             try (Connection conn = DriverManager.getConnection(url,
-                    configuration.getBDCredentials().getUser(),
-                    configuration.getBDCredentials().getPassword())) {
+                    configuration.getDBCredentials().getUser(),
+                    configuration.getDBCredentials().getPassword())) {
                 System.out.println("Connexion réussie !");
             } catch (Exception e) {
                 System.err.println("Échec de la connexion !");
@@ -42,7 +42,7 @@ public class Affichage {
             // Affichage des détails de configuration
             System.out.println("Type de connexion : " + configuration.getConnectionType());
             System.out.println("Type de base de données : " + configuration.getDBType());
-            System.out.println("Nom de la base de données : " + configuration.getBDCredentials().getDatabase());
+            System.out.println("Nom de la base de données : " + configuration.getDBCredentials().getDatabase());
 
         } catch (Exception e) {
             System.err.println("Erreur lors du chargement de la configuration.");

@@ -27,7 +27,7 @@ public class Connexion_DB {
      *
      * @throws RuntimeException Si le fichier de configuration est introuvable ou si une erreur survient lors de la connexion.
      */
-    protected Connexion_DB() {
+    protected Connexion_DB(String dbKey) {
         try {
             Gson gson = new Gson();
 
@@ -38,18 +38,30 @@ public class Connexion_DB {
             }
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            Configuration configuration = gson.fromJson(reader, Configuration.class);
+            ConfigurationRoot root = gson.fromJson(reader, ConfigurationRoot.class);
+            Configuration selectedDb = root.Databases.get(dbKey);
+
+            System.out.println(new Gson().toJson(selectedDb)); // Pour afficher ce que Gson a bien lu
+            System.out.println("Clé demandée : " + dbKey);
+            System.out.println("Clés disponibles : " + root.Databases.keySet());
+
             reader.close();
+            if (selectedDb == null) {
+                throw new RuntimeException("La configuration pour '" + dbKey + "' est introuvable dans config.json !");
+            }
 
-            // Construction de l'URL de connexion
-            String url = "jdbc:" + configuration.DBType + "://" + configuration.BDCredentials.HostName
-                    + ":" + configuration.BDCredentials.port
-                    + ";databaseName=" + configuration.BDCredentials.DBName
-                    + ";encrypt=false;user=" + configuration.BDCredentials.UserName
-                    + ";password=" + configuration.BDCredentials.Password;
+            String url = "jdbc:" + selectedDb.DBType + "://"
+                    + selectedDb.DBCredentials.HostName + ":"
+                    + selectedDb.DBCredentials.port + "/"
+                    + selectedDb.DBCredentials.DBName
+                    + "?useSSL=false&serverTimezone=UTC";
 
-            // Connexion à la base de données
-            connection = DriverManager.getConnection(url);
+            // Connexion à la base de données MySQL
+            connection = DriverManager.getConnection(
+                    url,
+                    selectedDb.DBCredentials.UserName,
+                    selectedDb.DBCredentials.Password
+            );
 
             System.out.println("Connexion OK");
         } catch (Exception e) {
@@ -64,12 +76,13 @@ public class Connexion_DB {
      *
      * @return L'instance unique de ConnexionDB_DAO.
      */
-    public static synchronized Connexion_DB getInstance() {
+    public static synchronized Connexion_DB getInstance(String dbKey) {
         if (instance == null) {
-            instance = new Connexion_DB();
+            instance = new Connexion_DB(dbKey);
         }
         return instance;
     }
+
 
     /**
      * Retourne l'objet Connection représentant la connexion à la base de données.

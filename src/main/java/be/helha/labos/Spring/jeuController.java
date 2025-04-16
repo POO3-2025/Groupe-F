@@ -26,7 +26,7 @@ public class jeuController {
     }
 
     @GetMapping("/{Id}")
-    public ResponseEntity<User> getUserById(@PathVariable ObjectId Id) {
+    /*public ResponseEntity<User> getUserById(@PathVariable ObjectId Id) {
         Optional<User> user = jeuService.getUserById(Id);
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -48,7 +48,7 @@ public class jeuController {
         } else {
             return ResponseEntity.notFound().build();
         }
-    }
+    }*/
 
     @DeleteMapping("/{Id}")
     public ResponseEntity<Void> deleteUser(@PathVariable ObjectId id) {
