@@ -1,49 +1,43 @@
 package be.helha.labos.collection.Character;
 
 import be.helha.labos.collection.Inventaire;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import java.util.Random;
 
-public class characters {
+public class CharacterType {
+    @JsonProperty("_id")
     protected ObjectId id;
     protected String name;
     protected int health;
     protected int damage;
     protected Inventaire inventaire;
-    protected double dodge; //esquive (entre 0.0 et 1.0)
-    protected double precision; //esquive (entre 0.0 et 1.0)
+    protected double dodge;
+    protected double precision;
 
-    public characters(String name, int health, int damage, double dodge, double precision) {
+    public CharacterType(String name, int health, int damage, double dodge, double precision) {
+        this.id = new ObjectId();
         this.name = name;
         this.health = health;
         this.damage = damage;
         this.dodge = dodge;
-        this.precision=precision;
+        this.precision = precision;
         this.inventaire = new Inventaire();
 
-        // Création du document pour le personnage
-        Document characterDocument = new Document("name", name)
+        // Création du document MongoDB
+        Document characterDocument = new Document("_id", id)
+                .append("name", name)
                 .append("health", health)
                 .append("damage", damage)
                 .append("dodge", dodge)
                 .append("precision", precision)
-                .append("inventory_id", inventaire.getId()); //ref à l'inventaire par _id
+                .append("inventory_id", inventaire.getId());
 
         System.out.println("Personnage créé : " + characterDocument.toJson());
     }
-
-    public characters()
-    {
-        //default
-        this.name = "Character Name";
-        this.health = 100;
-        this.damage = 10;
-        this.dodge = 0.3;
-        this.precision = 0.5;
-        this.inventaire = new Inventaire();
-
+    public CharacterType(){
     }
 
     public boolean attackHits()
@@ -54,7 +48,8 @@ public class characters {
     }
 
     // Getters et setters
-    public ObjectId getId() {
+    public ObjectId getId()
+    {
         return id;
     }
 
@@ -78,7 +73,7 @@ public class characters {
         return damage;
     }
 
-    public void setDamageAmount(int damage) {
+    public void setDamage(int damage) {
         this.damage = damage;
     }
 

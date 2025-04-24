@@ -1,13 +1,13 @@
 package be.helha.labos;
 
+import be.helha.labos.Authentification.AuthController;
+import be.helha.labos.Authentification.Authen;
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.DB.*;
 
+import be.helha.labos.Lanterna.Inscription;
 import be.helha.labos.collection.Character.*;
-import be.helha.labos.collection.Item.Item;
-import be.helha.labos.collection.Item.Potion;
-import be.helha.labos.collection.Item.Shield;
-import be.helha.labos.collection.Item.Sword;
+import be.helha.labos.collection.Item.*;
 import be.helha.labos.collection.User;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -24,21 +24,27 @@ public class main {
     public static void main(String[] args) {
         Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
         MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
+
         try {
 
             MongoCollection<Item> Itemcollection = mongoDatabase.getCollection("items", Item.class);
-            MongoCollection<Character> Charactercollection = mongoDatabase.getCollection("characters", Character.class);
+            MongoCollection<CharacterType> Charactercollection = mongoDatabase.getCollection("characters", CharacterType.class);
 
 
             Sword sword = new Sword();
             Sword fireSword = new Sword(Sword.SwordMaterial.FIRE);
 
-            Shield shield = new Shield(1, 50);
+            Mace mace = new Mace();
+            Mace diamondMace = new Mace(Mace.MaceMaterial.DIAMOND);
 
-            Potion potion = new Potion(20, 15);
+            Bow bow = new Bow();
+            Bow arablette = new Bow(Bow.BowMaterial.CROSSBOW);
 
-            //Archer archer = new Archer();
+            Potion potion = new Potion (20,15);
 
+            //Archer archerTest = new Archer("archerTest", 101, 20, 0.3, 0.8);
+
+            //CharacterType Chara = new CharacterType("Chara", 100, 20, 0.3, 0.8);
 
             // Insertion du document
             //Itemcollection.insertOne(sword);
@@ -46,7 +52,7 @@ public class main {
             //Itemcollection.insertOne(shield);
             //Itemcollection.insertOne(potion);
 
-            //Charactercollection.insertOne(archer);
+            //Charactercollection.insertOne(archerTest);
 
             //User user = new User("Doe","John");
             //user.save;
@@ -77,14 +83,29 @@ public class main {
 
         connexionDbNosql.closeConnection();
 
+        Authen authen = new Authen();
+
         User_DAO dao = new User_DAO();
-        User nouvelUser = new User("JohnDoe", "1234", 1);
+
+        //dao.supprimerTableUser();
+
+        boolean connex = dao.verifierConnexion("Jo","Jo");
+
+        if(connex)
+        {
+            System.out.println("Utilisateur connexion avec succes !");
+        }
+        else {
+            System.out.println("Utilisateur connexion échoué !");
+        }
+
+        /*User nouvelUser = new User("Jo", "Jo");
         boolean success = dao.ajouterUser(nouvelUser);
 
         if (success) {
             System.out.println("Utilisateur ajouté !");
         } else {
             System.out.println("Erreur lors de l'ajout.");
-        }
+        }*/
     }
 }

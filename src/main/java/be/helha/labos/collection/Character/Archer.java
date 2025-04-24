@@ -1,29 +1,29 @@
 package be.helha.labos.collection.Character;
-
 import be.helha.labos.collection.Inventaire;
 
-public class Archer extends characters {
+public class Archer extends CharacterType
+        {
+            public Archer(String name, int health, int damage, double dodge, double precision)
+            {
+                //default archer
+                super();
+                this.name = name;
+                this.health = health;
+                this.damage = damage;
+                this.dodge = dodge;
+                this.precision = precision;
+                this.inventaire = new Inventaire();
+            }
 
-    public Archer()
-    {
-        super();
-        //Archer default
-        this.name = "Archer Name";
-        this.health = 70;
-        this.damage = 35;
-        this.dodge = 0.8;
-        this.precision = 0.667;
-        this.inventaire = getInventaire();
-
-    }
-    @Override
-    public String toString() {
-        return "Archer{" +
-                "name='" + name + '\'' +
-                ", health=" + health +
-                ", damage=" + damage +
-                ", dodge=" + dodge +
-                ", precision=" + precision +
-                '}';
-    }
-}
+            @Override
+            public String toString() 
+            {
+                return "Archer{" +
+                        "name='" + name  +
+                        ", health=" + health +
+                        ", damage=" + damage +
+                        ", dodge=" + dodge +
+                        ", precision=" + precision +
+                        '}';
+            }
+        }

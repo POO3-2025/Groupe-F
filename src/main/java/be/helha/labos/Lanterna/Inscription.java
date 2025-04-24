@@ -1,7 +1,9 @@
 package be.helha.labos.Lanterna;
 
+import be.helha.labos.Authentification.Authen;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.googlecode.lanterna.screen.*;
 import com.googlecode.lanterna.terminal.*;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
@@ -9,7 +11,8 @@ import java.io.IOException;
 
 public class Inscription {
 
-    public static void main(String[] args) {
+   public void Lancer () {
+       Authen authen = new Authen();
         try {
             // Utilisation de DefaultTerminalFactory pour créer un terminal Swing
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
@@ -40,11 +43,37 @@ public class Inscription {
                 textGUI.addWindowAndWait(nouvelleFenetre);
             }));
             panel.addComponent(new Button("Se connecter", () -> {
-                try {
-                    screen.stopScreen();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                BasicWindow fenetreConnexion = new BasicWindow("Connexion");
+
+                Panel panelConnexion = new Panel();
+
+                TextBox pseudoInput = new TextBox();
+                TextBox passwordInput = new TextBox().setMask('*'); // cache les caractères
+
+                panelConnexion.addComponent(new Label("Pseudo :"));
+                panelConnexion.addComponent(pseudoInput);
+
+                panelConnexion.addComponent(new Label("Mot de passe :"));
+                panelConnexion.addComponent(passwordInput);
+
+                panelConnexion.addComponent(new Button("Se connecter", () -> {
+                    String pseudo = pseudoInput.getText();
+                    String password = passwordInput.getText();
+
+                    try {
+                        String token = authen.login(pseudo, password);
+                        MessageDialog.showMessageDialog(textGUI, "Succès", "Connexion validé !");
+                    } catch (Exception e) {
+                        MessageDialog.showMessageDialog(textGUI, "Erreur", "Échec de la connexion : " + e.getMessage());
+                    }
+
+                    fenetreConnexion.close(); // Ferme la fenêtre après traitement
+                }));
+
+                panelConnexion.addComponent(new Button("Annuler", fenetreConnexion::close));
+
+                fenetreConnexion.setComponent(panelConnexion);
+                textGUI.addWindowAndWait(fenetreConnexion);
             }));
             panel.addComponent(new Button("Quitter", () -> {
                 try {

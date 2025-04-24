@@ -15,12 +15,14 @@ public class User {
 
     private String pseudo;
     private String password;
-    private int IdPersonnage;
+    private boolean actif;
+    private String rôle;
 
-    public User(String pseudo, String password, int idPersonnage) {
+    public User(String pseudo, String password,String role) {
         this.pseudo = pseudo;
         this.password = password;
-        this.IdPersonnage = idPersonnage;
+        this.rôle = role;
+        this.actif = true;
     }
 
     public String getPseudo() {
@@ -39,12 +41,20 @@ public class User {
         this.password = password;
     }
 
-    public int getIdPersonnage() {
-        return IdPersonnage;
+    public String getRôle() {
+        return rôle;
     }
 
-    public void setIdPersonnage(int idPersonnage) {
-        IdPersonnage = idPersonnage;
+    public void setRôle(String rôle) {
+        this.rôle = rôle;
+    }
+
+    public boolean isActif() {
+        return actif;
+    }
+
+    public void setActif(boolean actif) {
+        this.actif = actif;
     }
 
     // Méthode permettant de supprimer un user ainsi que son inventaire
