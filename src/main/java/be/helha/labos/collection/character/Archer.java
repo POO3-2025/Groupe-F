@@ -13,6 +13,7 @@ public class Archer extends CharacterType
                 this.dodge = dodge;
                 this.precision = precision;
                 this.inventaire = new Inventaire();
+                //commentaire de test
             }
 
 
