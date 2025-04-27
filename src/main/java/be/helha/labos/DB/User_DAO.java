@@ -52,11 +52,9 @@ public class User_DAO {
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getPseudo());
-
             // 🔐 Hashage du mot de passe
             String hashedPassword = PasswordUtils.hashPassword(user.getPassword());
             pstmt.setString(2, hashedPassword);
-
             pstmt.setString(3, user.getRôle());
             pstmt.setBoolean(4, user.isActif());
 

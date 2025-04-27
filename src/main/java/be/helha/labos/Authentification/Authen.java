@@ -30,5 +30,7 @@ public class Authen {
             throw new RuntimeException("Pseudo ou mot de passe invalide");
         }
     }
-
+    public void AddUser(User newUser) {
+        user_DAO.ajouterUser(newUser);
+    }
 }
