@@ -2,23 +2,12 @@ package be.helha.labos;
 
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 
-import be.helha.labos.DBNosql.MongoDB;
-import be.helha.labos.collection.Inventaire;
 import be.helha.labos.collection.Item.*;
-import be.helha.labos.collection.*;
-import be.helha.labos.collection.character.Archer;
-import be.helha.labos.collection.character.CharacterType;
+import be.helha.labos.collection.Character.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
-import org.bson.types.ObjectId;
-
-import javax.crypto.Mac;
 
 import static be.helha.labos.DBNosql.MongoDB.readAllCollections;
-import static be.helha.labos.DBNosql.MongoDB.updateDocument;
-import static be.helha.labos.collection.Inventaire.putItemsInInventory;
-import static be.helha.labos.collection.chests.putItemsInChest;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 

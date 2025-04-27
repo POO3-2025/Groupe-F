@@ -18,7 +18,7 @@ public class Configuration {
    /**
     * Informations d'identification pour la connexion à la base de données.
     */
-   public Credentials BDCredentials;
+   public Credentials DBCredentials;
 
 
     public String getConnectionType() {
@@ -29,7 +29,7 @@ public class Configuration {
         return DBType;
     }
 
-    public Credentials getBDCredentials() {
-        return BDCredentials;
+    public Credentials getDBCredentials() {
+        return DBCredentials;
     }
 }
