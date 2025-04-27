@@ -58,8 +58,13 @@ public class User_DAO {
             pstmt.setString(3, user.getRôle());
             pstmt.setBoolean(4, user.isActif());
 
-            int rows = pstmt.executeUpdate();
-            return rows > 0;
+            if(GetUserByPseudo(user.getPseudo()) == null) {
+                pstmt.executeUpdate();
+                return true;
+            }
+            else {
+                throw new RuntimeException("Un utilisateur avec ce pseudo existe déjà");
+            }
         } catch (SQLException e) {
             System.err.println("Erreur lors de l'insertion de l'utilisateur.");
             e.printStackTrace();

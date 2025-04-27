@@ -1,21 +1,15 @@
-package be.helha.labos;
+package be.helha.labos.main;
 
-import be.helha.labos.Authentification.AuthController;
 import be.helha.labos.Authentification.Authen;
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.DB.*;
 
-import be.helha.labos.Lanterna.Inscription;
 import be.helha.labos.collection.Character.*;
 import be.helha.labos.collection.Item.*;
 import be.helha.labos.collection.User;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-import java.io.ObjectInputFilter;
-import java.sql.Connection;
-
-import static be.helha.labos.DBNosql.MongoDB.readAllCollections;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
@@ -87,9 +81,9 @@ public class main {
 
         User_DAO dao = new User_DAO();
 
-        //dao.supprimerTableUser();
+        dao.supprimerTableUser();
 
-        boolean connex = dao.verifierConnexion("Jo","Jo");
+        /*boolean connex = dao.verifierConnexion("Jo","Jo");
 
         if(connex)
         {
@@ -97,15 +91,15 @@ public class main {
         }
         else {
             System.out.println("Utilisateur connexion échoué !");
-        }
+        }*/
 
-        /*User nouvelUser = new User("Jo", "Jo");
+        User nouvelUser = new User("Jo", "Jo","USER");
         boolean success = dao.ajouterUser(nouvelUser);
 
         if (success) {
             System.out.println("Utilisateur ajouté !");
         } else {
             System.out.println("Erreur lors de l'ajout.");
-        }*/
+        }
     }
 }

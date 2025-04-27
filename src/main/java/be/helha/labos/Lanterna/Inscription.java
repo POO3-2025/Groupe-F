@@ -2,13 +2,13 @@ package be.helha.labos.Lanterna;
 
 import be.helha.labos.Authentification.Authen;
 import be.helha.labos.DB.User_DAO;
+import be.helha.labos.collection.User;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.googlecode.lanterna.screen.*;
 import com.googlecode.lanterna.terminal.*;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
-import org.springframework.security.core.userdetails.User;
 
 import java.io.IOException;
 
@@ -17,6 +17,7 @@ public class Inscription {
    public void Lancer () {
        Authen authen = new Authen();
        User_DAO dao = new User_DAO();
+
         try {
             // Utilisation de DefaultTerminalFactory pour créer un terminal Swing
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
@@ -40,8 +41,6 @@ public class Inscription {
             panel.addComponent(new Label("Bienvenue dans le jeu!"));
             panel.addComponent(new Button("S'inscrire", () -> {
                 BasicWindow nouvelleFenetre = new BasicWindow("Inscription");
-                Panel nouveauPanel = new Panel();
-                nouveauPanel.addComponent(new Label("Bienvenue !"));
 
                 Panel panelInscription = new Panel();
 
@@ -54,20 +53,22 @@ public class Inscription {
                 panelInscription.addComponent(new Label("Mot de passe :"));
                 panelInscription.addComponent(password);
 
-                String pseudoInscrit = pseudo.getText();
-                String passwordInscrit = password.getText();
+                panelInscription.addComponent(new Button("S'inscrire", () -> {
+                    String pseudoInscrit = pseudo.getText();
+                    String passwordInscrit = password.getText();
+                    try {
+                        User user1 = new User(pseudoInscrit,passwordInscrit,"USER");
+                        dao.ajouterUser(user1);
+                        MessageDialog.showMessageDialog(textGUI, "Succès", "Bienvenue ! ");
+                    } catch (Exception e) {
+                        MessageDialog.showMessageDialog(textGUI, "Erreur", "Échec de la connexion : " + e.getMessage());
+                    }
 
-                try {
-                    //authen.AddUser(newUser);
-                    MessageDialog.showMessageDialog(textGUI, "Succès", "Connexion validé ! ");
-                } catch (Exception e) {
-                    MessageDialog.showMessageDialog(textGUI, "Erreur", "Échec de la connexion : " + e.getMessage());
-                }
+                    nouvelleFenetre.close(); // Ferme la fenêtre après traitement
+                }));
 
-                nouvelleFenetre.close(); // Ferme la fenêtre après traitement
-
-                nouveauPanel.addComponent(new Button("Fermer", nouvelleFenetre::close));
-                nouvelleFenetre.setComponent(nouveauPanel);
+                panelInscription.addComponent(new Button("Fermer", nouvelleFenetre::close));
+                nouvelleFenetre.setComponent(panelInscription);
                 textGUI.addWindowAndWait(nouvelleFenetre);
             }));
 
@@ -90,7 +91,7 @@ public class Inscription {
                     String passwordConnexion = passwordInput.getText();
 
                     try {
-                        String token = authen.login(pseudoConnexion, passwordConnexion);
+                        authen.login(pseudoConnexion, passwordConnexion);
                         MessageDialog.showMessageDialog(textGUI, "Succès", "Connexion validé !");
                     } catch (Exception e) {
                         MessageDialog.showMessageDialog(textGUI, "Erreur", "Échec de la connexion : " + e.getMessage());
