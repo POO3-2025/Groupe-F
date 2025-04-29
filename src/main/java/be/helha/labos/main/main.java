@@ -10,6 +10,9 @@ import be.helha.labos.collection.User;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
+import java.io.IOException;
+
+import static be.helha.labos.DBNosql.MongoDB.readAllCollections;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
@@ -63,7 +66,7 @@ public class main {
                     new Document("$set", new Document("type", "Sword")));*/
 
             System.out.println("\n\n");
-           //readAllCollections(mongoDatabase);
+            readAllCollections(mongoDatabase);
 
             /*List<Document> users = readAllUser(mongoDatabase);
             for (Document User : users) {
@@ -81,7 +84,7 @@ public class main {
 
         User_DAO dao = new User_DAO();
 
-        dao.supprimerTableUser();
+        //dao.supprimerTableUser();
 
         /*boolean connex = dao.verifierConnexion("Jo","Jo");
 
@@ -93,13 +96,13 @@ public class main {
             System.out.println("Utilisateur connexion échoué !");
         }*/
 
-        User nouvelUser = new User("Jo", "Jo","USER");
+        /*User nouvelUser = new User("Jo", "Jo","USER");
         boolean success = dao.ajouterUser(nouvelUser);
 
         if (success) {
             System.out.println("Utilisateur ajouté !");
         } else {
             System.out.println("Erreur lors de l'ajout.");
-        }
+        }*/
     }
 }

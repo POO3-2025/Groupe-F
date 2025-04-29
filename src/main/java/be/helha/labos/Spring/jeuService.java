@@ -19,17 +19,13 @@ import static com.mongodb.client.model.Filters.eq;
 @Service
 public class jeuService {
 
-    private  MongoCollection<Document> userCollection;
-
-    Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
-    MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
+    // Récupère l'instance de connexion
+    Connexion_DB connexion = Connexion_DB.getInstance("mysql");
+    // Vérifie si la connexion est bien ouverte
+    Connection conn = connexion.getConnection();
 
     public List<User> getAllUsers() {
-        // Récupère l'instance de connexion
-        Connexion_DB connexion = Connexion_DB.getInstance("mysql");
 
-        // Vérifie si la connexion est bien ouverte
-        Connection conn = connexion.getConnection();
         return List.of();
     }
 
@@ -45,7 +41,6 @@ public class jeuService {
     }*/
 
     public void deleteUser(ObjectId id) {
-        userCollection.deleteOne(eq("_id", id));
     }
 
     /*private User documentToUser(Document doc) {
