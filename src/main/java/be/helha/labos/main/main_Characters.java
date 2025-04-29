@@ -7,12 +7,15 @@ import be.helha.labos.collection.Character.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
+import java.io.IOException;
+
 import static be.helha.labos.DBNosql.MongoDB.readAllCollections;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 public class main_Characters {
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
         MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
         try {

@@ -4,6 +4,7 @@ import be.helha.labos.collection.Inventaire;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class characters {
@@ -15,7 +16,7 @@ public class characters {
     protected double dodge; //esquive (entre 0.0 et 1.0)
     protected double precision; //esquive (entre 0.0 et 1.0)
 
-    public characters(String name, int health, int damage, double dodge, double precision) {
+    public characters(String name, int health, int damage, double dodge, double precision) throws IOException {
         this.name = name;
         this.health = health;
         this.damage = damage;

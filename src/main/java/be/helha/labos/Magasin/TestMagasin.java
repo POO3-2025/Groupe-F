@@ -3,8 +3,10 @@ package be.helha.labos.Magasin;
 import com.mongodb.client.MongoDatabase;
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 
+import java.io.IOException;
+
 public class TestMagasin {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         // Connexion à la base de données
         Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
         MongoDatabase database = connexionDbNosql.getDatabase();

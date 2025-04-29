@@ -1,6 +1,7 @@
 package be.helha.labos.Lanterna;
 
 import be.helha.labos.Authentification.Authen;
+import be.helha.labos.DB.Affichage;
 import be.helha.labos.DB.User_DAO;
 import be.helha.labos.collection.User;
 import com.googlecode.lanterna.TerminalSize;
@@ -93,6 +94,10 @@ public class Inscription {
                     try {
                         authen.login(pseudoConnexion, passwordConnexion);
                         MessageDialog.showMessageDialog(textGUI, "Succès", "Connexion validé !");
+                        // Appel de la fonction pour afficher le menu
+                        Menu menu = new Menu();
+                        menu.Affichage(pseudoConnexion);
+
                     } catch (Exception e) {
                         MessageDialog.showMessageDialog(textGUI, "Erreur", "Échec de la connexion : " + e.getMessage());
                     }
