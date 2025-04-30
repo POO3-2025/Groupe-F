@@ -23,14 +23,7 @@ import java.io.IOException;
 public class Menu {
 
     public void Affichage(String pseudo) throws IOException {
-        Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
-        MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
-
-        MongoCollection<Document> collection = mongoDatabase.getCollection("chests");
-        MongoCollection<Item> Itemcollection = mongoDatabase.getCollection("items", Item.class);
-        MongoCollection<CharacterType> Charactercollection = mongoDatabase.getCollection("characters", CharacterType.class);
-        MongoCollection<Document>Inventairecollection = mongoDatabase.getCollection("inventory");
-
+        MenuCréerPersonnage menuCréerPersonnage = new MenuCréerPersonnage();
         try {
             // Utilisation de DefaultTerminalFactory pour créer un terminal Swing
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
@@ -60,12 +53,8 @@ public class Menu {
                 // En attente...
             }));
 
-            panel.addComponent(new Button("Créer un personnage", () -> {
-
-            }));
-
-            panel.addComponent(new Button("Voir mes personnages", () -> {
-
+            panel.addComponent(new Button("Gérer personnage personnage", () -> {
+                menuCréerPersonnage.afficherCréationPersonnage();
             }));
 
                 panel.addComponent(new Button("Déconnexion", window::close)); // Ferme juste la fenêtre de menu
