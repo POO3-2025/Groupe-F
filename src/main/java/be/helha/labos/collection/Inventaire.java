@@ -24,28 +24,26 @@ public class Inventaire {
 
 
     public Inventaire() {
-
-        // Initialisation de la connexion
-        connexionDbNosql = Connexion_DB_Nosql.getInstance();
-        mongoDatabase = connexionDbNosql.getDatabase();
-        collection = mongoDatabase.getCollection("inventory");
-
-       // Création de l'inventaire de 10 slots
-        inventorySlots = new ArrayList<>();
+        this.id = new ObjectId();
+        this.inventorySlots = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Document slot = new Document("slot_number", i + 1).append("item", null);
             inventorySlots.add(slot);
         }
+    }
 
-        // Création du document Inventaire
-        Document inventory = new Document("maxSize", 10)
+    // Nouvelle méthode explicite pour insérer dans la DB
+    public void insererDansLaBase() {
+        connexionDbNosql = Connexion_DB_Nosql.getInstance();
+        mongoDatabase = connexionDbNosql.getDatabase();
+        collection = mongoDatabase.getCollection("inventory");
+
+        Document inventory = new Document("_id", this.id)
+                .append("maxSize", 10)
                 .append("slots", inventorySlots);
 
-        // Insertion de l'inventaire dans la collection 'inventory'
-        InsertOneResult inventoryResult = collection.insertOne(inventory);
-        id = (ObjectId) inventory.get("_id"); // Stocke l'ID dans l'objet Inventaire
-
-        System.out.println("Inventaire créé avec ID : " + id);
+        collection.insertOne(inventory);
+        System.out.println("Inventaire inséré avec ID : " + id);
     }
 
     // Méthode pour obtenir l'ID de l'inventaire

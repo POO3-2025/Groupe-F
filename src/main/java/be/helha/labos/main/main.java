@@ -4,15 +4,15 @@ import be.helha.labos.Authentification.Authen;
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.DB.*;
 
+import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.Character.*;
 import be.helha.labos.collection.Item.*;
-import be.helha.labos.collection.User;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-import java.io.IOException;
+import java.util.List;
 
-import static be.helha.labos.DBNosql.MongoDB.readAllCollections;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
@@ -21,6 +21,8 @@ public class main {
     public static void main(String[] args) {
         Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
         MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
+
+        DAO_NOSQL daoNosql = new DAO_NOSQL();
 
         try {
 
@@ -51,10 +53,6 @@ public class main {
 
             //Charactercollection.insertOne(archerTest);
 
-            //User user = new User("Doe","John");
-            //user.save;
-            //chests chests = new chests(new ObjectId("67c4646cc5452e653988b340"));
-
             /*putItemsInInventory(new ObjectId("67c4646cc5452e653988b340"),
                     new ObjectId("67d048cb69f5966a18dcef48") , false);*/
 
@@ -66,7 +64,21 @@ public class main {
                     new Document("$set", new Document("type", "Sword")));*/
 
             System.out.println("\n\n");
-            readAllCollections(mongoDatabase);
+            //daoNosql.readAllCollections(mongoDatabase);
+
+            List<CharacterType> characters = daoNosql.readAllCharacters(mongoDatabase); // récupère les persos
+            if (characters.isEmpty()) {
+               System.out.println("No characters found");
+            } else {
+                StringBuilder builder = new StringBuilder();
+                for (CharacterType character : characters) {
+                    builder.append("- ").append(character.getName())
+                            .append(" | HP: ").append(character.getHealth())
+                            .append(" | DMG: ").append(character.getDamage())
+                            .append("\n");
+                }
+                System.out.println(builder.toString());
+            }
 
             /*List<Document> users = readAllUser(mongoDatabase);
             for (Document User : users) {

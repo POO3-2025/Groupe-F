@@ -3,6 +3,10 @@ import be.helha.labos.collection.Inventaire;
 
 public class Archer extends CharacterType
         {
+            public Archer(){
+
+            }
+
             public Archer(String name, int health, int damage, double dodge, double precision)
             {
                 //default archer
@@ -13,6 +17,7 @@ public class Archer extends CharacterType
                 this.dodge = dodge;
                 this.precision = precision;
                 this.inventaire = new Inventaire();
+                inventaire.insererDansLaBase();
             }
 
             @Override

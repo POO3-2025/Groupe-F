@@ -17,6 +17,9 @@ public class CharacterType {
     protected double dodge;
     protected double precision;
 
+    public CharacterType(){
+    }
+
     public CharacterType(String name, int health, int damage, double dodge, double precision) {
         this.id = new ObjectId();
         this.name = name;
@@ -24,20 +27,6 @@ public class CharacterType {
         this.damage = damage;
         this.dodge = dodge;
         this.precision = precision;
-        this.inventaire = new Inventaire();
-
-        // Création du document MongoDB
-        Document characterDocument = new Document("_id", id)
-                .append("name", name)
-                .append("health", health)
-                .append("damage", damage)
-                .append("dodge", dodge)
-                .append("precision", precision)
-                .append("inventory_id", inventaire.getId());
-
-        System.out.println("Personnage créé : " + characterDocument.toJson());
-    }
-    public CharacterType(){
     }
 
     public boolean attackHits()

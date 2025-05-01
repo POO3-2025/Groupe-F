@@ -12,6 +12,7 @@ public class Knight extends CharacterType {
         this.dodge = dodge;
         this.precision = precision;
         this.inventaire = new Inventaire();
+        inventaire.insererDansLaBase();
     }
 
     @Override

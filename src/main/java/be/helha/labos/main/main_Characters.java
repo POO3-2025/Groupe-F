@@ -2,14 +2,12 @@ package be.helha.labos.main;
 
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 
+import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.Item.*;
 import be.helha.labos.collection.Character.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-import java.io.IOException;
-
-import static be.helha.labos.DBNosql.MongoDB.readAllCollections;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
@@ -18,6 +16,7 @@ public class main_Characters {
     {
         Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
         MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
+        DAO_NOSQL daoNosql = new DAO_NOSQL();
         try {
 
             MongoCollection <Item>Itemcollection = mongoDatabase.getCollection("items", Item.class);
@@ -62,7 +61,7 @@ public class main_Characters {
                     new Document("$set", new Document("type", "Sword")));*/
 
             System.out.println("\n\n");
-            readAllCollections(mongoDatabase);
+            daoNosql.readAllCollections(mongoDatabase);
 
         }catch (Exception e){
             e.printStackTrace();
