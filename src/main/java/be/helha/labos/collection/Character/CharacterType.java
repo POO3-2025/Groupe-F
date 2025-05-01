@@ -1,21 +1,34 @@
 package be.helha.labos.collection.Character;
 
+import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.collection.Inventaire;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+import java.util.List;
 import java.util.Random;
 
 public class CharacterType {
+
+
     @JsonProperty("_id")
     protected ObjectId id;
     protected String name;
+    protected String title;
     protected int health;
     protected int damage;
     protected Inventaire inventaire;
     protected double dodge;
     protected double precision;
+
+
+    private static Connexion_DB_Nosql connexionDbNosql;
+    private static MongoDatabase mongoDatabase;
+    private static MongoCollection<Document> collection;
+
 
     public CharacterType(){
     }
@@ -42,8 +55,21 @@ public class CharacterType {
         return id;
     }
 
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
+    }
+
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String Title) {
+        title = Title;
     }
 
     public void setName(String name) {
@@ -74,6 +100,14 @@ public class CharacterType {
         this.dodge = dodge;
     }
 
+    public double getPrecision() {
+        return precision;
+    }
+
+    public void setPrecision(double precision) {
+        this.precision = precision;
+    }
+
     public Inventaire getInventaire() {
         return inventaire;
     }
@@ -82,9 +116,33 @@ public class CharacterType {
         return "Character{" +
                 "name='" + name + '\'' +
                 ", health=" + health +
+                ", title='" + title + '\'' +
                 ", damage=" + damage +
                 ", dodge=" + dodge +
                 ", precision=" + precision +
                 '}';
+    }
+
+
+    public void removeCharacter(ObjectId id) {
+        try {
+            // Initialisation de la connexion
+            connexionDbNosql = Connexion_DB_Nosql.getInstance();
+            mongoDatabase = connexionDbNosql.getDatabase();
+            collection = mongoDatabase.getCollection("characters");
+
+            // Suppression du document correspondant
+            Document deleteQuery = new Document("_id", id);
+            long deletedCount = collection.deleteOne(deleteQuery).getDeletedCount();
+
+            if (deletedCount > 0) {
+                System.out.println("Personnage supprimé avec succès.");
+            } else {
+                System.out.println("Aucun personnage trouvé avec ce nom.");
+            }
+        } catch (Exception e) {
+            System.out.println("Erreur lors de la suppression du personnage.");
+            e.printStackTrace();
+        }
     }
 }

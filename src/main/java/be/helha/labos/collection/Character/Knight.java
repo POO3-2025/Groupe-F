@@ -8,6 +8,7 @@ public class Knight extends CharacterType {
         super();
         this.name = name;
         this.health = health;
+        this.title="Knight";
         this.damage = damage;
         this.dodge = dodge;
         this.precision = precision;

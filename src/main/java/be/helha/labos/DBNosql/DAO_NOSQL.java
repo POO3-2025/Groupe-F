@@ -1,8 +1,9 @@
 package be.helha.labos.DBNosql;
 
-import be.helha.labos.collection.Character.CharacterType;
+import be.helha.labos.collection.Character.*;
 import com.mongodb.client.*;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,11 @@ public class DAO_NOSQL {
                     System.out.println(doc.toJson());
                 }
             }
+    }
+
+    public void DeleteCharacters (MongoDatabase database,ObjectId id){
+        CharacterType characterType = new CharacterType();
+        characterType.removeCharacter(id);
     }
 
     public List<CharacterType> readAllCharacters(MongoDatabase database) {

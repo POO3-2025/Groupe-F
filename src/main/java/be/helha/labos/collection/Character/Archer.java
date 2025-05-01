@@ -12,6 +12,7 @@ public class Archer extends CharacterType
                 //default archer
                 super();
                 this.name = name;
+                this.title="Archer";
                 this.health = health;
                 this.damage = damage;
                 this.dodge = dodge;
