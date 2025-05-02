@@ -4,6 +4,8 @@ import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.Character.Archer;
 import be.helha.labos.collection.Character.CharacterType;
+import be.helha.labos.collection.Character.Knight;
+import be.helha.labos.collection.Character.Orc;
 import be.helha.labos.collection.Item.Item;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
@@ -18,7 +20,6 @@ import org.bson.Document;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MenuCréerPersonnage {
     public void afficherCréationPersonnage() {
@@ -64,8 +65,63 @@ public class MenuCréerPersonnage {
              * Méthode pour créer un perso de type Archer
              */
             panel.addComponent(new Button("Archer", () -> {
-                Archer archerTest = new Archer("archerTest", 101, 20, 0.3, 0.8);
+                Archer archerTest = new Archer("archerTest", 100, 20, 0.30, 0.80);
                 Charactercollection.insertOne(archerTest);
+            }));
+
+            panel.addComponent(new Button("Knight", () -> {
+                Knight KnightTest = new Knight("KnightTest", 150, 35, 0.20, 0.65);
+                Charactercollection.insertOne(KnightTest);
+            }));
+
+            panel.addComponent(new Button("Orc", () -> {
+                Orc OrcTest = new Orc("OrcTest", 250, 50, 0.10, 0.50);
+                Charactercollection.insertOne(OrcTest);
+            }));
+
+            /**
+             * Supprimer un perso
+             */
+            panel.addComponent(new Button("Supprimer un personnage", () -> {
+                List<CharacterType> characters = dao.readAllCharacters(mongoDatabase);
+
+                if (characters.isEmpty()) {
+                    MessageDialog.showMessageDialog(textGUI, "Suppression", "Aucun personnage disponible.");
+                    return;
+                }
+
+                // ComboBox avec affichage des noms
+                ComboBox<CharacterType> comboBox = new ComboBox<>();
+                for (CharacterType character : characters) {
+                    comboBox.addItem(character); // on affichera un toString() personnalisé
+                }
+
+                Panel selectionPanel = new Panel();
+                selectionPanel.setLayoutManager(new LinearLayout(Direction.VERTICAL));
+                selectionPanel.addComponent(new Label("Sélectionnez un personnage à supprimer :"));
+                selectionPanel.addComponent(comboBox);
+
+                BasicWindow selectionWindow = new BasicWindow("Supprimer un personnage");
+
+                // Bouton de confirmation
+                selectionPanel.addComponent(new Button("Confirmer", () -> {
+                    CharacterType selected = comboBox.getSelectedItem();
+                    if (selected != null) {
+                        dao.DeleteCharacters(mongoDatabase, selected.getId());
+                        MessageDialog.showMessageDialog(textGUI, "Succès", "Personnage supprimé : " + selected.getName());
+
+                        // Retour en arrière après suppression //
+                        /* selectionWindow.close(); */   // A voir si on le laisse...
+                    }
+                }));
+
+                // Bouton de confirmation
+                selectionPanel.addComponent(new Button("Retour", selectionWindow::close));
+
+                // Création d'une nouvelle fenêtre popup
+
+                selectionWindow.setComponent(selectionPanel);
+                textGUI.addWindowAndWait(selectionWindow);
             }));
 
             /**
@@ -80,6 +136,8 @@ public class MenuCréerPersonnage {
                     // Boucle pour récupérer les champs des persos. A Voir...
                     for (CharacterType character : characters) {
                         builder.append("- ").append(character.getName())
+                                .append(" Type: ").append(character.getId())
+                                .append(" Type: ").append(character.getTitle())
                                 .append(" | HP: ").append(character.getHealth())
                                 .append(" | DMG: ").append(character.getDamage())
                                 .append("\n");

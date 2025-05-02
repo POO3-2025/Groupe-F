@@ -51,7 +51,7 @@ public class Inventaire {
         return id;
     }
 
-    // Cette méthode permet de rajouter un itemps dans l'inventaire d'un user
+    // Cette méthode permet de rajouter un item dans l'inventaire d'un user
     public static void putItemsInInventory(ObjectId inventoryId, ObjectId itemsId, boolean remove) {
         try {
                 // Initialisation de la connexion

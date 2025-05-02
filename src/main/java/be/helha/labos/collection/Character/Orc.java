@@ -8,6 +8,7 @@ public class Orc extends CharacterType {
         super();
         this.name = name;
         this.health = health;
+        this.title="Orc";
         this.damage = damage;
         this.dodge = dodge;
         this.precision = precision;
