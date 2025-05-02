@@ -7,6 +7,7 @@ import be.helha.labos.DB.*;
 import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.Character.*;
 import be.helha.labos.collection.Item.*;
+import be.helha.labos.collection.User;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -96,7 +97,7 @@ public class main {
 
         User_DAO dao = new User_DAO();
 
-        //dao.supprimerTableUser();
+        dao.supprimerTableUser();
 
         /*boolean connex = dao.verifierConnexion("Jo","Jo");
 
@@ -108,13 +109,21 @@ public class main {
             System.out.println("Utilisateur connexion échoué !");
         }*/
 
-        /*User nouvelUser = new User("Jo", "Jo","USER");
+        /*User nouvelUser = new User("Jean", "Jean","USER");
         boolean success = dao.ajouterUser(nouvelUser);
 
         if (success) {
             System.out.println("Utilisateur ajouté !");
         } else {
             System.out.println("Erreur lors de l'ajout.");
+        }
+
+        if(dao.GetUserById(nouvelUser.getId()) != null){
+            System.out.println("User récupéré ,  Id :" + nouvelUser.getId());
+        }
+        else {
+            System.out.println("Erreur lors de la récupération de l'utilisateur.");
         }*/
+
     }
 }
