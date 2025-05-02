@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class MenuCréerPersonnage {
+
     public void afficherCréationPersonnage() {
 
         Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();

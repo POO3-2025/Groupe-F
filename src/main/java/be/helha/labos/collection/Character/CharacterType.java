@@ -8,6 +8,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -23,7 +24,6 @@ public class CharacterType {
     protected Inventaire inventaire;
     protected double dodge;
     protected double precision;
-
 
     private static Connexion_DB_Nosql connexionDbNosql;
     private static MongoDatabase mongoDatabase;
@@ -123,26 +123,59 @@ public class CharacterType {
                 '}';
     }
 
-
-    public void removeCharacter(ObjectId id) {
+    public void ajouterPersonnageAuUser(int idUser,ObjectId idPersonnage){
         try {
             // Initialisation de la connexion
             connexionDbNosql = Connexion_DB_Nosql.getInstance();
             mongoDatabase = connexionDbNosql.getDatabase();
             collection = mongoDatabase.getCollection("characters");
 
-            // Suppression du document correspondant
-            Document deleteQuery = new Document("_id", id);
-            long deletedCount = collection.deleteOne(deleteQuery).getDeletedCount();
+            // Ajout du document correspondant
+            Document addQuery = new Document("_id", id);
+            collection.insertOne(addQuery);
 
-            if (deletedCount > 0) {
-                System.out.println("Personnage supprimé avec succès.");
-            } else {
-                System.out.println("Aucun personnage trouvé avec ce nom.");
-            }
         } catch (Exception e) {
             System.out.println("Erreur lors de la suppression du personnage.");
             e.printStackTrace();
         }
     }
+
+    public void removeCharacter(ObjectId characterId) {
+        try {
+            // Connexion à la DB
+            connexionDbNosql = Connexion_DB_Nosql.getInstance();
+            mongoDatabase = connexionDbNosql.getDatabase();
+
+            // Récupération de la collection des personnages
+            MongoCollection<Document> charactersCollection = mongoDatabase.getCollection("characters");
+
+            // Récupération du document personnage AVANT suppression
+            Document characterDoc = charactersCollection.find(new Document("_id", characterId)).first();
+
+            if (characterDoc != null) {
+                // Récupérer l'ID de l'inventaire à partir du champ "inventaire._id"
+                Document inventaireDoc = characterDoc.get("inventaire", Document.class);
+                ObjectId inventoryId= inventaireDoc.getObjectId("_id");
+
+                // Suppression du personnage
+                charactersCollection.deleteOne(new Document("_id", characterId));
+                System.out.println("Personnage supprimé avec succès.");
+
+                MongoCollection<Document> inventoryCollection = mongoDatabase.getCollection("inventory");
+                long invDeleted = inventoryCollection.deleteOne(new Document("_id", inventoryId)).getDeletedCount();
+
+                if (invDeleted > 0) {
+                    System.out.println("Inventaire du personnage supprimé.");
+                } else {
+                    System.out.println("Aucun inventaire associé trouvé.");
+                }
+            } else {
+                System.out.println("Aucun personnage trouvé avec cet identifiant.");
+            }
+        } catch (Exception e) {
+            System.out.println("Erreur lors de la suppression du personnage ou de son inventaire.");
+            e.printStackTrace();
+        }
+    }
+
 }

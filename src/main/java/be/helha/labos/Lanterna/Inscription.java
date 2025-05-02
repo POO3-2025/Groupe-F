@@ -3,6 +3,7 @@ package be.helha.labos.Lanterna;
 import be.helha.labos.Authentification.Authen;
 import be.helha.labos.DB.Affichage;
 import be.helha.labos.DB.User_DAO;
+import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.User;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
@@ -18,6 +19,7 @@ public class Inscription {
    public void Lancer () {
        Authen authen = new Authen();
        User_DAO dao = new User_DAO();
+       DAO_NOSQL dao_nosql = new DAO_NOSQL();
 
         try {
             // Utilisation de DefaultTerminalFactory pour créer un terminal Swing
@@ -58,8 +60,11 @@ public class Inscription {
                     String pseudoInscrit = pseudo.getText();
                     String passwordInscrit = password.getText();
                     try {
+
                         User user1 = new User(pseudoInscrit,passwordInscrit,"USER");
                         dao.ajouterUser(user1);
+                        dao_nosql.creerUserDansMongo(user1.getId(), pseudoInscrit);
+
                         MessageDialog.showMessageDialog(textGUI, "Succès", "Bienvenue ! ");
                     } catch (Exception e) {
                         MessageDialog.showMessageDialog(textGUI, "Erreur", "Échec de la connexion : " + e.getMessage());

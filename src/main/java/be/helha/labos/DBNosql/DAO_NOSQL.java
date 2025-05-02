@@ -14,6 +14,12 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 public class DAO_NOSQL {
 
+
+    private static Connexion_DB_Nosql connexionDbNosql;
+    private static MongoDatabase mongoDatabase;
+    private static MongoCollection<Document> collection;
+
+
     public void readAllCollections (MongoDatabase database){
             for (String collectionName : database.listCollectionNames()) {
                 MongoCollection<Document> collection = database.getCollection(collectionName);
@@ -22,6 +28,23 @@ public class DAO_NOSQL {
                     System.out.println(doc.toJson());
                 }
             }
+    }
+
+    public void creerUserDansMongo(int idUser, String pseudo) {
+        try {
+            connexionDbNosql = Connexion_DB_Nosql.getInstance();
+            mongoDatabase = connexionDbNosql.getDatabase();
+            MongoCollection<Document> usersCollection = mongoDatabase.getCollection("users_nosql");
+
+            Document userDoc = new Document("_id", idUser)
+                    .append("pseudo", pseudo)
+                    .append("personnages", new ArrayList<>());
+            usersCollection.insertOne(userDoc);
+
+        } catch (Exception e) {
+            System.out.println("Erreur lors de la création de l'utilisateur dans MongoDB.");
+            e.printStackTrace();
+        }
     }
 
     public void DeleteCharacters (MongoDatabase database,ObjectId id){
