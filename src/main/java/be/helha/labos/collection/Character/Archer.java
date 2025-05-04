@@ -7,7 +7,7 @@ public class Archer extends CharacterType
 
             }
 
-            public Archer(String name, int health, int damage, double dodge, double precision,int idUser)
+            public Archer(String name, int health, int damage, double dodge, double precision)
             {
                 //default archer
                 super();
@@ -17,7 +17,6 @@ public class Archer extends CharacterType
                 this.damage = damage;
                 money = 100.00;
                 level = 1;
-                this.idUser= idUser;
                 this.dodge = dodge;
                 this.precision = precision;
                 this.inventaire = new Inventaire();

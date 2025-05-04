@@ -41,8 +41,6 @@ public class CharacterType {
         this.name = name;
         this.health = health;
         this.damage = damage;
-        money = 100.00;
-        level = 1;
         this.dodge = dodge;
         this.idUser= idUser;
         this.precision = precision;
@@ -154,7 +152,6 @@ public class CharacterType {
                 ", precision=" + precision +
                 '}';
     }
-
 
     public void removeCharacter(ObjectId characterId) {
         try {

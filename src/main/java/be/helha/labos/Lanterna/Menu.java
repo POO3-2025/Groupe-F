@@ -55,7 +55,7 @@ public class Menu {
             }));
 
             panel.addComponent(new Button("Gérer personnage personnage", () -> {
-                menuCréerPersonnage.afficherCréationPersonnage();
+                menuCréerPersonnage.afficherCréationPersonnage(pseudo);
             }));
 
                 panel.addComponent(new Button("Déconnexion", window::close)); // Ferme juste la fenêtre de menu

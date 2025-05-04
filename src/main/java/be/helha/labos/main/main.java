@@ -29,8 +29,7 @@ public class main {
 
         Authen authen = new Authen();
 
-        User_DAO dao = new User_DAO();
-        //far
+        User_DAO daoUser = new User_DAO();
 
         try{
 
@@ -46,11 +45,7 @@ public class main {
             System.out.println("Utilisateur connexion échoué !");
         }*/
 
-
-
-
-        //User nouvelUser = new User("nigf", "Jo","USER");
-        User userExistant = dao.GetUserByPseudo("Jo");
+        User nouvelUser = new User("Bill", "","USER");
 
         //boolean success = dao.ajouterUser(nouvelUser);
         /*if (success) {
@@ -68,14 +63,10 @@ public class main {
 
         DAO_NOSQL daoNosql = new DAO_NOSQL();
 
-            if (userExistant != null) {
-                int idUser = userExistant.getId(); // ✅ c'est l'ID qui vient de MySQL
-                Archer archer = new Archer("archerX", 120, 30, 0.4, 0.9, idUser);
-                Charactercollection.insertOne(archer);
-                System.out.println("Personnage ajouté pour le user ID : " + idUser);
-            } else {
-                System.out.println("Utilisateur non trouvé.");
-            }
+        Archer archer = new Archer("archerX", 120, 30, 0.4, 0.9);
+
+        daoNosql.ajouterPersonnagePourUser(nouvelUser.getPseudo(),archer);
+
 
             Sword sword = new Sword();
             Sword fireSword = new Sword(Sword.SwordMaterial.FIRE);
@@ -133,7 +124,7 @@ public class main {
 
         }
 
-        dao.fermerConnexion();
+        daoUser.fermerConnexion();
         connexionDbNosql.closeConnection();
 
     }

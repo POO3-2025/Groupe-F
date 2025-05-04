@@ -5,6 +5,7 @@ import be.helha.labos.collection.Character.*;
 import be.helha.labos.collection.Item.Item;
 import be.helha.labos.collection.User;
 import com.mongodb.client.*;
+import com.mongodb.client.model.Filters;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -20,13 +21,19 @@ public class DAO_NOSQL {
 
     private static Connexion_DB_Nosql connexionDbNosql;
     private static MongoDatabase mongoDatabase;
-    private static MongoCollection<Document> collection;
 
-    MongoCollection<Item> Itemcollection = mongoDatabase.getCollection("items", Item.class);
-    MongoCollection<CharacterType> Charactercollection = mongoDatabase.getCollection("characters", CharacterType.class);
+    MongoCollection<Item> Itemcollection;
+    MongoCollection<CharacterType> Charactercollection;
 
     User_DAO userDao = new User_DAO();
 
+    public DAO_NOSQL() {
+        connexionDbNosql = Connexion_DB_Nosql.getInstance();
+        mongoDatabase = connexionDbNosql.getDatabase();
+
+        Itemcollection = mongoDatabase.getCollection("items", Item.class);
+        Charactercollection = mongoDatabase.getCollection("characters", CharacterType.class);
+    }
 
     public void readAllCollections (MongoDatabase database){
             for (String collectionName : database.listCollectionNames()) {
@@ -72,12 +79,22 @@ public class DAO_NOSQL {
 
     public List<CharacterType> readAllCharacters(MongoDatabase database) {
         MongoCollection<CharacterType> collection = database.getCollection("characters", CharacterType.class);
-
         List<CharacterType> characters = new ArrayList<>();
+
         for (CharacterType character : collection.find()) {
             characters.add(character);
         }
 
+        return characters;
+    }
+
+    public List<CharacterType> readAllCharactersByUserId(MongoDatabase database, int idUser) {
+        MongoCollection<CharacterType> collection = database.getCollection("characters", CharacterType.class);
+        List<CharacterType> characters = new ArrayList<>();
+
+        for (CharacterType character : collection.find(Filters.eq("idUser", idUser))) {
+            characters.add(character);
+        }
         return characters;
     }
 

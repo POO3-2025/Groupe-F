@@ -87,6 +87,7 @@ public class User_DAO {
             if (rs.next()) {
                 // Création d'une instance de User à partir des données de la base
                 user = new User(
+                        rs.getInt("ID"),
                         rs.getString("Pseudo"),              // Pseudo
                         rs.getString("Password"),            // Mot de passe
                         rs.getString("ROLE")

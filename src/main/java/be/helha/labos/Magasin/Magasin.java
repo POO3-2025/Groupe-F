@@ -1,6 +1,7 @@
 package be.helha.labos.Magasin;
 
 import be.helha.labos.collection.Inventaire;
+import be.helha.labos.collection.Item.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
@@ -12,9 +13,7 @@ import java.util.Random;
 
 public class Magasin {
 
-    private MongoCollection<Document> itemsCollection;
-    private static final String[] NOMS_OBJETS = {"Épée", "Potion", "Arc", "Masse", "Armure"};
-    private static final double PRIX_MIN = 10.0;
+    private MongoCollection<Document> itemsCollection;    private static final double PRIX_MIN = 10.0;
     private static final double PRIX_MAX = 500.0;
 
     public Magasin(MongoDatabase database) {
@@ -67,16 +66,72 @@ public class Magasin {
 
     public static void genererObjets(MongoCollection<Document> itemsCollection) {
         Random random = new Random();
-            for (int i = 0; i < 10; i++) {
-                String nom = NOMS_OBJETS[random.nextInt(NOMS_OBJETS.length)];
-                double prix = PRIX_MIN + (PRIX_MAX - PRIX_MIN) * random.nextDouble();
 
-                Document objet = new Document("nom", nom)
-                        .append("prix", prix);
+        for (int i = 0; i < 10; i++) {
+            Item objet;
+            String nom = "";
+            Document document = new Document();
+            double prix = 0;
 
-                itemsCollection.insertOne(objet);
-                System.out.println("Objet généré : " + nom + " (Prix : " + prix + ")");
+            int typeAleatoire = random.nextInt(4);
+
+            switch (typeAleatoire) {
+                case 0 -> {
+                    Sword.SwordMaterial[] materials = Sword.SwordMaterial.values();
+                    Sword.SwordMaterial material = materials[random.nextInt(materials.length)];
+                    Sword sword = new Sword(material);
+                    objet = sword;
+                    nom = "Épée en " + material.getMaterial();
+
+
+                    document.append("type", "Sword")
+                            .append("materiau", material.getMaterial())
+                            .append("degats", sword.getDamage());
+                }
+                case 1 -> {
+                    int max = 50 + random.nextInt(51);
+                    int contenu = random.nextInt(max + 1);
+                    Potion potion = new Potion(max, contenu);
+                    objet = potion;
+                    nom = "Potion (" + contenu + "/" + max + ")";
+                    prix = 10 + ((double) contenu / max) * 40; // Prix selon remplissage
+
+                    document.append("type", "Potion")
+                            .append("maxContent", max)
+                            .append("actualContent", contenu);
+                }
+                case 2 -> {
+                    Bow.BowMaterial[] materials = Bow.BowMaterial.values();
+                    Bow.BowMaterial material = materials[random.nextInt(materials.length)];
+                    Bow bow = new Bow(material);
+                    objet = bow;
+                    nom = "Arc en " + material.getMaterial();
+
+
+                    document.append("type", "Bow")
+                            .append("materiau", material.getMaterial())
+                            .append("degats", bow.getDamage());
+                }
+                case 3 -> {
+                    Mace.MaceMaterial[] materials = Mace.MaceMaterial.values();
+                    Mace.MaceMaterial material = materials[random.nextInt(materials.length)];
+                    Mace mace = new Mace(material);
+                    objet = mace;
+                    nom = "Masse en " + material.getMaterial();
+
+
+                    document.append("type", "Mace")
+                            .append("materiau", material.getMaterial())
+                            .append("degats", mace.getDamage());
+                }
             }
+
+            document.append("nom", nom)
+                    .append("prix", prix)
+                    .append("_id", new ObjectId());
+
+            itemsCollection.insertOne(document);
+            System.out.println("Objet généré : " + nom + " (Prix : " + prix + ")");
+        }
     }
 }
-
