@@ -32,6 +32,7 @@ public class MenuCréerPersonnage {
          *
          */
         DAO_NOSQL dao = new DAO_NOSQL();
+        CharacterType characterType = new CharacterType();
 
         /**
          * Appel de toutes les collections de la DB
@@ -66,8 +67,8 @@ public class MenuCréerPersonnage {
              * Méthode pour créer un perso de type Archer
              */
             panel.addComponent(new Button("Archer", () -> {
-                Archer archerTest = new Archer("archerTest", 100, 20, 0.30, 0.80);
-                Charactercollection.insertOne(archerTest);
+                //Archer archerTest = new Archer("archerTest", 100, 20, 0.30, 0.80,);
+                //Charactercollection.insertOne(archerTest);
             }));
 
             panel.addComponent(new Button("Knight", () -> {

@@ -1,6 +1,9 @@
 package be.helha.labos.DBNosql;
 
+import be.helha.labos.DB.User_DAO;
 import be.helha.labos.collection.Character.*;
+import be.helha.labos.collection.Item.Item;
+import be.helha.labos.collection.User;
 import com.mongodb.client.*;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -19,6 +22,11 @@ public class DAO_NOSQL {
     private static MongoDatabase mongoDatabase;
     private static MongoCollection<Document> collection;
 
+    MongoCollection<Item> Itemcollection = mongoDatabase.getCollection("items", Item.class);
+    MongoCollection<CharacterType> Charactercollection = mongoDatabase.getCollection("characters", CharacterType.class);
+
+    User_DAO userDao = new User_DAO();
+
 
     public void readAllCollections (MongoDatabase database){
             for (String collectionName : database.listCollectionNames()) {
@@ -34,7 +42,7 @@ public class DAO_NOSQL {
         try {
             connexionDbNosql = Connexion_DB_Nosql.getInstance();
             mongoDatabase = connexionDbNosql.getDatabase();
-            MongoCollection<Document> usersCollection = mongoDatabase.getCollection("users_nosql");
+            MongoCollection<Document> usersCollection = mongoDatabase.getCollection("users");
 
             Document userDoc = new Document("_id", idUser)
                     .append("pseudo", pseudo)
@@ -44,6 +52,16 @@ public class DAO_NOSQL {
         } catch (Exception e) {
             System.out.println("Erreur lors de la création de l'utilisateur dans MongoDB.");
             e.printStackTrace();
+        }
+    }
+
+    public void ajouterPersonnagePourUser(String pseudo, CharacterType perso) {
+        User user = userDao.GetUserByPseudo(pseudo);
+        if (user != null) {
+            perso.setIdUser(user.getId());
+            Charactercollection.insertOne(perso);
+        } else {
+            throw new IllegalArgumentException("User avec pseudo " + pseudo + " introuvable.");
         }
     }
 

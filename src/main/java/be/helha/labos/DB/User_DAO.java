@@ -134,6 +134,7 @@ public class User_DAO {
         }
         return false;
     }
+
     public void supprimerTableUser(){
         String sql = "TRUNCATE TABLE  User";
         try(PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -141,6 +142,20 @@ public class User_DAO {
             System.out.println("Table 'User' supprimée.");
             pstmt.executeUpdate();
         }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Ferme la connexion à la base de données.
+     */
+    public void fermerConnexion() {
+        try {
+            if (conn != null && !conn.isClosed()) {
+                conn.close();
+                System.out.println("Table 'User' fermée.");
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

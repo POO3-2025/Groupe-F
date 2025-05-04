@@ -20,7 +20,10 @@ public class CharacterType {
     protected String name;
     protected String title;
     protected int health;
+    protected int idUser;
     protected int damage;
+    protected double money;
+    protected int level;
     protected Inventaire inventaire;
     protected double dodge;
     protected double precision;
@@ -33,12 +36,15 @@ public class CharacterType {
     public CharacterType(){
     }
 
-    public CharacterType(String name, int health, int damage, double dodge, double precision) {
+    public CharacterType(String name, int health, int damage, double dodge, double precision,int idUser) {
         this.id = new ObjectId();
         this.name = name;
         this.health = health;
         this.damage = damage;
+        money = 100.00;
+        level = 1;
         this.dodge = dodge;
+        this.idUser= idUser;
         this.precision = precision;
     }
 
@@ -100,6 +106,30 @@ public class CharacterType {
         this.dodge = dodge;
     }
 
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int IdUser) {
+        idUser = IdUser;
+    }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     public double getPrecision() {
         return precision;
     }
@@ -118,27 +148,13 @@ public class CharacterType {
                 ", health=" + health +
                 ", title='" + title + '\'' +
                 ", damage=" + damage +
+                ", money=" + money +
+                ", user=" + idUser +
                 ", dodge=" + dodge +
                 ", precision=" + precision +
                 '}';
     }
 
-    public void ajouterPersonnageAuUser(int idUser,ObjectId idPersonnage){
-        try {
-            // Initialisation de la connexion
-            connexionDbNosql = Connexion_DB_Nosql.getInstance();
-            mongoDatabase = connexionDbNosql.getDatabase();
-            collection = mongoDatabase.getCollection("characters");
-
-            // Ajout du document correspondant
-            Document addQuery = new Document("_id", id);
-            collection.insertOne(addQuery);
-
-        } catch (Exception e) {
-            System.out.println("Erreur lors de la suppression du personnage.");
-            e.printStackTrace();
-        }
-    }
 
     public void removeCharacter(ObjectId characterId) {
         try {

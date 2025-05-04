@@ -24,6 +24,7 @@ public class Menu {
 
     public void Affichage(String pseudo) throws IOException {
         MenuCréerPersonnage menuCréerPersonnage = new MenuCréerPersonnage();
+
         try {
             // Utilisation de DefaultTerminalFactory pour créer un terminal Swing
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
@@ -50,7 +51,7 @@ public class Menu {
                 }));
 
             panel.addComponent(new Button("Jouer", () -> {
-                // En attente...
+
             }));
 
             panel.addComponent(new Button("Gérer personnage personnage", () -> {

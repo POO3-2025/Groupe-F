@@ -63,7 +63,7 @@ public class Inscription {
 
                         User user1 = new User(pseudoInscrit,passwordInscrit,"USER");
                         dao.ajouterUser(user1);
-                        dao_nosql.creerUserDansMongo(user1.getId(), pseudoInscrit);
+                        //dao_nosql.creerUserDansMongo(user1.getId(), pseudoInscrit);
 
                         MessageDialog.showMessageDialog(textGUI, "Succès", "Bienvenue ! ");
                     } catch (Exception e) {

@@ -34,9 +34,9 @@ public class main_Characters {
 
             Potion potion = new Potion (20,15);
 
-            Archer archerTest = new Archer("archerTest", 101, 20, 0.3, 0.8);
+            Archer archerTest = new Archer("archerTest", 101, 20, 0.3, 0.8,5);
 
-            CharacterType Chara = new CharacterType("Chara", 100, 20, 0.3, 0.8);
+            CharacterType Chara = new CharacterType("Chara", 100, 20,0.8, 0.3, 2);
 
 
             // Insertion du document
