@@ -13,8 +13,7 @@ import java.util.Random;
 
 public class Magasin {
 
-    private MongoCollection<Document> itemsCollection;
-    private static final double PRIX_MIN = 10.0;
+    private MongoCollection<Document> itemsCollection;    private static final double PRIX_MIN = 10.0;
     private static final double PRIX_MAX = 500.0;
 
     public Magasin(MongoDatabase database) {
