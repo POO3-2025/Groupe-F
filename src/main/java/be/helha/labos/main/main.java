@@ -30,7 +30,6 @@ public class main {
         Authen authen = new Authen();
 
         User_DAO dao = new User_DAO();
-        //far
 
         try{
 
