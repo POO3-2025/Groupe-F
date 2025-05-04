@@ -1,0 +1,46 @@
+{
+  "Databases": {
+    "mysql": {
+      "ConnectionType": "DB",
+      "DBType": "mysql",
+      "DBCredentials": {
+        "HostName": "127.0.0.1",
+        "UserName": "root",
+        "Password": "",
+        "DBName": "gameprod",
+        "port": 3306
+      }
+    },
+    "mysqlTEST": {
+      "ConnectionType": "DB",
+      "DBType": "mysql",
+      "DBCredentials": {
+        "HostName": "127.0.0.1",
+        "UserName": "root",
+        "Password": "",
+        "DBName": "GAMETEST",
+        "port": 3306
+      }
+    },
+    "nosqlTest": {
+      "ConnectionType": "DB",
+      "DBType": "nosql",
+      "DBCredentials": {
+        "HostName": "localhost",
+        "UserName": "sa",
+        "Password": "1234",
+        "DBName": "TestDB"
+      }
+    },
+    "nosql": {
+      "ConnectionType": "DB",
+      "DBType": "nosql",
+      "DBCredentials": {
+        "HostName": "localhost",
+        "UserName": "sa",
+        "Password": "1234",
+        "DBName": "Game"
+      }
+    }
+  }
+}
