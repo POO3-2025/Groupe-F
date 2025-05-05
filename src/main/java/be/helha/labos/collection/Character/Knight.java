@@ -10,6 +10,8 @@ public class Knight extends CharacterType {
         this.health = health;
         this.title="Knight";
         this.damage = damage;
+        money = 100.00;
+        level = 1;
         this.dodge = dodge;
         this.precision = precision;
         this.inventaire = new Inventaire();

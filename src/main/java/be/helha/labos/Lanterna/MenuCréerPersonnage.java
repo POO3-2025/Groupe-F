@@ -72,15 +72,15 @@ public class MenuCréerPersonnage {
                 dao.ajouterPersonnagePourUser(pseudo,archerTest);
             }));
 
-            /*panel.addComponent(new Button("Knight", () -> {
+            panel.addComponent(new Button("Knight", () -> {
                 Knight KnightTest = new Knight("KnightTest", 150, 35, 0.20, 0.65);
-                Charactercollection.insertOne(KnightTest);
+                dao.ajouterPersonnagePourUser(pseudo,KnightTest);
             }));
 
             panel.addComponent(new Button("Orc", () -> {
                 Orc OrcTest = new Orc("OrcTest", 250, 50, 0.10, 0.50);
-                Charactercollection.insertOne(OrcTest);
-            }));*/
+                dao.ajouterPersonnagePourUser(pseudo,OrcTest);
+            }));
 
             /**
              * Supprimer un perso
@@ -142,8 +142,8 @@ public class MenuCréerPersonnage {
                     // Boucle pour récupérer les champs des persos. A Voir...
                     for (CharacterType character : characters) {
                         builder.append("- ").append(character.getName())
-                                .append(" Type: ").append(character.getId())
-                                .append(" Type: ").append(character.getTitle())
+                                .append(" | Type: ").append(character.getTitle())
+                                .append(" | Argent: ").append(character.getMoney())
                                 .append(" | HP: ").append(character.getHealth())
                                 .append(" | DMG: ").append(character.getDamage())
                                 .append("\n");
