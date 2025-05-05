@@ -40,7 +40,6 @@ public class User_DAO {
         """;
         try (Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(createTableQuery);
-            System.out.println("Table 'User' créée ou déjà existante.");
         } catch (SQLException e) {
             System.err.println("Erreur lors de la création de la table 'User'.");
             e.printStackTrace();

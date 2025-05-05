@@ -153,6 +153,14 @@ public class CharacterType {
                 '}';
     }
 
+    public void updateMoneyInDB() {
+        connexionDbNosql = Connexion_DB_Nosql.getInstance();
+        mongoDatabase = connexionDbNosql.getDatabase();
+        collection = mongoDatabase.getCollection("characters");
+
+        collection.updateOne(new Document("_id", this.id), new Document("$set", new Document("money", this.money)));
+    }
+
     public void removeCharacter(ObjectId characterId) {
         try {
             // Connexion à la DB

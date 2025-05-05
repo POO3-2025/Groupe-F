@@ -62,6 +62,32 @@ public class Magasin {
         System.out.println("Objet vendu avec succès : " + item.getString("nom"));
     }
 
+    // Méthode pour calculer le prix selon le matériau
+    private static double calculerPrixArme(String type, String materiau) {
+        double base = switch (type) {
+            case "Sword" -> 50.0;
+            case "Bow"   -> 45.0;
+            case "Mace"  -> 55.0;
+            default      -> 40.0;
+        };
+
+        double multiplicateur = switch (materiau.toLowerCase()) {
+            case "bois"     -> 1.0;
+            case "pierre"   -> 1.2;
+            case "fer"      -> 1.5;
+            case "argent"   -> 1.7;
+            case "or"       -> 1.8;
+            case "acier"    -> 2.0;
+            case "feu"      -> 2.2;
+            case "glace"    -> 2.3;
+            case "diamant"  -> 2.5;
+            default         -> 1.0;
+        };
+
+        return base * multiplicateur;
+    }
+
+
 
 
     public static void genererObjets(MongoCollection<Document> itemsCollection) {
@@ -82,6 +108,7 @@ public class Magasin {
                     Sword sword = new Sword(material);
                     objet = sword;
                     nom = "Épée en " + material.getMaterial();
+                    prix = calculerPrixArme("Sword", material.getMaterial());
 
 
                     document.append("type", "Sword")
@@ -95,6 +122,7 @@ public class Magasin {
                     objet = potion;
                     nom = "Potion (" + contenu + "/" + max + ")";
                     prix = 10 + ((double) contenu / max) * 40; // Prix selon remplissage
+                    prix = calculerPrixArme("Potion", "none");
 
                     document.append("type", "Potion")
                             .append("maxContent", max)
@@ -106,6 +134,7 @@ public class Magasin {
                     Bow bow = new Bow(material);
                     objet = bow;
                     nom = "Arc en " + material.getMaterial();
+                    prix = calculerPrixArme("Bow", material.getMaterial());
 
 
                     document.append("type", "Bow")
@@ -118,6 +147,7 @@ public class Magasin {
                     Mace mace = new Mace(material);
                     objet = mace;
                     nom = "Masse en " + material.getMaterial();
+                    prix = calculerPrixArme("Mace", material.getMaterial());
 
 
                     document.append("type", "Mace")
