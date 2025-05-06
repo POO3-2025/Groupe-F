@@ -13,6 +13,8 @@ public class Knight extends CharacterType {
         this.health = health;
         this.title="Knight";
         this.damage = damage;
+        money = 100.00;
+        level = 1;
         this.dodge = dodge;
         this.precision = precision;
         this.inventaire = new Inventaire();
@@ -22,12 +24,13 @@ public class Knight extends CharacterType {
     @Override
     public String toString() {
         return "Knight{" +
-                "name='" + name  +
-                ", title='" + title +
+                "name='" + name + '\'' +
                 ", health=" + health +
+                ", title='" + title + '\'' +
                 ", damage=" + damage +
+                ", money=" + money +
+                ", user=" + idUser +
                 ", dodge=" + dodge +
-                ", level=" + level +
                 ", precision=" + precision +
                 '}';
     }

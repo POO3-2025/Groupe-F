@@ -36,7 +36,7 @@ public class main_Characters {
 
             Archer archerTest = new Archer("archerTest", 101, 20, 0.3, 0.8);
 
-            CharacterType Chara = new CharacterType("Chara", 100, 20, 0.3, 0.8);
+            CharacterType Chara = new CharacterType("Chara", 100, 20,0.8, 0.3,5);
 
 
             // Insertion du document

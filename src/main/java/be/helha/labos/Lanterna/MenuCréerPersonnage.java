@@ -1,5 +1,6 @@
 package be.helha.labos.Lanterna;
 
+import be.helha.labos.DB.User_DAO;
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.Character.Archer;
@@ -22,7 +23,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class MenuCréerPersonnage {
-    public void afficherCréationPersonnage() {
+
+    public void afficherCréationPersonnage(String pseudo) {
 
         Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
         MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
@@ -31,6 +33,7 @@ public class MenuCréerPersonnage {
          *
          */
         DAO_NOSQL dao = new DAO_NOSQL();
+        User_DAO userDao = new User_DAO();
 
         /**
          * Appel de toutes les collections de la DB
@@ -66,17 +69,17 @@ public class MenuCréerPersonnage {
              */
             panel.addComponent(new Button("Archer", () -> {
                 Archer archerTest = new Archer("archerTest", 100, 20, 0.30, 0.80);
-                Charactercollection.insertOne(archerTest);
+                dao.ajouterPersonnagePourUser(pseudo,archerTest);
             }));
 
             panel.addComponent(new Button("Knight", () -> {
                 Knight KnightTest = new Knight("KnightTest", 150, 35, 0.20, 0.65);
-                Charactercollection.insertOne(KnightTest);
+                dao.ajouterPersonnagePourUser(pseudo,KnightTest);
             }));
 
             panel.addComponent(new Button("Orc", () -> {
                 Orc OrcTest = new Orc("OrcTest", 250, 50, 0.10, 0.50);
-                Charactercollection.insertOne(OrcTest);
+                dao.ajouterPersonnagePourUser(pseudo,OrcTest);
             }));
 
             /**
@@ -128,7 +131,10 @@ public class MenuCréerPersonnage {
              * Méthode d'affichages des persos
              */
             panel.addComponent(new Button("Voir mes personnages", () -> {
-                List<CharacterType> characters = dao.readAllCharacters(mongoDatabase); // récupère les persos
+
+                int idUser = userDao.GetUserByPseudo(pseudo).getId();
+                List<CharacterType> characters = dao.readAllCharactersByUserId(mongoDatabase, idUser);
+
                 if (characters.isEmpty()) {
                     MessageDialog.showMessageDialog(textGUI, "Personnages", "Aucun personnage trouvé.");
                 } else {
@@ -136,8 +142,8 @@ public class MenuCréerPersonnage {
                     // Boucle pour récupérer les champs des persos. A Voir...
                     for (CharacterType character : characters) {
                         builder.append("- ").append(character.getName())
-                                .append(" Type: ").append(character.getId())
-                                .append(" Type: ").append(character.getTitle())
+                                .append(" | Type: ").append(character.getTitle())
+                                .append(" | Argent: ").append(character.getMoney())
                                 .append(" | HP: ").append(character.getHealth())
                                 .append(" | DMG: ").append(character.getDamage())
                                 .append("\n");

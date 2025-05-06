@@ -40,7 +40,6 @@ public class User_DAO {
         """;
         try (Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(createTableQuery);
-            System.out.println("Table 'User' créée ou déjà existante.");
         } catch (SQLException e) {
             System.err.println("Erreur lors de la création de la table 'User'.");
             e.printStackTrace();
@@ -50,7 +49,7 @@ public class User_DAO {
     public boolean ajouterUser(User user) {
         String sql = "INSERT INTO User (Pseudo, Password, Role, Actif) VALUES (?, ?, ?, ?)";
 
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             pstmt.setString(1, user.getPseudo());
             // 🔐 Hashage du mot de passe
             String hashedPassword = PasswordUtils.hashPassword(user.getPassword());
@@ -60,6 +59,12 @@ public class User_DAO {
 
             if(GetUserByPseudo(user.getPseudo()) == null) {
                 pstmt.executeUpdate();
+                // Récupération de l'ID généré
+                ResultSet generatedKeys = pstmt.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    int id = generatedKeys.getInt(1);
+                    user.setId(id); // Met à jour l'objet avec l'id attribué
+                }
                 return true;
             }
             else {
@@ -79,8 +84,9 @@ public class User_DAO {
             stmt.setString(1, pseudo);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                // Création d'une instance de Lunettes à partir des données de la base
+                // Création d'une instance de User à partir des données de la base
                 user = new User(
+                        rs.getInt("ID"),
                         rs.getString("Pseudo"),              // Pseudo
                         rs.getString("Password"),            // Mot de passe
                         rs.getString("ROLE")
@@ -91,6 +97,29 @@ public class User_DAO {
         }
         return user;
     }
+
+    public User GetUserById(int id) {
+        User user = null;
+        String query = "SELECT DISTINCT * FROM User WHERE ID = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                // Création d'une instance de User à partir des données de la base
+                user = new User(
+                        rs.getInt("ID"),
+                        rs.getString("Pseudo"),              // Pseudo
+                        rs.getString("Password"),            // Mot de passe
+                        rs.getString("ROLE")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+
     public boolean verifierConnexion(String pseudo, String password) {
         String sql = "SELECT Password FROM User WHERE Pseudo = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -105,13 +134,28 @@ public class User_DAO {
         }
         return false;
     }
+
     public void supprimerTableUser(){
         String sql = "TRUNCATE TABLE  User";
         try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 
-            System.out.println("Table 'User' supprim<UNK>.");
+            System.out.println("Table 'User' supprimée.");
             pstmt.executeUpdate();
         }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Ferme la connexion à la base de données.
+     */
+    public void fermerConnexion() {
+        try {
+            if (conn != null && !conn.isClosed()) {
+                conn.close();
+                System.out.println("Table 'User' fermée.");
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

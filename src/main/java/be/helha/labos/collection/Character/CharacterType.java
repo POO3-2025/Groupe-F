@@ -1,5 +1,6 @@
 package be.helha.labos.collection.Character;
 
+import be.helha.labos.collection.User;
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.collection.Inventaire;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,6 +9,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -16,35 +18,35 @@ public class CharacterType {
 
     @JsonProperty("_id")
     protected ObjectId id;
-    protected ObjectId userId;
     protected String name;
     protected String title;
     protected int health;
+    protected int idUser;
     protected int damage;
+    protected double money;
     protected int level;
     protected Inventaire inventaire;
     protected double dodge;
     protected double precision;
 
-
     private static Connexion_DB_Nosql connexionDbNosql;
     private static MongoDatabase mongoDatabase;
     private static MongoCollection<Document> collection;
 
-    public CharacterType() {
+
+    public CharacterType(){
     }
 
-
-    public CharacterType(String name, int health, int damage, double dodge, double precision) {
+    public CharacterType(String name, int health, int damage, double dodge, double precision,User user) {
         this.id = new ObjectId();
-        this.userId = user.getId();
         this.name = name;
-        this.title = "Character";
         this.health = health;
         this.damage = damage;
         this.dodge = dodge;
+        this.idUser= user.getId();
         this.precision = precision;
         this.level = 1;
+        this.money = 100.00;
     }
 
     public boolean attackHits()
@@ -105,6 +107,30 @@ public class CharacterType {
         this.dodge = dodge;
     }
 
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int IdUser) {
+        idUser = IdUser;
+    }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     public double getPrecision() {
         return precision;
     }
@@ -117,54 +143,63 @@ public class CharacterType {
         return inventaire;
     }
 
-    public ObjectId getUserId() {
-        return userId;
-    }
-
-    public void setUserId(ObjectId userId) {
-        this.userId = userId;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
     public String toString() {
         return "Character{" +
-                "name='" + name  +
-                ", title='" + title +
+                "name='" + name + '\'' +
                 ", health=" + health +
+                ", title='" + title + '\'' +
                 ", damage=" + damage +
+                ", money=" + money +
+                ", user=" + idUser +
                 ", dodge=" + dodge +
-                ", level=" + level +
                 ", precision=" + precision +
                 '}';
     }
 
+    public void updateMoneyInDB() {
+        connexionDbNosql = Connexion_DB_Nosql.getInstance();
+        mongoDatabase = connexionDbNosql.getDatabase();
+        collection = mongoDatabase.getCollection("characters");
 
-    public void removeCharacter(ObjectId id) {
+        collection.updateOne(new Document("_id", this.id), new Document("$set", new Document("money", this.money)));
+    }
+
+    public void removeCharacter(ObjectId characterId) {
         try {
-            // Initialisation de la connexion
+            // Connexion à la DB
             connexionDbNosql = Connexion_DB_Nosql.getInstance();
             mongoDatabase = connexionDbNosql.getDatabase();
-            collection = mongoDatabase.getCollection("characters");
 
-            // Suppression du document correspondant
-            Document deleteQuery = new Document("_id", id);
-            long deletedCount = collection.deleteOne(deleteQuery).getDeletedCount();
+            // Récupération de la collection des personnages
+            MongoCollection<Document> charactersCollection = mongoDatabase.getCollection("characters");
 
-            if (deletedCount > 0) {
+            // Récupération du document personnage AVANT suppression
+            Document characterDoc = charactersCollection.find(new Document("_id", characterId)).first();
+
+            if (characterDoc != null) {
+                // Récupérer l'ID de l'inventaire à partir du champ "inventaire._id"
+                Document inventaireDoc = characterDoc.get("inventaire", Document.class);
+                ObjectId inventoryId= inventaireDoc.getObjectId("_id");
+
+                // Suppression du personnage
+                charactersCollection.deleteOne(new Document("_id", characterId));
                 System.out.println("Personnage supprimé avec succès.");
+
+                MongoCollection<Document> inventoryCollection = mongoDatabase.getCollection("inventory");
+                long invDeleted = inventoryCollection.deleteOne(new Document("_id", inventoryId)).getDeletedCount();
+
+                if (invDeleted > 0) {
+                    System.out.println("Inventaire du personnage supprimé.");
+                } else {
+                    System.out.println("Aucun inventaire associé trouvé.");
+                }
             } else {
-                System.out.println("Aucun personnage trouvé avec ce nom.");
+                System.out.println("Aucun personnage trouvé avec cet identifiant.");
             }
         } catch (Exception e) {
-            System.out.println("Erreur lors de la suppression du personnage.");
+            System.out.println("Erreur lors de la suppression du personnage ou de son inventaire.");
             e.printStackTrace();
         }
     }
+
 }

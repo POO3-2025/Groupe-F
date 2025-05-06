@@ -23,12 +23,13 @@ public class Archer extends CharacterType
             public String toString() 
             {
                 return "Archer{" +
-                        "name='" + name  +
-                        ", title='" + title +
+                        "name='" + name + '\'' +
                         ", health=" + health +
+                        ", title='" + title + '\'' +
                         ", damage=" + damage +
+                        ", money=" + money +
+                        ", user=" + idUser +
                         ", dodge=" + dodge +
-                        ", level=" + level +
                         ", precision=" + precision +
                         '}';
             }

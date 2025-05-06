@@ -7,6 +7,7 @@ import be.helha.labos.DB.*;
 import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.Character.*;
 import be.helha.labos.collection.Item.*;
+import be.helha.labos.collection.User;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -22,12 +23,49 @@ public class main {
         Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
         MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
 
+        MongoCollection<Item> Itemcollection = mongoDatabase.getCollection("items", Item.class);
+        MongoCollection<CharacterType> Charactercollection = mongoDatabase.getCollection("characters", CharacterType.class);
+
+
+        Authen authen = new Authen();
+
+        User_DAO daoUser = new User_DAO();
+
+        try{
+
+        //dao.supprimerTableUser();
+
+        /*boolean connex = dao.verifierConnexion("Jo","Jo");
+
+        if(connex)
+        {
+            System.out.println("Utilisateur connexion avec succes !");
+        }
+        else {
+            System.out.println("Utilisateur connexion échoué !");
+        }*/
+
+        User nouvelUser = new User("Bill", "","USER");
+
+        //boolean success = dao.ajouterUser(nouvelUser);
+        /*if (success) {
+            System.out.println("Utilisateur ajouté !");
+        } else {
+            System.out.println("Erreur lors de l'ajout.");
+        }*/
+
+        /*if(dao.GetUserById(nouvelUser.getId()) != null){
+            System.out.println("User récupéré ,  Id :" + nouvelUser.getId());
+        }
+        else {
+            System.out.println("Erreur lors de la récupération de l'utilisateur.");
+        }*/
+
         DAO_NOSQL daoNosql = new DAO_NOSQL();
 
-        try {
+        Archer archer = new Archer("archerX", 120, 30, 0.4, 0.9);
 
-            MongoCollection<Item> Itemcollection = mongoDatabase.getCollection("items", Item.class);
-            MongoCollection<CharacterType> Charactercollection = mongoDatabase.getCollection("characters", CharacterType.class);
+        daoNosql.ajouterPersonnagePourUser(nouvelUser.getPseudo(),archer);
 
 
             Sword sword = new Sword();
@@ -41,8 +79,6 @@ public class main {
 
             Potion potion = new Potion (20,15);
 
-            //Archer archerTest = new Archer("archerTest", 101, 20, 0.3, 0.8);
-
             //CharacterType Chara = new CharacterType("Chara", 100, 20, 0.3, 0.8);
 
             // Insertion du document
@@ -50,8 +86,6 @@ public class main {
 
             //Itemcollection.insertOne(shield);
             //Itemcollection.insertOne(potion);
-
-            //Charactercollection.insertOne(archerTest);
 
             /*putItemsInInventory(new ObjectId("67c4646cc5452e653988b340"),
                     new ObjectId("67d048cb69f5966a18dcef48") , false);*/
@@ -90,31 +124,8 @@ public class main {
 
         }
 
+        daoUser.fermerConnexion();
         connexionDbNosql.closeConnection();
 
-        Authen authen = new Authen();
-
-        User_DAO dao = new User_DAO();
-
-        //dao.supprimerTableUser();
-
-        /*boolean connex = dao.verifierConnexion("Jo","Jo");
-
-        if(connex)
-        {
-            System.out.println("Utilisateur connexion avec succes !");
-        }
-        else {
-            System.out.println("Utilisateur connexion échoué !");
-        }*/
-
-        /*User nouvelUser = new User("Jo", "Jo","USER");
-        boolean success = dao.ajouterUser(nouvelUser);
-
-        if (success) {
-            System.out.println("Utilisateur ajouté !");
-        } else {
-            System.out.println("Erreur lors de l'ajout.");
-        }*/
     }
 }

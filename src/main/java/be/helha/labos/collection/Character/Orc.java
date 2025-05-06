@@ -13,7 +13,6 @@ public class Orc extends CharacterType {
         this.title="Orc";
         this.damage = damage;
         this.dodge = dodge;
-        this.level = 1;
         this.precision = precision;
         this.inventaire = new Inventaire();
         inventaire.insererDansLaBase();
@@ -22,12 +21,13 @@ public class Orc extends CharacterType {
     @Override
     public String toString() {
         return "Orc{" +
-                "name='" + name  +
-                ", title='" + title +
+                "name='" + name + '\'' +
                 ", health=" + health +
+                ", title='" + title + '\'' +
                 ", damage=" + damage +
+                ", money=" + money +
+                ", user=" + idUser +
                 ", dodge=" + dodge +
-                ", level=" + level +
                 ", precision=" + precision +
                 '}';
     }
