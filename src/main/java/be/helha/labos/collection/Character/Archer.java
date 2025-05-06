@@ -3,16 +3,20 @@ import be.helha.labos.collection.Inventaire;
 
 public class Archer extends CharacterType
         {
+            public Archer(){
+            }
+
             public Archer(String name, int health, int damage, double dodge, double precision)
             {
-                //default archer
                 super();
                 this.name = name;
+                this.title="Archer";
                 this.health = health;
                 this.damage = damage;
                 this.dodge = dodge;
                 this.precision = precision;
                 this.inventaire = new Inventaire();
+                inventaire.insererDansLaBase();
             }
 
             @Override
@@ -20,9 +24,11 @@ public class Archer extends CharacterType
             {
                 return "Archer{" +
                         "name='" + name  +
+                        ", title='" + title +
                         ", health=" + health +
                         ", damage=" + damage +
                         ", dodge=" + dodge +
+                        ", level=" + level +
                         ", precision=" + precision +
                         '}';
             }

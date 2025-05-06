@@ -30,5 +30,10 @@ public class Authen {
             throw new RuntimeException("Pseudo ou mot de passe invalide");
         }
     }
-
+    public void AddUser(User newUser) {
+        if (user_DAO.GetUserByPseudo(newUser.getPseudo()) != null) {
+            throw new RuntimeException("Un utilisateur avec ce pseudo existe déjà");
+        }
+        user_DAO.ajouterUser(newUser);
+    }
 }

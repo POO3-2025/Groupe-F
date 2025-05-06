@@ -1,9 +1,19 @@
 package be.helha.labos.DBNosql;
 
+import be.helha.labos.DB.Connexion_DB;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.*;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.sql.Connection;
+
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
@@ -13,30 +23,42 @@ public class Connexion_DB_Nosql {
     private MongoClient mongoClient;
     private MongoDatabase database;
 
+    CodecRegistry pojoCodecRegistry = fromRegistries(
+            MongoClientSettings.getDefaultCodecRegistry(),
+            fromProviders(PojoCodecProvider.builder().automatic(true).build())
+    );
+
+    private static final String CONFIG_FILE = "config.json"; // Chemin relatif dans src/main/resources
+
+    private ConfigWrapper.DBConfig chargerConfiguration(String key) {
+        InputStream is = getClass().getClassLoader().getResourceAsStream(CONFIG_FILE);
+        InputStreamReader reader = new InputStreamReader(is);
+        JsonObject json = JsonParser.parseReader(reader).getAsJsonObject();
+
+        // Accéder à l'objet "Databases" puis à la clé spécifique
+        JsonObject databases = json.getAsJsonObject("Databases");
+        JsonObject conf = databases.getAsJsonObject(key);
+
+        if (conf == null) {
+            throw new IllegalArgumentException("La configuration pour '" + key + "' est introuvable dans 'Databases'.");
+        }
+        return new Gson().fromJson(conf, ConfigWrapper.DBConfig.class);
+    }
+
     // Constructeur privé pour empêcher l'instanciation directe
     private Connexion_DB_Nosql() {
-        try {
-            // Création du client MongoDB
-            mongoClient = MongoClients.create("mongodb://localhost:27017");
 
-            // Configuration du support POJO
-            CodecRegistry pojoCodecRegistry = fromRegistries(
-                    MongoClientSettings.getDefaultCodecRegistry(),
-                    fromProviders(PojoCodecProvider.builder().automatic(true).build())
-            );
+        ConfigWrapper.DBConfig config = chargerConfiguration("nosqlTest");
 
-            // Connexion à la base de données avec le support des POJOs
-            database = mongoClient.getDatabase("TestDB").withCodecRegistry(pojoCodecRegistry);
+        String uri = "mongodb://" + config.getDBCredentials().getHost() + ":27017";
 
-            System.out.println("Connexion MongoDB établie !");
-        } catch (Exception e) {
-            System.out.println("Erreur lors de la connexion à MongoDB !");
-            e.printStackTrace();
-        }
+        mongoClient = MongoClients.create(uri);
+        database = mongoClient.getDatabase(config.getDBCredentials().getDatabase())
+                .withCodecRegistry(pojoCodecRegistry);
     }
 
     // Méthode pour obtenir l'instance unique du Singleton
-    public static synchronized Connexion_DB_Nosql getInstance() {
+    public static synchronized Connexion_DB_Nosql getInstance(){
         if (instance == null) {
             instance = new Connexion_DB_Nosql();
         }

@@ -23,10 +23,14 @@
       }
     },
     "nosql": {
-      "HostName": "localhost",
-      "UserName": "sa",
-      "Password": "1234",
-      "DBName": "DB_TEST"
+      "ConnectionType": "DB",
+      "DBType": "nosql",
+      "DBCredentials": {
+        "HostName": "localhost",
+        "UserName": "sa",
+        "Password": "1234",
+        "DBName": "DB_TEST"
+      }
     }
   }
 }

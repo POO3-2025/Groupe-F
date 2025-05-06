@@ -1,11 +1,8 @@
 package be.helha.labos.DBNosql;
 
-import com.mongodb.MongoClientSettings;
+import be.helha.labos.collection.Character.*;
 import com.mongodb.client.*;
-import com.mongodb.client.result.InsertOneResult;
 import org.bson.Document;
-import org.bson.codecs.configuration.CodecRegistry;
-import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
@@ -15,9 +12,9 @@ import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 
-public class MongoDB {
+public class DAO_NOSQL {
 
-    public static void readAllCollections (MongoDatabase database){
+    public void readAllCollections (MongoDatabase database){
             for (String collectionName : database.listCollectionNames()) {
                 MongoCollection<Document> collection = database.getCollection(collectionName);
                 System.out.println("\nLecture de la collection " + collectionName + " : ");
@@ -25,6 +22,22 @@ public class MongoDB {
                     System.out.println(doc.toJson());
                 }
             }
+    }
+
+    public void DeleteCharacters (MongoDatabase database,ObjectId id){
+        CharacterType characterType = new CharacterType();
+        characterType.removeCharacter(id);
+    }
+
+    public List<CharacterType> readAllCharacters(MongoDatabase database) {
+        MongoCollection<CharacterType> collection = database.getCollection("characters", CharacterType.class);
+
+        List<CharacterType> characters = new ArrayList<>();
+        for (CharacterType character : collection.find()) {
+            characters.add(character);
+        }
+
+        return characters;
     }
 
     public static void updateDocument (MongoDatabase database, String collectionName, Document filter, Document

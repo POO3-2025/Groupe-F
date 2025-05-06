@@ -1,43 +1,50 @@
 package be.helha.labos.collection.Character;
 
+import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.collection.Inventaire;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+import java.util.List;
 import java.util.Random;
 
 public class CharacterType {
+
+
     @JsonProperty("_id")
     protected ObjectId id;
+    protected ObjectId userId;
     protected String name;
+    protected String title;
     protected int health;
     protected int damage;
+    protected int level;
     protected Inventaire inventaire;
     protected double dodge;
     protected double precision;
 
+
+    private static Connexion_DB_Nosql connexionDbNosql;
+    private static MongoDatabase mongoDatabase;
+    private static MongoCollection<Document> collection;
+
+    public CharacterType() {
+    }
+
+
     public CharacterType(String name, int health, int damage, double dodge, double precision) {
         this.id = new ObjectId();
+        this.userId = user.getId();
         this.name = name;
+        this.title = "Character";
         this.health = health;
         this.damage = damage;
         this.dodge = dodge;
         this.precision = precision;
-        this.inventaire = new Inventaire();
-
-        // Création du document MongoDB
-        Document characterDocument = new Document("_id", id)
-                .append("name", name)
-                .append("health", health)
-                .append("damage", damage)
-                .append("dodge", dodge)
-                .append("precision", precision)
-                .append("inventory_id", inventaire.getId());
-
-        System.out.println("Personnage créé : " + characterDocument.toJson());
-    }
-    public CharacterType(){
+        this.level = 1;
     }
 
     public boolean attackHits()
@@ -53,8 +60,21 @@ public class CharacterType {
         return id;
     }
 
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
+    }
+
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String Title) {
+        title = Title;
     }
 
     public void setName(String name) {
@@ -85,17 +105,66 @@ public class CharacterType {
         this.dodge = dodge;
     }
 
+    public double getPrecision() {
+        return precision;
+    }
+
+    public void setPrecision(double precision) {
+        this.precision = precision;
+    }
+
     public Inventaire getInventaire() {
         return inventaire;
     }
 
+    public ObjectId getUserId() {
+        return userId;
+    }
+
+    public void setUserId(ObjectId userId) {
+        this.userId = userId;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     public String toString() {
         return "Character{" +
-                "name='" + name + '\'' +
+                "name='" + name  +
+                ", title='" + title +
                 ", health=" + health +
                 ", damage=" + damage +
                 ", dodge=" + dodge +
+                ", level=" + level +
                 ", precision=" + precision +
                 '}';
+    }
+
+
+    public void removeCharacter(ObjectId id) {
+        try {
+            // Initialisation de la connexion
+            connexionDbNosql = Connexion_DB_Nosql.getInstance();
+            mongoDatabase = connexionDbNosql.getDatabase();
+            collection = mongoDatabase.getCollection("characters");
+
+            // Suppression du document correspondant
+            Document deleteQuery = new Document("_id", id);
+            long deletedCount = collection.deleteOne(deleteQuery).getDeletedCount();
+
+            if (deletedCount > 0) {
+                System.out.println("Personnage supprimé avec succès.");
+            } else {
+                System.out.println("Aucun personnage trouvé avec ce nom.");
+            }
+        } catch (Exception e) {
+            System.out.println("Erreur lors de la suppression du personnage.");
+            e.printStackTrace();
+        }
     }
 }
