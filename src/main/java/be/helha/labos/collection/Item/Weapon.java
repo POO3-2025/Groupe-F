@@ -1,4 +1,6 @@
 package be.helha.labos.collection.Item;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.bson.types.ObjectId;
 
 public abstract class Weapon extends Item {
     protected int damage;

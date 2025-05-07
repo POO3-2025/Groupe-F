@@ -1,5 +1,8 @@
 package be.helha.labos.collection.Item;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.bson.types.ObjectId;
+
 public class Potion extends Item {
 
     private int maxContent ;

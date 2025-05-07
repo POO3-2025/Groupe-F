@@ -3,8 +3,8 @@ package be.helha.labos.collection.Item;
 public enum WeaponType {
     SWORD("Épée", "Tranchant"),
     BOW("Arc", "Perforant"),
-    MACE("Masse", "Contondant"),
-    AXE("Hache", "Tranchant");
+    MACE("Masse", "Contondant");
+    //AXE("Hache", "Tranchant");
 
     private final String name;
     private final String damageType;

@@ -1,13 +1,10 @@
 package be.helha.labos.DB;
 
 
-import java.util.Map;
-
 /**
  * Classe représentant la configuration nécessaire pour établir une connexion à la base de données.
  */
 public class Configuration {
-
    /**
     * Type de connexion à utiliser.
     */
