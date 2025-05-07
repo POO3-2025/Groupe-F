@@ -8,10 +8,12 @@ import java.sql.*;
 
 public class User_DAO {
 
-    Connexion_DB connexion = Connexion_DB.getInstance("mysql");
+    private final Connection conn;
 
-    // Vérifie si la connexion est bien ouverte
-    Connection conn = connexion.getConnection();
+    public User_DAO(String dbKey) {
+        this.conn = Connexion_DB.getInstance(dbKey).getConnection();
+        creerTableUser();
+    }
 
     public class PasswordUtils {
         public static String hashPassword(String plainPassword) {
@@ -21,10 +23,6 @@ public class User_DAO {
         public static boolean verifyPassword(String plainPassword, String hashedPassword) {
             return BCrypt.checkpw(plainPassword, hashedPassword);
         }
-    }
-
-    public User_DAO() {
-        creerTableUser(); // S'assure que la table existe au moment de l'initialisation
     }
 
     private void creerTableUser() {

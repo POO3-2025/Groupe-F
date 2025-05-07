@@ -33,7 +33,7 @@ public class MenuCréerPersonnage {
          *
          */
         DAO_NOSQL dao = new DAO_NOSQL();
-        User_DAO userDao = new User_DAO();
+        User_DAO userDao = new User_DAO("mysql");
 
         /**
          * Appel de toutes les collections de la DB
@@ -86,7 +86,8 @@ public class MenuCréerPersonnage {
              * Supprimer un perso
              */
             panel.addComponent(new Button("Supprimer un personnage", () -> {
-                List<CharacterType> characters = dao.readAllCharacters(mongoDatabase);
+                int idUser = userDao.GetUserByPseudo(pseudo).getId();
+                List<CharacterType> characters = dao.readAllCharactersByUserId(mongoDatabase,idUser);
 
                 if (characters.isEmpty()) {
                     MessageDialog.showMessageDialog(textGUI, "Suppression", "Aucun personnage disponible.");

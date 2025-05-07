@@ -31,6 +31,7 @@ public class Menu {
         MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
 
         DAO_NOSQL dao = new DAO_NOSQL();
+        User_DAO userDao = new User_DAO("mysql");
         Partie partie = new Partie();
 
         try {
@@ -63,7 +64,8 @@ public class Menu {
                 Panel jouerPanel = new Panel(new LinearLayout(Direction.VERTICAL));
 
                 jouerPanel.addComponent(new Button("Sélectionner un personnage", () -> {
-                    List<CharacterType> characters = dao.readAllCharacters(mongoDatabase);
+                    int idUser = userDao.GetUserByPseudo(pseudo).getId();
+                    List<CharacterType> characters = dao.readAllCharactersByUserId(mongoDatabase,idUser);
 
                     if (characters.isEmpty()) {
                         MessageDialog.showMessageDialog(textGUI, "Info", "Aucun personnage disponible.");
@@ -101,7 +103,7 @@ public class Menu {
                 textGUI.addWindowAndWait(jouerWindow);
             }));
 
-            panel.addComponent(new Button("Gérer personnage personnage", () -> {
+            panel.addComponent(new Button("Gérer mes personnages", () -> {
                 menuCréerPersonnage.afficherCréationPersonnage(pseudo);
             }));
 

@@ -25,7 +25,7 @@ public class DAO_NOSQL {
     MongoCollection<Item> Itemcollection;
     MongoCollection<CharacterType> Charactercollection;
 
-    User_DAO userDao = new User_DAO();
+    User_DAO userDao = new User_DAO("mysql");
 
     public DAO_NOSQL() {
         connexionDbNosql = Connexion_DB_Nosql.getInstance();

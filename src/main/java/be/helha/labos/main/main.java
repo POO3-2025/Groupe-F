@@ -12,6 +12,7 @@ import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
+import java.sql.Connection;
 import java.util.List;
 
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
@@ -32,7 +33,7 @@ public class main {
 
         Authen authen = new Authen();
 
-        User_DAO daoUser = new User_DAO();
+        User_DAO daoUser = new User_DAO("mysql");
 
         try{
 

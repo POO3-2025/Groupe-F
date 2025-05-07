@@ -28,7 +28,7 @@ public class main_Characters {
 
 
         Authen authen = new Authen();
-        User_DAO daoUser = new User_DAO();
+        User_DAO daoUser = new User_DAO("mysql");
 
         try
         {

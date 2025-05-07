@@ -21,6 +21,8 @@ public class Archer extends CharacterType
                 this.name = name;
                 this.title="Archer";
                 this.health = 100;
+                money = 100.00;
+                level = 1;
                 this.damage = 5;
                 this.dodge = 0.5;
                 this.precision = 0.9;

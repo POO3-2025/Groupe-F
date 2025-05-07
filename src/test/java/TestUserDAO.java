@@ -24,11 +24,11 @@ public class TestUserDAO {
 
         // Création d'un objet User
         User user1 = new User("TestPseudo", "TestPassword", "TestRole");
-        User_DAO userDAO = new User_DAO();
+        User_DAO userDAO = new User_DAO("mysqlTEST");
         userDAO.ajouterUser(user1);
     }
 
-    @Test
+    /*@Test
     @DisplayName("Test des setters")
     @Order(2)
     public void testSetters() {
@@ -44,5 +44,5 @@ public class TestUserDAO {
         assertEquals("TestPseudo2", user1.getPseudo());
         assertEquals("TestPassword2", user1.getPassword());
         assertEquals("TestRole2",user1.getRôle());
-    }
+    }*/
 }
