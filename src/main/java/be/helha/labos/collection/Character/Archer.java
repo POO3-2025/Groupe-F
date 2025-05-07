@@ -1,14 +1,25 @@
 package be.helha.labos.collection.Character;
 import be.helha.labos.collection.Inventaire;
 
+/**
+ * Classe étendue de Charactertype représentant un personnage de type Archer
+ */
 public class Archer extends CharacterType
         {
             /**
-             * Default constructor needed for MongoDB
+             * Constructeur par défaut
              */
             public Archer(){
             }
 
+            /**
+             * Constructeur de la classe Archer
+             * @param name
+             * @param health
+             * @param damage
+             * @param dodge
+             * @param precision
+             */
             public Archer(String name, int health, int damage, double dodge, double precision)
             {
                 super();
@@ -22,6 +33,10 @@ public class Archer extends CharacterType
                 inventaire.insererDansLaBase();
             }
 
+            /**
+             * Méthode toString pour afficher les informations de l'archer
+             * @return une chaîne de caractères contenant les informations de l'archer
+             */
             @Override
             public String toString() 
             {
