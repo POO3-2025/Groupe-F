@@ -1,5 +1,6 @@
 package be.helha.labos.collection.Character;
 
+import be.helha.labos.collection.User;
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.collection.Inventaire;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -36,14 +37,16 @@ public class CharacterType {
     public CharacterType(){
     }
 
-    public CharacterType(String name, int health, int damage, double dodge, double precision,int idUser) {
+    public CharacterType(String name, int health, int damage, double dodge, double precision,User user) {
         this.id = new ObjectId();
         this.name = name;
         this.health = health;
         this.damage = damage;
         this.dodge = dodge;
-        this.idUser= idUser;
+        this.idUser= user.getId();
         this.precision = precision;
+        this.level = 1;
+        this.money = 100.00;
     }
 
     public boolean attackHits()

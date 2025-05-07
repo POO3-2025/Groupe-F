@@ -3,6 +3,8 @@ package be.helha.labos.collection.Character;
 import be.helha.labos.collection.Inventaire;
 
 public class Orc extends CharacterType {
+    public Orc() {
+    }
 
     public Orc(String name, int health, int damage, double dodge, double precision) {
         super();
@@ -10,8 +12,6 @@ public class Orc extends CharacterType {
         this.health = health;
         this.title="Orc";
         this.damage = damage;
-        money = 100.00;
-        level = 1;
         this.dodge = dodge;
         this.precision = precision;
         this.inventaire = new Inventaire();
@@ -21,9 +21,12 @@ public class Orc extends CharacterType {
     @Override
     public String toString() {
         return "Orc{" +
-                "name='" + name +
+                "name='" + name + '\'' +
                 ", health=" + health +
+                ", title='" + title + '\'' +
                 ", damage=" + damage +
+                ", money=" + money +
+                ", user=" + idUser +
                 ", dodge=" + dodge +
                 ", precision=" + precision +
                 '}';

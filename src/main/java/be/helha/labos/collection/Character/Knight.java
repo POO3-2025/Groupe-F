@@ -4,6 +4,9 @@ import be.helha.labos.collection.Inventaire;
 
 public class Knight extends CharacterType {
 
+    public Knight() {
+    }
+
     public Knight(String name, int health, int damage, double dodge, double precision) {
         super();
         this.name = name;
@@ -21,9 +24,12 @@ public class Knight extends CharacterType {
     @Override
     public String toString() {
         return "Knight{" +
-                "name='" + name +
+                "name='" + name + '\'' +
                 ", health=" + health +
+                ", title='" + title + '\'' +
                 ", damage=" + damage +
+                ", money=" + money +
+                ", user=" + idUser +
                 ", dodge=" + dodge +
                 ", precision=" + precision +
                 '}';

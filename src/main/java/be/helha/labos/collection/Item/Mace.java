@@ -1,5 +1,9 @@
 package be.helha.labos.collection.Item;
 
+import be.helha.labos.collection.Item.Weapon;
+import be.helha.labos.collection.Item.WeaponType;
+import org.bson.codecs.pojo.annotations.BsonProperty;
+
 public class Mace extends Weapon {
     public enum MaceMaterial {
         WOOD(8f, "Bois"),

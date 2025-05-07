@@ -45,7 +45,6 @@ tasks.named('test') {
 test {
     useJUnitPlatform()
 }
-
 sourceSets {
     main {
         java {
