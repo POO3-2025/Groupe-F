@@ -2,11 +2,29 @@ package be.helha.labos.collection.Character;
 
 import be.helha.labos.collection.Inventaire;
 
-public class Orc extends CharacterType {
-    public Orc() {
+/**
+ * Classe étendue de Charactertype représentant un personnage de type Orc
+ */
+public class Orc extends CharacterType
+    {
+    /**
+     * Constructeur par défaut
+     **/
+    public Orc()
+    {
     }
 
-    public Orc(String name, int health, int damage, double dodge, double precision) {
+    /**
+     * Constructeur de la classe Orc
+     *
+     * @param name     le nom du personnage
+     * @param health   la santé du personnage
+     * @param damage   les dégâts du personnage
+     * @param dodge    la capacité d'esquive du personnage
+     * @param precision la précision du personnage
+     */
+    public Orc(String name, int health, int damage, double dodge, double precision)
+    {
         super();
         this.name = name;
         this.health = health;
@@ -18,8 +36,13 @@ public class Orc extends CharacterType {
         inventaire.insererDansLaBase();
     }
 
+    /**
+     * Méthode toString pour afficher les informations de l'orc
+     * @return une chaîne de caractères contenant les informations de l'orc
+     */
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Orc{" +
                 "name='" + name + '\'' +
                 ", health=" + health +
