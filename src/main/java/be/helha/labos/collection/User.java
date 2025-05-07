@@ -1,16 +1,5 @@
 package be.helha.labos.collection;
 
-import be.helha.labos.DBNosql.Connexion_DB_Nosql;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.result.InsertOneResult;
-import org.bson.Document;
-import org.bson.types.ObjectId;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class User {
 
     private int id;
