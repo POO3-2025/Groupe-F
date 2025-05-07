@@ -18,20 +18,18 @@ public class Orc extends CharacterType
      * Constructeur de la classe Orc
      *
      * @param name     le nom du personnage
-     * @param health   la santé du personnage
-     * @param damage   les dégâts du personnage
-     * @param dodge    la capacité d'esquive du personnage
-     * @param precision la précision du personnage
      */
-    public Orc(String name, int health, int damage, double dodge, double precision)
+    public Orc(String name)
     {
         super();
         this.name = name;
-        this.health = health;
         this.title="Orc";
-        this.damage = damage;
-        this.dodge = dodge;
-        this.precision = precision;
+        money = 100.00;
+        level = 1;
+        this.health = 250;
+        this.damage = 50;
+        this.dodge = 0.0;
+        this.precision = 0.5;
         this.inventaire = new Inventaire();
         inventaire.insererDansLaBase();
     }

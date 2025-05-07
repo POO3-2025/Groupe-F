@@ -17,21 +17,17 @@ public class Knight extends CharacterType {
      * Constructeur de la classe Knight
      *
      * @param name     le nom du personnage
-     * @param health   la santé du personnage
-     * @param damage   les dégâts du personnage
-     * @param dodge    la capacité d'esquive du personnage
-     * @param precision la précision du personnage
      */
-    public Knight(String name, int health, int damage, double dodge, double precision) {
+    public Knight(String name) {
         super();
         this.name = name;
-        this.health = health;
+        this.health = 150;
         this.title="Knight";
-        this.damage = damage;
+        this.damage = 25;
         money = 100.00;
         level = 1;
-        this.dodge = dodge;
-        this.precision = precision;
+        this.dodge = 0.3;
+        this.precision = 0.7;
         this.inventaire = new Inventaire();
         inventaire.insererDansLaBase();
     }

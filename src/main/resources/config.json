@@ -22,6 +22,16 @@
         "port": 3306
       }
     },
+    "nosqlTest": {
+      "ConnectionType": "DB",
+      "DBType": "nosql",
+      "DBCredentials": {
+        "HostName": "localhost",
+        "UserName": "sa",
+        "Password": "1234",
+        "DBName": "TestDB"
+      }
+    },
     "nosql": {
       "ConnectionType": "DB",
       "DBType": "nosql",
