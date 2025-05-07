@@ -65,7 +65,7 @@ public class main_Characters {
             Knight knightTest= new Knight("onightX", 150, 50, 0.2, 0.7);
             daoNosql.ajouterPersonnagePourUser(nouvelUser2.getPseudo(),knightTest);
 
-            Orc orcTest = new Orc("orcX", 200, 80, 0.0, 0.5);
+            Orc orcTest = new Orc("orcX", 250, 80, 0.0, 0.5);
             daoNosql.ajouterPersonnagePourUser(nouvelUser3.getPseudo(),orcTest);
 
             List<CharacterType> characters = daoNosql.readAllCharacters(mongoDatabase);
