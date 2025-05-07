@@ -8,7 +8,6 @@ import java.sql.*;
 
 public class User_DAO {
 
-    // Récupère l'instance de connexion
     Connexion_DB connexion = Connexion_DB.getInstance("mysql");
 
     // Vérifie si la connexion est bien ouverte

@@ -34,9 +34,7 @@ public class main_Characters {
 
             Potion potion = new Potion (20,15);
 
-            Archer archerTest = new Archer("archerTest", 101, 20, 0.3, 0.8);
-
-            CharacterType Chara = new CharacterType("Chara", 100, 20,0.8, 0.3,5);
+            Archer archerTest = new Archer("archerTest");
 
 
             // Insertion du document
@@ -45,7 +43,6 @@ public class main_Characters {
             Itemcollection.insertOne(fireSword);
             Itemcollection.insertOne(diamondMace);
             CharacterTypecollection.insertOne(archerTest);
-            CharacterTypecollection.insertOne(Chara);
 
             //user user = new user("Doe","John");
             //chests chests = new chests(new ObjectId("67c4646cc5452e653988b340"));

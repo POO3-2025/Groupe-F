@@ -68,17 +68,17 @@ public class MenuCréerPersonnage {
              * Méthode pour créer un perso de type Archer
              */
             panel.addComponent(new Button("Archer", () -> {
-                Archer archerTest = new Archer("archerTest", 100, 20, 0.30, 0.80);
+                Archer archerTest = new Archer("archerTest");
                 dao.ajouterPersonnagePourUser(pseudo,archerTest);
             }));
 
             panel.addComponent(new Button("Knight", () -> {
-                Knight KnightTest = new Knight("KnightTest", 150, 35, 0.20, 0.65);
+                Knight KnightTest = new Knight("KnightTest");
                 dao.ajouterPersonnagePourUser(pseudo,KnightTest);
             }));
 
             panel.addComponent(new Button("Orc", () -> {
-                Orc OrcTest = new Orc("OrcTest", 250, 50, 0.10, 0.50);
+                Orc OrcTest = new Orc("OrcTest");
                 dao.ajouterPersonnagePourUser(pseudo,OrcTest);
             }));
 

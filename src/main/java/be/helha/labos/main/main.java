@@ -17,6 +17,9 @@ import java.util.List;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
+/**
+ * Classe de test pour tester les opérations CRUD de la classe User et characters et test de la DB
+ */
 
 public class main {
     public static void main(String[] args) {
@@ -63,7 +66,7 @@ public class main {
 
         DAO_NOSQL daoNosql = new DAO_NOSQL();
 
-        Archer archer = new Archer("archerX", 120, 30, 0.4, 0.9);
+        Archer archer = new Archer("archerX");
 
         daoNosql.ajouterPersonnagePourUser(nouvelUser.getPseudo(),archer);
 
@@ -113,11 +116,6 @@ public class main {
                 }
                 System.out.println(builder.toString());
             }
-
-            /*List<Document> users = readAllUser(mongoDatabase);
-            for (Document User : users) {
-                System.out.println(User.toJson());
-            }*/
 
         } catch (Exception e) {
             e.printStackTrace();

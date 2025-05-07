@@ -31,7 +31,6 @@ public class Connexion_DB {
         try {
             Gson gson = new Gson();
 
-            // Chargement du fichier depuis le classpath
             InputStream inputStream = getClass().getClassLoader().getResourceAsStream(CONFIG_FILE);
             if (inputStream == null) {
                 throw new RuntimeException("Le fichier de configuration " + CONFIG_FILE + " est introuvable dans le classpath.");
@@ -39,15 +38,19 @@ public class Connexion_DB {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             ConfigurationRoot root = gson.fromJson(reader, ConfigurationRoot.class);
-            Configuration selectedDb = root.Databases.get(dbKey);
+            reader.close();
 
-            System.out.println(new Gson().toJson(selectedDb)); // Pour afficher ce que Gson a bien lu
-            System.out.println("Clé demandée : " + dbKey);
+            // ➤ Lecture depuis la variable d'environnement si présente
+            String envKey = System.getenv("DB_ENV");
+            String effectiveDbKey = (envKey != null && !envKey.isBlank()) ? envKey : dbKey;
+
+            Configuration selectedDb = root.Databases.get(effectiveDbKey);
+
+            System.out.println("Clé demandée : " + effectiveDbKey);
             System.out.println("Clés disponibles : " + root.Databases.keySet());
 
-            reader.close();
             if (selectedDb == null) {
-                throw new RuntimeException("La configuration pour '" + dbKey + "' est introuvable dans config.json !");
+                throw new RuntimeException("La configuration pour '" + effectiveDbKey + "' est introuvable dans config.json !");
             }
 
             String url = "jdbc:" + selectedDb.DBType + "://"
@@ -56,7 +59,6 @@ public class Connexion_DB {
                     + selectedDb.DBCredentials.DBName
                     + "?useSSL=false&serverTimezone=UTC";
 
-            // Connexion à la base de données MySQL
             connection = DriverManager.getConnection(
                     url,
                     selectedDb.DBCredentials.UserName,
@@ -69,7 +71,6 @@ public class Connexion_DB {
             throw new RuntimeException("Erreur lors de l'initialisation de la connexion à la base de données", e);
         }
     }
-
     /**
      * Retourne l'instance unique de la classe (Singleton).
      * Si l'instance n'existe pas, elle est créée.

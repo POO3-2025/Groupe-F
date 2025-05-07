@@ -4,16 +4,16 @@ import be.helha.labos.collection.Inventaire;
 
 public class Orc extends CharacterType {
 
-    public Orc(String name, int health, int damage, double dodge, double precision) {
+    public Orc(String name) {
         super();
         this.name = name;
-        this.health = health;
+        this.health = 250;
         this.title="Orc";
-        this.damage = damage;
+        this.damage = 80;
         money = 100.00;
         level = 1;
-        this.dodge = dodge;
-        this.precision = precision;
+        this.dodge = 0.0;
+        this.precision = 0.5;
         this.inventaire = new Inventaire();
         inventaire.insererDansLaBase();
     }
