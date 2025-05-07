@@ -23,6 +23,7 @@ public class Item
         protected int idUser;
         protected String name;
         protected String type;
+        protected int level_Required;
 
         /**
          * Constructeur vide
@@ -76,7 +77,12 @@ public class Item
             return name;
         }
 
-        /**
+    public int getLevel_Buy() {
+        return level_Required;
+    }
+
+
+    /**
          * setter pour l'identifiant d'utilisateur
          * @param idUser
          */
@@ -95,6 +101,7 @@ public class Item
                     "idUser=" + idUser +
                     ", name='" + name +
                     ", type='" + type +
+                    ", level_Required=" + level_Required +
                     '}';
         }
 }
