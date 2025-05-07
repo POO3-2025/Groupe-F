@@ -14,21 +14,18 @@ public class Archer extends CharacterType
 
             /**
              * Constructeur de la classe Archer
-             * @param name
-             * @param health
-             * @param damage
-             * @param dodge
-             * @param precision
              */
-            public Archer(String name, int health, int damage, double dodge, double precision)
+            public Archer(String name)
             {
                 super();
                 this.name = name;
                 this.title="Archer";
-                this.health = health;
-                this.damage = damage;
-                this.dodge = dodge;
-                this.precision = precision;
+                this.health = 100;
+                money = 100.00;
+                level = 1;
+                this.damage = 5;
+                this.dodge = 0.5;
+                this.precision = 0.9;
                 this.inventaire = new Inventaire();
                 inventaire.insererDansLaBase();
             }

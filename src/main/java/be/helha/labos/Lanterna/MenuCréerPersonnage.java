@@ -33,7 +33,7 @@ public class MenuCréerPersonnage {
          *
          */
         DAO_NOSQL dao = new DAO_NOSQL();
-        User_DAO userDao = new User_DAO();
+        User_DAO userDao = new User_DAO("mysql");
 
         /**
          * Appel de toutes les collections de la DB
@@ -68,17 +68,17 @@ public class MenuCréerPersonnage {
              * Méthode pour créer un perso de type Archer
              */
             panel.addComponent(new Button("Archer", () -> {
-                Archer archerTest = new Archer("archerTest", 100, 20, 0.30, 0.80);
+                Archer archerTest = new Archer("archerTest");
                 dao.ajouterPersonnagePourUser(pseudo,archerTest);
             }));
 
             panel.addComponent(new Button("Knight", () -> {
-                Knight KnightTest = new Knight("KnightTest", 150, 35, 0.20, 0.65);
+                Knight KnightTest = new Knight("KnightTest");
                 dao.ajouterPersonnagePourUser(pseudo,KnightTest);
             }));
 
             panel.addComponent(new Button("Orc", () -> {
-                Orc OrcTest = new Orc("OrcTest", 250, 50, 0.10, 0.50);
+                Orc OrcTest = new Orc("OrcTest");
                 dao.ajouterPersonnagePourUser(pseudo,OrcTest);
             }));
 
@@ -86,7 +86,8 @@ public class MenuCréerPersonnage {
              * Supprimer un perso
              */
             panel.addComponent(new Button("Supprimer un personnage", () -> {
-                List<CharacterType> characters = dao.readAllCharacters(mongoDatabase);
+                int idUser = userDao.GetUserByPseudo(pseudo).getId();
+                List<CharacterType> characters = dao.readAllCharactersByUserId(mongoDatabase,idUser);
 
                 if (characters.isEmpty()) {
                     MessageDialog.showMessageDialog(textGUI, "Suppression", "Aucun personnage disponible.");

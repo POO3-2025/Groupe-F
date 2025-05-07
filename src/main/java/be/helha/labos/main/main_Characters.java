@@ -20,7 +20,7 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 
 public class main_Characters {
-    public static void main_Characters(String[] args) {
+    public static void main(String[] args) {
         Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
         MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
 
@@ -28,7 +28,7 @@ public class main_Characters {
 
 
         Authen authen = new Authen();
-        User_DAO daoUser = new User_DAO();
+        User_DAO daoUser = new User_DAO("mysql");
 
         try
         {
@@ -59,13 +59,13 @@ public class main_Characters {
 
             DAO_NOSQL daoNosql = new DAO_NOSQL();
 
-            Archer archerTest = new Archer("archerX", 120, 30, 0.4, 0.9);
+            Archer archerTest = new Archer("archerX");
             daoNosql.ajouterPersonnagePourUser(nouvelUser.getPseudo(),archerTest);
 
-            Knight knightTest= new Knight("onightX", 150, 50, 0.2, 0.7);
+            Knight knightTest= new Knight("onightX");
             daoNosql.ajouterPersonnagePourUser(nouvelUser2.getPseudo(),knightTest);
 
-            Orc orcTest = new Orc("orcX", 250, 80, 0.0, 0.5);
+            Orc orcTest = new Orc("orcX");
             daoNosql.ajouterPersonnagePourUser(nouvelUser3.getPseudo(),orcTest);
 
             List<CharacterType> characters = daoNosql.readAllCharacters(mongoDatabase);
