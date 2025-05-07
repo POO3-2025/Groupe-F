@@ -3,6 +3,9 @@ import be.helha.labos.collection.Inventaire;
 
 public class Archer extends CharacterType
         {
+            /**
+             * Default constructor needed for MongoDB
+             */
             public Archer(){
             }
 
