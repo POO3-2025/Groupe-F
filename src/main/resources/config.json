@@ -39,7 +39,7 @@
         "HostName": "localhost",
         "UserName": "sa",
         "Password": "1234",
-        "DBName": "DB_TEST"
+        "DBName": "Game"
       }
     }
   }

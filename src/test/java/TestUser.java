@@ -42,4 +42,13 @@ public class TestUser {
         assertEquals("TestPassword2", user1.getPassword());
         assertEquals("TestRole2",user1.getRôle());
     }
+
+    @Test
+    @DisplayName("Vérification du password du user")
+    @Order(3)
+    public void testVerifierPassword() {
+        // Création d'un objet User
+        User user1 = new User("TestPseudo", "PasswordSecret", "TestRole");
+        assertEquals("PasswordSecret", user1.getPassword());
+    }
 }

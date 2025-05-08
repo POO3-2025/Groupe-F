@@ -6,25 +6,55 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.sql.*;
 
+/**
+ * Classe de gestion des utilisateurs dans la base de données avec DAO (Data Access Object).
+ */
 public class User_DAO {
 
+    // Récupère l'instance de connexion
     private final Connection conn;
 
+    /**
+     * Constructeur de la classe User_DAO.
+     * Il appelle la méthode pour créer la table User si elle n'existe pas déjà.
+     *
+     * @param dbKey pour connaitre si on se connecte à la DB de prod ou bien de test
+     */
     public User_DAO(String dbKey) {
         this.conn = Connexion_DB.getInstance(dbKey).getConnection();
         creerTableUser();
     }
 
+    /**
+     * Classe utilitaire pour le hachage et la vérification des mots de passe.
+     */
+
     public class PasswordUtils {
+        /**
+         * Hache un mot de passe en utilisant BCrypt.
+         *
+         * @param plainPassword Le mot de passe en clair à hacher.
+         * @return Le mot de passe haché.
+         */
         public static String hashPassword(String plainPassword) {
             return BCrypt.hashpw(plainPassword, BCrypt.gensalt());
         }
 
+        /**
+         * Vérifie si un mot de passe en clair correspond à un mot de passe haché.
+         *
+         * @param plainPassword Le mot de passe en clair à vérifier.
+         * @param hashedPassword Le mot de passe haché à comparer.
+         * @return true si le mot de passe en clair correspond au haché, false sinon.
+         */
         public static boolean verifyPassword(String plainPassword, String hashedPassword) {
             return BCrypt.checkpw(plainPassword, hashedPassword);
         }
     }
 
+    /**
+     * Crée la table User dans la base de données si elle n'existe pas déjà.
+     */
     private void creerTableUser() {
         String createTableQuery = """
             CREATE TABLE IF NOT EXISTS User (
@@ -43,6 +73,12 @@ public class User_DAO {
         }
     }
 
+    /**
+     * Ajoute un nouvel utilisateur à la base de données.
+     *
+     * @param user L'utilisateur à ajouter.
+     * @return true si l'utilisateur a été ajouté avec succès, false sinon.
+     */
     public boolean ajouterUser(User user) {
         String sql = "INSERT INTO User (Pseudo, Password, Role, Actif) VALUES (?, ?, ?, ?)";
 
@@ -74,6 +110,11 @@ public class User_DAO {
         }
     }
 
+    /**
+     * Méthode qui récupere un utilisateur par son pseudo.
+     *
+     * @return user si le user est trouvé sinon renvoie une exception.
+     */
     public User GetUserByPseudo(String pseudo) {
         User user = null;
         String query = "SELECT DISTINCT * FROM User WHERE Pseudo = ?";
@@ -95,6 +136,12 @@ public class User_DAO {
         return user;
     }
 
+    /**
+     * Méthode qui récupere un utilisateur par son id.
+     *
+     * @param id L'utilisateur à mettre à jour.
+     * @return true si l'utilisateur a été mis à jour avec succès, false sinon.
+     */
     public User GetUserById(int id) {
         User user = null;
         String query = "SELECT DISTINCT * FROM User WHERE ID = ?";
@@ -116,7 +163,12 @@ public class User_DAO {
         return user;
     }
 
-
+    /**
+     * Met à jour les informations d'un utilisateur dans la base de données.
+     *
+     *
+     * @return true si l'utilisateur a été identifié sinon false
+     */
     public boolean verifierConnexion(String pseudo, String password) {
         String sql = "SELECT Password FROM User WHERE Pseudo = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -132,6 +184,9 @@ public class User_DAO {
         return false;
     }
 
+    /**
+     * Méthode pour remettre la table User à 0
+     */
     public void supprimerTableUser(){
         String sql = "TRUNCATE TABLE  User";
         try(PreparedStatement pstmt = conn.prepareStatement(sql)){

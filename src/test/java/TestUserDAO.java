@@ -1,20 +1,20 @@
-import be.helha.labos.DB.Connexion_DB;
+import be.helha.labos.Authentification.Authen;
 import be.helha.labos.DB.User_DAO;
 import be.helha.labos.collection.User;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-
-import java.sql.Connection;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class TestUserDAO {
 
+    User_DAO userDao = new User_DAO("mysqlTEST");
 
     @BeforeEach
     public void setUp(TestInfo testInfo) {
         System.out.println("Exécution du test : " + testInfo.getDisplayName());
+        userDao.supprimerTableUser();
     }
 
     @Test
@@ -24,25 +24,43 @@ public class TestUserDAO {
 
         // Création d'un objet User
         User user1 = new User("TestPseudo", "TestPassword", "TestRole");
-        User_DAO userDAO = new User_DAO("mysqlTEST");
-        userDAO.ajouterUser(user1);
+        userDao.ajouterUser(user1);
+        assertTrue(userDao.verifierConnexion(user1.getPseudo(), user1.getPassword()));
+        assertEquals(1, user1.getId());
     }
 
-    /*@Test
-    @DisplayName("Test des setters")
+    @Test
+    @DisplayName("Vérification de l'authentification du user")
     @Order(2)
-    public void testSetters() {
+    public void testVerifierAuthentification() {
         // Création d'un objet User
-        User user1 = new User("TestPseudo", "TestPassword", "TestRole");
+        User user1 = new User("TestPseudo", "PasswordSecret", "TestRole");
+        userDao.ajouterUser(user1);
+        assertTrue(userDao.verifierConnexion(user1.getPseudo(), user1.getPassword()));
 
-        // Modification via les setters
-        user1.setPseudo("TestPseudo2");
-        user1.setPassword("TestPassword2");
-        user1.setRôle("TestRole2"); // La provenance doit être setter à false avant de modifier l'état de la paire pour 'T' ou 'B'
+        Authen authen = new Authen();
+        String token = authen.login(user1.getPseudo(),"PasswordSecret","mysqlTEST");
+        assertNotNull(token);
+    }
 
-        // Vérification des nouvelles valeurs
-        assertEquals("TestPseudo2", user1.getPseudo());
-        assertEquals("TestPassword2", user1.getPassword());
-        assertEquals("TestRole2",user1.getRôle());
-    }*/
+    @Test
+    @DisplayName("Récupérer le user par le pseudo")
+    @Order(3)
+    public void testGetUserByPseudo() {
+        // Création d'un objet User
+        User user1 = new User("TestDeCeUser", "PasswordSecret", "TestRole");
+        userDao.ajouterUser(user1);
+        assertTrue(userDao.verifierConnexion(user1.getPseudo(), user1.getPassword()));
+        assertEquals(user1.getPseudo(),userDao.GetUserByPseudo(user1.getPseudo()).getPseudo());
+    }
+    @Test
+    @DisplayName("Récupérer le user par son id")
+    @Order(4)
+    public void testGetUserById() {
+        User user1 = new User("TestDeCeUser", "PasswordSecret", "TestRole");
+        userDao.ajouterUser(user1);
+        assertTrue(userDao.verifierConnexion(user1.getPseudo(), user1.getPassword()));
+        assertEquals(1, userDao.GetUserById(user1.getId()).getId());
+    }
+
 }
