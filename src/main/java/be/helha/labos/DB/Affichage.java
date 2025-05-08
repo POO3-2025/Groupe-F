@@ -9,13 +9,21 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Objects;
 
+/**
+ * Classe principale pour afficher les informations de configuration et établir une connexion à la base de données.
+ */
 public class Affichage {
+    /**
+     * Classe interne pour représenter les informations de configuration.
+     */
     public static void main(String[] args) {
         Gson gson = new Gson();
         Configuration configuration;
 
+        // Nom du fichier de configuration
         String configFileName = "config.json"; // Assurez-vous qu'il est dans src/main/resources
 
+        // Chargement du fichier de configuration
         try (Reader reader = new InputStreamReader(
                 Objects.requireNonNull(Affichage.class.getClassLoader().getResourceAsStream(configFileName)),
                 StandardCharsets.UTF_8)) {
@@ -43,6 +51,7 @@ public class Affichage {
             System.out.println("Type de connexion : " + configuration.getConnectionType());
             System.out.println("Type de base de données : " + configuration.getDBType());
             System.out.println("Nom de la base de données : " + configuration.getDBCredentials().getDatabase());
+
 
         } catch (Exception e) {
             System.err.println("Erreur lors du chargement de la configuration.");
