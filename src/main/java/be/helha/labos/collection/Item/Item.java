@@ -15,8 +15,11 @@ public class Item
          * @JsonProperty est utilisé pour indiquer que cet attribut doit être sérialisé/désérialisé avec ce nom
          * @ObjectId est un identifiant unique généré par MongoDB
          * @param name le nom de l'objet
+         * @param id l'identifiant de l'objet
+         * @param idUser l'identifiant de l'utilisateur auquel appartient l'objet
          * @param type le type de l'objet
-         * @param user l'utilisateur auquel appartient l'objet
+         * @param level_Required le niveau requis pour utiliser l'objet
+         *
          */
         @JsonProperty("_id")
         protected ObjectId id;
@@ -24,6 +27,7 @@ public class Item
         protected String name;
         protected String type;
         protected int level_Required;
+
 
         /**
          * Constructeur vide
@@ -77,13 +81,17 @@ public class Item
             return name;
         }
 
-    public int getLevel_Buy() {
+        /**
+         * getter pour le niveau requis pour acheter l'objet
+         * @return
+         */
+        public int getLevel_Buy() {
         return level_Required;
-    }
+        }
 
 
-    /**
-         * setter pour l'identifiant d'utilisateur
+        /**
+         * setter pour le nom de l'objet
          * @param name
          */
         public void setName(String name) {
