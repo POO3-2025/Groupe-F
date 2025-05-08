@@ -91,12 +91,12 @@ public class Item
         }
 
         /**
-         * getter pour le type d'objet
-         * @return
+         * methode toString pour afficher les informations de l'objet
+         * @return une chaîne de caractères contenant les informations de l'objet (id,idUser, nom, type, niveau requis)
          */
         @Override
         public String toString() {
-            return "Item2{" +
+            return "Item{" +
                     "id=" + id +
                     "idUser=" + idUser +
                     ", name='" + name +

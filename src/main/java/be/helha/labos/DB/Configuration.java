@@ -20,15 +20,22 @@ public class Configuration {
     */
    public Credentials DBCredentials;
 
-
+    /**
+     * Methode getteur pour obtenir le type de connexion.
+     */
     public String getConnectionType() {
         return ConnectionType;
     }
-
+    /**
+     * Methode getteur pour obtenir le type de base de données.
+     */
     public String getDBType() {
         return DBType;
     }
 
+    /**
+     * Methode getteur pour obtenir les informations d'identification de la base de données.
+     */
     public Credentials getDBCredentials() {
         return DBCredentials;
     }

@@ -10,7 +10,10 @@ import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Classe représentant un inventaire dans le jeu.
+ * Elle contient des informations sur l'inventaire, telles que son ID et les slots qu'il contient.
+ */
 public class Inventaire {
 
 
@@ -22,7 +25,9 @@ public class Inventaire {
     private static MongoCollection<Document> collection;
     private List<Document> inventorySlots;
 
-
+    /**
+     * Constructeur vide
+     */
     public Inventaire() {
         this.id = new ObjectId();
         this.inventorySlots = new ArrayList<>();
@@ -32,7 +37,10 @@ public class Inventaire {
         }
     }
 
-    // Nouvelle méthode explicite pour insérer dans la DB
+    /**
+     * méthode explicite pour insérer dans la DB
+     * @throws Exception
+     */
     public void insererDansLaBase() {
         connexionDbNosql = Connexion_DB_Nosql.getInstance();
         mongoDatabase = connexionDbNosql.getDatabase();
@@ -46,12 +54,16 @@ public class Inventaire {
         System.out.println("Inventaire inséré avec ID : " + id);
     }
 
-    // Méthode pour obtenir l'ID de l'inventaire
+    /**
+     * méthode pour obtenir l'identifiant de l'inventaire
+     */
     public ObjectId getId() {
         return id;
     }
 
-    // Cette méthode permet de rajouter un item dans l'inventaire d'un user
+    /**
+     *Methodde rajouter un item dans l'inventaire d'un user
+     */
     public static void putItemsInInventory(ObjectId inventoryId, ObjectId itemsId, boolean remove) {
         try {
                 // Initialisation de la connexion
