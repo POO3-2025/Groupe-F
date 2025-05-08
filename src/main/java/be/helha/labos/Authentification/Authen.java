@@ -11,9 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class Authen {
 
     private final JwtUtils jwtUtils = new JwtUtils();
-    private final User_DAO user_DAO = new User_DAO("mysql");
 
-    public String login(String pseudo, String motDePasse) {
+    public String login(String pseudo, String motDePasse,String Dbkey) {
+        final User_DAO user_DAO = new User_DAO(Dbkey);
         User user = user_DAO.GetUserByPseudo(pseudo); // récupère ton user custom
 
         if (user != null && User_DAO.PasswordUtils.verifyPassword(motDePasse, user.getPassword())) {

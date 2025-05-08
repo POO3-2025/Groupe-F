@@ -97,7 +97,7 @@ public class Inscription {
                     String passwordConnexion = passwordInput.getText();
 
                     try {
-                        authen.login(pseudoConnexion, passwordConnexion);
+                        authen.login(pseudoConnexion, passwordConnexion,"mysql");
                         MessageDialog.showMessageDialog(textGUI, "Succès", "Connexion validé !");
                         // Appel de la fonction pour afficher le menu
                         Menu menu = new Menu();
