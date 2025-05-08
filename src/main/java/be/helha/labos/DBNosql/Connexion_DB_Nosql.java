@@ -16,9 +16,15 @@ import java.sql.Connection;
 
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
-
+/**
+ * Classe de connexion à une base de données NoSQL (MongoDB).
+ * Utilise le design pattern Singleton pour garantir qu'une seule instance de la connexion existe.
+ * La configuration est chargée depuis un fichier JSON.
+ */
 public class Connexion_DB_Nosql {
-
+    /**
+     * Instance unique de la classe Connexion_DB_Nosql (Singleton).
+     */
     private static Connexion_DB_Nosql instance;  // Singleton
     private MongoClient mongoClient;
     private MongoDatabase database;
@@ -27,9 +33,16 @@ public class Connexion_DB_Nosql {
             MongoClientSettings.getDefaultCodecRegistry(),
             fromProviders(PojoCodecProvider.builder().automatic(true).build())
     );
-
+    /**
+     * Chemin du fichier de configuration JSON.
+     * Il doit être placé dans le répertoire src/main/resources.
+     */
     private static final String CONFIG_FILE = "config.json"; // Chemin relatif dans src/main/resources
-
+    /**
+     * Méthode pour charger la configuration de la base de données à partir du fichier JSON.
+     * @param key La clé de la configuration à charger.
+     * @return Un objet DBConfig contenant les informations de connexion.
+     */
     private ConfigWrapper.DBConfig chargerConfiguration(String key) {
         InputStream is = getClass().getClassLoader().getResourceAsStream(CONFIG_FILE);
         InputStreamReader reader = new InputStreamReader(is);
@@ -45,7 +58,11 @@ public class Connexion_DB_Nosql {
         return new Gson().fromJson(conf, ConfigWrapper.DBConfig.class);
     }
 
-    // Constructeur privé pour empêcher l'instanciation directe
+
+    /**
+     * Constructeur privé pour empêcher l'instanciation directe
+     * Il initialise la connexion à la base de données MongoDB en utilisant les informations de configuration.
+     */
     private Connexion_DB_Nosql() {
 
         ConfigWrapper.DBConfig config = chargerConfiguration("nosqlTest");
@@ -57,7 +74,10 @@ public class Connexion_DB_Nosql {
                 .withCodecRegistry(pojoCodecRegistry);
     }
 
-    // Méthode pour obtenir l'instance unique du Singleton
+    /**
+     * Méthode pour obtenir l'instance unique du Singleton
+     * @return L'instance unique de Connexion_DB_Nosql.
+     */
     public static synchronized Connexion_DB_Nosql getInstance(){
         if (instance == null) {
             instance = new Connexion_DB_Nosql();
@@ -65,12 +85,18 @@ public class Connexion_DB_Nosql {
         return instance;
     }
 
-    // Méthode pour récupérer la base de données
+
+    /**
+     * Méthode pour récupérer la base de données
+     * @return La base de données MongoDB.
+     */
     public MongoDatabase getDatabase() {
         return database;
     }
 
-    // Méthode pour fermer la connexion proprement
+    /**
+     * Méthode pour fermer la connexion à la base de données MongoDB proprement.
+     */
     public void closeConnection() {
         if (mongoClient != null) {
             mongoClient.close();

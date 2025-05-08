@@ -84,7 +84,7 @@ public class Item
 
     /**
          * setter pour l'identifiant d'utilisateur
-         * @param idUser
+         * @param name
          */
         public void setName(String name) {
             this.name = name;
