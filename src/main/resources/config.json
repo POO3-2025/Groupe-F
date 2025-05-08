@@ -18,8 +18,18 @@
         "HostName": "127.0.0.1",
         "UserName": "root",
         "Password": "",
-        "DBName": "GAMETEST",
+        "DBName": "gametest",
         "port": 3306
+      }
+    },
+    "nosqlTest": {
+      "ConnectionType": "DB",
+      "DBType": "nosql",
+      "DBCredentials": {
+        "HostName": "localhost",
+        "UserName": "sa",
+        "Password": "1234",
+        "DBName": "TestDB"
       }
     },
     "nosql": {

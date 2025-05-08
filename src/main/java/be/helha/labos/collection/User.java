@@ -15,12 +15,14 @@ public class User {
 
     /**
      * Constructeur de la classe User.
+     * @param id Identifiant de l'utilisateur.
      * @param pseudo Nom d'utilisateur.
      * @param password Mot de passe de l'utilisateur.
      * @param role Rôle de l'utilisateur.
      * @param actif Indique si l'utilisateur est actif ou non.
      */
-    public User(String pseudo, String password,String role) {
+    public User(int id,String pseudo, String password,String role) {
+        this.id=id;
         this.pseudo = pseudo;
         this.password = password;
         this.rôle = role;
