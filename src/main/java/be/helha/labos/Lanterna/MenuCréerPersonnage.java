@@ -26,8 +26,9 @@ public class MenuCréerPersonnage {
 
     public void afficherCréationPersonnage(String pseudo) {
 
-        Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
-        MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
+
+        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
+        MongoDatabase mongoDatabase = mongoFactory.createDatabase();
 
         /**
          *
@@ -86,8 +87,8 @@ public class MenuCréerPersonnage {
              * Supprimer un perso
              */
             panel.addComponent(new Button("Supprimer un personnage", () -> {
-                int idUser = userDao.GetUserByPseudo(pseudo).getId();
-                List<CharacterType> characters = dao.readAllCharactersByUserId(mongoDatabase,idUser);
+                int idUser = userDao.getUserByPseudo(pseudo).getId();
+                List<CharacterType> characters = dao.readAllCharactersByUserId(idUser);
 
                 if (characters.isEmpty()) {
                     MessageDialog.showMessageDialog(textGUI, "Suppression", "Aucun personnage disponible.");
@@ -133,8 +134,8 @@ public class MenuCréerPersonnage {
              */
             panel.addComponent(new Button("Voir mes personnages", () -> {
 
-                int idUser = userDao.GetUserByPseudo(pseudo).getId();
-                List<CharacterType> characters = dao.readAllCharactersByUserId(mongoDatabase, idUser);
+                int idUser = userDao.getUserByPseudo(pseudo).getId();
+                List<CharacterType> characters = dao.readAllCharactersByUserId(idUser);
 
                 if (characters.isEmpty()) {
                     MessageDialog.showMessageDialog(textGUI, "Personnages", "Aucun personnage trouvé.");

@@ -24,16 +24,17 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 public class main {
     public static void main(String[] args) {
-        Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
-        MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
+        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
+        MongoDatabase database = mongoFactory.createDatabase();
 
-        MongoCollection<Item> Itemcollection = mongoDatabase.getCollection("items", Item.class);
-        MongoCollection<CharacterType> Charactercollection = mongoDatabase.getCollection("characters", CharacterType.class);
+        MongoCollection<Item> Itemcollection = database.getCollection("items", Item.class);
+        MongoCollection<CharacterType> Charactercollection = database.getCollection("characters", CharacterType.class);
 
 
         Authen authen = new Authen();
 
         User_DAO daoUser = new User_DAO("mysql");
+        DAO_NOSQL daoNosql = new DAO_NOSQL();
 
         try{
 
@@ -49,7 +50,7 @@ public class main {
             System.out.println("Utilisateur connexion échoué !");
         }*/
 
-        User nouvelUser = new User("Bill", "","USER");
+        User nouvelUser = new User("Jo", "","USER");
 
         //boolean success = dao.ajouterUser(nouvelUser);
         /*if (success) {
@@ -65,7 +66,7 @@ public class main {
             System.out.println("Erreur lors de la récupération de l'utilisateur.");
         }*/
 
-        DAO_NOSQL daoNosql = new DAO_NOSQL();
+
 
         Archer archer = new Archer("archerX");
 
@@ -104,7 +105,7 @@ public class main {
             System.out.println("\n\n");
             //daoNosql.readAllCollections(mongoDatabase);
 
-            List<CharacterType> characters = daoNosql.readAllCharacters(mongoDatabase); // récupère les persos
+            List<CharacterType> characters = daoNosql.readAllCharacters(); // récupère les persos
             if (characters.isEmpty()) {
                System.out.println("No characters found");
             } else {
@@ -124,7 +125,5 @@ public class main {
         }
 
         daoUser.fermerConnexion();
-        connexionDbNosql.closeConnection();
-
     }
 }

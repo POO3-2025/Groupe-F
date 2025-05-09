@@ -265,8 +265,8 @@ public class CharacterType {
      * Méthode changer l'argent du personnage dans la DB
      */
     public void updateMoneyInDB() {
-        connexionDbNosql = Connexion_DB_Nosql.getInstance();
-        mongoDatabase = connexionDbNosql.getDatabase();
+        connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
+        mongoDatabase = connexionDbNosql.createDatabase();
         collection = mongoDatabase.getCollection("characters");
 
         collection.updateOne(new Document("_id", this.id), new Document("$set", new Document("money", this.money)));
@@ -279,8 +279,8 @@ public class CharacterType {
     public void removeCharacter(ObjectId characterId) {
         try {
             // Connexion à la DB
-            connexionDbNosql = Connexion_DB_Nosql.getInstance();
-            mongoDatabase = connexionDbNosql.getDatabase();
+            connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
+            mongoDatabase = connexionDbNosql.createDatabase();
 
             // Récupération de la collection des personnages
             MongoCollection<Document> charactersCollection = mongoDatabase.getCollection("characters");

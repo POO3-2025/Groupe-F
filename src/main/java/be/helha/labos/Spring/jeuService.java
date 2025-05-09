@@ -20,9 +20,9 @@ import static com.mongodb.client.model.Filters.eq;
 public class jeuService {
 
     // Récupère l'instance de connexion
-    Connexion_DB connexion = Connexion_DB.getInstance("mysql");
+    Connexion_DB connexion = new Connexion_DB("mysql");
     // Vérifie si la connexion est bien ouverte
-    Connection conn = connexion.getConnection();
+    Connection conn = connexion.createConnection();
 
     public List<User> getAllUsers() {
 

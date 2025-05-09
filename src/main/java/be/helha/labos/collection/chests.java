@@ -25,8 +25,8 @@ public class chests {
     @JsonProperty("_id")
     protected ObjectId id;
 
-    private static Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
-    private static MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
+    private static Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
+    private static MongoDatabase mongoDatabase = connexionDbNosql.createDatabase();
     private static MongoCollection<Document> collection = mongoDatabase.getCollection("chests");
     private List<Document> chestsSlots;
 
@@ -89,7 +89,6 @@ public class chests {
     /**
      * Constructeur de la classe chests.
      *
-     * @param id l'identifiant du coffre
      */
     public ObjectId getId() {
         return id;

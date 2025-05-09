@@ -15,39 +15,33 @@ import java.sql.SQLException;
  * Utilise un fichier de configuration JSON pour initialiser les paramètres de connexion.
  * Implémente le design pattern Singleton pour garantir une instance unique.
  */
-public class Connexion_DB {
+public class Connexion_DB implements DbSQLFactory {
 
-    private static Connexion_DB instance;
-    private Connection connection;
-    private static final String CONFIG_FILE = "config.json"; // Chemin relatif dans src/main/resources
+
+    private final String dbKey;
 
     /**
-     * Constructeur privé qui initialise la connexion à la base de données.
-     * Lit les paramètres de connexion depuis un fichier de configuration JSON.
-     *
-     * @throws RuntimeException Si le fichier de configuration est introuvable ou si une erreur survient lors de la connexion.
+     * Le nom de la DB avec laquelle on se connecte
+     * @param dbKey
      */
-    protected Connexion_DB(String dbKey) {
+    public Connexion_DB(String dbKey) {
+        this.dbKey = dbKey;
+    }
+
+    @Override
+    /**
+     * Modele factory pour la connexion en DB
+     */
+    public Connection createConnection() {
         try {
             Gson gson = new Gson();
-
-            // Chargement du fichier depuis le classpath
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(CONFIG_FILE);
-            if (inputStream == null) {
-                throw new RuntimeException("Le fichier de configuration " + CONFIG_FILE + " est introuvable dans le classpath.");
-            }
-
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("config.json");
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             ConfigurationRoot root = gson.fromJson(reader, ConfigurationRoot.class);
             Configuration selectedDb = root.Databases.get(dbKey);
 
-            System.out.println(new Gson().toJson(selectedDb)); // Pour afficher ce que Gson a bien lu
-            System.out.println("Clé demandée : " + dbKey);
-            System.out.println("Clés disponibles : " + root.Databases.keySet());
-
-            reader.close();
             if (selectedDb == null) {
-                throw new RuntimeException("La configuration pour '" + dbKey + "' est introuvable dans config.json !");
+                throw new RuntimeException("La configuration pour '" + dbKey + "' est introuvable !");
             }
 
             String url = "jdbc:" + selectedDb.DBType + "://"
@@ -56,40 +50,13 @@ public class Connexion_DB {
                     + selectedDb.DBCredentials.DBName
                     + "?useSSL=false&serverTimezone=UTC";
 
-            // Connexion à la base de données MySQL
-            connection = DriverManager.getConnection(
+            return DriverManager.getConnection(
                     url,
                     selectedDb.DBCredentials.UserName,
                     selectedDb.DBCredentials.Password
             );
-
-            System.out.println("Connexion OK");
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Erreur lors de l'initialisation de la connexion à la base de données", e);
+            throw new RuntimeException("Erreur lors de la connexion SQL : " + e.getMessage(), e);
         }
-    }
-
-    /**
-     * Retourne l'instance unique de la classe (Singleton).
-     * Si l'instance n'existe pas, elle est créée.
-     *
-     * @return L'instance unique de ConnexionDB_DAO.
-     */
-    public static synchronized Connexion_DB getInstance(String dbKey) {
-        if (instance == null) {
-            instance = new Connexion_DB(dbKey);
-        }
-        return instance;
-    }
-
-
-    /**
-     * Retourne l'objet Connection représentant la connexion à la base de données.
-     *
-     * @return L'objet Connection actuel.
-     */
-    public Connection getConnection() {
-        return connection;
     }
 }

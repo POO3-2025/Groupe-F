@@ -27,8 +27,8 @@ public class Menu {
     public void Affichage(String pseudo) throws IOException {
         MenuCréerPersonnage menuCréerPersonnage = new MenuCréerPersonnage();
 
-        Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
-        MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
+        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
+        MongoDatabase mongoDatabase = mongoFactory.createDatabase();
 
         DAO_NOSQL dao = new DAO_NOSQL();
         User_DAO userDao = new User_DAO("mysql");
@@ -64,8 +64,8 @@ public class Menu {
                 Panel jouerPanel = new Panel(new LinearLayout(Direction.VERTICAL));
 
                 jouerPanel.addComponent(new Button("Sélectionner un personnage", () -> {
-                    int idUser = userDao.GetUserByPseudo(pseudo).getId();
-                    List<CharacterType> characters = dao.readAllCharactersByUserId(mongoDatabase,idUser);
+                    int idUser = userDao.getUserByPseudo(pseudo).getId();
+                    List<CharacterType> characters = dao.readAllCharactersByUserId(idUser);
 
                     if (characters.isEmpty()) {
                         MessageDialog.showMessageDialog(textGUI, "Info", "Aucun personnage disponible.");

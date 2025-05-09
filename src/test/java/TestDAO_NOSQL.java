@@ -20,8 +20,8 @@ public class TestDAO_NOSQL {
         System.out.println("Exécution du test : " + testInfo.getDisplayName());
     }
 
-    Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
-    MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
+    private static Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");;
+    private static MongoDatabase mongoDatabase = connexionDbNosql.createDatabase();
 
     @Test
     @DisplayName("Test de lecture des collections")

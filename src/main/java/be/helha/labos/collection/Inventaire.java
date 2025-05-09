@@ -20,8 +20,8 @@ public class Inventaire {
     @JsonProperty("_id")
     protected ObjectId id;
 
-    private static Connexion_DB_Nosql connexionDbNosql;
-    private static MongoDatabase mongoDatabase;
+    private static Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");;
+    private static MongoDatabase mongoDatabase = connexionDbNosql.createDatabase();
     private static MongoCollection<Document> collection;
     private List<Document> inventorySlots;
 
@@ -42,8 +42,7 @@ public class Inventaire {
      * @throws Exception
      */
     public void insererDansLaBase() {
-        connexionDbNosql = Connexion_DB_Nosql.getInstance();
-        mongoDatabase = connexionDbNosql.getDatabase();
+
         collection = mongoDatabase.getCollection("inventory");
 
         Document inventory = new Document("_id", this.id)
@@ -67,8 +66,8 @@ public class Inventaire {
     public static void putItemsInInventory(ObjectId inventoryId, ObjectId itemsId, boolean remove) {
         try {
                 // Initialisation de la connexion
-                connexionDbNosql = Connexion_DB_Nosql.getInstance();
-                mongoDatabase = connexionDbNosql.getDatabase();
+                connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
+                mongoDatabase = connexionDbNosql.createDatabase();
                 collection = mongoDatabase.getCollection("inventory");
 
                 Document inventory = collection.find(new Document("_id", inventoryId)).first();
