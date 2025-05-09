@@ -21,8 +21,8 @@ public class Partie {
 
     public void AfficherPartie(CharacterType personnage) {
 
-        Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
-        MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
+        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
+        MongoDatabase database = mongoFactory.createDatabase();
 
         DAO_NOSQL dao = new DAO_NOSQL();
 
@@ -47,7 +47,7 @@ public class Partie {
             Panel panel = new Panel();
 
             panel.addComponent(new Button("Boutique", () -> {
-                MongoCollection<Document> collection = mongoDatabase.getCollection("Magasin");
+                MongoCollection<Document> collection = database.getCollection("Magasin");
                 Boutique boutique = new Boutique(collection);
                 boutique.afficherBoutique(textGUI, personnage); // plus besoin de setMoney()
             }));

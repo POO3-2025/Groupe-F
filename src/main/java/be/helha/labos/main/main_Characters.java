@@ -21,14 +21,16 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 public class main_Characters {
     public static void main(String[] args) {
-        Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
-        MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
+        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
+        MongoDatabase database = mongoFactory.createDatabase();
 
-        MongoCollection<CharacterType> Charactercollection = mongoDatabase.getCollection("characters", CharacterType.class);
+
+        MongoCollection<CharacterType> Charactercollection = database.getCollection("characters", CharacterType.class);
 
 
         Authen authen = new Authen();
         User_DAO daoUser = new User_DAO("mysql");
+        DAO_NOSQL daoNosql = new DAO_NOSQL();
 
         try
         {
@@ -46,7 +48,7 @@ public class main_Characters {
                 System.out.println("Erreur lors de l'ajout");
             }
 
-            if(daoUser.GetUserById(nouvelUser.getId()) != null)
+            if(daoUser.getUserById(nouvelUser.getId()) != null)
             {
                 System.out.println("Id :" + nouvelUser.getId());
             }
@@ -57,7 +59,7 @@ public class main_Characters {
 
 
 
-            DAO_NOSQL daoNosql = new DAO_NOSQL();
+
 
             Archer archerTest = new Archer("archerX");
             daoNosql.ajouterPersonnagePourUser(nouvelUser.getPseudo(),archerTest);
@@ -68,7 +70,7 @@ public class main_Characters {
             Orc orcTest = new Orc("orcX");
             daoNosql.ajouterPersonnagePourUser(nouvelUser3.getPseudo(),orcTest);
 
-            List<CharacterType> characters = daoNosql.readAllCharacters(mongoDatabase);
+            List<CharacterType> characters = daoNosql.readAllCharacters();
             if (characters.isEmpty())
             {
                 System.out.println("No characters found");
@@ -94,7 +96,5 @@ public class main_Characters {
         }
 
         daoUser.fermerConnexion();
-        connexionDbNosql.closeConnection();
-
     }
 }

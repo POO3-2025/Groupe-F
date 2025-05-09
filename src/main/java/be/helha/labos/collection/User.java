@@ -15,14 +15,26 @@ public class User {
 
     /**
      * Constructeur de la classe User.
-     * @param id Identifiant de l'utilisateur.
      * @param pseudo Nom d'utilisateur.
      * @param password Mot de passe de l'utilisateur.
      * @param role Rôle de l'utilisateur.
-     * @param actif Indique si l'utilisateur est actif ou non.
      */
-    public User(int id,String pseudo, String password,String role) {
-        this.id=id;
+    public User(String pseudo, String password,String role) {
+        this.pseudo = pseudo;
+        this.password = password;
+        this.rôle = role;
+        this.actif = true;
+    }
+
+    /**
+     * Constructeur pour l'ajout en DB et pour l'utilisation des méthode en DAO
+     * @param id
+     * @param pseudo
+     * @param password
+     * @param role
+     */
+    public User(int id ,String pseudo, String password,String role) {
+        this.id = id;
         this.pseudo = pseudo;
         this.password = password;
         this.rôle = role;

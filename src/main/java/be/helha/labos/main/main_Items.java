@@ -19,13 +19,13 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 public class main_Items {
     public static void main(String[] args)
     {
-        Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
-        MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
+        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
+        MongoDatabase database = mongoFactory.createDatabase();
         DAO_NOSQL daoNosql = new DAO_NOSQL();
         try {
 
-            MongoCollection <Item>Itemcollection = mongoDatabase.getCollection("items", Item.class);
-            MongoCollection <CharacterType>CharacterTypecollection = mongoDatabase.getCollection("characters", CharacterType.class);
+            MongoCollection <Item>Itemcollection = database.getCollection("items", Item.class);
+            MongoCollection <CharacterType>CharacterTypecollection = database.getCollection("characters", CharacterType.class);
 
 
             Sword sword = new Sword();
@@ -55,14 +55,12 @@ public class main_Items {
             putItemsInChest(new ObjectId(),
                     new ObjectId() , true);
 
-            daoNosql.readAllCollections(mongoDatabase);
+            daoNosql.readAllCollections(database);
 
         }catch (Exception e){
             e.printStackTrace();
 
         }
-
-        connexionDbNosql.closeConnection();
     }
 }
 

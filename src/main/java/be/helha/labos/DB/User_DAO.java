@@ -9,7 +9,7 @@ import java.sql.*;
 /**
  * Classe de gestion des utilisateurs dans la base de données avec DAO (Data Access Object).
  */
-public class User_DAO {
+public class User_DAO{
 
     // Récupère l'instance de connexion
     private final Connection conn;
@@ -21,7 +21,8 @@ public class User_DAO {
      * @param dbKey pour connaitre si on se connecte à la DB de prod ou bien de test
      */
     public User_DAO(String dbKey) {
-        this.conn = Connexion_DB.getInstance(dbKey).getConnection();
+        Connexion_DB factory = new Connexion_DB(dbKey);
+        conn = factory.createConnection();
         creerTableUser();
     }
 
@@ -61,7 +62,7 @@ public class User_DAO {
                 ID INT AUTO_INCREMENT PRIMARY KEY,
                 Pseudo VARCHAR(60),
                 Password VARCHAR(60),
-                ROLE VARCHAR(60),
+                Role VARCHAR(60),
                 Actif BOOL 
             );
         """;
@@ -90,7 +91,7 @@ public class User_DAO {
             pstmt.setString(3, user.getRôle());
             pstmt.setBoolean(4, user.isActif());
 
-            if(GetUserByPseudo(user.getPseudo()) == null) {
+            if(getUserByPseudo(user.getPseudo()) == null) {
                 pstmt.executeUpdate();
                 // Récupération de l'ID généré
                 ResultSet generatedKeys = pstmt.getGeneratedKeys();
@@ -115,7 +116,7 @@ public class User_DAO {
      *
      * @return user si le user est trouvé sinon renvoie une exception.
      */
-    public User GetUserByPseudo(String pseudo) {
+    public User getUserByPseudo(String pseudo) {
         User user = null;
         String query = "SELECT DISTINCT * FROM User WHERE Pseudo = ?";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -127,7 +128,7 @@ public class User_DAO {
                         rs.getInt("ID"),
                         rs.getString("Pseudo"),              // Pseudo
                         rs.getString("Password"),            // Mot de passe
-                        rs.getString("ROLE")
+                        rs.getString("Role")
                 );
             }
         } catch (SQLException e) {
@@ -142,7 +143,7 @@ public class User_DAO {
      * @param id L'utilisateur à mettre à jour.
      * @return true si l'utilisateur a été mis à jour avec succès, false sinon.
      */
-    public User GetUserById(int id) {
+    public User getUserById(int id) {
         User user = null;
         String query = "SELECT DISTINCT * FROM User WHERE ID = ?";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -154,7 +155,7 @@ public class User_DAO {
                         rs.getInt("ID"),
                         rs.getString("Pseudo"),              // Pseudo
                         rs.getString("Password"),            // Mot de passe
-                        rs.getString("ROLE")
+                        rs.getString("Role")
                 );
             }
         } catch (SQLException e) {
