@@ -5,69 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbe35a1e-4d15-4a05-9805-559abf65640b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gradle/8.11/checksums/checksums.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/8.11/fileChanges/last-build.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/8.11/fileHashes/fileHashes.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/8.11/fileHashes/fileHashes.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/8.11/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/8.11/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/Groupe-F-develop.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/resources/main/config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/resources/main/config_invalide.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/Authen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/Authen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/DB/Affichage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/DB/Affichage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/DB/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/DB/Configuration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/DB/ConfigurationRoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/DB/ConfigurationRoot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/DB/Connexion_DB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/DB/Connexion_DB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/JwtFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/DB/User_DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/DB/User_DAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/DBNosql/ConfigWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/DBNosql/ConfigWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/DBNosql/Connexion_DB_Nosql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/DBNosql/Connexion_DB_Nosql.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/DBNosql/DAO_NOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/DBNosql/DAO_NOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/DBNosql/Mongo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/DBNosql/Mongo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Boutique.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Boutique.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Inscription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Inscription.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/MenuCréerPersonnage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/MenuCréerPersonnage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Partie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Partie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Magasin/Magasin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Magasin/Magasin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Magasin/TestMagasin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Magasin/TestMagasin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Spring/jeuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Spring/jeuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Spring/jeuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Spring/jeuService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/Archer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/Archer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/CharacterType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/CharacterType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/CharactereFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/Knight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/Orc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/Orc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Inventaire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Inventaire.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/InventaireFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Bow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Bow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Potion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Shield.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Shield.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Sword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Sword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Weapon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/WeaponType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/WeaponType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/chests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/chests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main_Characters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main_Characters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main_Items.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main_Items.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TestDAO_NOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestDAO_NOSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,12 +51,12 @@
     &quot;assignee&quot;: &quot;LA237823-Santimaria&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/POO3-2025/Groupe-F.git&quot;,
-    &quot;accountId&quot;: &quot;086906ea-dbb9-4324-9b99-634d94bce35a&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/POO3-2025/Groupe-F.git",
+    "accountId": "bc5b9c12-9a5a-4383-8d16-0a62bca2a8b6"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 1
@@ -117,14 +68,20 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.Build Groupe-F.executor": "Run",
     "Gradle.Groupe-F [:be.helha.labos.Lanterna.Lancer.main()].executor": "Run",
     "Gradle.Groupe-F [:be.helha.labos.Magasin.TestMagasin.main()].executor": "Run",
     "Gradle.Groupe-F [:be.helha.labos.main.main.main()].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.SpringApiJeuApplication.executor": "Run",
     "com.codeium.enabled": "true",
-    "git-widget-placeholder": "Merging feature/Authentification",
+    "git-widget-placeholder": "feature/Authentification",
     "last_opened_file_path": "C:/Users/santi/OneDrive/Bureau/testclone/Groupe-F",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -161,6 +118,7 @@
       <workItem from="1746368817994" duration="212000" />
       <workItem from="1746480350171" duration="2678000" />
       <workItem from="1746618005930" duration="2316000" />
+      <workItem from="1746899414311" duration="1888000" />
     </task>
     <servers />
   </component>

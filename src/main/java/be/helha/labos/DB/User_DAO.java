@@ -6,6 +6,8 @@ import be.helha.labos.collection.User;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe de gestion des utilisateurs dans la base de données avec DAO (Data Access Object).
@@ -59,7 +61,7 @@ public class User_DAO{
      */
     private void creerTableUser() {
         String createTableQuery = """
-            CREATE TABLE IF NOT EXISTS User (
+            CREATE TABLE IF NOT EXISTS users (
                 ID INT AUTO_INCREMENT PRIMARY KEY,
                 Pseudo VARCHAR(60),
                 Password VARCHAR(60),
@@ -163,6 +165,30 @@ public class User_DAO{
             e.printStackTrace();
         }
         return user;
+    }
+
+    /**
+     * Méthodes qui renvoie une liste de tous les users
+     * @return
+     */
+    public List <User> getAllUser(){
+        List<User> users = new ArrayList<>();
+        String query = "SELECT DISTINCT * FROM User";
+        try(PreparedStatement stmt = conn.prepareStatement(query)){
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
+                User user = new User
+                        (rs.getInt("ID"),
+                        rs.getString("Pseudo"),
+                        rs.getString("Password"),
+                        rs.getString("Role"));
+
+                users.add(user);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
     }
 
     /**

@@ -1,21 +1,11 @@
-package be.helha.labos.Spring;
+package be.helha.labos.Authentification;
 
-import be.helha.labos.DB.Connexion_DB;
 import be.helha.labos.DB.User_DAO;
-import be.helha.labos.DBNosql.Connexion_DB_Nosql;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
+import be.helha.labos.collection.User;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
-import be.helha.labos.collection.User;
 
-import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-import static com.mongodb.client.model.Filters.eq;
 
 @Service
 public class jeuService {

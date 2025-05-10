@@ -23,7 +23,6 @@ public class JwtUtils {
     private final int jwtExpirationMs = 3600000;   // Durée en millisecondes (1 heure)
 
     public String generateToken(Authentication authentication) {
-
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
