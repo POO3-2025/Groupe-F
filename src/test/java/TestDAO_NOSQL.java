@@ -30,4 +30,5 @@ public class TestDAO_NOSQL {
         DAO_NOSQL dao = new DAO_NOSQL();
         dao.readAllCollections(mongoDatabase);
     }
+
 }

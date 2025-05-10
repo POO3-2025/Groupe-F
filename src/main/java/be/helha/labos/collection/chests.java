@@ -67,23 +67,23 @@ public class chests {
         List<Document> slots = (List<Document>) inventory.get("slots");
 
         // Trouver un slot vide
-            boolean itemPlaced = false;
-            for (Document slot : slots) {
-                if (slot.get("item") == null) { // Slot vide trouvé
-                    slot.put("item", id);
-                    itemPlaced = true;
-                    break;
-                }
+        boolean itemPlaced = false;
+        for (Document slot : slots) {
+            if (slot.get("item") == null) { // Slot vide trouvé
+                slot.put("item", id);
+                itemPlaced = true;
+                break;
             }
+        }
 
-            if (itemPlaced) {
-                // Mettre à jour du coffre dans la base de données
-                Document updateQuery = new Document("$set", new Document("slots", slots));
-                inventoryCollection.updateOne(new Document("_id", inventoryId), updateQuery);
-                System.out.println("Coffre ajouté a l'inventaire avec succès.");
-            } else {
-                System.out.println("Aucun slot disponible dans l'inventaire.");
-            }
+        if (itemPlaced) {
+            // Mettre à jour du coffre dans la base de données
+            Document updateQuery = new Document("$set", new Document("slots", slots));
+            inventoryCollection.updateOne(new Document("_id", inventoryId), updateQuery);
+            System.out.println("Coffre ajouté a l'inventaire avec succès.");
+        } else {
+            System.out.println("Aucun slot disponible dans l'inventaire.");
+        }
     }
 
     /**

@@ -11,7 +11,6 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import static be.helha.labos.DBNosql.DAO_NOSQL.updateDocument;
-import static be.helha.labos.collection.InventaireFactory.*;
 import static be.helha.labos.collection.chests.putItemsInChest;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
@@ -49,8 +48,6 @@ public class main_Items {
 
             chests chests = new chests(new ObjectId());
 
-            putItemsInInventory(new ObjectId(),
-                    new ObjectId() , false);
 
             putItemsInChest(new ObjectId(),
                     new ObjectId() , true);
@@ -63,4 +60,3 @@ public class main_Items {
         }
     }
 }
-

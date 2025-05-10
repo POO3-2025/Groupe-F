@@ -1,6 +1,7 @@
 package be.helha.labos.DB;
 
 import be.helha.labos.DB.Configuration;
+import be.helha.labos.DB.DbSQLFactory;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;

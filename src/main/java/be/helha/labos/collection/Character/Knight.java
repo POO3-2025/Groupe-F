@@ -28,6 +28,8 @@ public class Knight extends CharacterType {
         level = 1;
         this.dodge = 0.3;
         this.precision = 0.7;
+        this.inventaire = new Inventaire();
+        inventaire.insererDansLaBase();
 
     }
 

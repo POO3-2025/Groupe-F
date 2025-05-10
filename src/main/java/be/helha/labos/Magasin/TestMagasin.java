@@ -1,3 +1,4 @@
+
 package be.helha.labos.Magasin;
 
 import be.helha.labos.DBNosql.DAO_NOSQL;

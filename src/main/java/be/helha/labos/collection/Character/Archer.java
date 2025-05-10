@@ -1,5 +1,7 @@
 package be.helha.labos.collection.Character;
 
+import be.helha.labos.collection.Inventaire;
+
 /**
  * Classe étendue de Charactertype représentant un personnage de type Archer
  */
@@ -25,6 +27,8 @@ public class Archer extends CharacterType
                 this.damage = 5;
                 this.dodge = 0.5;
                 this.precision = 0.9;
+                this.inventaire = new Inventaire();
+                inventaire.insererDansLaBase();
             }
 
             /**

@@ -16,7 +16,7 @@ import org.bson.types.ObjectId;
 import java.sql.Connection;
 import java.util.List;
 
-import static be.helha.labos.collection.InventaireFactory.putItemsInInventory;
+
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
@@ -70,7 +70,7 @@ public class main {
 
 
 
-            CharacterType archer = CharactereFactory.createCharacter("archer", "archerX");
+            Archer archer = new Archer("archer");
             daoNosql.ajouterPersonnagePourUser(nouvelUser.getPseudo(), archer);
 
             Sword sword = new Sword();
@@ -94,7 +94,7 @@ public class main {
 
 
 
-            putItemsInInventory((archer.getInventaire()), bow.getId(), false);
+
 
             /*putItemsInChest(new ObjectId("67c4687a6085201f7eca9d02"),
                     new ObjectId("67d048cb69f5966a18dcef4a") , true);*/

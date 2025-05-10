@@ -30,6 +30,8 @@ public class Orc extends CharacterType
         this.damage = 50;
         this.dodge = 0.0;
         this.precision = 0.5;
+        this.inventaire = new Inventaire();
+        inventaire.insererDansLaBase();
 
     }
 

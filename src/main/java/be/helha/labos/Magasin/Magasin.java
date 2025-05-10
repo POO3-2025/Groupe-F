@@ -1,7 +1,6 @@
 package be.helha.labos.Magasin;
 
 import be.helha.labos.collection.Inventaire;
-import static be.helha.labos.collection.InventaireFactory.*;
 import be.helha.labos.collection.Item.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -36,15 +35,14 @@ public class Magasin {
     public void acheterObjet(ObjectId itemId, Inventaire inventaire) {
         Document item = itemsCollection.find(new Document("_id", itemId)).first();
         if (item != null) {
-
-
-
             // Ajouter l'objet à l'inventaire de l'utilisateur
-            putItemsInInventory(inventaire.getId(), itemId, false);
-
-            // Supprimer l'objet du magasin
-            itemsCollection.deleteOne(new Document("_id", itemId));
-            System.out.println("Objet acheté avec succès : " + item.getString("nom"));
+            if (Inventaire.ajouterObjetDansInventaire(inventaire.getId(), itemId)) {
+                // Supprimer l'objet du magasin
+                itemsCollection.deleteOne(new Document("_id", itemId));
+                System.out.println("Objet acheté avec succès : " + item.getString("nom"));
+            } else {
+                System.out.println("Impossible d'ajouter l'objet à l'inventaire.");
+            }
         } else {
             System.out.println("Objet introuvable dans le magasin.");
         }
@@ -59,10 +57,7 @@ public class Magasin {
             return;
         }
 
-
-        // Retirer l'objet de l'inventaire
-        putItemsInInventory(inventaire.getId(), itemId, true);
-
+        // On suppose que l'objet est déjà retiré de l'inventaire avant d'appeler cette méthode
         // Ajouter l'objet au magasin
         itemsCollection.insertOne(item);
         System.out.println("Objet vendu avec succès : " + item.getString("nom"));

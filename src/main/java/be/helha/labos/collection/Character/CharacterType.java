@@ -1,6 +1,5 @@
 package be.helha.labos.collection.Character;
 
-import be.helha.labos.collection.InventaireFactory;
 import be.helha.labos.collection.User;
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.collection.Inventaire;
@@ -10,8 +9,6 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -34,7 +31,7 @@ public class CharacterType {
     protected int damage;
     protected double money;
     protected int level;
-    protected ObjectId inventaire;
+    protected Inventaire inventaire;
     protected double dodge;
     protected double precision;
 
@@ -246,11 +243,11 @@ public class CharacterType {
      * Méthode de récupération de l'inventaire
      * @return
      */
-    public ObjectId getInventaire() {
+    public Inventaire getInventaire() {
         return inventaire;
     }
 
-    public void setInventaire(ObjectId inventaire) {
+    public void setInventaire(Inventaire inventaire) {
         this.inventaire = inventaire;
     }
 
