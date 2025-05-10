@@ -16,65 +16,50 @@ import java.sql.Connection;
 
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
+/**
+ * Classe de connexion à une base de données NoSQL (MongoDB).
+ * Utilise le design pattern Singleton pour garantir qu'une seule instance de la connexion existe.
+ * La configuration est chargée depuis un fichier JSON.
+ */
+public class Connexion_DB_Nosql implements Mongo{
 
-public class Connexion_DB_Nosql {
+    private final String configKey;
 
-    private static Connexion_DB_Nosql instance;  // Singleton
-    private MongoClient mongoClient;
-    private MongoDatabase database;
-
-    CodecRegistry pojoCodecRegistry = fromRegistries(
-            MongoClientSettings.getDefaultCodecRegistry(),
-            fromProviders(PojoCodecProvider.builder().automatic(true).build())
-    );
-
-    private static final String CONFIG_FILE = "config.json"; // Chemin relatif dans src/main/resources
-
-    private ConfigWrapper.DBConfig chargerConfiguration(String key) {
-        InputStream is = getClass().getClassLoader().getResourceAsStream(CONFIG_FILE);
-        InputStreamReader reader = new InputStreamReader(is);
-        JsonObject json = JsonParser.parseReader(reader).getAsJsonObject();
-
-        // Accéder à l'objet "Databases" puis à la clé spécifique
-        JsonObject databases = json.getAsJsonObject("Databases");
-        JsonObject conf = databases.getAsJsonObject(key);
-
-        if (conf == null) {
-            throw new IllegalArgumentException("La configuration pour '" + key + "' est introuvable dans 'Databases'.");
-        }
-        return new Gson().fromJson(conf, ConfigWrapper.DBConfig.class);
+    public Connexion_DB_Nosql(String configKey) {
+        this.configKey = configKey;
     }
 
-    // Constructeur privé pour empêcher l'instanciation directe
-    private Connexion_DB_Nosql() {
-
-        ConfigWrapper.DBConfig config = chargerConfiguration("nosqlTest");
+    @Override
+    public MongoDatabase createDatabase() {
+        ConfigWrapper.DBConfig config = chargerConfiguration(configKey);
 
         String uri = "mongodb://" + config.getDBCredentials().getHost() + ":27017";
 
-        mongoClient = MongoClients.create(uri);
-        database = mongoClient.getDatabase(config.getDBCredentials().getDatabase())
+        CodecRegistry pojoCodecRegistry = fromRegistries(
+                MongoClientSettings.getDefaultCodecRegistry(),
+                fromProviders(PojoCodecProvider.builder().automatic(true).build())
+        );
+
+        MongoClient client = MongoClients.create(uri);
+        return client.getDatabase(config.getDBCredentials().getDatabase())
                 .withCodecRegistry(pojoCodecRegistry);
     }
 
-    // Méthode pour obtenir l'instance unique du Singleton
-    public static synchronized Connexion_DB_Nosql getInstance(){
-        if (instance == null) {
-            instance = new Connexion_DB_Nosql();
-        }
-        return instance;
-    }
+    private ConfigWrapper.DBConfig chargerConfiguration(String key) {
+        try {
+            InputStream is = getClass().getClassLoader().getResourceAsStream("config.json");
+            InputStreamReader reader = new InputStreamReader(is);
+            JsonObject json = JsonParser.parseReader(reader).getAsJsonObject();
+            JsonObject databases = json.getAsJsonObject("Databases");
+            JsonObject conf = databases.getAsJsonObject(key);
 
-    // Méthode pour récupérer la base de données
-    public MongoDatabase getDatabase() {
-        return database;
-    }
+            if (conf == null) {
+                throw new IllegalArgumentException("La configuration pour '" + key + "' est introuvable.");
+            }
 
-    // Méthode pour fermer la connexion proprement
-    public void closeConnection() {
-        if (mongoClient != null) {
-            mongoClient.close();
-            System.out.println("Connexion MongoDB fermée.");
+            return new Gson().fromJson(conf, ConfigWrapper.DBConfig.class);
+        } catch (Exception e) {
+            throw new RuntimeException("Erreur de chargement de la configuration MongoDB", e);
         }
     }
 }

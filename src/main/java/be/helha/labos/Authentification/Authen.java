@@ -1,3 +1,4 @@
+
 package be.helha.labos.Authentification;
 
 import be.helha.labos.DB.User_DAO;
@@ -11,10 +12,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class Authen {
 
     private final JwtUtils jwtUtils = new JwtUtils();
-    private final User_DAO user_DAO = new User_DAO();
 
-    public String login(String pseudo, String motDePasse) {
-        User user = user_DAO.GetUserByPseudo(pseudo); // récupère ton user custom
+    public String login(String pseudo, String motDePasse,String Dbkey) {
+        final User_DAO user_DAO = new User_DAO(Dbkey);
+        User user = user_DAO.getUserByPseudo(pseudo); // récupère ton user custom
 
         if (user != null && User_DAO.PasswordUtils.verifyPassword(motDePasse, user.getPassword())) {
             UserDetailsImpl userDetails = new UserDetailsImpl(user);
@@ -29,11 +30,5 @@ public class Authen {
         } else {
             throw new RuntimeException("Pseudo ou mot de passe invalide");
         }
-    }
-    public void AddUser(User newUser) {
-        if (user_DAO.GetUserByPseudo(newUser.getPseudo()) != null) {
-            throw new RuntimeException("Un utilisateur avec ce pseudo existe déjà");
-        }
-        user_DAO.ajouterUser(newUser);
     }
 }
