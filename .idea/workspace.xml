@@ -5,10 +5,62 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbe35a1e-4d15-4a05-9805-559abf65640b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.11/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/AuthController$LoginRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/AuthController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/AuthResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/Authen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/JwtUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/UserDetailsImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DB/Affichage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DB/Configuration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DB/ConfigurationRoot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DB/Connexion_DB.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DB/Credentials.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DB/User_DAO$PasswordUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DB/User_DAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DBNosql/ConfigWrapper$DBConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DBNosql/ConfigWrapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DBNosql/Connexion_DB_Nosql.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DBNosql/Credentials.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DBNosql/DAO_NOSQL.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DBNosql/Mongo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/Inscription.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/Lancer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/Menu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/MenuCréerPersonnage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Magasin/Magasin.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Magasin/TestMagasin.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Spring/SpringApiJeuApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Spring/jeuController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Spring/jeuService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Character/Archer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Character/CharacterType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Character/Knight.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Character/Orc.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Inventaire.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Bow$BowMaterial.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Bow.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Item$ObjectIdWrapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Item.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Mace$MaceMaterial.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Mace.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Potion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Shield.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Sword$SwordMaterial.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Sword.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Weapon.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/WeaponType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/chests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/main/main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/main/main_Characters.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Boutique.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Boutique.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/CharacterType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/CharacterType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main_Characters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main_Characters.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +72,13 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -28,39 +87,44 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "LA237823-Santimaria"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;LA237823-Santimaria&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/POO3-2025/Groupe-F.git",
-    "accountId": "086906ea-dbb9-4324-9b99-634d94bce35a"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/POO3-2025/Groupe-F.git&quot;,
+    &quot;accountId&quot;: &quot;086906ea-dbb9-4324-9b99-634d94bce35a&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 1
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2wdQ8BXBMk6PMTx9BNMAqEmU4e5" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "feature/Magasin",
-    "last_opened_file_path": "C:/Users/santi/OneDrive/Bureau/testclone/Groupe-F",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Groupe-F [:be.helha.labos.Lanterna.Lancer.main()].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/Magasin&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/santi/OneDrive/Bureau/testclone/Groupe-F&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -77,6 +141,8 @@
       <option name="presentableId" value="Default" />
       <updated>1746368811057</updated>
       <workItem from="1746368817994" duration="212000" />
+      <workItem from="1746480350171" duration="2678000" />
+      <workItem from="1746618005930" duration="2316000" />
     </task>
     <servers />
   </component>

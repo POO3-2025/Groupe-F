@@ -1,5 +1,6 @@
 package be.helha.labos.Lanterna;
 
+import be.helha.labos.collection.Character.CharacterType;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
@@ -14,21 +15,22 @@ import java.util.List;
 public class Boutique {
 
     private final MongoCollection<Document> collection;
+    private double argent;
 
     public Boutique(MongoCollection<Document> collection) {
         this.collection = collection; // Injection de la collection MongoDB
     }
 
-    public void afficherBoutique(WindowBasedTextGUI gui) {
+    public double afficherBoutique(WindowBasedTextGUI gui, CharacterType personnage) {
+
+        this.argent = personnage.getMoney();
+
         BasicWindow boutiqueMenu = new BasicWindow("Boutique");
         Panel boutiquePanel = new Panel();
         boutiquePanel.setLayoutManager(new LinearLayout(Direction.VERTICAL));
 
-        // Montant initial d'or
-        final int[] orRestant = {150};
-
         // Label pour afficher l'or restant
-        Label orRestantLabel = new Label("Or restant : " + orRestant[0] + " pièces");
+        Label orRestantLabel = new Label("Or restant : " + argent + " pièces");
         boutiquePanel.addComponent(orRestantLabel);
 
         // Table pour afficher les objets disponibles
@@ -54,7 +56,7 @@ public class Boutique {
             double prix = objetSelectionne.getDouble("prix");
 
             // Vérification de l'or restant
-            if (prix > orRestant[0]) {
+            if (prix > argent) {
                 MessageDialog.showMessageDialog(gui, "Erreur", "Vous n'avez pas assez de pièces pour acheter cet objet.");
             } else {
                 // Afficher une boîte de dialogue de confirmation
@@ -71,8 +73,13 @@ public class Boutique {
                     MessageDialog.showMessageDialog(gui, "Achat", "Vous avez acheté : " + objetSelectionne.getString("nom"));
 
                     // Mise à jour de l'or restant
-                    orRestant[0] -= prix;
-                    orRestantLabel.setText("Or restant : " + orRestant[0] + " pièces");
+                    argent -= prix;
+
+                    personnage.setMoney(argent);  // mise à jour de l'objet
+
+                    personnage.updateMoneyInDB();
+
+                    orRestantLabel.setText("Or restant : " + argent + " pièces");
 
                     // Mise à jour de la table
                     objetsDisponibles.remove(objetSelectionne);
@@ -92,5 +99,7 @@ public class Boutique {
 
         // Affichage de la fenêtre
         gui.addWindowAndWait(boutiqueMenu);
+
+        return argent;
     }
 }

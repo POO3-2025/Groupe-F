@@ -28,6 +28,7 @@ public class main_Characters {
             Mace diamondMace = new Mace(Mace.MaceMaterial.DIAMOND);
 
             Bow bow = new Bow();
+            Bow arablette = new Bow(Bow.BowMaterial.CROSSBOW);
 
             Shield shield = new Shield(1,50);
 
@@ -35,10 +36,11 @@ public class main_Characters {
 
             Archer archerTest = new Archer("archerTest", 101, 20, 0.3, 0.8);
 
-            CharacterType Chara = new CharacterType("Chara", 100, 20,0.8, 0.3,5);
+            CharacterType Chara = new CharacterType("Chara", 100, 20, 0.3, 0.8);
 
 
             // Insertion du document
+            Itemcollection.insertOne(arablette);
             Itemcollection.insertOne(sword);
             Itemcollection.insertOne(fireSword);
             Itemcollection.insertOne(diamondMace);
