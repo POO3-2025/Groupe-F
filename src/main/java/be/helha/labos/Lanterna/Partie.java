@@ -49,7 +49,7 @@ public class Partie {
             panel.addComponent(new Button("Boutique", () -> {
                 MongoCollection<Document> collection = database.getCollection("Magasin");
                 Boutique boutique = new Boutique(collection);
-                boutique.afficherBoutique(textGUI, personnage); // plus besoin de setMoney()
+                boutique.afficherBoutique(textGUI, personnage);
             }));
 
             panel.addComponent(new Button("Retour", window::close)); // Ferme juste la fenêtre de menu

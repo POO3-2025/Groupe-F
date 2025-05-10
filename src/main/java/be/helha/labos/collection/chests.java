@@ -10,22 +10,35 @@ import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Classe représentant un coffre dans le jeu.
+ * Elle contient des informations sur le coffre, telles que son ID et les slots qu'il contient.
+ */
 public class chests {
 
-
+    /**
+     * Attributs de la classe chests
+     * @JsonProperty est utilisé pour indiquer que cet attribut doit être sérialisé/désérialisé avec ce nom
+     * @ObjectId est un identifiant unique généré par MongoDB
+     * @param id l'identifiant du coffre
+     */
     @JsonProperty("_id")
     protected ObjectId id;
 
-    private static Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
-    private static MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
+    private static Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
+    private static MongoDatabase mongoDatabase = connexionDbNosql.createDatabase();
     private static MongoCollection<Document> collection = mongoDatabase.getCollection("chests");
     private List<Document> chestsSlots;
 
-
+    /**
+     * Constructeur vide
+     */
     public chests( ObjectId inventoryId) {
 
-        // Création d'un coffre de 10 slots
+        /**
+         * Création de la liste des slots du coffre
+         * Chaque slot est un document contenant le numéro de slot et l'item associé (null au départ)
+         */
         chestsSlots = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Document slot = new Document("slot_number", i + 1).append("item", null);
@@ -54,32 +67,38 @@ public class chests {
         List<Document> slots = (List<Document>) inventory.get("slots");
 
         // Trouver un slot vide
-            boolean itemPlaced = false;
-            for (Document slot : slots) {
-                if (slot.get("item") == null) { // Slot vide trouvé
-                    slot.put("item", id);
-                    itemPlaced = true;
-                    break;
-                }
+        boolean itemPlaced = false;
+        for (Document slot : slots) {
+            if (slot.get("item") == null) { // Slot vide trouvé
+                slot.put("item", id);
+                itemPlaced = true;
+                break;
             }
+        }
 
-            if (itemPlaced) {
-                // Mettre à jour du coffre dans la base de données
-                Document updateQuery = new Document("$set", new Document("slots", slots));
-                inventoryCollection.updateOne(new Document("_id", inventoryId), updateQuery);
-                System.out.println("Coffre ajouté a l'inventaire avec succès.");
-            } else {
-                System.out.println("Aucun slot disponible dans l'inventaire.");
-            }
+        if (itemPlaced) {
+            // Mettre à jour du coffre dans la base de données
+            Document updateQuery = new Document("$set", new Document("slots", slots));
+            inventoryCollection.updateOne(new Document("_id", inventoryId), updateQuery);
+            System.out.println("Coffre ajouté a l'inventaire avec succès.");
+        } else {
+            System.out.println("Aucun slot disponible dans l'inventaire.");
+        }
     }
 
-    // Méthode pour obtenir l'ID de l'inventaire
+    /**
+     * Constructeur de la classe chests.
+     *
+     */
     public ObjectId getId() {
         return id;
     }
 
-
-    // Cette méthode permet de rajouter un item dans un coffre d'un user
+    /**
+     * Méthode pour obtenir l'ID du coffre.
+     * Cette méthode permet de rajouter un item dans un coffre d'un user
+     * @return ID du coffre.
+     */
     public static void putItemsInChest(ObjectId chestId, ObjectId itemsId, boolean remove) {
         try {
 

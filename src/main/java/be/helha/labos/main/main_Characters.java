@@ -1,71 +1,100 @@
 package be.helha.labos.main;
 
+import be.helha.labos.Authentification.Authen;
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
+import be.helha.labos.DB.*;
 
 import be.helha.labos.DBNosql.DAO_NOSQL;
-import be.helha.labos.collection.Item.*;
 import be.helha.labos.collection.Character.*;
+import be.helha.labos.collection.Item.*;
+import be.helha.labos.collection.User;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+
+import java.util.List;
 
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
+
 public class main_Characters {
-    public static void main(String[] args)
-    {
-        Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
-        MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
+    public static void main(String[] args) {
+        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
+        MongoDatabase database = mongoFactory.createDatabase();
+
+
+        MongoCollection<CharacterType> Charactercollection = database.getCollection("characters", CharacterType.class);
+
+
+        Authen authen = new Authen();
+        User_DAO daoUser = new User_DAO("mysql");
         DAO_NOSQL daoNosql = new DAO_NOSQL();
-        try {
 
-            MongoCollection <Item>Itemcollection = mongoDatabase.getCollection("items", Item.class);
-            MongoCollection <CharacterType>CharacterTypecollection = mongoDatabase.getCollection("characters", CharacterType.class);
-            Sword sword = new Sword();
-            Sword fireSword = new Sword(Sword.SwordMaterial.FIRE);
+        try
+        {
+            User nouvelUser = new User("PSEUDOTEST", "","USER");
+            User nouvelUser2 = new User("PSEUDOTEST2", "","USER");
+            User nouvelUser3 = new User("PSEUDOTEST3", "","USER");
 
-            Mace mace = new Mace();
-            Mace diamondMace = new Mace(Mace.MaceMaterial.DIAMOND);
+            boolean success = daoUser.ajouterUser(nouvelUser);
+            if (success)
+            {
+                System.out.println("Utilisateur ajouté");
+            }
+            else
+            {
+                System.out.println("Erreur lors de l'ajout");
+            }
 
-            Bow bow = new Bow();
-
-            Shield shield = new Shield(1,50);
-
-            Potion potion = new Potion (20,15);
-
-            Archer archerTest = new Archer("archerTest", 101, 20, 0.3, 0.8);
-
-            CharacterType Chara = new CharacterType("Chara", 100, 20,0.8, 0.3,5);
-
-
-            // Insertion du document
-            Itemcollection.insertOne(sword);
-            Itemcollection.insertOne(fireSword);
-            Itemcollection.insertOne(diamondMace);
-            CharacterTypecollection.insertOne(archerTest);
-            CharacterTypecollection.insertOne(Chara);
-
-            //user user = new user("Doe","John");
-            //chests chests = new chests(new ObjectId("67c4646cc5452e653988b340"));
-
-            /*putItemsInInventory(new ObjectId("67c4646cc5452e653988b340"),
-                    new ObjectId("67d048cb69f5966a18dcef48") , false);*/
-
-            /*putItemsInChest(new ObjectId("67c4687a6085201f7eca9d02"),
-                    new ObjectId("67d048cb69f5966a18dcef4a") , true);*/
+            if(daoUser.getUserById(nouvelUser.getId()) != null)
+            {
+                System.out.println("Id :" + nouvelUser.getId());
+            }
+            else
+            {
+                System.out.println("Erreur de la récupération de ID");
+            }
 
 
-            /*updateDocument(mongoDatabase, "items", new Document("type", "WoodenSword"),
-                    new Document("$set", new Document("type", "Sword")));*/
 
-            System.out.println("\n\n");
-            daoNosql.readAllCollections(mongoDatabase);
 
-        }catch (Exception e){
+
+            Archer archerTest = new Archer("archerX");
+            daoNosql.ajouterPersonnagePourUser(nouvelUser.getPseudo(),archerTest);
+
+            Knight knightTest= new Knight("onightX");
+            daoNosql.ajouterPersonnagePourUser(nouvelUser2.getPseudo(),knightTest);
+
+            Orc orcTest = new Orc("orcX");
+            daoNosql.ajouterPersonnagePourUser(nouvelUser3.getPseudo(),orcTest);
+
+            List<CharacterType> characters = daoNosql.readAllCharacters();
+            if (characters.isEmpty())
+            {
+                System.out.println("No characters found");
+            }
+            else
+            {
+                StringBuilder builder = new StringBuilder();
+                for (CharacterType character : characters)
+                {
+                    builder.append("- ").append(character.getName())
+                            .append(" | HP: ").append(character.getHealth())
+                            .append(" | DMG: ").append(character.getDamage())
+                            .append("\n");
+                }
+                System.out.println(builder.toString());
+            }
+
+
+        } catch (Exception e)
+        {
             e.printStackTrace();
 
         }
 
-        connexionDbNosql.closeConnection();
+        daoUser.fermerConnexion();
     }
 }

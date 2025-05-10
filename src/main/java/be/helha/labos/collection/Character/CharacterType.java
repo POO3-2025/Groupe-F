@@ -9,9 +9,9 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
+
+import static com.mongodb.client.model.Filters.eq;
 
 /**
  * Classe mère représentant un personnage dans le jeu.
@@ -34,6 +34,8 @@ public class CharacterType {
     protected Inventaire inventaire;
     protected double dodge;
     protected double precision;
+
+
     private static Connexion_DB_Nosql connexionDbNosql;
     private static MongoDatabase mongoDatabase;
     private static MongoCollection<Document> collection;
@@ -245,6 +247,10 @@ public class CharacterType {
         return inventaire;
     }
 
+    public void setInventaire(Inventaire inventaire) {
+        this.inventaire = inventaire;
+    }
+
     /**
      * Méthode toString pour afficher les informations du personnage
      */
@@ -290,8 +296,7 @@ public class CharacterType {
 
             if (characterDoc != null) {
                 // Récupérer l'ID de l'inventaire à partir du champ "inventaire._id"
-                Document inventaireDoc = characterDoc.get("inventaire", Document.class);
-                ObjectId inventoryId= inventaireDoc.getObjectId("_id");
+                ObjectId inventoryId= characterDoc.getObjectId("inventaire");
 
                 // Suppression du personnage
                 charactersCollection.deleteOne(new Document("_id", characterId));
@@ -312,6 +317,13 @@ public class CharacterType {
             System.out.println("Erreur lors de la suppression du personnage ou de son inventaire.");
             e.printStackTrace();
         }
+    }
+
+    public Inventaire getInventaireFromDB() {
+        Connexion_DB_Nosql connexion = new Connexion_DB_Nosql("nosqlTest");
+        MongoDatabase db = connexion.createDatabase();
+        MongoCollection<Inventaire> inventaireCollection = db.getCollection("inventory", Inventaire.class);
+        return inventaireCollection.find(eq("_id", inventaire)).first();
     }
 
 }

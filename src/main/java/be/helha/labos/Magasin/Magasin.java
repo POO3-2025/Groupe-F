@@ -36,11 +36,13 @@ public class Magasin {
         Document item = itemsCollection.find(new Document("_id", itemId)).first();
         if (item != null) {
             // Ajouter l'objet à l'inventaire de l'utilisateur
-            inventaire.putItemsInInventory(inventaire.getId(), itemId, false);
-
-            // Supprimer l'objet du magasin
-            itemsCollection.deleteOne(new Document("_id", itemId));
-            System.out.println("Objet acheté avec succès : " + item.getString("nom"));
+            if (Inventaire.ajouterObjetDansInventaire(inventaire.getId(), itemId)) {
+                // Supprimer l'objet du magasin
+                itemsCollection.deleteOne(new Document("_id", itemId));
+                System.out.println("Objet acheté avec succès : " + item.getString("nom"));
+            } else {
+                System.out.println("Impossible d'ajouter l'objet à l'inventaire.");
+            }
         } else {
             System.out.println("Objet introuvable dans le magasin.");
         }
@@ -54,9 +56,8 @@ public class Magasin {
             System.out.println("L'objet à vendre n'existe pas dans le magasin.");
             return;
         }
-        // Retirer l'objet de l'inventaire
-        inventaire.putItemsInInventory(inventaire.getId(), itemId, true);
 
+        // On suppose que l'objet est déjà retiré de l'inventaire avant d'appeler cette méthode
         // Ajouter l'objet au magasin
         itemsCollection.insertOne(item);
         System.out.println("Objet vendu avec succès : " + item.getString("nom"));
