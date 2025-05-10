@@ -1,12 +1,11 @@
-package be.helha.labos.Spring;
+package be.helha.labos.Authentification;
 
-import org.bson.types.ObjectId;
+import be.helha.labos.collection.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import be.helha.labos.collection.*;
+
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/jeu")

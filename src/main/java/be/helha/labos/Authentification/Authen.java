@@ -15,7 +15,7 @@ public class Authen {
 
     public String login(String pseudo, String motDePasse,String Dbkey) {
         final User_DAO user_DAO = new User_DAO(Dbkey);
-        User user = user_DAO.getUserByPseudo(pseudo); // récupère ton user custom
+        User user = user_DAO.getUserByPseudo(pseudo); // récupère le user custom
 
         if (user != null && User_DAO.PasswordUtils.verifyPassword(motDePasse, user.getPassword())) {
             UserDetailsImpl userDetails = new UserDetailsImpl(user);

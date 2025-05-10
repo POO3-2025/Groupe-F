@@ -52,14 +52,14 @@ public class main {
             System.out.println("Utilisateur connexion échoué !");
         }*/
 
-        User nouvelUser = new User("Jo", "","USER");
+        User nouvelUser = new User("Danny", "Danny","USER");
 
-        //boolean success = dao.ajouterUser(nouvelUser);
-        /*if (success) {
+        boolean success = daoUser.ajouterUser(nouvelUser);
+        if (success) {
             System.out.println("Utilisateur ajouté !");
         } else {
             System.out.println("Erreur lors de l'ajout.");
-        }*/
+        }
 
         /*if(dao.GetUserById(nouvelUser.getId()) != null){
             System.out.println("User récupéré ,  Id :" + nouvelUser.getId());
