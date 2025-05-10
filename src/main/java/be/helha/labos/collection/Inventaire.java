@@ -10,24 +10,19 @@ import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
-/**
- * Classe représentant un inventaire dans le jeu.
- * Elle contient des informations sur l'inventaire, telles que son ID et les slots qu'il contient.
- */
+
 public class Inventaire {
 
 
     @JsonProperty("_id")
     protected ObjectId id;
 
-    private static Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");;
-    private static MongoDatabase mongoDatabase = connexionDbNosql.createDatabase();
+    private static Connexion_DB_Nosql connexionDbNosql;
+    private static MongoDatabase mongoDatabase;
     private static MongoCollection<Document> collection;
     private List<Document> inventorySlots;
 
-    /**
-     * Constructeur vide
-     */
+
     public Inventaire() {
         this.id = new ObjectId();
         this.inventorySlots = new ArrayList<>();
@@ -37,12 +32,10 @@ public class Inventaire {
         }
     }
 
-    /**
-     * méthode explicite pour insérer dans la DB
-     * @throws Exception
-     */
+    // Nouvelle méthode explicite pour insérer dans la DB
     public void insererDansLaBase() {
-
+        connexionDbNosql = Connexion_DB_Nosql.getInstance();
+        mongoDatabase = connexionDbNosql.getDatabase();
         collection = mongoDatabase.getCollection("inventory");
 
         Document inventory = new Document("_id", this.id)
@@ -53,21 +46,17 @@ public class Inventaire {
         System.out.println("Inventaire inséré avec ID : " + id);
     }
 
-    /**
-     * méthode pour obtenir l'identifiant de l'inventaire
-     */
+    // Méthode pour obtenir l'ID de l'inventaire
     public ObjectId getId() {
         return id;
     }
 
-    /**
-     *Methodde rajouter un item dans l'inventaire d'un user
-     */
+    // Cette méthode permet de rajouter un item dans l'inventaire d'un user
     public static void putItemsInInventory(ObjectId inventoryId, ObjectId itemsId, boolean remove) {
         try {
                 // Initialisation de la connexion
-                connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
-                mongoDatabase = connexionDbNosql.createDatabase();
+                connexionDbNosql = Connexion_DB_Nosql.getInstance();
+                mongoDatabase = connexionDbNosql.getDatabase();
                 collection = mongoDatabase.getCollection("inventory");
 
                 Document inventory = collection.find(new Document("_id", inventoryId)).first();

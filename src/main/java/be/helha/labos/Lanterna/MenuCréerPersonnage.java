@@ -1,6 +1,5 @@
 package be.helha.labos.Lanterna;
 
-import be.helha.labos.DB.User_DAO;
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.Character.Archer;
@@ -24,17 +23,15 @@ import java.util.List;
 
 public class MenuCréerPersonnage {
 
-    public void afficherCréationPersonnage(String pseudo) {
+    public void afficherCréationPersonnage() {
 
-
-        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
-        MongoDatabase mongoDatabase = mongoFactory.createDatabase();
+        Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
+        MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
 
         /**
          *
          */
         DAO_NOSQL dao = new DAO_NOSQL();
-        User_DAO userDao = new User_DAO("mysql");
 
         /**
          * Appel de toutes les collections de la DB
@@ -69,26 +66,25 @@ public class MenuCréerPersonnage {
              * Méthode pour créer un perso de type Archer
              */
             panel.addComponent(new Button("Archer", () -> {
-                Archer archerTest = new Archer("archerTest");
-                dao.ajouterPersonnagePourUser(pseudo,archerTest);
+                Archer archerTest = new Archer("archerTest", 100, 20, 0.30, 0.80);
+                Charactercollection.insertOne(archerTest);
             }));
 
             panel.addComponent(new Button("Knight", () -> {
-                Knight KnightTest = new Knight("KnightTest");
-                dao.ajouterPersonnagePourUser(pseudo,KnightTest);
+                Knight KnightTest = new Knight("KnightTest", 150, 35, 0.20, 0.65);
+                Charactercollection.insertOne(KnightTest);
             }));
 
             panel.addComponent(new Button("Orc", () -> {
-                Orc OrcTest = new Orc("OrcTest");
-                dao.ajouterPersonnagePourUser(pseudo,OrcTest);
+                Orc OrcTest = new Orc("OrcTest", 250, 50, 0.10, 0.50);
+                Charactercollection.insertOne(OrcTest);
             }));
 
             /**
              * Supprimer un perso
              */
             panel.addComponent(new Button("Supprimer un personnage", () -> {
-                int idUser = userDao.getUserByPseudo(pseudo).getId();
-                List<CharacterType> characters = dao.readAllCharactersByUserId(idUser);
+                List<CharacterType> characters = dao.readAllCharacters(mongoDatabase);
 
                 if (characters.isEmpty()) {
                     MessageDialog.showMessageDialog(textGUI, "Suppression", "Aucun personnage disponible.");
@@ -133,10 +129,7 @@ public class MenuCréerPersonnage {
              * Méthode d'affichages des persos
              */
             panel.addComponent(new Button("Voir mes personnages", () -> {
-
-                int idUser = userDao.getUserByPseudo(pseudo).getId();
-                List<CharacterType> characters = dao.readAllCharactersByUserId(idUser);
-
+                List<CharacterType> characters = dao.readAllCharacters(mongoDatabase); // récupère les persos
                 if (characters.isEmpty()) {
                     MessageDialog.showMessageDialog(textGUI, "Personnages", "Aucun personnage trouvé.");
                 } else {
@@ -144,8 +137,8 @@ public class MenuCréerPersonnage {
                     // Boucle pour récupérer les champs des persos. A Voir...
                     for (CharacterType character : characters) {
                         builder.append("- ").append(character.getName())
-                                .append(" | Type: ").append(character.getTitle())
-                                .append(" | Argent: ").append(character.getMoney())
+                                .append(" Type: ").append(character.getId())
+                                .append(" Type: ").append(character.getTitle())
                                 .append(" | HP: ").append(character.getHealth())
                                 .append(" | DMG: ").append(character.getDamage())
                                 .append("\n");

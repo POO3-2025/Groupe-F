@@ -1,3 +1,4 @@
+
 package be.helha.labos.Lanterna;
 
 import be.helha.labos.Authentification.Authen;
@@ -16,10 +17,10 @@ import java.io.IOException;
 
 public class Inscription {
 
-   public void Lancer () {
-       Authen authen = new Authen();
-       User_DAO dao = new User_DAO("mysql");
-       DAO_NOSQL dao_nosql = new DAO_NOSQL();
+    public void Lancer () {
+        Authen authen = new Authen();
+        User_DAO dao = new User_DAO("mysql");
+        DAO_NOSQL dao_nosql = new DAO_NOSQL();
 
         try {
             // Utilisation de DefaultTerminalFactory pour créer un terminal Swing

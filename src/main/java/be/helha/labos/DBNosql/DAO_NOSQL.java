@@ -1,3 +1,4 @@
+
 package be.helha.labos.DBNosql;
 
 import be.helha.labos.DB.User_DAO;
@@ -50,13 +51,13 @@ public class DAO_NOSQL {
      * @return L'instance de la connexion à la base de données.
      */
     public void readAllCollections (MongoDatabase database){
-            for (String collectionName : database.listCollectionNames()) {
-                MongoCollection<Document> collection = database.getCollection(collectionName);
-                System.out.println("\nLecture de la collection " + collectionName + " : ");
-                for (Document doc : collection.find()) {
-                    System.out.println(doc.toJson());
-                }
+        for (String collectionName : database.listCollectionNames()) {
+            MongoCollection<Document> collection = database.getCollection(collectionName);
+            System.out.println("\nLecture de la collection " + collectionName + " : ");
+            for (Document doc : collection.find()) {
+                System.out.println(doc.toJson());
             }
+        }
     }
 
     /**
@@ -120,9 +121,9 @@ public class DAO_NOSQL {
      * @param update        Le document de mise à jour.
      */
     public static void updateDocument (MongoDatabase database, String collectionName, Document filter, Document
-        update){
-            MongoCollection<Document> collection = database.getCollection(collectionName);
-            collection.updateOne(filter, update);
-            System.out.println("Mise à jour effectuée dans la collection " + collectionName + " : ");
-        }
+            update){
+        MongoCollection<Document> collection = database.getCollection(collectionName);
+        collection.updateOne(filter, update);
+        System.out.println("Mise à jour effectuée dans la collection " + collectionName + " : ");
+    }
 }
