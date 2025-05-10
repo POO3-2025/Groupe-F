@@ -11,7 +11,7 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import static be.helha.labos.DBNosql.DAO_NOSQL.updateDocument;
-import static be.helha.labos.collection.Inventaire.putItemsInInventory;
+import static be.helha.labos.collection.InventaireFactory.*;
 import static be.helha.labos.collection.chests.putItemsInChest;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;

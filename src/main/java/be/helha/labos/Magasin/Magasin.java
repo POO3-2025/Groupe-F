@@ -1,6 +1,7 @@
 package be.helha.labos.Magasin;
 
 import be.helha.labos.collection.Inventaire;
+import static be.helha.labos.collection.InventaireFactory.*;
 import be.helha.labos.collection.Item.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -35,8 +36,11 @@ public class Magasin {
     public void acheterObjet(ObjectId itemId, Inventaire inventaire) {
         Document item = itemsCollection.find(new Document("_id", itemId)).first();
         if (item != null) {
+
+
+
             // Ajouter l'objet à l'inventaire de l'utilisateur
-            inventaire.putItemsInInventory(inventaire.getId(), itemId, false);
+            putItemsInInventory(inventaire.getId(), itemId, false);
 
             // Supprimer l'objet du magasin
             itemsCollection.deleteOne(new Document("_id", itemId));
@@ -54,8 +58,10 @@ public class Magasin {
             System.out.println("L'objet à vendre n'existe pas dans le magasin.");
             return;
         }
+
+
         // Retirer l'objet de l'inventaire
-        inventaire.putItemsInInventory(inventaire.getId(), itemId, true);
+        putItemsInInventory(inventaire.getId(), itemId, true);
 
         // Ajouter l'objet au magasin
         itemsCollection.insertOne(item);

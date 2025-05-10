@@ -11,10 +11,12 @@ import be.helha.labos.collection.User;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import org.bson.types.ObjectId;
 
 import java.sql.Connection;
 import java.util.List;
 
+import static be.helha.labos.collection.InventaireFactory.putItemsInInventory;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
@@ -68,10 +70,8 @@ public class main {
 
 
 
-        Archer archer = new Archer("archerX");
-
-        daoNosql.ajouterPersonnagePourUser(nouvelUser.getPseudo(),archer);
-
+            CharacterType archer = CharactereFactory.createCharacter("archer", "archerX");
+            daoNosql.ajouterPersonnagePourUser(nouvelUser.getPseudo(), archer);
 
             Sword sword = new Sword();
             Sword fireSword = new Sword(Sword.SwordMaterial.FIRE);
@@ -92,8 +92,9 @@ public class main {
             //Itemcollection.insertOne(shield);
             //Itemcollection.insertOne(potion);
 
-            /*putItemsInInventory(new ObjectId("67c4646cc5452e653988b340"),
-                    new ObjectId("67d048cb69f5966a18dcef48") , false);*/
+
+
+            putItemsInInventory((archer.getInventaire()), bow.getId(), false);
 
             /*putItemsInChest(new ObjectId("67c4687a6085201f7eca9d02"),
                     new ObjectId("67d048cb69f5966a18dcef4a") , true);*/
