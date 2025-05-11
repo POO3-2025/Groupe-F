@@ -6,12 +6,9 @@ import be.helha.labos.DB.*;
 
 import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.Character.*;
-import be.helha.labos.collection.Item.*;
 import be.helha.labos.collection.User;
-import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
 
 import java.util.List;
 

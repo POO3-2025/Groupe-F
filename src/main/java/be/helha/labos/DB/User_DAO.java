@@ -84,7 +84,7 @@ public class User_DAO{
      * @return true si l'utilisateur a été ajouté avec succès, false sinon.
      */
     public boolean ajouterUser(User user) {
-        String sql = "INSERT INTO User (Pseudo, Password, Role, Actif) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO users (Pseudo, Password, Role, Actif) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             pstmt.setString(1, user.getPseudo());
@@ -121,7 +121,7 @@ public class User_DAO{
      */
     public User getUserByPseudo(String pseudo) {
         User user = null;
-        String query = "SELECT DISTINCT * FROM User WHERE Pseudo = ?";
+        String query = "SELECT DISTINCT * FROM users WHERE Pseudo = ?";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, pseudo);
             ResultSet rs = stmt.executeQuery();
@@ -148,7 +148,7 @@ public class User_DAO{
      */
     public User getUserById(int id) {
         User user = null;
-        String query = "SELECT DISTINCT * FROM User WHERE ID = ?";
+        String query = "SELECT DISTINCT * FROM users WHERE ID = ?";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -173,7 +173,7 @@ public class User_DAO{
      */
     public List <User> getAllUser(){
         List<User> users = new ArrayList<>();
-        String query = "SELECT DISTINCT * FROM User";
+        String query = "SELECT DISTINCT * FROM users";
         try(PreparedStatement stmt = conn.prepareStatement(query)){
             ResultSet rs = stmt.executeQuery();
             if(rs.next()) {
@@ -198,7 +198,7 @@ public class User_DAO{
      * @return true si l'utilisateur a été identifié sinon false
      */
     public boolean verifierConnexion(String pseudo, String password) {
-        String sql = "SELECT Password FROM User WHERE Pseudo = ?";
+        String sql = "SELECT Password FROM users WHERE Pseudo = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, pseudo);
             ResultSet rs = stmt.executeQuery();
@@ -216,7 +216,7 @@ public class User_DAO{
      * Méthode pour remettre la table User à 0
      */
     public void supprimerTableUser(){
-        String sql = "TRUNCATE TABLE  User";
+        String sql = "TRUNCATE TABLE  users";
         try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 
             System.out.println("Table 'User' supprimée.");

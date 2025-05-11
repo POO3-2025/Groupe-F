@@ -2,7 +2,6 @@
 package be.helha.labos.Lanterna;
 
 import be.helha.labos.Authentification.Authen;
-import be.helha.labos.DB.Affichage;
 import be.helha.labos.DB.User_DAO;
 import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.User;

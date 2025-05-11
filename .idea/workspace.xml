@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbe35a1e-4d15-4a05-9805-559abf65640b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/JwtFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/fileHashes/fileHashes.bin" afterDir="false" />
@@ -14,11 +14,22 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/Authen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/Authen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/CustomUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/CustomUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/DB/User_DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/DB/User_DAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Inscription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Inscription.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Spring/jeuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Spring/jeuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Spring/jeuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Spring/jeuService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main_Characters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main_Characters.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestDAO_NOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestDAO_NOSQL.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +44,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -51,12 +63,12 @@
     &quot;assignee&quot;: &quot;LA237823-Santimaria&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/POO3-2025/Groupe-F.git",
-    "accountId": "bc5b9c12-9a5a-4383-8d16-0a62bca2a8b6"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/POO3-2025/Groupe-F.git&quot;,
+    &quot;accountId&quot;: &quot;bc5b9c12-9a5a-4383-8d16-0a62bca2a8b6&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 1
@@ -68,21 +80,27 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
     "Gradle.Build Groupe-F.executor": "Run",
     "Gradle.Groupe-F [:be.helha.labos.Lanterna.Lancer.main()].executor": "Run",
     "Gradle.Groupe-F [:be.helha.labos.Magasin.TestMagasin.main()].executor": "Run",
     "Gradle.Groupe-F [:be.helha.labos.main.main.main()].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.ServerAuthApplication.executor": "Run",
     "Spring Boot.SpringApiJeuApplication.executor": "Run",
     "com.codeium.enabled": "true",
     "git-widget-placeholder": "feature/Authentification",
-    "last_opened_file_path": "C:/Users/santi/OneDrive/Bureau/testclone/Groupe-F",
+    "last_opened_file_path": "C:/Users/akina/Desktop/Documents cours/POO 3/Labos/Groupe-F/Groupe-F/src/main/java/be/helha/labos/Authentification",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -91,6 +109,14 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\akina\Desktop\Documents cours\POO 3\Labos\Groupe-F\Groupe-F\src\main\java\be\helha\labos\Authentification" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="be.helha.labos.Authentification" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="SpringApiJeuApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="test_game_1.main" />
@@ -118,7 +144,8 @@
       <workItem from="1746368817994" duration="212000" />
       <workItem from="1746480350171" duration="2678000" />
       <workItem from="1746618005930" duration="2316000" />
-      <workItem from="1746899414311" duration="1888000" />
+      <workItem from="1746899414311" duration="10963000" />
+      <workItem from="1746968118707" duration="5349000" />
     </task>
     <servers />
   </component>

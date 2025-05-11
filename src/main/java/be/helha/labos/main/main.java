@@ -8,12 +8,9 @@ import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.Character.*;
 import be.helha.labos.collection.Item.*;
 import be.helha.labos.collection.User;
-import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.types.ObjectId;
 
-import java.sql.Connection;
 import java.util.List;
 
 
@@ -52,26 +49,28 @@ public class main {
             System.out.println("Utilisateur connexion échoué !");
         }*/
 
-        User nouvelUser = new User("Danny", "Danny","USER");
+        User nouvelUser = new User("Bill", "bill","USER");
 
-        boolean success = daoUser.ajouterUser(nouvelUser);
+        /*boolean success = daoUser.ajouterUser(nouvelUser);
         if (success) {
             System.out.println("Utilisateur ajouté !");
         } else {
             System.out.println("Erreur lors de l'ajout.");
-        }
+        }*/
 
-        /*if(dao.GetUserById(nouvelUser.getId()) != null){
-            System.out.println("User récupéré ,  Id :" + nouvelUser.getId());
+        if(daoUser.getUserByPseudo(nouvelUser.getPseudo()) != null){
+            System.out.println("User récupéré ,  pseudo :" + nouvelUser.getPseudo());
         }
         else {
             System.out.println("Erreur lors de la récupération de l'utilisateur.");
-        }*/
+        }
+
+        daoUser.getAllUser();
 
 
 
-            Archer archer = new Archer("archer");
-            daoNosql.ajouterPersonnagePourUser(nouvelUser.getPseudo(), archer);
+            //Archer archer = new Archer("archer");
+            //daoNosql.ajouterPersonnagePourUser(nouvelUser.getPseudo(), archer);
 
             Sword sword = new Sword();
             Sword fireSword = new Sword(Sword.SwordMaterial.FIRE);
