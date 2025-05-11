@@ -1,16 +1,7 @@
-import be.helha.labos.DB.Connexion_DB;
-import be.helha.labos.DB.User_DAO;
-import be.helha.labos.collection.User;
 import be.helha.labos.DBNosql.*;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-
-import java.sql.Connection;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class TestDAO_NOSQL {

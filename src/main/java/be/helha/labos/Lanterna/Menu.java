@@ -1,13 +1,9 @@
 package be.helha.labos.Lanterna;
 
-import be.helha.labos.Authentification.Authen;
 import be.helha.labos.DB.User_DAO;
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.Character.CharacterType;
-import be.helha.labos.collection.Inventaire;
-import be.helha.labos.collection.Item.Item;
-import be.helha.labos.collection.User;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
@@ -15,9 +11,7 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
 
 import java.io.IOException;
 import java.util.List;

@@ -1,8 +1,6 @@
 package be.helha.labos.collection;
 
 import jakarta.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "users") // nom de la table MySQL

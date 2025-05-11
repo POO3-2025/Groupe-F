@@ -1,7 +1,7 @@
 package be.helha.labos.Authentification;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import be.helha.labos.collection.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
