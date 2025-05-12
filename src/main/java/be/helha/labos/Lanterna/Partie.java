@@ -17,9 +17,16 @@ import org.bson.Document;
 
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * Classe Partie qui gère l'affichage de l'écran de jeu principal.
+ * Elle utilise la bibliothèque Lanterna pour créer une interface graphique dans le terminal.
+ */
 public class Partie {
 
+    /**
+     * Méthode qui affiche l'écran de jeu principal.
+     * @param personnage Le personnage du joueur.
+     */
     public void AfficherPartie(CharacterType personnage) {
 
         Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");

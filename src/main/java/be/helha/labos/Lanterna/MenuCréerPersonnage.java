@@ -21,9 +21,15 @@ import org.bson.Document;
 
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * Classe MenuCréerPersonnage qui gère l'affichage du menu de création de personnage.
+ * Elle utilise la bibliothèque Lanterna pour créer une interface graphique dans le terminal.
+ */
 public class MenuCréerPersonnage {
-
+    /**
+     * Méthode qui affiche le menu de création de personnage.
+     * @param pseudo Le pseudo de l'utilisateur connecté.
+     */
     public void afficherCréationPersonnage(String pseudo) {
 
 

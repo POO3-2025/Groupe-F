@@ -15,9 +15,16 @@ import com.mongodb.client.MongoDatabase;
 
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * Classe Menu qui gère l'affichage du menu principal du jeu.
+ * Elle utilise la bibliothèque Lanterna pour créer une interface graphique dans le terminal.
+ */
 public class Menu {
-
+    /**
+     * Méthode qui affiche le menu principal du jeu.
+     * @param pseudo Le pseudo de l'utilisateur connecté.
+     * @throws IOException En cas d'erreur d'entrée/sortie.
+     */
     public void Affichage(String pseudo) throws IOException {
         MenuCréerPersonnage menuCréerPersonnage = new MenuCréerPersonnage();
 

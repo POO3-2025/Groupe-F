@@ -8,6 +8,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "be.helha.labos.Authentification")
 @EntityScan(basePackages = "be.helha.labos.collection")
+/**
+ * Classe principale pour démarrer l'application de serveur d'authentification.
+ * Elle utilise Spring Boot pour configurer et exécuter l'application.
+ */
 public class ServerAuthApplication {
 
     public static void main(String[] args) {

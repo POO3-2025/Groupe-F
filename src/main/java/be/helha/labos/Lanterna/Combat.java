@@ -13,6 +13,10 @@ import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Classe Combat qui gère l'affichage du combat entre le joueur et un bot ou entre deux joueurs.
+ * Elle utilise la bibliothèque Lanterna pour créer une interface graphique dans le terminal.
+ */
 public class Combat {
 
     /**

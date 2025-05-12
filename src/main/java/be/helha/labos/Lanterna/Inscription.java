@@ -13,9 +13,14 @@ import com.googlecode.lanterna.terminal.*;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
 
 import java.io.IOException;
-
+/**
+ * Classe Inscription qui gère l'affichage de l'écran d'inscription et de connexion.
+ * Elle utilise la bibliothèque Lanterna pour créer une interface graphique dans le terminal.
+ */
 public class Inscription {
-
+    /**
+     * Méthode qui permet à l'utilisateur de s'inscrire ou de se connecter.
+     */
     public void Lancer () {
         Authen authen = new Authen();
         User_DAO dao = new User_DAO("mysql");

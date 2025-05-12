@@ -16,18 +16,37 @@ import org.bson.types.ObjectId;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Classe représentant une boutique dans le jeu.
+ * Elle permet d'afficher les objets disponibles à la vente et de gérer les achats.
+ */
 public class Boutique {
+    /**
+     * Constructeur de la classe Boutique.
+     */
     private final MongoCollection<Document> collection;
     private double argent;
     private final MongoDatabase mongoDatabase;
 
+    /**
+     * Constructeur de la classe Boutique.
+     * Il initialise la collection d'objets et la base de données.
+     *
+     * @param collection La collection d'objets disponibles à la vente.
+     */
     public Boutique(MongoCollection<Document> collection) {
         this.collection = collection;
         Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
         this.mongoDatabase = connexionDbNosql.createDatabase();
     }
 
+    /**
+     * Méthode pour afficher la boutique et gérer les achats.
+     *
+     * @param gui        L'interface graphique de la boutique.
+     * @param personnage Le personnage qui interagit avec la boutique.
+     * @return L'argent restant après les achats.
+     */
     public double afficherBoutique(WindowBasedTextGUI gui, CharacterType personnage) {
 
         this.argent = personnage.getMoney();

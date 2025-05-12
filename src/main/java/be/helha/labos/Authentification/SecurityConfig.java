@@ -20,10 +20,21 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true)
+/**
+ * Configuration de sécurité pour l'application.
+ * Elle configure les filtres de sécurité, l'authentification et la gestion des sessions.
+ */
 public class SecurityConfig  {
     @Autowired
     private JwtUtils jwtUtils;
 
+    /**
+     * Méthode pour configurer le filtre de sécurité.
+     *
+     * @param http La configuration de sécurité HTTP
+     * @return La chaîne de filtres de sécurité
+     * @throws Exception Si une erreur se produit lors de la configuration
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -44,10 +55,18 @@ public class SecurityConfig  {
     }
 
     @Autowired
+
     private CustomUserDetailsService customUserDetailsService;
 
 
     @Bean
+    /**
+     * Méthode pour configurer le gestionnaire d'authentification.
+     *
+     * @param http La configuration de sécurité HTTP
+     * @return Le gestionnaire d'authentification
+     * @throws Exception Si une erreur se produit lors de la configuration
+     */
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder =
                 http.getSharedObject(AuthenticationManagerBuilder.class);
@@ -60,6 +79,11 @@ public class SecurityConfig  {
     }
 
     @Bean
+    /**
+     * Méthode pour configurer le mot de passe encodeur.
+     *
+     * @return Un encodeur de mot de passe
+     */
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }

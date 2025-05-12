@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+/**
+ * Classe de service pour gérer les opérations liées aux utilisateurs dans le jeu.
+ */
 public class jeuService {
 
     User_DAO dao = new User_DAO("mysql");
@@ -20,6 +23,12 @@ public class jeuService {
         return dao.getUserById(id);
     }
 
+    /**
+     * Méthode pour créer un nouvel utilisateur.
+     *
+     * @param user l'utilisateur à créer
+     * @return l'utilisateur créé
+     */
     public User saveUser(User user) {
         if(dao.getUserById(user.getId()) == null) {
             return user = null;
@@ -30,6 +39,11 @@ public class jeuService {
 
     }
 
+    /**
+     * Méthode pour supprimer un utilisateur par son ID.
+     *
+     * @param id l'ID de l'utilisateur à supprimer
+     */
     public void deleteUser(ObjectId id) {
     }
 
