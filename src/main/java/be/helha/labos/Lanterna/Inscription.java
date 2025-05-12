@@ -1,7 +1,7 @@
+
 package be.helha.labos.Lanterna;
 
 import be.helha.labos.Authentification.Authen;
-import be.helha.labos.DB.Affichage;
 import be.helha.labos.DB.User_DAO;
 import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.User;
@@ -13,13 +13,18 @@ import com.googlecode.lanterna.terminal.*;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
 
 import java.io.IOException;
-
+/**
+ * Classe Inscription qui gère l'affichage de l'écran d'inscription et de connexion.
+ * Elle utilise la bibliothèque Lanterna pour créer une interface graphique dans le terminal.
+ */
 public class Inscription {
-
-   public void Lancer () {
-       Authen authen = new Authen();
-       User_DAO dao = new User_DAO("mysql");
-       DAO_NOSQL dao_nosql = new DAO_NOSQL();
+    /**
+     * Méthode qui permet à l'utilisateur de s'inscrire ou de se connecter.
+     */
+    public void Lancer () {
+        Authen authen = new Authen();
+        User_DAO dao = new User_DAO("mysql");
+        DAO_NOSQL dao_nosql = new DAO_NOSQL();
 
         try {
             // Utilisation de DefaultTerminalFactory pour créer un terminal Swing

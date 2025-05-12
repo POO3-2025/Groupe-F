@@ -1,3 +1,4 @@
+
 package be.helha.labos.DBNosql;
 
 import be.helha.labos.DB.User_DAO;
@@ -38,9 +39,8 @@ public class DAO_NOSQL {
      * Il initialise la connexion à la base de données et les collections nécessaires.
      */
     public DAO_NOSQL() {
-        connexionDbNosql = Connexion_DB_Nosql.getInstance();
-        mongoDatabase = connexionDbNosql.getDatabase();
-
+        connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
+        mongoDatabase = connexionDbNosql.createDatabase();
         Itemcollection = mongoDatabase.getCollection("items", Item.class);
         Charactercollection = mongoDatabase.getCollection("characters", CharacterType.class);
     }
@@ -51,13 +51,13 @@ public class DAO_NOSQL {
      * @return L'instance de la connexion à la base de données.
      */
     public void readAllCollections (MongoDatabase database){
-            for (String collectionName : database.listCollectionNames()) {
-                MongoCollection<Document> collection = database.getCollection(collectionName);
-                System.out.println("\nLecture de la collection " + collectionName + " : ");
-                for (Document doc : collection.find()) {
-                    System.out.println(doc.toJson());
-                }
+        for (String collectionName : database.listCollectionNames()) {
+            MongoCollection<Document> collection = database.getCollection(collectionName);
+            System.out.println("\nLecture de la collection " + collectionName + " : ");
+            for (Document doc : collection.find()) {
+                System.out.println(doc.toJson());
             }
+        }
     }
 
     /**
@@ -67,7 +67,7 @@ public class DAO_NOSQL {
      * @param perso  Le personnage à ajouter.
      */
     public void ajouterPersonnagePourUser(String pseudo, CharacterType perso) {
-        User user = userDao.GetUserByPseudo(pseudo);
+        User user = userDao.getUserByPseudo(pseudo);
         if (user != null) {
             perso.setIdUser(user.getId());
             Charactercollection.insertOne(perso);
@@ -87,32 +87,26 @@ public class DAO_NOSQL {
 
     /**
      * liste tous les personnages de la base de données.
-     * @param database La base de données MongoDB.
      * @return Une liste de tous les personnages.
      */
-    public List<CharacterType> readAllCharacters(MongoDatabase database) {
-        MongoCollection<CharacterType> collection = database.getCollection("characters", CharacterType.class);
+    public List<CharacterType> readAllCharacters() {
         List<CharacterType> characters = new ArrayList<>();
-
-        for (CharacterType character : collection.find()) {
+        for (CharacterType character : Charactercollection.find()) {
             characters.add(character);
         }
-
         return characters;
     }
 
     /**
      * Méthode pour récupérer tous les personnages d'un utilisateur par son identifiant.
      *
-     * @param database La base de données MongoDB.
      * @param idUser   L'identifiant de l'utilisateur.
      * @return Une liste de personnages associés à l'utilisateur.
      */
-    public List<CharacterType> readAllCharactersByUserId(MongoDatabase database, int idUser) {
-        MongoCollection<CharacterType> collection = database.getCollection("characters", CharacterType.class);
+    public List<CharacterType> readAllCharactersByUserId(int idUser) {
         List<CharacterType> characters = new ArrayList<>();
 
-        for (CharacterType character : collection.find(Filters.eq("idUser", idUser))) {
+        for (CharacterType character : Charactercollection.find(Filters.eq("idUser", idUser))) {
             characters.add(character);
         }
         return characters;
@@ -127,9 +121,9 @@ public class DAO_NOSQL {
      * @param update        Le document de mise à jour.
      */
     public static void updateDocument (MongoDatabase database, String collectionName, Document filter, Document
-        update){
-            MongoCollection<Document> collection = database.getCollection(collectionName);
-            collection.updateOne(filter, update);
-            System.out.println("Mise à jour effectuée dans la collection " + collectionName + " : ");
-        }
+            update){
+        MongoCollection<Document> collection = database.getCollection(collectionName);
+        collection.updateOne(filter, update);
+        System.out.println("Mise à jour effectuée dans la collection " + collectionName + " : ");
     }
+}

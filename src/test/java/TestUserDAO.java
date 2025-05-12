@@ -51,7 +51,7 @@ public class TestUserDAO {
         User user1 = new User("TestDeCeUser", "PasswordSecret", "TestRole");
         userDao.ajouterUser(user1);
         assertTrue(userDao.verifierConnexion(user1.getPseudo(), user1.getPassword()));
-        assertEquals(user1.getPseudo(),userDao.GetUserByPseudo(user1.getPseudo()).getPseudo());
+        assertEquals(user1.getPseudo(),userDao.getUserByPseudo(user1.getPseudo()).getPseudo());
     }
     @Test
     @DisplayName("Récupérer le user par son id")
@@ -60,7 +60,7 @@ public class TestUserDAO {
         User user1 = new User("TestDeCeUser", "PasswordSecret", "TestRole");
         userDao.ajouterUser(user1);
         assertTrue(userDao.verifierConnexion(user1.getPseudo(), user1.getPassword()));
-        assertEquals(1, userDao.GetUserById(user1.getId()).getId());
+        assertEquals(1, userDao.getUserById(user1.getId()).getId());
     }
 
 }

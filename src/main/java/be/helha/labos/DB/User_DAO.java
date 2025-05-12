@@ -1,3 +1,4 @@
+
 package be.helha.labos.DB;
 
 import be.helha.labos.collection.User;
@@ -5,11 +6,13 @@ import be.helha.labos.collection.User;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe de gestion des utilisateurs dans la base de données avec DAO (Data Access Object).
  */
-public class User_DAO {
+public class User_DAO{
 
     // Récupère l'instance de connexion
     private final Connection conn;
@@ -21,7 +24,8 @@ public class User_DAO {
      * @param dbKey pour connaitre si on se connecte à la DB de prod ou bien de test
      */
     public User_DAO(String dbKey) {
-        this.conn = Connexion_DB.getInstance(dbKey).getConnection();
+        Connexion_DB factory = new Connexion_DB(dbKey);
+        conn = factory.createConnection();
         creerTableUser();
     }
 
@@ -57,11 +61,11 @@ public class User_DAO {
      */
     private void creerTableUser() {
         String createTableQuery = """
-            CREATE TABLE IF NOT EXISTS User (
+            CREATE TABLE IF NOT EXISTS users (
                 ID INT AUTO_INCREMENT PRIMARY KEY,
                 Pseudo VARCHAR(60),
                 Password VARCHAR(60),
-                ROLE VARCHAR(60),
+                Role VARCHAR(60),
                 Actif BOOL 
             );
         """;
@@ -80,7 +84,7 @@ public class User_DAO {
      * @return true si l'utilisateur a été ajouté avec succès, false sinon.
      */
     public boolean ajouterUser(User user) {
-        String sql = "INSERT INTO User (Pseudo, Password, Role, Actif) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO users (Pseudo, Password, Role, Actif) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             pstmt.setString(1, user.getPseudo());
@@ -90,7 +94,7 @@ public class User_DAO {
             pstmt.setString(3, user.getRôle());
             pstmt.setBoolean(4, user.isActif());
 
-            if(GetUserByPseudo(user.getPseudo()) == null) {
+            if(getUserByPseudo(user.getPseudo()) == null) {
                 pstmt.executeUpdate();
                 // Récupération de l'ID généré
                 ResultSet generatedKeys = pstmt.getGeneratedKeys();
@@ -115,9 +119,9 @@ public class User_DAO {
      *
      * @return user si le user est trouvé sinon renvoie une exception.
      */
-    public User GetUserByPseudo(String pseudo) {
+    public User getUserByPseudo(String pseudo) {
         User user = null;
-        String query = "SELECT DISTINCT * FROM User WHERE Pseudo = ?";
+        String query = "SELECT DISTINCT * FROM users WHERE Pseudo = ?";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, pseudo);
             ResultSet rs = stmt.executeQuery();
@@ -127,7 +131,7 @@ public class User_DAO {
                         rs.getInt("ID"),
                         rs.getString("Pseudo"),              // Pseudo
                         rs.getString("Password"),            // Mot de passe
-                        rs.getString("ROLE")
+                        rs.getString("Role")
                 );
             }
         } catch (SQLException e) {
@@ -142,9 +146,9 @@ public class User_DAO {
      * @param id L'utilisateur à mettre à jour.
      * @return true si l'utilisateur a été mis à jour avec succès, false sinon.
      */
-    public User GetUserById(int id) {
+    public User getUserById(int id) {
         User user = null;
-        String query = "SELECT DISTINCT * FROM User WHERE ID = ?";
+        String query = "SELECT DISTINCT * FROM users WHERE ID = ?";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -154,7 +158,7 @@ public class User_DAO {
                         rs.getInt("ID"),
                         rs.getString("Pseudo"),              // Pseudo
                         rs.getString("Password"),            // Mot de passe
-                        rs.getString("ROLE")
+                        rs.getString("Role")
                 );
             }
         } catch (SQLException e) {
@@ -164,13 +168,37 @@ public class User_DAO {
     }
 
     /**
+     * Méthodes qui renvoie une liste de tous les users
+     * @return
+     */
+    public List<User> getAllUser() {
+        List<User> users = new ArrayList<>();
+        String query = "SELECT DISTINCT * FROM users";
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {  // ← Ici, on boucle sur chaque ligne
+                User user = new User(
+                        rs.getInt("ID"),
+                        rs.getString("Pseudo"),
+                        rs.getString("Password"),
+                        rs.getString("Role")
+                );
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    /**
      * Met à jour les informations d'un utilisateur dans la base de données.
      *
      *
      * @return true si l'utilisateur a été identifié sinon false
      */
     public boolean verifierConnexion(String pseudo, String password) {
-        String sql = "SELECT Password FROM User WHERE Pseudo = ?";
+        String sql = "SELECT Password FROM users WHERE Pseudo = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, pseudo);
             ResultSet rs = stmt.executeQuery();
@@ -188,7 +216,7 @@ public class User_DAO {
      * Méthode pour remettre la table User à 0
      */
     public void supprimerTableUser(){
-        String sql = "TRUNCATE TABLE  User";
+        String sql = "TRUNCATE TABLE  users";
         try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 
             System.out.println("Table 'User' supprimée.");

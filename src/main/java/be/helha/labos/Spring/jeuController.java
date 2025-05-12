@@ -1,42 +1,69 @@
 package be.helha.labos.Spring;
 
-import org.bson.types.ObjectId;
+import be.helha.labos.collection.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import be.helha.labos.collection.*;
+
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/jeu")
-public class jeuController {
 
+/**
+ * Methode controleur pour gérer les opérations liées aux utilisateurs dans le jeu.
+ */
+public class jeuController {
+    /**
+     * Methode pour gérer les opérations liées aux utilisateurs dans le jeu.
+     */
     private final jeuService jeuService;
 
     @Autowired
+    /**
+     * Constructeur pour initialiser le service de jeu.
+     */
     public jeuController(jeuService jeuService) {
         this.jeuService = jeuService;
     }
 
 
     @GetMapping
+    /**
+     * Methode Get all users.
+     *
+     * @return liste des utilisateurs
+     */
     public List<User> getAlluser() {
         return jeuService.getAllUsers();
     }
 
     @GetMapping("/{Id}")
-    /*public ResponseEntity<User> getUserById(@PathVariable ObjectId Id) {
-        Optional<User> user = jeuService.getUserById(Id);
-        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    /**
+     * Methode qui retourne un utilisateur par son ID.
+     * return @param Id
+     */
+    public ResponseEntity<User> getUserById(@PathVariable int Id) {
+        User user = jeuService.getUserById(Id);
+        if(user == null) {
+            return ResponseEntity.notFound().build();
+        }
+        else
+            return ResponseEntity.ok(user);
     }
 
     @PostMapping
+    /**
+     * Methode qui crée un nouvel utilisateur.
+     *
+     * @param user
+     * @return l'utilisateur créé
+     */
     public User createUser(@RequestBody User user) {
         return jeuService.saveUser(user);
     }
 
-    @PutMapping("/{Id}")
+    /*@PutMapping("/{Id}")
     public ResponseEntity<User> updateUser(@PathVariable ObjectId Id, @RequestBody User userDetails) {
         Optional<User> user = jeuService.getUserById(Id);
         if (user.isPresent()) {
@@ -50,9 +77,9 @@ public class jeuController {
         }
     }*/
 
-    @DeleteMapping("/{Id}")
+    /*@DeleteMapping("/{Id}")
     public ResponseEntity<Void> deleteUser(@PathVariable ObjectId id) {
         jeuService.deleteUser(id);
         return ResponseEntity.noContent().build();
-    }
+    }*/
 }

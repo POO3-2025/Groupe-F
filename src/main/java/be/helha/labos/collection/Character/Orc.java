@@ -32,6 +32,7 @@ public class Orc extends CharacterType
         this.precision = 0.5;
         this.inventaire = new Inventaire();
         inventaire.insererDansLaBase();
+
     }
 
     /**

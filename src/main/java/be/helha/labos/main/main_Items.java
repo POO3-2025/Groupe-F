@@ -11,7 +11,6 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import static be.helha.labos.DBNosql.DAO_NOSQL.updateDocument;
-import static be.helha.labos.collection.Inventaire.putItemsInInventory;
 import static be.helha.labos.collection.chests.putItemsInChest;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
@@ -19,13 +18,13 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 public class main_Items {
     public static void main(String[] args)
     {
-        Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
-        MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
+        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
+        MongoDatabase database = mongoFactory.createDatabase();
         DAO_NOSQL daoNosql = new DAO_NOSQL();
         try {
 
-            MongoCollection <Item>Itemcollection = mongoDatabase.getCollection("items", Item.class);
-            MongoCollection <CharacterType>CharacterTypecollection = mongoDatabase.getCollection("characters", CharacterType.class);
+            MongoCollection <Item>Itemcollection = database.getCollection("items", Item.class);
+            MongoCollection <CharacterType>CharacterTypecollection = database.getCollection("characters", CharacterType.class);
 
 
             Sword sword = new Sword();
@@ -49,20 +48,15 @@ public class main_Items {
 
             chests chests = new chests(new ObjectId());
 
-            putItemsInInventory(new ObjectId(),
-                    new ObjectId() , false);
 
             putItemsInChest(new ObjectId(),
                     new ObjectId() , true);
 
-            daoNosql.readAllCollections(mongoDatabase);
+            daoNosql.readAllCollections(database);
 
         }catch (Exception e){
             e.printStackTrace();
 
         }
-
-        connexionDbNosql.closeConnection();
     }
 }
-

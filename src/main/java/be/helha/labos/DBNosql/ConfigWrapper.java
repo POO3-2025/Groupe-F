@@ -3,36 +3,34 @@ package be.helha.labos.DBNosql;
 import java.util.Map;
 
 /**
- * Classe représentant la configuration des connexions à la base de données.
- * Elle contient une carte DBConfig, où chaque clé est le nom de la connexion.
+ * Classe de configuration pour les connexions à la base de données.
  */
 public class ConfigWrapper {
 
     /**
      * Map contenant les configurations de connexion à la base de données.
-     * La clé est le nom de la connexion et la valeur est un objet DBConfig.
+     * La clé est le nom de la connexion et la valeur est un objet DBConfig contenant les détails de la connexion.
      */
     private Map<String, DBConfig> connections;
-
     /**
-     * Constructeur par défaut.
+     * Constructeur de la classe ConfigWrapper.
+     *
+     * @return  connections Map contenant les configurations de connexion à la base de données.
      */
     public Map<String, DBConfig> getConnections() {
         return connections;
     }
 
     /**
-     * Méthode pour définir les connexions à la base de données.
+     * Méthode pour définir les configurations de connexion à la base de données.
      *
      * @param connections Map contenant les configurations de connexion à la base de données.
      */
     public void setConnections(Map<String, DBConfig> connections) {
         this.connections = connections;
     }
-
     /**
-     * Classe interne représentant la configuration d'une connexion à la base de données.
-     * Elle contient le type de connexion, le type de base de données et les informations d'identification.
+     * Classe interne représentant la configuration de connexion à la base de données.
      */
     public static class DBConfig {
         private String ConnectionType;
@@ -40,51 +38,27 @@ public class ConfigWrapper {
         private Credentials DBCredentials;
 
         // Getters & Setters
-        /**
-         * Méthode pour obtenir le type de connexion.
-         *
-         * @return Le type de connexion.
-         */
+
         public String getConnectionType() {
             return ConnectionType;
         }
-        /**
-         * Méthode pour set le type de connexion.
-         *
-         * @param connectionType Le type de connexion.
-         */
+
         public void setConnectionType(String connectionType) {
             ConnectionType = connectionType;
         }
-        /**
-         * Méthode pour obtenir le type de base de données.
-         *
-         * @return Le type de base de données.
-         */
+
         public String getDBType() {
             return DBType;
         }
-        /**
-         * Méthode pour set le type de base de données.
-         *
-         * @param DBType Le type de base de données.
-         */
+
         public void setDBType(String DBType) {
             this.DBType = DBType;
         }
-        /**
-         * Méthode pour obtenir les informations d'identification de la base de données.
-         *
-         * @return Les informations d'identification de la base de données.
-         */
+
         public Credentials getDBCredentials() {
             return DBCredentials;
         }
-        /**
-         * Méthode pour set les informations d'identification de la base de données.
-         *
-         * @param DBCredentials Les informations d'identification de la base de données.
-         */
+
         public void setDBCredentials(Credentials DBCredentials) {
             this.DBCredentials = DBCredentials;
         }

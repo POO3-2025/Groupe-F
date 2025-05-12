@@ -1,13 +1,9 @@
 package be.helha.labos.Lanterna;
 
-import be.helha.labos.Authentification.Authen;
 import be.helha.labos.DB.User_DAO;
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.Character.CharacterType;
-import be.helha.labos.collection.Inventaire;
-import be.helha.labos.collection.Item.Item;
-import be.helha.labos.collection.User;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
@@ -15,20 +11,25 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
 
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * Classe Menu qui gère l'affichage du menu principal du jeu.
+ * Elle utilise la bibliothèque Lanterna pour créer une interface graphique dans le terminal.
+ */
 public class Menu {
-
+    /**
+     * Méthode qui affiche le menu principal du jeu.
+     * @param pseudo Le pseudo de l'utilisateur connecté.
+     * @throws IOException En cas d'erreur d'entrée/sortie.
+     */
     public void Affichage(String pseudo) throws IOException {
         MenuCréerPersonnage menuCréerPersonnage = new MenuCréerPersonnage();
 
-        Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
-        MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
+        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
+        MongoDatabase mongoDatabase = mongoFactory.createDatabase();
 
         DAO_NOSQL dao = new DAO_NOSQL();
         User_DAO userDao = new User_DAO("mysql");
@@ -64,8 +65,8 @@ public class Menu {
                 Panel jouerPanel = new Panel(new LinearLayout(Direction.VERTICAL));
 
                 jouerPanel.addComponent(new Button("Sélectionner un personnage", () -> {
-                    int idUser = userDao.GetUserByPseudo(pseudo).getId();
-                    List<CharacterType> characters = dao.readAllCharactersByUserId(mongoDatabase,idUser);
+                    int idUser = userDao.getUserByPseudo(pseudo).getId();
+                    List<CharacterType> characters = dao.readAllCharactersByUserId(idUser);
 
                     if (characters.isEmpty()) {
                         MessageDialog.showMessageDialog(textGUI, "Info", "Aucun personnage disponible.");

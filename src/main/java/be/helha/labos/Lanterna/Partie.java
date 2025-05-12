@@ -1,5 +1,6 @@
 package be.helha.labos.Lanterna;
 
+import be.helha.labos.Bot.Bot;
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.Character.CharacterType;
@@ -16,15 +17,23 @@ import org.bson.Document;
 
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * Classe Partie qui gère l'affichage de l'écran de jeu principal.
+ * Elle utilise la bibliothèque Lanterna pour créer une interface graphique dans le terminal.
+ */
 public class Partie {
 
+    /**
+     * Méthode qui affiche l'écran de jeu principal.
+     * @param personnage Le personnage du joueur.
+     */
     public void AfficherPartie(CharacterType personnage) {
 
-        Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
-        MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
+        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
+        MongoDatabase database = mongoFactory.createDatabase();
 
         DAO_NOSQL dao = new DAO_NOSQL();
+        Combat combat = new Combat();
 
         try {
             // Utilisation de DefaultTerminalFactory pour créer un terminal Swing
@@ -46,10 +55,15 @@ public class Partie {
             // Création du contenu de la fenêtre (panel avec un bouton)
             Panel panel = new Panel();
 
+            panel.addComponent(new Button("Jouer en solo", () -> {
+               combat.AfficherCombat(personnage,true);
+            }));
+
+
             panel.addComponent(new Button("Boutique", () -> {
-                MongoCollection<Document> collection = mongoDatabase.getCollection("Magasin");
+                MongoCollection<Document> collection = database.getCollection("Magasin");
                 Boutique boutique = new Boutique(collection);
-                boutique.afficherBoutique(textGUI, personnage); // plus besoin de setMoney()
+                boutique.afficherBoutique(textGUI, personnage);
             }));
 
             panel.addComponent(new Button("Retour", window::close)); // Ferme juste la fenêtre de menu

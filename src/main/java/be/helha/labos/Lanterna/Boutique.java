@@ -1,26 +1,52 @@
 package be.helha.labos.Lanterna;
 
+import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.collection.Character.CharacterType;
+import be.helha.labos.collection.Inventaire;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
 import com.googlecode.lanterna.gui2.table.Table;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe représentant une boutique dans le jeu.
+ * Elle permet d'afficher les objets disponibles à la vente et de gérer les achats.
+ */
 public class Boutique {
-
+    /**
+     * Constructeur de la classe Boutique.
+     */
     private final MongoCollection<Document> collection;
     private double argent;
+    private final MongoDatabase mongoDatabase;
 
+    /**
+     * Constructeur de la classe Boutique.
+     * Il initialise la collection d'objets et la base de données.
+     *
+     * @param collection La collection d'objets disponibles à la vente.
+     */
     public Boutique(MongoCollection<Document> collection) {
-        this.collection = collection; // Injection de la collection MongoDB
+        this.collection = collection;
+        Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
+        this.mongoDatabase = connexionDbNosql.createDatabase();
     }
 
+    /**
+     * Méthode pour afficher la boutique et gérer les achats.
+     *
+     * @param gui        L'interface graphique de la boutique.
+     * @param personnage Le personnage qui interagit avec la boutique.
+     * @return L'argent restant après les achats.
+     */
     public double afficherBoutique(WindowBasedTextGUI gui, CharacterType personnage) {
 
         this.argent = personnage.getMoney();
@@ -69,23 +95,79 @@ public class Boutique {
                 );
 
                 if (confirmation == MessageDialogButton.Yes) {
-                    collection.deleteOne(new Document("_id", objetSelectionne.getObjectId("_id")));
-                    MessageDialog.showMessageDialog(gui, "Achat", "Vous avez acheté : " + objetSelectionne.getString("nom"));
+                    ObjectId objetId = objetSelectionne.getObjectId("_id");
 
-                    // Mise à jour de l'or restant
-                    argent -= prix;
+                    // Récupération du document du personnage pour obtenir l'ID de son inventaire
+                    Document characterDoc = mongoDatabase.getCollection("characters")
+                            .find(new Document("_id", personnage.getId()))
+                            .first();
 
-                    personnage.setMoney(argent);  // mise à jour de l'objet
+                    if (characterDoc != null) {
+                        // Récupération de l'ID de l'inventaire du personnage
+                        Document inventaireDoc = characterDoc.get("inventaire", Document.class);
+                        ObjectId inventaireId = inventaireDoc.getObjectId("_id");
 
-                    personnage.updateMoneyInDB();
+                        // Tentative d'ajout de l'objet dans l'inventaire
+                        if (Inventaire.ajouterObjetDansInventaire(inventaireId, objetId)) {
+                            // Mise à jour du magasin et de l'interface
+                            collection.deleteOne(new Document("_id", objetId));
+                            MessageDialog.showMessageDialog(gui, "Achat", "Vous avez acheté : " + objetSelectionne.getString("nom"));
 
-                    orRestantLabel.setText("Or restant : " + argent + " pièces");
+                            // Mise à jour de l'or
+                            argent -= prix;
+                            personnage.setMoney(argent);
+                            personnage.updateMoneyInDB();
+                            orRestantLabel.setText("Or restant : " + argent + " pièces");
 
-                    // Mise à jour de la table
-                    objetsDisponibles.remove(objetSelectionne);
-                    objetsTable.getTableModel().removeRow(selectedRow);
+                            // Mise à jour de la table
+                            objetsDisponibles.remove(objetSelectionne);
+                            objetsTable.getTableModel().removeRow(selectedRow);
+                        } else {
+                            MessageDialog.showMessageDialog(gui, "Erreur", "Impossible d'ajouter l'objet dans l'inventaire");
+                        }
+                    } else {
+                        MessageDialog.showMessageDialog(gui, "Erreur", "Impossible de trouver le personnage");
+                    }
                 }
             }
+        });
+
+        // Bouton pour afficher l'inventaire du personnage (bouton Vente)
+        Button venteButton = new Button("Vendre", () -> {
+            Document characterDoc = mongoDatabase.getCollection("characters")
+                    .find(new Document("_id", personnage.getId()))
+                    .first();
+
+            if (characterDoc == null) {
+                MessageDialog.showMessageDialog(gui, "Erreur", "Personnage introuvable.");
+                return;
+            }
+
+            Document inventaireDoc = characterDoc.get("inventaire", Document.class);
+            if (inventaireDoc == null) {
+                MessageDialog.showMessageDialog(gui, "Erreur", "Inventaire non trouvé.");
+                return;
+            }
+
+            List<Document> objetsInventaire = inventaireDoc.getList("objets", Document.class, new ArrayList<>());
+
+            BasicWindow inventaireWindow = new BasicWindow("Inventaire de " + personnage.getName());
+            Panel inventairePanel = new Panel(new LinearLayout(Direction.VERTICAL));
+
+            Table<String> inventaireTable = new Table<>("Nom", "Type");
+
+            for (Document item : objetsInventaire) {
+                inventaireTable.getTableModel().addRow(
+                        item.getString("nom"),
+                        item.getString("type")
+                );
+            }
+
+            inventairePanel.addComponent(inventaireTable);
+            inventairePanel.addComponent(new Button("Fermer", inventaireWindow::close));
+
+            inventaireWindow.setComponent(inventairePanel);
+            gui.addWindowAndWait(inventaireWindow);
         });
 
         // Bouton pour retourner au menu précédent

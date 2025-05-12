@@ -8,8 +8,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Classe qui implémente l'interface UserDetails de Spring Security.
+ * Elle représente les détails d'un utilisateur pour l'authentification.
+ */
 public class UserDetailsImpl implements UserDetails {
 
+    /**
+     * Constructeur de la classe UserDetailsImpl.
+     *
+     * @param user l'utilisateur à partir duquel créer les détails
+     */
     private final String pseudo;
     private final String password;
     private final boolean actif;
@@ -22,6 +31,11 @@ public class UserDetailsImpl implements UserDetails {
         this.role = user.getRôle();
     }
 
+    /**
+     * Méthode pour obtenir le pseudo de l'utilisateur.
+     *
+     * @return le pseudo de l'utilisateur
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role)); // Exemple : "ROLE_USER"

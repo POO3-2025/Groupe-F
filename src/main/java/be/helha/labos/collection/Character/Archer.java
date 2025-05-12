@@ -1,4 +1,5 @@
 package be.helha.labos.collection.Character;
+
 import be.helha.labos.collection.Inventaire;
 
 /**

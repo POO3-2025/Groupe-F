@@ -30,6 +30,7 @@ public class Knight extends CharacterType {
         this.precision = 0.7;
         this.inventaire = new Inventaire();
         inventaire.insererDansLaBase();
+
     }
 
     /**

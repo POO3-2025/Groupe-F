@@ -78,8 +78,6 @@ public class Mace extends Weapon {
     /**
      * Constructeur de la classe Mace
      *
-     * @param damage   les dégâts de la masse
-     * @param material le matériau de la masse
      */
     @Override
     protected String getMaterialName() {
