@@ -1,5 +1,7 @@
+
 package be.helha.labos.Magasin;
 
+import be.helha.labos.DBNosql.DAO_NOSQL;
 import com.mongodb.client.MongoDatabase;
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 
@@ -8,8 +10,9 @@ import java.io.IOException;
 public class TestMagasin {
     public static void main(String[] args){
         // Connexion à la base de données
-        Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
-        MongoDatabase database = connexionDbNosql.getDatabase();
+        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
+        MongoDatabase database = mongoFactory.createDatabase();
+        DAO_NOSQL dao = new DAO_NOSQL();
 
         try {
             // Générer des objets pour le magasin
@@ -23,9 +26,6 @@ public class TestMagasin {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            // Fermer la connexion à la base de données
-            connexionDbNosql.closeConnection();
         }
     }
 }

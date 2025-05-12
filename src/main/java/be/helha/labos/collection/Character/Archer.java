@@ -1,35 +1,52 @@
 package be.helha.labos.collection.Character;
+
 import be.helha.labos.collection.Inventaire;
 
+/**
+ * Classe étendue de Charactertype représentant un personnage de type Archer
+ */
 public class Archer extends CharacterType
-        {
-            public Archer(){
+{
+    /**
+     * Constructeur par défaut
+     */
+    public Archer(){
+    }
 
-            }
+    /**
+     * Constructeur de la classe Archer
+     */
+    public Archer(String name)
+    {
+        super();
+        this.name = name;
+        this.title="Archer";
+        this.health = 100;
+        money = 100.00;
+        level = 1;
+        this.damage = 5;
+        this.dodge = 0.5;
+        this.precision = 0.9;
+        this.inventaire = new Inventaire();
+        inventaire.insererDansLaBase();
+    }
 
-            public Archer(String name, int health, int damage, double dodge, double precision)
-            {
-                //default archer
-                super();
-                this.name = name;
-                this.title="Archer";
-                this.health = health;
-                this.damage = damage;
-                this.dodge = dodge;
-                this.precision = precision;
-                this.inventaire = new Inventaire();
-                inventaire.insererDansLaBase();
-            }
-
-            @Override
-            public String toString() 
-            {
-                return "Archer{" +
-                        "name='" + name  +
-                        ", health=" + health +
-                        ", damage=" + damage +
-                        ", dodge=" + dodge +
-                        ", precision=" + precision +
-                        '}';
-            }
-        }
+    /**
+     * Méthode toString pour afficher les informations de l'archer
+     * @return une chaîne de caractères contenant les informations de l'archer
+     */
+    @Override
+    public String toString()
+    {
+        return "Archer{" +
+                "name='" + name + '\'' +
+                ", health=" + health +
+                ", title='" + title + '\'' +
+                ", damage=" + damage +
+                ", money=" + money +
+                ", user=" + idUser +
+                ", dodge=" + dodge +
+                ", precision=" + precision +
+                '}';
+    }
+}

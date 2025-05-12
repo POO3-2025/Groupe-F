@@ -8,20 +8,20 @@ import java.util.Map;
  */
 public class Configuration {
 
-   /**
-    * Type de connexion à utiliser.
-    */
-   public String ConnectionType;
+    /**
+     * Type de connexion à utiliser.
+     */
+    public String ConnectionType;
 
-   /**
-    * Type de base de données.
-    */
-   public String DBType;
+    /**
+     * Type de base de données.
+     */
+    public String DBType;
 
-   /**
-    * Informations d'identification pour la connexion à la base de données.
-    */
-   public Credentials DBCredentials;
+    /**
+     * Informations d'identification pour la connexion à la base de données.
+     */
+    public Credentials DBCredentials;
 
 
     public String getConnectionType() {

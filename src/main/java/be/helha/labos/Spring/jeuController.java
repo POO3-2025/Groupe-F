@@ -26,9 +26,13 @@ public class jeuController {
     }
 
     @GetMapping("/{Id}")
-    /*public ResponseEntity<User> getUserById(@PathVariable ObjectId Id) {
-        Optional<User> user = jeuService.getUserById(Id);
-        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<User> getUserById(@PathVariable int Id) {
+        User user = jeuService.getUserById(Id);
+        if(user == null) {
+            return ResponseEntity.notFound().build();
+        }
+        else
+            return ResponseEntity.ok(user);
     }
 
     @PostMapping
@@ -36,7 +40,7 @@ public class jeuController {
         return jeuService.saveUser(user);
     }
 
-    @PutMapping("/{Id}")
+    /*@PutMapping("/{Id}")
     public ResponseEntity<User> updateUser(@PathVariable ObjectId Id, @RequestBody User userDetails) {
         Optional<User> user = jeuService.getUserById(Id);
         if (user.isPresent()) {
@@ -50,9 +54,9 @@ public class jeuController {
         }
     }*/
 
-    @DeleteMapping("/{Id}")
+    /*@DeleteMapping("/{Id}")
     public ResponseEntity<Void> deleteUser(@PathVariable ObjectId id) {
         jeuService.deleteUser(id);
         return ResponseEntity.noContent().build();
-    }
+    }*/
 }

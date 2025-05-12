@@ -1,20 +1,32 @@
+
 package be.helha.labos.Authentification;
 
 import be.helha.labos.DB.User_DAO;
 import be.helha.labos.collection.User;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-
+/**
+ * Classe pour gérer l'authentification des utilisateurs.
+ * Elle utilise un DAO pour interagir avec la base de données et un utilitaire JWT pour générer des tokens.
+ */
 public class Authen {
-
+    /**
+     * Instance de User_DAO pour interagir avec la base de données.
+     */
     private final JwtUtils jwtUtils = new JwtUtils();
-    private final User_DAO user_DAO = new User_DAO();
 
-    public String login(String pseudo, String motDePasse) {
-        User user = user_DAO.GetUserByPseudo(pseudo); // récupère ton user custom
+    /**
+     * Méthode pour authentifier un utilisateur.
+     *
+     * @param pseudo      Le pseudo de l'utilisateur
+     * @param motDePasse  Le mot de passe de l'utilisateur
+     * @param Dbkey       La clé de la base de données
+     * @return Un token JWT si l'authentification réussit
+     */
+    public String login(String pseudo, String motDePasse,String Dbkey) {
+        final User_DAO user_DAO = new User_DAO(Dbkey);
+        User user = user_DAO.getUserByPseudo(pseudo); // récupère le user custom
 
         if (user != null && User_DAO.PasswordUtils.verifyPassword(motDePasse, user.getPassword())) {
             UserDetailsImpl userDetails = new UserDetailsImpl(user);
@@ -29,11 +41,5 @@ public class Authen {
         } else {
             throw new RuntimeException("Pseudo ou mot de passe invalide");
         }
-    }
-    public void AddUser(User newUser) {
-        if (user_DAO.GetUserByPseudo(newUser.getPseudo()) != null) {
-            throw new RuntimeException("Un utilisateur avec ce pseudo existe déjà");
-        }
-        user_DAO.ajouterUser(newUser);
     }
 }

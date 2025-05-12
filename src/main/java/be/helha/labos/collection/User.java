@@ -1,23 +1,25 @@
 package be.helha.labos.collection;
 
-import be.helha.labos.DBNosql.Connexion_DB_Nosql;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.result.InsertOneResult;
-import org.bson.Document;
-import org.bson.types.ObjectId;
+import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@Entity
+@Table(name = "users") // nom de la table MySQL
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(nullable = false, unique = true)
     private String pseudo;
+
+    @Column(nullable = false, unique = true)
     private String password;
     private boolean actif;
     private String rôle;
+
+    public User() {
+    }
 
     public User(String pseudo, String password,String role) {
         this.pseudo = pseudo;
@@ -33,6 +35,7 @@ public class User {
         this.rôle = role;
         this.actif = true;
     }
+
 
 
     public int getId() {
@@ -75,4 +78,12 @@ public class User {
         this.actif = actif;
     }
 
+    @Override
+    public String toString() {
+        return
+                "\n{id=" + id +
+                        "\n pseudo='" + pseudo +
+                        "\n role='" + rôle +
+                        "\n actif=" + actif + "}";
+    }
 }
