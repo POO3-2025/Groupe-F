@@ -65,8 +65,12 @@ public class main {
             System.out.println("Erreur lors de la récupération de l'utilisateur.");
         }
 
-        daoUser.getAllUser();
-
+        List<User> lesUsers;
+        System.out.println("\nListe des users :");
+        lesUsers = daoUser.getAllUser();
+        for (User u : lesUsers) {
+                System.out.println(u);
+        }
 
 
             //Archer archer = new Archer("archer");

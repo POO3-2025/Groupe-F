@@ -79,6 +79,16 @@ public class CharacterType {
     }
 
     /**
+     * Méthode d'attaque qui touche la cible a main nu (sauf pour l'orc)
+     * @return
+     */
+    public int attackHitsMainNu(CharacterType perso)
+    {
+        return perso.getDamage();
+    }
+
+
+    /**
      * Méthode de récupération de l'inventaire
      * @return
      */
