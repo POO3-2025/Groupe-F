@@ -1,8 +1,15 @@
 
+import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.collection.Character.*;
+import be.helha.labos.collection.Inventaire;
 import be.helha.labos.collection.User;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+
+import static com.mongodb.client.model.Filters.eq;
 import static org.junit.jupiter.api.Assertions.*;
 
 //Test CharacterType (Knight et Orc héritent de CharacterType et sont identique a Archer)
@@ -150,13 +157,26 @@ public class TestCharacters {
     @DisplayName("Test de la suppression d'un personnage")
     @Order(10)
     public void testRemoveCharacter() {
+        // Insère un personnage ("test") dans la base de données avec son inventaire
         CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8, testUser);
+        character.setInventaire(new Inventaire());
+        character.getInventaire().insererDansLaBase();
+        Connexion_DB_Nosql connexion = new Connexion_DB_Nosql("nosqlTest");
+        MongoDatabase db = connexion.createDatabase();
+        MongoCollection<Document> collection = db.getCollection("characters");
+        collection.insertOne(new Document("_id", character.getId())
+                .append("name", character.getName())
+                .append("inventaire", character.getInventaire().getId()));
 
-        // Simule la suppression du personnage
+        // Supprime le personnage
         character.removeCharacter(character.getId());
 
-        // Vérifie que le personnage a été supprimé (par exemple, en vérifiant une exception ou un état)
-        assertThrows(Exception.class, () -> character.getInventaireFromDB());
+        // Vérifie que le personnage n'existe plus dans la DB
+        assertNull(collection.find(eq("_id", character.getId())).first(), "Le personnage n'a pas été supprimé.");
+
+        // Vérifie que l'inventaire n'existe également plus dans la DB
+        MongoCollection<Document> inventoryCollection = db.getCollection("inventory");
+        assertNull(inventoryCollection.find(eq("_id", character.getInventaire().getId())).first(), "L'inventaire n'a pas été supprimé.");
     }
 
     @Test
