@@ -18,10 +18,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+/**
+ * Classe utilitaire pour gérer les opérations liées aux tokens JWT.
+ * Elle permet de générer, valider et extraire des informations à partir des tokens JWT.
+ */
 public class JwtUtils {
     private SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
     private final int jwtExpirationMs = 3600000;   // Durée en millisecondes (1 heure)
 
+    /**
+     * Méthode pour générer un token JWT à partir de l'authentification de l'utilisateur.
+     *
+     * @param authentication L'authentification de l'utilisateur
+     * @return Le token JWT généré
+     */
     public String generateToken(Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         return Jwts.builder()
@@ -35,6 +45,12 @@ public class JwtUtils {
                 .compact();
     }
 
+    /**
+     * Méthode pour extraire le token JWT de la requête HTTP.
+     *
+     * @param request La requête HTTP
+     * @return Le token JWT extrait, ou null si aucun token n'est trouvé
+     */
     public String extractJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
@@ -43,7 +59,12 @@ public class JwtUtils {
         return null;
     }
 
-
+    /**
+     * Méthode pour extraire le nom d'utilisateur à partir du token JWT.
+     *
+     * @param token Le token JWT
+     * @return Le nom d'utilisateur extrait du token
+     */
     public String getUsernameFromJwtToken(String token) {
          return Jwts.parser()
                 .setSigningKey(key)
@@ -52,6 +73,12 @@ public class JwtUtils {
                 .getSubject();
     }
 
+    /**
+     * Méthode pour valider le token JWT.
+     *
+     * @param token Le token JWT à valider
+     * @return true si le token est valide, false sinon
+     */
     public boolean validateJwtToken(String token) {
         try {
             Jwts.parser().setSigningKey(key).parseClaimsJws(token);
@@ -60,7 +87,12 @@ public class JwtUtils {
             return false;
         }
     }
-
+    /**
+     * Méthode pour extraire les rôles à partir du token JWT.
+     *
+     * @param token Le token JWT
+     * @return La liste des rôles extraits du token
+     */
     public List<String> getRolesFromJwtToken(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(key)

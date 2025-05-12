@@ -14,10 +14,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Collections;
 
+/**
+ * Classe de service pour gérer les détails de l'utilisateur.
+ * Elle implémente l'interface UserDetailsService de Spring Security.
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
+    /**
+     * Constructeur.
+     */
     @Override
+    /**
+     * Méthode pour charger les détails de l'utilisateur par son nom d'utilisateur.
+     *
+     * @param username le nom d'utilisateur
+     * @return les détails de l'utilisateur
+     * @throws UsernameNotFoundException si l'utilisateur n'est pas trouvé
+     */
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Connexion_DB factory = new Connexion_DB("mysql");
 

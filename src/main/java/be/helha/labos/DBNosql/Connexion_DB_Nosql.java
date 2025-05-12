@@ -23,12 +23,21 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
  */
 public class Connexion_DB_Nosql implements Mongo{
 
+    /**
+     * Clé de configuration pour identifier la connexion dans le fichier de configuration.
+     */
     private final String configKey;
 
     public Connexion_DB_Nosql(String configKey) {
         this.configKey = configKey;
     }
 
+    /**
+     * Crée une connexion à la base de données MongoDB.
+     * Utilise le codec POJO pour la sérialisation et désérialisation des objets.
+     *
+     * @return Une instance de MongoDatabase.
+     */
     @Override
     public MongoDatabase createDatabase() {
         ConfigWrapper.DBConfig config = chargerConfiguration(configKey);
@@ -45,6 +54,12 @@ public class Connexion_DB_Nosql implements Mongo{
                 .withCodecRegistry(pojoCodecRegistry);
     }
 
+    /**
+     * Crée une connexion à la base de données SQL.
+     * Utilise la classe Connexion_DB pour établir la connexion.
+     *
+     * @return Une instance de Connection.
+     */
     private ConfigWrapper.DBConfig chargerConfiguration(String key) {
         try {
             InputStream is = getClass().getClassLoader().getResourceAsStream("config.json");

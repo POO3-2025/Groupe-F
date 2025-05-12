@@ -10,9 +10,14 @@ import org.bson.types.ObjectId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
+/**
+ * Classe représentant un magasin dans le jeu.
+ * Elle permet de gérer les objets disponibles à la vente, ainsi que les achats et ventes d'objets.
+ */
 public class Magasin {
-
+    /**
+     * Collection d'objets disponibles dans le magasin.
+     */
     private MongoCollection<Document> itemsCollection;    private static final double PRIX_MIN = 10.0;
     private static final double PRIX_MAX = 500.0;
 
@@ -21,7 +26,9 @@ public class Magasin {
         this.itemsCollection = database.getCollection("Magasin");
     }
 
-    // Méthode pour afficher les objets disponibles
+    /**
+     * Méthode pour afficher les objets disponibles dans le magasin.
+     */
     public List<Document> afficherObjetsDisponibles() {
         List<Document> objets = itemsCollection.find().into(new ArrayList<>());
         System.out.println("Objets disponibles dans le magasin :");
@@ -31,7 +38,9 @@ public class Magasin {
         return objets;
     }
 
-    // Méthode pour acheter un objet
+    /**
+     * Méthode pour acheter un objet.
+     */
     public void acheterObjet(ObjectId itemId, Inventaire inventaire) {
         Document item = itemsCollection.find(new Document("_id", itemId)).first();
         if (item != null) {
@@ -48,7 +57,11 @@ public class Magasin {
         }
     }
 
-    // Méthode pour vendre un objet
+    /**
+     * Méthode pour vendre un objet.
+     * @param itemId L'ID de l'objet à vendre.
+     * @param inventaire L'inventaire de l'utilisateur.
+     */
     public void vendreObjet(ObjectId itemId, Inventaire inventaire) {
         // Vérifier si l'objet est présent dans l'inventaire
         Document item = itemsCollection.find(new Document("_id", itemId)).first();
@@ -63,7 +76,12 @@ public class Magasin {
         System.out.println("Objet vendu avec succès : " + item.getString("nom"));
     }
 
-    // Méthode pour calculer le prix selon le matériau
+    /**
+     * Méthode pour calculer le prix d'une arme en fonction de son type(prix) et de son matériau.
+     * @param type
+     * @param materiau
+     * @return
+     */
     private static double calculerPrixArme(String type, String materiau) {
         double base = switch (type) {
             case "Sword" -> 50.0;
@@ -89,8 +107,10 @@ public class Magasin {
     }
 
 
-
-
+    /**
+     * Méthode pour générer des objets aléatoires et les insérer dans la collection.
+     * @param itemsCollection
+     */
     public static void genererObjets(MongoCollection<Document> itemsCollection) {
         Random random = new Random();
 

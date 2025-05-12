@@ -9,22 +9,40 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/jeu")
-public class jeuController {
 
+/**
+ * Methode controleur pour gérer les opérations liées aux utilisateurs dans le jeu.
+ */
+public class jeuController {
+    /**
+     * Methode pour gérer les opérations liées aux utilisateurs dans le jeu.
+     */
     private final jeuService jeuService;
 
     @Autowired
+    /**
+     * Constructeur pour initialiser le service de jeu.
+     */
     public jeuController(jeuService jeuService) {
         this.jeuService = jeuService;
     }
 
 
     @GetMapping
+    /**
+     * Methode Get all users.
+     *
+     * @return liste des utilisateurs
+     */
     public List<User> getAlluser() {
         return jeuService.getAllUsers();
     }
 
     @GetMapping("/{Id}")
+    /**
+     * Methode qui retourne un utilisateur par son ID.
+     * return @param Id
+     */
     public ResponseEntity<User> getUserById(@PathVariable int Id) {
         User user = jeuService.getUserById(Id);
         if(user == null) {
@@ -35,6 +53,12 @@ public class jeuController {
     }
 
     @PostMapping
+    /**
+     * Methode qui crée un nouvel utilisateur.
+     *
+     * @param user
+     * @return l'utilisateur créé
+     */
     public User createUser(@RequestBody User user) {
         return jeuService.saveUser(user);
     }
