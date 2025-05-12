@@ -78,4 +78,12 @@ public class User {
         this.actif = actif;
     }
 
+    @Override
+    public String toString() {
+        return
+                "\n{id=" + id +
+                "\n pseudo='" + pseudo +
+                "\n role='" + rôle +
+                "\n actif=" + actif + "}";
+    }
 }

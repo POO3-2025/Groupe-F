@@ -1,5 +1,6 @@
 package be.helha.labos.Lanterna;
 
+import be.helha.labos.Bot.Bot;
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.Character.CharacterType;
@@ -25,6 +26,7 @@ public class Partie {
         MongoDatabase database = mongoFactory.createDatabase();
 
         DAO_NOSQL dao = new DAO_NOSQL();
+        Combat combat = new Combat();
 
         try {
             // Utilisation de DefaultTerminalFactory pour créer un terminal Swing
@@ -45,6 +47,11 @@ public class Partie {
             BasicWindow window = new BasicWindow("Nom du jeu");
             // Création du contenu de la fenêtre (panel avec un bouton)
             Panel panel = new Panel();
+
+            panel.addComponent(new Button("Jouer en solo", () -> {
+               combat.AfficherCombat(personnage,true);
+            }));
+
 
             panel.addComponent(new Button("Boutique", () -> {
                 MongoCollection<Document> collection = database.getCollection("Magasin");

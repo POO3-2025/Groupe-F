@@ -171,21 +171,21 @@ public class User_DAO{
      * Méthodes qui renvoie une liste de tous les users
      * @return
      */
-    public List <User> getAllUser(){
+    public List<User> getAllUser() {
         List<User> users = new ArrayList<>();
         String query = "SELECT DISTINCT * FROM users";
-        try(PreparedStatement stmt = conn.prepareStatement(query)){
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
             ResultSet rs = stmt.executeQuery();
-            if(rs.next()) {
-                User user = new User
-                        (rs.getInt("ID"),
+            while (rs.next()) {  // ← Ici, on boucle sur chaque ligne
+                User user = new User(
+                        rs.getInt("ID"),
                         rs.getString("Pseudo"),
                         rs.getString("Password"),
-                        rs.getString("Role"));
-
+                        rs.getString("Role")
+                );
                 users.add(user);
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return users;
