@@ -1,5 +1,6 @@
 package be.helha.labos.Lanterna;
 
+import be.helha.labos.DB.User_DAO;
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.Character.Archer;
@@ -20,18 +21,26 @@ import org.bson.Document;
 
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * Classe MenuCréerPersonnage qui gère l'affichage du menu de création de personnage.
+ * Elle utilise la bibliothèque Lanterna pour créer une interface graphique dans le terminal.
+ */
 public class MenuCréerPersonnage {
+    /**
+     * Méthode qui affiche le menu de création de personnage.
+     * @param pseudo Le pseudo de l'utilisateur connecté.
+     */
+    public void afficherCréationPersonnage(String pseudo) {
 
-    public void afficherCréationPersonnage() {
 
-        Connexion_DB_Nosql connexionDbNosql = Connexion_DB_Nosql.getInstance();
-        MongoDatabase mongoDatabase = connexionDbNosql.getDatabase();
+        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
+        MongoDatabase mongoDatabase = mongoFactory.createDatabase();
 
         /**
          *
          */
         DAO_NOSQL dao = new DAO_NOSQL();
+        User_DAO userDao = new User_DAO("mysql");
 
         /**
          * Appel de toutes les collections de la DB
@@ -66,25 +75,26 @@ public class MenuCréerPersonnage {
              * Méthode pour créer un perso de type Archer
              */
             panel.addComponent(new Button("Archer", () -> {
-                Archer archerTest = new Archer("archerTest", 100, 20, 0.30, 0.80);
-                Charactercollection.insertOne(archerTest);
+                Archer archerTest = new Archer("archerTest");
+                dao.ajouterPersonnagePourUser(pseudo,archerTest);
             }));
 
             panel.addComponent(new Button("Knight", () -> {
-                Knight KnightTest = new Knight("KnightTest", 150, 35, 0.20, 0.65);
-                Charactercollection.insertOne(KnightTest);
+                Knight KnightTest = new Knight("KnightTest");
+                dao.ajouterPersonnagePourUser(pseudo,KnightTest);
             }));
 
             panel.addComponent(new Button("Orc", () -> {
-                Orc OrcTest = new Orc("OrcTest", 250, 50, 0.10, 0.50);
-                Charactercollection.insertOne(OrcTest);
+                Orc OrcTest = new Orc("OrcTest");
+                dao.ajouterPersonnagePourUser(pseudo,OrcTest);
             }));
 
             /**
              * Supprimer un perso
              */
             panel.addComponent(new Button("Supprimer un personnage", () -> {
-                List<CharacterType> characters = dao.readAllCharacters(mongoDatabase);
+                int idUser = userDao.getUserByPseudo(pseudo).getId();
+                List<CharacterType> characters = dao.readAllCharactersByUserId(idUser);
 
                 if (characters.isEmpty()) {
                     MessageDialog.showMessageDialog(textGUI, "Suppression", "Aucun personnage disponible.");
@@ -129,7 +139,10 @@ public class MenuCréerPersonnage {
              * Méthode d'affichages des persos
              */
             panel.addComponent(new Button("Voir mes personnages", () -> {
-                List<CharacterType> characters = dao.readAllCharacters(mongoDatabase); // récupère les persos
+
+                int idUser = userDao.getUserByPseudo(pseudo).getId();
+                List<CharacterType> characters = dao.readAllCharactersByUserId(idUser);
+
                 if (characters.isEmpty()) {
                     MessageDialog.showMessageDialog(textGUI, "Personnages", "Aucun personnage trouvé.");
                 } else {
@@ -137,8 +150,8 @@ public class MenuCréerPersonnage {
                     // Boucle pour récupérer les champs des persos. A Voir...
                     for (CharacterType character : characters) {
                         builder.append("- ").append(character.getName())
-                                .append(" Type: ").append(character.getId())
-                                .append(" Type: ").append(character.getTitle())
+                                .append(" | Type: ").append(character.getTitle())
+                                .append(" | Argent: ").append(character.getMoney())
                                 .append(" | HP: ").append(character.getHealth())
                                 .append(" | DMG: ").append(character.getDamage())
                                 .append("\n");

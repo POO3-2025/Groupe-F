@@ -1,6 +1,5 @@
 package be.helha.labos.Authentification;
 
-import be.helha.labos.Authentification.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,19 +12,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+/**
+ * Classe de contrôleur pour gérer l'authentification des utilisateurs.
+ */
 @RestController
 public class AuthController {
-
+    /**
+     * Constructeur.
+     */
     @Autowired
     private JwtUtils jwtUtils;
 
     private final AuthenticationManager authenticationManager;
 
+    /**
+     * Service pour gérer les détails de l'utilisateur.
+     */
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
+
     public AuthController(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
-
+    /**
+     * Méthode pour authentifier un utilisateur.
+     *
+     * @param loginRequest Contient le nom d'utilisateur et le mot de passe
+     * @return Un token JWT si l'authentification réussit
+     */
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
         try {
@@ -47,7 +61,9 @@ public class AuthController {
                     "Échec de l'authentification : " + e.getMessage());
         }
     }
-
+    /**
+     * Classe interne pour représenter la requête de connexion.
+     */
     static class LoginRequest {
         private String username;
         private String password;
