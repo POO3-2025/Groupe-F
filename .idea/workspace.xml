@@ -178,12 +178,12 @@
     &quot;assignee&quot;: &quot;LA237823-Santimaria&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/POO3-2025/Groupe-F.git",
-    "accountId": "086906ea-dbb9-4324-9b99-634d94bce35a"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/POO3-2025/Groupe-F.git&quot;,
+    &quot;accountId&quot;: &quot;086906ea-dbb9-4324-9b99-634d94bce35a&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 1
@@ -193,38 +193,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Gradle.Build Groupe-F.executor": "Run",
-    "Gradle.Groupe-F [:be.helha.labos.Lanterna.Lancer.main()].executor": "Run",
-    "Gradle.Groupe-F [:be.helha.labos.Magasin.TestMagasin.main()].executor": "Run",
-    "Gradle.Groupe-F [:be.helha.labos.main.main.main()].executor": "Run",
-    "Gradle.TestCharacters.testRemoveCharacter.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.ServerAuthApplication.executor": "Run",
-    "Spring Boot.SpringApiJeuApplication.executor": "Run",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "feature/Magasin",
-    "last_opened_file_path": "C:/Users/akina/Desktop/Documents cours/POO 3/Labos/Groupe-F/Groupe-F/src/main/java/be/helha/labos/Authentification",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Gradle.Build Groupe-F.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Groupe-F [:be.helha.labos.Lanterna.Lancer.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Groupe-F [:be.helha.labos.Magasin.TestMagasin.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Groupe-F [:be.helha.labos.main.main.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.TestCharacters.testRemoveCharacter.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ServerAuthApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.SpringApiJeuApplication.executor&quot;: &quot;Run&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/Magasin&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/akina/Desktop/Documents cours/POO 3/Labos/Groupe-F/Groupe-F/src/main/java/be/helha/labos/Authentification&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\akina\Desktop\Documents cours\POO 3\Labos\Groupe-F\Groupe-F\src\main\java\be\helha\labos\Authentification" />
