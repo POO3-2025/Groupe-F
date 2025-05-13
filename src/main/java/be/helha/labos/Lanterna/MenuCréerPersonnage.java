@@ -33,23 +33,12 @@ public class MenuCréerPersonnage {
     public void afficherCréationPersonnage(String pseudo) {
 
 
-        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
-        MongoDatabase mongoDatabase = mongoFactory.createDatabase();
-
+        String dbkey = "mysql";
         /**
          *
          */
-        DAO_NOSQL dao = new DAO_NOSQL();
-        User_DAO userDao = new User_DAO("mysql");
-
-        /**
-         * Appel de toutes les collections de la DB
-         */
-        MongoCollection<Document> collection = mongoDatabase.getCollection("chests");
-        MongoCollection<Item> Itemcollection = mongoDatabase.getCollection("items", Item.class);
-        MongoCollection<CharacterType> Charactercollection = mongoDatabase.getCollection("characters", CharacterType.class);
-        MongoCollection<Document>Inventairecollection = mongoDatabase.getCollection("inventory");
-        MongoCollection<Document> Magasincollection = mongoDatabase.getCollection("Magasin");
+        DAO_NOSQL dao = new DAO_NOSQL("nosql");
+        User_DAO userDao = new User_DAO(dbkey);
 
         try {
             // Utilisation de DefaultTerminalFactory pour créer un terminal Swing
@@ -76,17 +65,17 @@ public class MenuCréerPersonnage {
              */
             panel.addComponent(new Button("Archer", () -> {
                 Archer archerTest = new Archer("archerTest");
-                dao.ajouterPersonnagePourUser(pseudo,archerTest);
+                dao.ajouterPersonnagePourUser(dbkey,pseudo,archerTest);
             }));
 
             panel.addComponent(new Button("Knight", () -> {
                 Knight KnightTest = new Knight("KnightTest");
-                dao.ajouterPersonnagePourUser(pseudo,KnightTest);
+                dao.ajouterPersonnagePourUser(dbkey,pseudo,KnightTest);
             }));
 
             panel.addComponent(new Button("Orc", () -> {
                 Orc OrcTest = new Orc("OrcTest");
-                dao.ajouterPersonnagePourUser(pseudo,OrcTest);
+                dao.ajouterPersonnagePourUser(dbkey,pseudo,OrcTest);
             }));
 
             /**
@@ -118,7 +107,7 @@ public class MenuCréerPersonnage {
                 selectionPanel.addComponent(new Button("Confirmer", () -> {
                     CharacterType selected = comboBox.getSelectedItem();
                     if (selected != null) {
-                        dao.DeleteCharacters(mongoDatabase, selected.getId());
+                        dao.DeleteCharacters(selected.getId());
                         MessageDialog.showMessageDialog(textGUI, "Succès", "Personnage supprimé : " + selected.getName());
 
                         // Retour en arrière après suppression //
