@@ -32,6 +32,8 @@ public class MenuCréerPersonnage {
      */
     public void afficherCréationPersonnage(String pseudo) {
 
+        Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosql");
+        MongoDatabase mongoDatabase = connexionDbNosql.createDatabase();
 
         String dbkey = "mysql";
         /**
@@ -64,17 +66,17 @@ public class MenuCréerPersonnage {
              * Méthode pour créer un perso de type Archer
              */
             panel.addComponent(new Button("Archer", () -> {
-                Archer archerTest = new Archer("archerTest");
+                Archer archerTest = new Archer("archer",mongoDatabase);
                 dao.ajouterPersonnagePourUser(dbkey,pseudo,archerTest);
             }));
 
             panel.addComponent(new Button("Knight", () -> {
-                Knight KnightTest = new Knight("KnightTest");
+                Knight KnightTest = new Knight("KnightTest",mongoDatabase);
                 dao.ajouterPersonnagePourUser(dbkey,pseudo,KnightTest);
             }));
 
             panel.addComponent(new Button("Orc", () -> {
-                Orc OrcTest = new Orc("OrcTest");
+                Orc OrcTest = new Orc("OrcTest",mongoDatabase);
                 dao.ajouterPersonnagePourUser(dbkey,pseudo,OrcTest);
             }));
 
