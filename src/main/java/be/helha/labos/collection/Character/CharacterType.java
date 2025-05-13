@@ -280,9 +280,7 @@ public class CharacterType {
     /**
      * Méthode changer l'argent du personnage dans la DB
      */
-    public void updateMoneyInDB() {
-        connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
-        mongoDatabase = connexionDbNosql.createDatabase();
+    public void updateMoneyInDB(MongoDatabase mongoDatabase) {
         collection = mongoDatabase.getCollection("characters");
 
         collection.updateOne(new Document("_id", this.id), new Document("$set", new Document("money", this.money)));
@@ -292,11 +290,8 @@ public class CharacterType {
      * Méthode retirer un personnage de la DB noSQL
      * @param characterId
      */
-    public void removeCharacter(ObjectId characterId) {
+    public void removeCharacter(MongoDatabase mongoDatabase,ObjectId characterId) {
         try {
-            // Connexion à la DB
-            connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
-            mongoDatabase = connexionDbNosql.createDatabase();
 
             // Récupération de la collection des personnages
             MongoCollection<Document> charactersCollection = mongoDatabase.getCollection("characters");
@@ -329,10 +324,8 @@ public class CharacterType {
         }
     }
 
-    public Inventaire getInventaireFromDB() {
-        Connexion_DB_Nosql connexion = new Connexion_DB_Nosql("nosqlTest");
-        MongoDatabase db = connexion.createDatabase();
-        MongoCollection<Inventaire> inventaireCollection = db.getCollection("inventory", Inventaire.class);
+    public Inventaire getInventaireFromDB(MongoDatabase mongoDatabase) {
+        MongoCollection<Inventaire> inventaireCollection = mongoDatabase.getCollection("inventory", Inventaire.class);
         return inventaireCollection.find(eq("_id", inventaire)).first();
     }
 

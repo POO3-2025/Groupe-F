@@ -29,10 +29,9 @@ public class Partie {
      */
     public void AfficherPartie(CharacterType personnage) {
 
-        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
+        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosql");
         MongoDatabase database = mongoFactory.createDatabase();
 
-        DAO_NOSQL dao = new DAO_NOSQL();
         Combat combat = new Combat();
 
         try {

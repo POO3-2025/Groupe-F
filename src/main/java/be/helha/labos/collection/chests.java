@@ -25,7 +25,7 @@ public class chests {
     @JsonProperty("_id")
     protected ObjectId id;
 
-    private static Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
+    private static Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosql");
     private static MongoDatabase mongoDatabase = connexionDbNosql.createDatabase();
     private static MongoCollection<Document> collection = mongoDatabase.getCollection("chests");
     private List<Document> chestsSlots;

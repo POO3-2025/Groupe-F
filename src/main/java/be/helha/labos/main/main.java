@@ -23,17 +23,11 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 public class main {
     public static void main(String[] args) {
-        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
-        MongoDatabase database = mongoFactory.createDatabase();
-
-        MongoCollection<Item> Itemcollection = database.getCollection("items", Item.class);
-        MongoCollection<CharacterType> Charactercollection = database.getCollection("characters", CharacterType.class);
-
 
         Authen authen = new Authen();
 
         User_DAO daoUser = new User_DAO("mysql");
-        DAO_NOSQL daoNosql = new DAO_NOSQL();
+        DAO_NOSQL daoNosql = new DAO_NOSQL("nosql");
 
         try{
 
@@ -73,8 +67,8 @@ public class main {
         }
 
 
-            //Archer archer = new Archer("archer");
-            //daoNosql.ajouterPersonnagePourUser(nouvelUser.getPseudo(), archer);
+            Archer archer = new Archer("archer");
+            daoNosql.ajouterPersonnagePourUser("mysql",nouvelUser.getPseudo(), archer);
 
             Sword sword = new Sword();
             Sword fireSword = new Sword(Sword.SwordMaterial.FIRE);
@@ -102,12 +96,8 @@ public class main {
             /*putItemsInChest(new ObjectId("67c4687a6085201f7eca9d02"),
                     new ObjectId("67d048cb69f5966a18dcef4a") , true);*/
 
-
-            /*updateDocument(mongoDatabase, "items", new Document("type", "WoodenSword"),
-                    new Document("$set", new Document("type", "Sword")));*/
-
             System.out.println("\n\n");
-            //daoNosql.readAllCollections(mongoDatabase);
+            daoNosql.readAllCollections();
 
             List<CharacterType> characters = daoNosql.readAllCharacters(); // récupère les persos
             if (characters.isEmpty()) {
