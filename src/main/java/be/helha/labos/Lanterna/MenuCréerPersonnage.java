@@ -58,24 +58,71 @@ public class MenuCréerPersonnage {
             WindowBasedTextGUI textGUI = new MultiWindowTextGUI(screen);
             BasicWindow window = new BasicWindow("Menu Création");
             // Création du contenu de la fenêtre (panel avec un bouton)
+
+
+
             Panel panel = new Panel();
-
             /**
-             * Méthode pour créer un perso de type Archer
+             * Méthode pour nous créer un perso
              */
-            panel.addComponent(new Button("Archer", () -> {
-                Archer archerTest = new Archer("archerTest");
-                dao.ajouterPersonnagePourUser(dbkey,pseudo,archerTest);
+            panel.addComponent(new Button("Archer", () ->
+            {
+                // Création d'un panel pour la saisie du nom
+                Label label = new Label("Entrez le pseudo pour votre Archer :");
+                TextBox textBox = new TextBox();
+                panel.addComponent(label);
+                panel.addComponent(textBox);
+                textBox.takeFocus();
+                panel.addComponent(new Button("Confirmer", () ->
+                {
+                    String name = textBox.getText();
+                    if (name != null && !name.isEmpty())
+                    {
+                        Archer archer = new Archer(name);
+                        dao.ajouterPersonnagePourUser(dbkey, pseudo, archer);
+                        window.close();
+                    }
+                }));
             }));
 
-            panel.addComponent(new Button("Knight", () -> {
-                Knight KnightTest = new Knight("KnightTest");
-                dao.ajouterPersonnagePourUser(dbkey,pseudo,KnightTest);
+            panel.addComponent(new Button("Knight", () ->
+            {
+                // Création d'un panel pour la saisie du nom
+                Label label = new Label("Entrez le pseudo pour votre Knight :");
+                TextBox textBox = new TextBox();
+                panel.addComponent(label);
+                panel.addComponent(textBox);
+                textBox.takeFocus();
+                panel.addComponent(new Button("Confirmer", () ->
+                {
+                    String name = textBox.getText();
+                    if (name != null && !name.isEmpty())
+                    {
+                        Knight knight = new Knight(name);
+                        dao.ajouterPersonnagePourUser(dbkey, pseudo, knight);
+                        window.close();
+                    }
+                }));
             }));
 
-            panel.addComponent(new Button("Orc", () -> {
-                Orc OrcTest = new Orc("OrcTest");
-                dao.ajouterPersonnagePourUser(dbkey,pseudo,OrcTest);
+            panel.addComponent(new Button("Orc", () ->
+            {
+                // Création d'un panel pour la saisie du nom
+                Label label = new Label("Entrez le pseudo pour votre Orc :");
+                TextBox textBox = new TextBox();
+                panel.addComponent(label);
+                panel.addComponent(textBox);
+                textBox.takeFocus();
+                panel.addComponent(new Button("Confirmer", () ->
+                {
+                    String name = textBox.getText();
+                    if (name != null && !name.isEmpty())
+                    {
+                        Orc orc = new Orc(name);
+                        dao.ajouterPersonnagePourUser(dbkey, pseudo, orc);
+                        window.close();
+                    }
+                }));
             }));
 
             /**
@@ -161,5 +208,6 @@ public class MenuCréerPersonnage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }

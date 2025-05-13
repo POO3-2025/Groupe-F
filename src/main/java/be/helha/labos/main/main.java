@@ -31,7 +31,7 @@ public class main {
 
         try{
 
-        //dao.supprimerTableUser();
+        //daoUser.supprimerTableUser();
 
         /*boolean connex = dao.verifierConnexion("Jo","Jo");
 

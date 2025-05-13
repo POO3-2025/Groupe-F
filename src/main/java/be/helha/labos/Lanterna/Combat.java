@@ -67,6 +67,7 @@ public class Combat {
                     pvBot.setText("PV de l'adversaire : " + botVi);
 
                     if (botVi.get() <= 0) {
+                        perso.setMoney(perso.getMoney() + 15);
                         MessageDialog.showMessageDialog(textGUI, "Victoire", "Vous avez gagné !");
                         window.close();
                         return;
