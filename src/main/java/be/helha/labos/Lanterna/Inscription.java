@@ -24,7 +24,6 @@ public class Inscription {
     public void Lancer () {
         Authen authen = new Authen();
         User_DAO dao = new User_DAO("mysql");
-        DAO_NOSQL dao_nosql = new DAO_NOSQL();
 
         try {
             // Utilisation de DefaultTerminalFactory pour créer un terminal Swing

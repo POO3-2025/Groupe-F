@@ -28,10 +28,7 @@ public class Menu {
     public void Affichage(String pseudo) throws IOException {
         MenuCréerPersonnage menuCréerPersonnage = new MenuCréerPersonnage();
 
-        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
-        MongoDatabase mongoDatabase = mongoFactory.createDatabase();
-
-        DAO_NOSQL dao = new DAO_NOSQL();
+        DAO_NOSQL dao = new DAO_NOSQL("nosql");
         User_DAO userDao = new User_DAO("mysql");
         Partie partie = new Partie();
 
