@@ -22,7 +22,7 @@ public class Inventaire {
     public Inventaire() {
         this.id = new ObjectId();
         this.inventorySlots = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             Document slot = new Document("slot_number", i + 1).append("item", null);
             inventorySlots.add(slot);
         }
@@ -31,7 +31,7 @@ public class Inventaire {
     public void insererDansLaBase() {
         collection = mongoDatabase.getCollection("inventory");
         Document inventory = new Document("_id", this.id)
-                .append("maxSize", 10)
+                .append("maxSize", 5)
                 .append("slots", inventorySlots);
         collection.insertOne(inventory);
         System.out.println("Inventaire inséré avec ID : " + id);
