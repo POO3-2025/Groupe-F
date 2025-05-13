@@ -68,6 +68,7 @@ public class Combat {
 
                     if (botVi.get() <= 0) {
                         perso.setMoney(perso.getMoney() + 15);
+                        System.out.println("Vous avez remporté :" + 15+ " pièces");
                         MessageDialog.showMessageDialog(textGUI, "Victoire", "Vous avez gagné !");
                         window.close();
                         return;
@@ -79,6 +80,8 @@ public class Combat {
                     pvLabel.setText("Vos PV : " + perso.getHealth());
 
                     if (perso.getHealth() <= 0) {
+                        perso.setMoney(perso.getMoney() + 2);
+                        System.out.println("Vous avez remporté :" + 2+ " pièces");
                         MessageDialog.showMessageDialog(textGUI, "Défaite", "Vous avez perdu !");
                         window.close();
                     }
