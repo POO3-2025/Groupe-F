@@ -14,8 +14,7 @@ public class Inventaire {
     @JsonProperty("_id")
     protected ObjectId id;
 
-    private static Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosql");
-    private static MongoDatabase mongoDatabase = connexionDbNosql.createDatabase();
+    private MongoDatabase mongoDatabase;
     private static MongoCollection<Document> collection;
     private List<Document> inventorySlots;
 
@@ -28,8 +27,18 @@ public class Inventaire {
         }
     }
 
+    public Inventaire(MongoDatabase mongoDatabase) {
+        this.id = new ObjectId();
+        this.mongoDatabase = mongoDatabase;
+        this.inventorySlots = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Document slot = new Document("slot_number", i + 1).append("item", null);
+            inventorySlots.add(slot);
+        }
+    }
+
     public void insererDansLaBase() {
-        collection = mongoDatabase.getCollection("inventory");
+        MongoCollection<Document> collection = mongoDatabase.getCollection("inventory");
         Document inventory = new Document("_id", this.id)
                 .append("maxSize", 5)
                 .append("slots", inventorySlots);
@@ -41,14 +50,14 @@ public class Inventaire {
         return id;
     }
 
-    public static boolean retirerObjetDeInventaire(MongoDatabase mongoDatabase,ObjectId inventaireId, ObjectId objetId) {
+    public boolean retirerObjetDeInventaire(MongoDatabase mongoDatabase,ObjectId inventaireId, ObjectId objetId) {
         MongoCollection<Document> inventaires = mongoDatabase.getCollection("inventory");
 
         Document update = new Document("$pull", new Document("objets", new Document("_id", objetId)));
         return inventaires.updateOne(new Document("_id", inventaireId), update).getModifiedCount() > 0;
     }
 
-    public static Document getInventaireFromMongoDB(MongoDatabase mongoDatabase,ObjectId inventaireId) {
+    public Document getInventaireFromMongoDB(MongoDatabase mongoDatabase,ObjectId inventaireId) {
         try {
             collection = mongoDatabase.getCollection("inventory");
 
@@ -67,9 +76,9 @@ public class Inventaire {
         }
     }
 
-    public static boolean ajouterObjetDansInventaire(ObjectId inventaireId, ObjectId objetId) {
+    public static boolean ajouterObjetDansInventaire(MongoDatabase mongoDatabase, ObjectId inventaireId, ObjectId objetId) {
         try {
-            collection = mongoDatabase.getCollection("inventory");
+            MongoCollection<Document> collection = mongoDatabase.getCollection("inventory");
             MongoCollection<Document> magasinCollection = mongoDatabase.getCollection("Magasin");
             Document inventaire = collection.find(new Document("_id", inventaireId)).first();
 
@@ -84,9 +93,12 @@ public class Inventaire {
                 List<Document> slots = (List<Document>) inventaire.get("slots");
 
                 for (Document slot : slots) {
-                    if (objetId.equals(slot.get("item"))) {
-                        System.out.println("L'objet est déjà dans l'inventaire");
-                        return false;
+                    if (slot.get("item") instanceof Document) {
+                        Document item = (Document) slot.get("item");
+                        if (objetId.equals(item.getObjectId("_id"))) {
+                            System.out.println("L'objet est déjà dans l'inventaire");
+                            return false;
+                        }
                     }
                 }
 
@@ -114,4 +126,5 @@ public class Inventaire {
             return false;
         }
     }
+
 }

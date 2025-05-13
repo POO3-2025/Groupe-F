@@ -32,7 +32,8 @@ public class MenuCréerPersonnage {
      */
     public void afficherCréationPersonnage(String pseudo) {
 
-
+        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosql");
+        MongoDatabase database = mongoFactory.createDatabase();
         String dbkey = "mysql";
         /**
          *
@@ -78,7 +79,7 @@ public class MenuCréerPersonnage {
                     String name = textBox.getText();
                     if (name != null && !name.isEmpty())
                     {
-                        Archer archer = new Archer(name);
+                        Archer archer = new Archer(name,database);
                         dao.ajouterPersonnagePourUser(dbkey, pseudo, archer);
                         window.close();
                     }
@@ -98,7 +99,7 @@ public class MenuCréerPersonnage {
                     String name = textBox.getText();
                     if (name != null && !name.isEmpty())
                     {
-                        Knight knight = new Knight(name);
+                        Knight knight = new Knight(name,database);
                         dao.ajouterPersonnagePourUser(dbkey, pseudo, knight);
                         window.close();
                     }
@@ -118,7 +119,7 @@ public class MenuCréerPersonnage {
                     String name = textBox.getText();
                     if (name != null && !name.isEmpty())
                     {
-                        Orc orc = new Orc(name);
+                        Orc orc = new Orc(name,database);
                         dao.ajouterPersonnagePourUser(dbkey, pseudo, orc);
                         window.close();
                     }

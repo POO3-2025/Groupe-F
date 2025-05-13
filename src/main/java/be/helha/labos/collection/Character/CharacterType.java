@@ -55,7 +55,7 @@ public class CharacterType {
      * @param precision
      * @param user
      */
-    public CharacterType(String name, int health, int damage, double dodge, double precision,User user) {
+    public CharacterType(String name, int health, int damage, double dodge, double precision,MongoDatabase database,User user) {
         this.id = new ObjectId();
         this.name = name;
         this.health = health;
@@ -290,18 +290,17 @@ public class CharacterType {
      * Méthode retirer un personnage de la DB noSQL
      * @param characterId
      */
-    public void removeCharacter(MongoDatabase mongoDatabase,ObjectId characterId) {
+    public void removeCharacter(MongoDatabase mongoDatabase, ObjectId characterId) {
         try {
-
-            // Récupération de la collection des personnages
             MongoCollection<Document> charactersCollection = mongoDatabase.getCollection("characters");
 
             // Récupération du document personnage AVANT suppression
             Document characterDoc = charactersCollection.find(new Document("_id", characterId)).first();
 
             if (characterDoc != null) {
-                // Récupérer l'ID de l'inventaire à partir du champ "inventaire._id"
-                ObjectId inventoryId= characterDoc.getObjectId("inventaire");
+                // Récupérer le sous-document "inventaire"
+                Document inventaireDoc = (Document) characterDoc.get("inventaire");
+                ObjectId inventoryId = inventaireDoc.getObjectId("_id");
 
                 // Suppression du personnage
                 charactersCollection.deleteOne(new Document("_id", characterId));
@@ -323,6 +322,7 @@ public class CharacterType {
             e.printStackTrace();
         }
     }
+
 
     public Inventaire getInventaireFromDB(MongoDatabase mongoDatabase) {
         MongoCollection<Inventaire> inventaireCollection = mongoDatabase.getCollection("inventory", Inventaire.class);

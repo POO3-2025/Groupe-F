@@ -1,6 +1,8 @@
 package be.helha.labos.Lanterna;
 
 import be.helha.labos.Bot.Bot;
+import be.helha.labos.DBNosql.Connexion_DB_Nosql;
+import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.Character.CharacterType;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
@@ -9,6 +11,7 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
+import com.mongodb.client.MongoDatabase;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -25,6 +28,9 @@ public class Combat {
      */
     public void AfficherCombat(CharacterType perso, boolean type) {
         Bot bot = new Bot();
+        Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosql");
+        MongoDatabase mongoDatabase = connexionDbNosql.createDatabase();
+
         try {
             // Utilisation de DefaultTerminalFactory pour créer un terminal Swing
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
@@ -54,7 +60,7 @@ public class Combat {
                 Label pvLabel = new Label("Vos PV : " + perso.getHealth());
                 panel.addComponent(pvLabel);
                 // PV du bot
-                AtomicInteger botVi = new AtomicInteger(100); // PV du bot
+                AtomicInteger botVi = new AtomicInteger(30); // PV du bot
 
                 Label pvBot = new Label("PV de l'adversaire : " + botVi );
                 panel.addComponent(pvBot);
@@ -67,9 +73,11 @@ public class Combat {
                     pvBot.setText("PV de l'adversaire : " + botVi);
 
                     if (botVi.get() <= 0) {
-                        perso.setMoney(perso.getMoney() + 15);
-                        System.out.println("Vous avez remporté :" + 15+ " pièces");
-                        MessageDialog.showMessageDialog(textGUI, "Victoire", "Vous avez gagné !");
+                        int recomp = 15;
+                        perso.setMoney( perso.getMoney() + recomp); //
+                        perso.updateMoneyInDB(mongoDatabase);
+                        MessageDialog.showMessageDialog(textGUI, "Victoire", "Vous avez gagné ! , " +
+                                "voici votre récompense " + recomp );
                         window.close();
                         return;
                     }
@@ -80,8 +88,6 @@ public class Combat {
                     pvLabel.setText("Vos PV : " + perso.getHealth());
 
                     if (perso.getHealth() <= 0) {
-                        perso.setMoney(perso.getMoney() + 2);
-                        System.out.println("Vous avez remporté :" + 2+ " pièces");
                         MessageDialog.showMessageDialog(textGUI, "Défaite", "Vous avez perdu !");
                         window.close();
                     }

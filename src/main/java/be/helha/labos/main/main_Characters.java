@@ -58,13 +58,13 @@ public class main_Characters {
 
 
 
-            Archer archerTest = new Archer("archerX");
+            Archer archerTest = new Archer("archerX",database);
             daoNosql.ajouterPersonnagePourUser("mysql",nouvelUser.getPseudo(),archerTest);
 
-            Knight knightTest= new Knight("onightX");
+            Knight knightTest= new Knight("onightX",database);
             daoNosql.ajouterPersonnagePourUser("mysql",nouvelUser2.getPseudo(),knightTest);
 
-            Orc orcTest = new Orc("orcX");
+            Orc orcTest = new Orc("orcX",database);
             daoNosql.ajouterPersonnagePourUser("mysql",nouvelUser3.getPseudo(),orcTest);
 
             List<CharacterType> characters = daoNosql.readAllCharacters();

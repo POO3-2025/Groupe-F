@@ -26,6 +26,9 @@ public class main {
 
         Authen authen = new Authen();
 
+        Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosql");
+        MongoDatabase mongoDatabase = connexionDbNosql.createDatabase();
+
         User_DAO daoUser = new User_DAO("mysql");
         DAO_NOSQL daoNosql = new DAO_NOSQL("nosql");
 
@@ -67,7 +70,7 @@ public class main {
         }
 
 
-            Archer archer = new Archer("archer");
+            Archer archer = new Archer("archer",mongoDatabase);
             daoNosql.ajouterPersonnagePourUser("mysql",nouvelUser.getPseudo(), archer);
 
             Sword sword = new Sword();
@@ -81,16 +84,12 @@ public class main {
 
             Potion potion = new Potion (20,15);
 
-            //CharacterType Chara = new CharacterType("Chara", 100, 20, 0.3, 0.8);
 
             // Insertion du document
             //Itemcollection.insertOne(sword);
 
             //Itemcollection.insertOne(shield);
             //Itemcollection.insertOne(potion);
-
-
-
 
 
             /*putItemsInChest(new ObjectId("67c4687a6085201f7eca9d02"),

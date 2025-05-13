@@ -75,7 +75,7 @@ public class Magasin {
             double prix = item.getDouble("prix");
             if (prix > personnage.getMoney()) return false;
 
-            if (Inventaire.ajouterObjetDansInventaire(inventaireDoc.getObjectId("_id"), item.getObjectId("_id"))) {
+            if (Inventaire.ajouterObjetDansInventaire(mongoDatabase,inventaireDoc.getObjectId("_id"), item.getObjectId("_id"))) {
                 itemsCollection.deleteOne(new Document("_id", item.getObjectId("_id")));
                 double nouvelArgent = personnage.getMoney() - prix;
                 personnage.setMoney(nouvelArgent);

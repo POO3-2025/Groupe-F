@@ -1,6 +1,7 @@
 package be.helha.labos.collection.Character;
 
 import be.helha.labos.collection.Inventaire;
+import com.mongodb.client.MongoDatabase;
 
 /**
  * Classe étendue de Charactertype représentant un personnage de type Knight
@@ -18,7 +19,7 @@ public class Knight extends CharacterType {
      *
      * @param name     le nom du personnage
      */
-    public Knight(String name) {
+    public Knight(String name, MongoDatabase db) {
         super();
         this.name = name;
         this.health = 150;
@@ -28,7 +29,7 @@ public class Knight extends CharacterType {
         level = 1;
         this.dodge = 0.3;
         this.precision = 0.7;
-        this.inventaire = new Inventaire();
+        this.inventaire = new Inventaire(db);
         inventaire.insererDansLaBase();
 
     }

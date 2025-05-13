@@ -1,6 +1,7 @@
 package be.helha.labos.collection.Character;
 
 import be.helha.labos.collection.Inventaire;
+import com.mongodb.client.MongoDatabase;
 
 /**
  * Classe étendue de Charactertype représentant un personnage de type Orc
@@ -19,7 +20,7 @@ public class Orc extends CharacterType
      *
      * @param name     le nom du personnage
      */
-    public Orc(String name)
+    public Orc(String name,MongoDatabase db)
     {
         super();
         this.name = name;
@@ -30,7 +31,7 @@ public class Orc extends CharacterType
         this.damage = 50;
         this.dodge = 0.0;
         this.precision = 0.5;
-        this.inventaire = new Inventaire();
+        this.inventaire = new Inventaire(db);
         inventaire.insererDansLaBase();
 
     }
