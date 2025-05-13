@@ -34,6 +34,7 @@ public class CharacterType {
     protected Inventaire inventaire;
     protected double dodge;
     protected double precision;
+    private ObjectId inventoryId;
 
 
     private static Connexion_DB_Nosql connexionDbNosql;
@@ -95,6 +96,14 @@ public class CharacterType {
     public ObjectId getId()
     {
         return id;
+    }
+
+    public void setInventoryId(ObjectId id) {
+        this.inventoryId = id;
+    }
+
+    public ObjectId getInventoryId() {
+        return this.inventoryId;
     }
 
     /**
@@ -280,7 +289,9 @@ public class CharacterType {
     /**
      * Méthode changer l'argent du personnage dans la DB
      */
-    public void updateMoneyInDB(MongoDatabase mongoDatabase) {
+    public void updateMoneyInDB() {
+        connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
+        mongoDatabase = connexionDbNosql.createDatabase();
         collection = mongoDatabase.getCollection("characters");
 
         collection.updateOne(new Document("_id", this.id), new Document("$set", new Document("money", this.money)));
@@ -290,8 +301,11 @@ public class CharacterType {
      * Méthode retirer un personnage de la DB noSQL
      * @param characterId
      */
-    public void removeCharacter(MongoDatabase mongoDatabase,ObjectId characterId) {
+    public void removeCharacter(ObjectId characterId) {
         try {
+            // Connexion à la DB
+            connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
+            mongoDatabase = connexionDbNosql.createDatabase();
 
             // Récupération de la collection des personnages
             MongoCollection<Document> charactersCollection = mongoDatabase.getCollection("characters");
@@ -324,8 +338,10 @@ public class CharacterType {
         }
     }
 
-    public Inventaire getInventaireFromDB(MongoDatabase mongoDatabase) {
-        MongoCollection<Inventaire> inventaireCollection = mongoDatabase.getCollection("inventory", Inventaire.class);
+    public Inventaire getInventaireFromDB() {
+        Connexion_DB_Nosql connexion = new Connexion_DB_Nosql("nosqlTest");
+        MongoDatabase db = connexion.createDatabase();
+        MongoCollection<Inventaire> inventaireCollection = db.getCollection("inventory", Inventaire.class);
         return inventaireCollection.find(eq("_id", inventaire)).first();
     }
 

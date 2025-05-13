@@ -79,7 +79,7 @@ public class Magasin {
                 itemsCollection.deleteOne(new Document("_id", item.getObjectId("_id")));
                 double nouvelArgent = personnage.getMoney() - prix;
                 personnage.setMoney(nouvelArgent);
-                personnage.updateMoneyInDB(mongoDatabase);
+                personnage.updateMoneyInDB();
                 return true;
             }
             return false;
@@ -142,7 +142,7 @@ public class Magasin {
 
             double nouvelArgent = personnage.getMoney() + prixVente;
             personnage.setMoney(nouvelArgent);
-            personnage.updateMoneyInDB(mongoDatabase);
+            personnage.updateMoneyInDB();
 
             return true;
         } catch (Exception e) {

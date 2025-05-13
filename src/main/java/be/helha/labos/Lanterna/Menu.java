@@ -12,6 +12,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
 import com.mongodb.client.MongoDatabase;
+import be.helha.labos.Lanterna.Partie;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,7 +29,7 @@ public class Menu {
     public void Affichage(String pseudo) throws IOException {
         MenuCréerPersonnage menuCréerPersonnage = new MenuCréerPersonnage();
 
-        DAO_NOSQL dao = new DAO_NOSQL("nosql");
+        DAO_NOSQL dao = new DAO_NOSQL();
         User_DAO userDao = new User_DAO("mysql");
         Partie partie = new Partie();
 

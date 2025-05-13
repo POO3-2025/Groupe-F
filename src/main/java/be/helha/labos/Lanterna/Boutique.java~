@@ -40,7 +40,7 @@ public class Boutique {
      */
     public Boutique(MongoCollection<Document> collection) {
         this.collection = collection;
-        Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
+        Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosql");
         this.mongoDatabase = connexionDbNosql.createDatabase();
         this.magasin = new Magasin(mongoDatabase);
     }

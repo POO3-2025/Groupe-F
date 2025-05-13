@@ -19,6 +19,9 @@ public class TestCharacters {
 
     private User testUser;
 
+    Connexion_DB_Nosql connexion = new Connexion_DB_Nosql("nosqlTest");
+    MongoDatabase db = connexion.createDatabase();
+
     @BeforeEach
     public void setUp(TestInfo testInfo) {
         System.out.println("Exécution du test : " + testInfo.getDisplayName());
@@ -147,7 +150,7 @@ public class TestCharacters {
         character.setMoney(200.00);
 
         // Simule la mise à jour dans la base de données
-        character.updateMoneyInDB();
+        character.updateMoneyInDB(db);
 
         // Vérifie que l'argent a été mis à jour
         assertEquals(200.00, character.getMoney());
@@ -161,15 +164,13 @@ public class TestCharacters {
         CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8, testUser);
         character.setInventaire(new Inventaire());
         character.getInventaire().insererDansLaBase();
-        Connexion_DB_Nosql connexion = new Connexion_DB_Nosql("nosqlTest");
-        MongoDatabase db = connexion.createDatabase();
         MongoCollection<Document> collection = db.getCollection("characters");
         collection.insertOne(new Document("_id", character.getId())
                 .append("name", character.getName())
                 .append("inventaire", character.getInventaire().getId()));
 
         // Supprime le personnage
-        character.removeCharacter(character.getId());
+        character.removeCharacter(db,character.getId());
 
         // Vérifie que le personnage n'existe plus dans la DB
         assertNull(collection.find(eq("_id", character.getId())).first(), "Le personnage n'a pas été supprimé.");

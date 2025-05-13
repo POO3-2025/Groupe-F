@@ -18,7 +18,7 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 public class main_Characters {
     public static void main(String[] args) {
-        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosql");
+        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
         MongoDatabase database = mongoFactory.createDatabase();
 
 
@@ -27,7 +27,7 @@ public class main_Characters {
 
         Authen authen = new Authen();
         User_DAO daoUser = new User_DAO("mysql");
-        DAO_NOSQL daoNosql = new DAO_NOSQL("nosql");
+        DAO_NOSQL daoNosql = new DAO_NOSQL();
 
         try
         {
@@ -59,13 +59,13 @@ public class main_Characters {
 
 
             Archer archerTest = new Archer("archerX");
-            daoNosql.ajouterPersonnagePourUser("mysql",nouvelUser.getPseudo(),archerTest);
+            daoNosql.ajouterPersonnagePourUser(nouvelUser.getPseudo(),archerTest);
 
             Knight knightTest= new Knight("onightX");
-            daoNosql.ajouterPersonnagePourUser("mysql",nouvelUser2.getPseudo(),knightTest);
+            daoNosql.ajouterPersonnagePourUser(nouvelUser2.getPseudo(),knightTest);
 
             Orc orcTest = new Orc("orcX");
-            daoNosql.ajouterPersonnagePourUser("mysql",nouvelUser3.getPseudo(),orcTest);
+            daoNosql.ajouterPersonnagePourUser(nouvelUser3.getPseudo(),orcTest);
 
             List<CharacterType> characters = daoNosql.readAllCharacters();
             if (characters.isEmpty())
