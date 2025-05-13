@@ -36,7 +36,7 @@ public class Boutique {
      */
     public Boutique(MongoCollection<Document> collection) {
         this.collection = collection;
-        Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
+        Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosql");
         this.mongoDatabase = connexionDbNosql.createDatabase();
     }
 
@@ -116,7 +116,7 @@ public class Boutique {
                             // Mise à jour de l'or
                             argent -= prix;
                             personnage.setMoney(argent);
-                            personnage.updateMoneyInDB();
+                            personnage.updateMoneyInDB(mongoDatabase);
                             orRestantLabel.setText("Or restant : " + argent + " pièces");
 
                             // Mise à jour de la table

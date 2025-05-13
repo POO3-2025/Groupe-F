@@ -18,9 +18,9 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 public class main_Items {
     public static void main(String[] args)
     {
-        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
+        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosql");
         MongoDatabase database = mongoFactory.createDatabase();
-        DAO_NOSQL daoNosql = new DAO_NOSQL();
+        DAO_NOSQL daoNosql = new DAO_NOSQL("nosql");
         try {
 
             MongoCollection <Item>Itemcollection = database.getCollection("items", Item.class);
@@ -52,7 +52,7 @@ public class main_Items {
             putItemsInChest(new ObjectId(),
                     new ObjectId() , true);
 
-            daoNosql.readAllCollections(database);
+            daoNosql.readAllCollections();
 
         }catch (Exception e){
             e.printStackTrace();

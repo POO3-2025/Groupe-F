@@ -14,7 +14,7 @@ public class Inventaire {
     @JsonProperty("_id")
     protected ObjectId id;
 
-    private static Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
+    private static Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosql");
     private static MongoDatabase mongoDatabase = connexionDbNosql.createDatabase();
     private static MongoCollection<Document> collection;
     private List<Document> inventorySlots;
@@ -41,18 +41,15 @@ public class Inventaire {
         return id;
     }
 
-    public static boolean retirerObjetDeInventaire(ObjectId inventaireId, ObjectId objetId) {
-        MongoDatabase db = new Connexion_DB_Nosql("nosqlTest").createDatabase();
-        MongoCollection<Document> inventaires = db.getCollection("inventory");
+    public static boolean retirerObjetDeInventaire(MongoDatabase mongoDatabase,ObjectId inventaireId, ObjectId objetId) {
+        MongoCollection<Document> inventaires = mongoDatabase.getCollection("inventory");
 
         Document update = new Document("$pull", new Document("objets", new Document("_id", objetId)));
         return inventaires.updateOne(new Document("_id", inventaireId), update).getModifiedCount() > 0;
     }
 
-    public static Document getInventaireFromMongoDB(ObjectId inventaireId) {
+    public static Document getInventaireFromMongoDB(MongoDatabase mongoDatabase,ObjectId inventaireId) {
         try {
-            connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
-            mongoDatabase = connexionDbNosql.createDatabase();
             collection = mongoDatabase.getCollection("inventory");
 
             Document inventaire = collection.find(new Document("_id", inventaireId)).first();

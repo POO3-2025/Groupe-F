@@ -63,7 +63,7 @@ public class Combat {
 
                     System.out.println("Vous attaquez le bot !");
                     int degats = perso.attackHitsMainNu(perso);
-                    botVi.set(botVi.get() - degats); // <-- Correction ici
+                    botVi.set(botVi.get() - degats); // Le bot subit des dégâts
                     pvBot.setText("PV de l'adversaire : " + botVi);
 
                     if (botVi.get() <= 0) {
