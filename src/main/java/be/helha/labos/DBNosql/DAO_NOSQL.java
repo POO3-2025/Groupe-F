@@ -31,8 +31,8 @@ public class DAO_NOSQL {
     private static Connexion_DB_Nosql connexionDbNosql;
     private static MongoDatabase mongoDatabase;
 
-    MongoCollection<Item> Itemcollection;
-    MongoCollection<CharacterType> Charactercollection;
+    private final  MongoCollection<Item> Itemcollection;
+    private final MongoCollection<CharacterType> Charactercollection;
 
     /**
      * Constructeur de la classe DAO_NOSQL.
@@ -97,7 +97,7 @@ public class DAO_NOSQL {
      * Méthode pour supprimer un personnage par son identifiant.
      *
      */
-    public void DeleteCharacters (ObjectId id){
+    public void DeleteCharactersById(ObjectId id){
         CharacterType characterType = new CharacterType();
         characterType.removeCharacter(mongoDatabase,id);
     }

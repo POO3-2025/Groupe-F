@@ -23,6 +23,9 @@ public class Knight extends CharacterType {
         super();
         this.name = name;
         this.health = 150;
+        this.maxHealth = 150;
+        this.experience = 0;
+        this.experienceToNextLevel = 100; // Ex. : 100 XP pour passer du niveau 1 au 2
         this.title="Knight";
         this.damage = 25;
         money = 100.00;

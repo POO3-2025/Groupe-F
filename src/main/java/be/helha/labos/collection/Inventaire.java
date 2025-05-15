@@ -31,7 +31,7 @@ public class Inventaire {
         this.id = new ObjectId();
         this.mongoDatabase = mongoDatabase;
         this.inventorySlots = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             Document slot = new Document("slot_number", i + 1).append("item", null);
             inventorySlots.add(slot);
         }

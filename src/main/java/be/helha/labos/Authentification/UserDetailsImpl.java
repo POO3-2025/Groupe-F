@@ -28,7 +28,7 @@ public class UserDetailsImpl implements UserDetails {
         this.pseudo = user.getPseudo();
         this.password = user.getPassword();
         this.actif = user.isActif();
-        this.role = user.getRôle();
+        this.role = user.getRole();
     }
 
     /**

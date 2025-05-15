@@ -22,8 +22,11 @@ public class Archer extends CharacterType
                 this.name = name;
                 this.title = "Archer";
                 this.health = 100;
+                this.maxHealth = 100;
                 this.money = 100.00;
                 this.level = 1;
+                this.experience = 0;
+                this.experienceToNextLevel = 100; // Ex. : 100 XP pour passer du niveau 1 au 2
                 this.damage = 5;
                 this.dodge = 0.5;
                 this.precision = 0.9;

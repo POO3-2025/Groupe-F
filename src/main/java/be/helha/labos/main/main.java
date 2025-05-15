@@ -105,7 +105,7 @@ public class main {
                 StringBuilder builder = new StringBuilder();
                 for (CharacterType character : characters) {
                     builder.append("- ").append(character.getName())
-                            .append(" | HP: ").append(character.getHealth())
+                            .append(" | HP: ").append(character.getMaxHealth())
                             .append(" | DMG: ").append(character.getDamage())
                             .append("\n");
                 }

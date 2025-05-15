@@ -28,6 +28,9 @@ public class Orc extends CharacterType
         money = 100.00;
         level = 1;
         this.health = 250;
+        this.maxHealth = 250;
+        this.experience = 0;
+        this.experienceToNextLevel = 100; // Ex. : 100 XP pour passer du niveau 1 au 2
         this.damage = 50;
         this.dodge = 0.0;
         this.precision = 0.5;
