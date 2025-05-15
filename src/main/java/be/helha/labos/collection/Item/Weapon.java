@@ -17,6 +17,7 @@ public abstract class Weapon extends Item {
     }
 
     protected abstract String getMaterialName();
+
     public void attack() {
         System.out.printf("Vous infligez %d dégâts avec %s en %s !", getDamage(), weaponType.getName(), getMaterialName()); // Méthode abstraite à implémenter
     }

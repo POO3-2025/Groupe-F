@@ -7,7 +7,6 @@ import be.helha.labos.collection.Character.Archer;
 import be.helha.labos.collection.Character.CharacterType;
 import be.helha.labos.collection.Character.Knight;
 import be.helha.labos.collection.Character.Orc;
-import be.helha.labos.collection.Item.Item;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
@@ -15,9 +14,7 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
 
 import java.io.IOException;
 import java.util.List;
@@ -155,7 +152,7 @@ public class MenuCréerPersonnage {
                 selectionPanel.addComponent(new Button("Confirmer", () -> {
                     CharacterType selected = comboBox.getSelectedItem();
                     if (selected != null) {
-                        dao.DeleteCharacters(selected.getId());
+                        dao.DeleteCharactersById(selected.getId());
                         MessageDialog.showMessageDialog(textGUI, "Succès", "Personnage supprimé : " + selected.getName());
 
                         // Retour en arrière après suppression //
@@ -189,7 +186,8 @@ public class MenuCréerPersonnage {
                         builder.append("- ").append(character.getName())
                                 .append(" | Type: ").append(character.getTitle())
                                 .append(" | Argent: ").append(character.getMoney())
-                                .append(" | HP: ").append(character.getHealth())
+                                .append(" | HP: ").append(character.getMaxHealth())
+                                .append(" | XP: ").append(character.getExperience())
                                 .append(" | DMG: ").append(character.getDamage())
                                 .append("\n");
                     }

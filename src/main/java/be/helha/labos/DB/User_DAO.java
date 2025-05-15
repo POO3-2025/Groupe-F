@@ -91,7 +91,7 @@ public class User_DAO{
             // 🔐 Hashage du mot de passe
             String hashedPassword = PasswordUtils.hashPassword(user.getPassword());
             pstmt.setString(2, hashedPassword);
-            pstmt.setString(3, user.getRôle());
+            pstmt.setString(3, user.getRole());
             pstmt.setBoolean(4, user.isActif());
 
             if(getUserByPseudo(user.getPseudo()) == null) {
