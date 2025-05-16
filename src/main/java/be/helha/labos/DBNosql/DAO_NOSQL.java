@@ -11,7 +11,9 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
@@ -32,32 +34,46 @@ public class DAO_NOSQL {
     MongoCollection<Item> Itemcollection;
     MongoCollection<CharacterType> Charactercollection;
 
-    User_DAO userDao = new User_DAO("mysql");
-
     /**
      * Constructeur de la classe DAO_NOSQL.
      * Il initialise la connexion à la base de données et les collections nécessaires.
      */
-    public DAO_NOSQL() {
-        connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
+    public DAO_NOSQL(String dbkey) {
+        connexionDbNosql = new Connexion_DB_Nosql(dbkey);
         mongoDatabase = connexionDbNosql.createDatabase();
         Itemcollection = mongoDatabase.getCollection("items", Item.class);
         Charactercollection = mongoDatabase.getCollection("characters", CharacterType.class);
     }
 
     /**
-     * Méthode pour obtenir l'instance de la connexion à la base de données.
-     *
-     * @return L'instance de la connexion à la base de données.
+     * Méthode pour afficher le contenue de chaque collections de la DB Nosql
      */
-    public void readAllCollections (MongoDatabase database){
-        for (String collectionName : database.listCollectionNames()) {
-            MongoCollection<Document> collection = database.getCollection(collectionName);
-            System.out.println("\nLecture de la collection " + collectionName + " : ");
+    public void readAllCollections() {
+        for (String collectionName : mongoDatabase.listCollectionNames()) {
+            MongoCollection<Document> collection = mongoDatabase.getCollection(collectionName);
+            System.out.println("\nLecture de la collection : " + collectionName);
             for (Document doc : collection.find()) {
                 System.out.println(doc.toJson());
             }
         }
+    }
+
+    /**
+     * Méthode pour afficher le contenue de chaque collections de la DB Nosql en map
+     *
+     * @return la liste en map
+     */
+    public Map<String, List<Document>> readAllCollectionsAsMap() {
+        Map<String, List<Document>> result = new HashMap<>();
+        for (String collectionName : mongoDatabase.listCollectionNames()) {
+            MongoCollection<Document> collection = mongoDatabase.getCollection(collectionName);
+            List<Document> docs = new ArrayList<>();
+            for (Document doc : collection.find()) {
+                docs.add(doc);
+            }
+            result.put(collectionName, docs);
+        }
+        return result;
     }
 
     /**
@@ -66,7 +82,8 @@ public class DAO_NOSQL {
      * @param pseudo Le pseudo de l'utilisateur.
      * @param perso  Le personnage à ajouter.
      */
-    public void ajouterPersonnagePourUser(String pseudo, CharacterType perso) {
+    public void ajouterPersonnagePourUser(String dbkey,String pseudo, CharacterType perso) {
+        User_DAO userDao = new User_DAO(dbkey);
         User user = userDao.getUserByPseudo(pseudo);
         if (user != null) {
             perso.setIdUser(user.getId());
@@ -80,9 +97,9 @@ public class DAO_NOSQL {
      * Méthode pour supprimer un personnage par son identifiant.
      *
      */
-    public void DeleteCharacters (MongoDatabase database,ObjectId id){
+    public void DeleteCharacters (ObjectId id){
         CharacterType characterType = new CharacterType();
-        characterType.removeCharacter(id);
+        characterType.removeCharacter(mongoDatabase,id);
     }
 
     /**

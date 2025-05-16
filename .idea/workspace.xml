@@ -5,31 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbe35a1e-4d15-4a05-9805-559abf65640b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Http/HttpConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/AuthController$LoginRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/AuthController$LoginRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/AuthController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DBNosql/DAO_NOSQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DBNosql/DAO_NOSQL.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/Inscription.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/Inscription.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/Menu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/MenuCréerPersonnage.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/MenuCréerPersonnage.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Magasin/Magasin.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Magasin/Magasin.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Magasin/TestMagasin.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Magasin/TestMagasin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Spring/jeuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Spring/jeuController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Character/CharacterType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Character/CharacterType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Inventaire.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Inventaire.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/chests.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/chests.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/main/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/main/main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/main/main_Characters.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/main/main_Characters.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Boutique.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Boutique.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/JwtUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/DBNosql/DAO_NOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/DBNosql/DAO_NOSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Http/HttpService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Http/HttpService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Combat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Combat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Lancer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Lancer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/MenuCréerPersonnage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/MenuCréerPersonnage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Magasin/Magasin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Magasin/Magasin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Magasin/TestMagasin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Magasin/TestMagasin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/CharacterType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/CharacterType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main_Characters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main_Characters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main_Items.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main_Items.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestCharacters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestCharacters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestDAO_NOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestDAO_NOSQL.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +108,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/POO3-2025/Groupe-F.git&quot;,
-    &quot;accountId&quot;: &quot;bc5b9c12-9a5a-4383-8d16-0a62bca2a8b6&quot;
+    &quot;accountId&quot;: &quot;086906ea-dbb9-4324-9b99-634d94bce35a&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -118,10 +129,16 @@
     &quot;Gradle.Groupe-F [:be.helha.labos.Magasin.TestMagasin.main()].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Groupe-F [:be.helha.labos.main.main.main()].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Groupe-F [:be.helha.labos.main.main_Characters.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Groupe-F-develop [:be.helha.labos.Lanterna.Lancer.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Groupe-F-develop [:be.helha.labos.main.main.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Groupe-F-develop [:be.helha.labos.main.main_Characters.main()].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.TestCharacters.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.TestCharacters.testRemoveCharacter.executor&quot;: &quot;Debug&quot;,
     &quot;Gradle.TestDAO_NOSQL.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.TestDAO_NOSQL.testAjouterPersoAUser.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.TestMagasin.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.test_game_1 [:be.helha.labos.Lanterna.Lancer.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.test_game_1 [:be.helha.labos.main.main.main()].executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
     &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
@@ -136,7 +153,7 @@
     &quot;Spring Boot.ServerAuthApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.SpringApiJeuApplication.executor&quot;: &quot;Run&quot;,
     &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/Authentification&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging feature/Magasin&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/akina/Desktop/Documents cours/POO 3/Labos/Groupe-F/Groupe-F/src/main/java/be/helha/labos/Authentification&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -154,7 +171,20 @@
       <recent name="be.helha.labos.Authentification" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Lancer">
+    <configuration name="Lancer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="be.helha.labos.Lanterna.Lancer" />
+      <module name="test_game_1.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="be.helha.labos.Lanterna.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TestCharacters.testRemoveCharacter" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -212,6 +242,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Lancer" />
         <item itemvalue="Gradle.TestDAO_NOSQL.testAjouterPersoAUser" />
         <item itemvalue="Gradle.TestCharacters.testRemoveCharacter" />
       </list>
@@ -239,6 +270,9 @@
       <workItem from="1746968118707" duration="6418000" />
       <workItem from="1747052526226" duration="3530000" />
       <workItem from="1747068099252" duration="5578000" />
+      <workItem from="1747150473772" duration="1207000" />
+      <workItem from="1747172786384" duration="992000" />
+      <workItem from="1747392060179" duration="378000" />
     </task>
     <servers />
   </component>

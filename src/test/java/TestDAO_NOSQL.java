@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 @TestMethodOrder(OrderAnnotation.class)
 public class TestDAO_NOSQL {
 
-    DAO_NOSQL dao = new DAO_NOSQL();
+    DAO_NOSQL dao = new DAO_NOSQL("nosslTest");
     String dbkeySQL = "mysqlTEST";
     User_DAO userDao = new User_DAO(dbkeySQL);
 

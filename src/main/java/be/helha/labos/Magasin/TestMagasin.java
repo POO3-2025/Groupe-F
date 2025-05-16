@@ -12,7 +12,7 @@ public class TestMagasin {
         // Connexion à la base de données
         Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosql");
         MongoDatabase database = mongoFactory.createDatabase();
-        DAO_NOSQL dao = new DAO_NOSQL(); // pas utilisé pour le moment
+        DAO_NOSQL dao = new DAO_NOSQL("nosql"); // pas utilisé pour le moment
 
         try {
             // Générer des objets pour le magasin

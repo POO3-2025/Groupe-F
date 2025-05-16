@@ -61,30 +61,66 @@ public class Magasin {
      * @param personnage  Le personnage effectuant l'achat.
      * @return true si l'achat est réussi, false sinon.
      */
-    public boolean acheterObjet(Document item, CharacterType personnage) {
+    public boolean acheterObjet(Document item, CharacterType character) {
+        // Vérifier si le joueur a assez d'argent
+        double prix = item.getDouble("prix");
+        if (character.getMoney() < prix) {
+            return false;
+        }
+
+        // Vérifier si l'objet est disponible
+        if (!item.getBoolean("disponible", true)) {
+            return false;
+        }
+
         try {
-            Document characterDoc = mongoDatabase.getCollection("characters")
-                    .find(new Document("_id", personnage.getId()))
+            // Récupérer l'inventaire du personnage
+            Document inventory = mongoDatabase.getCollection("inventory")
+                    .find(new Document("_id", character.getInventoryId()))
                     .first();
 
-            if (characterDoc == null) return false;
-
-            Document inventaireDoc = characterDoc.get("inventaire", Document.class);
-            if (inventaireDoc == null) return false;
-
-            double prix = item.getDouble("prix");
-            if (prix > personnage.getMoney()) return false;
-
-            if (Inventaire.ajouterObjetDansInventaire(inventaireDoc.getObjectId("_id"), item.getObjectId("_id"))) {
-                itemsCollection.deleteOne(new Document("_id", item.getObjectId("_id")));
-                double nouvelArgent = personnage.getMoney() - prix;
-                personnage.setMoney(nouvelArgent);
-                personnage.updateMoneyInDB();
-                return true;
+            if (inventory == null) {
+                return false;
             }
-            return false;
+
+            // Trouver un emplacement vide
+            List<Document> slots = inventory.getList("slots", Document.class);
+            int emptySlotIndex = -1;
+            for (int i = 0; i < slots.size(); i++) {
+                if (slots.get(i).get("item") == null) {
+                    emptySlotIndex = i;
+                    break;
+                }
+            }
+
+            if (emptySlotIndex == -1) {
+                return false; // Inventaire plein
+            }
+
+            // Mettre à jour l'inventaire
+            mongoDatabase.getCollection("inventory").updateOne(
+                    new Document("_id", character.getInventoryId()),
+                    new Document("$set",
+                            new Document("slots." + emptySlotIndex + ".item", item)
+                    )
+            );
+
+            // Mettre à jour l'argent du personnage
+            character.setMoney(character.getMoney() - prix);
+            mongoDatabase.getCollection("characters").updateOne(
+                    new Document("_id", character.getId()),
+                    new Document("$set", new Document("money", character.getMoney()))
+            );
+
+            // Marquer l'objet comme non disponible dans le magasin
+            itemsCollection.updateOne(
+                    new Document("_id", item.getObjectId("_id")),
+                    new Document("$set", new Document("disponible", false))
+            );
+
+            return true;
         } catch (Exception e) {
-            System.out.println("Erreur lors de l'achat : " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
@@ -142,7 +178,7 @@ public class Magasin {
 
             double nouvelArgent = personnage.getMoney() + prixVente;
             personnage.setMoney(nouvelArgent);
-            personnage.updateMoneyInDB();
+            personnage.updateMoneyInDB(mongoDatabase);
 
             return true;
         } catch (Exception e) {

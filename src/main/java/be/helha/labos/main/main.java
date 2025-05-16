@@ -23,21 +23,15 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 public class main {
     public static void main(String[] args) {
-        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
-        MongoDatabase database = mongoFactory.createDatabase();
-
-        MongoCollection<Item> Itemcollection = database.getCollection("items", Item.class);
-        MongoCollection<CharacterType> Charactercollection = database.getCollection("characters", CharacterType.class);
-
 
         Authen authen = new Authen();
 
         User_DAO daoUser = new User_DAO("mysql");
-        DAO_NOSQL daoNosql = new DAO_NOSQL();
+        DAO_NOSQL daoNosql = new DAO_NOSQL("nosql");
 
         try{
 
-            //dao.supprimerTableUser();
+        //daoUser.supprimerTableUser();
 
         /*boolean connex = dao.verifierConnexion("Jo","Jo");
 
@@ -49,7 +43,7 @@ public class main {
             System.out.println("Utilisateur connexion échoué !");
         }*/
 
-            User nouvelUser = new User("Bill", "bill","USER");
+        User nouvelUser = new User("Bill", "bill","USER");
 
         /*boolean success = daoUser.ajouterUser(nouvelUser);
         if (success) {
@@ -58,23 +52,23 @@ public class main {
             System.out.println("Erreur lors de l'ajout.");
         }*/
 
-            if(daoUser.getUserByPseudo(nouvelUser.getPseudo()) != null){
-                System.out.println("User récupéré ,  pseudo :" + nouvelUser.getPseudo());
-            }
-            else {
-                System.out.println("Erreur lors de la récupération de l'utilisateur.");
-            }
+        if(daoUser.getUserByPseudo(nouvelUser.getPseudo()) != null){
+            System.out.println("User récupéré ,  pseudo :" + nouvelUser.getPseudo());
+        }
+        else {
+            System.out.println("Erreur lors de la récupération de l'utilisateur.");
+        }
 
-            List<User> lesUsers;
-            System.out.println("\nListe des users :");
-            lesUsers = daoUser.getAllUser();
-            for (User u : lesUsers) {
+        List<User> lesUsers;
+        System.out.println("\nListe des users :");
+        lesUsers = daoUser.getAllUser();
+        for (User u : lesUsers) {
                 System.out.println(u);
-            }
+        }
 
 
-            //Archer archer = new Archer("archer");
-            //daoNosql.ajouterPersonnagePourUser(nouvelUser.getPseudo(), archer);
+            Archer archer = new Archer("archer");
+            daoNosql.ajouterPersonnagePourUser("mysql",nouvelUser.getPseudo(), archer);
 
             Sword sword = new Sword();
             Sword fireSword = new Sword(Sword.SwordMaterial.FIRE);
@@ -102,16 +96,12 @@ public class main {
             /*putItemsInChest(new ObjectId("67c4687a6085201f7eca9d02"),
                     new ObjectId("67d048cb69f5966a18dcef4a") , true);*/
 
-
-            /*updateDocument(mongoDatabase, "items", new Document("type", "WoodenSword"),
-                    new Document("$set", new Document("type", "Sword")));*/
-
             System.out.println("\n\n");
-            //daoNosql.readAllCollections(mongoDatabase);
+            daoNosql.readAllCollections();
 
             List<CharacterType> characters = daoNosql.readAllCharacters(); // récupère les persos
             if (characters.isEmpty()) {
-                System.out.println("No characters found");
+               System.out.println("No characters found");
             } else {
                 StringBuilder builder = new StringBuilder();
                 for (CharacterType character : characters) {

@@ -33,23 +33,12 @@ public class MenuCréerPersonnage {
     public void afficherCréationPersonnage(String pseudo) {
 
 
-        Connexion_DB_Nosql mongoFactory = new Connexion_DB_Nosql("nosqlTest");
-        MongoDatabase mongoDatabase = mongoFactory.createDatabase();
-
+        String dbkey = "mysql";
         /**
          *
          */
-        DAO_NOSQL dao = new DAO_NOSQL();
-        User_DAO userDao = new User_DAO("mysql");
-
-        /**
-         * Appel de toutes les collections de la DB
-         */
-        MongoCollection<Document> collection = mongoDatabase.getCollection("chests");
-        MongoCollection<Item> Itemcollection = mongoDatabase.getCollection("items", Item.class);
-        MongoCollection<CharacterType> Charactercollection = mongoDatabase.getCollection("characters", CharacterType.class);
-        MongoCollection<Document>Inventairecollection = mongoDatabase.getCollection("inventory");
-        MongoCollection<Document> Magasincollection = mongoDatabase.getCollection("Magasin");
+        DAO_NOSQL dao = new DAO_NOSQL("nosql");
+        User_DAO userDao = new User_DAO(dbkey);
 
         try {
             // Utilisation de DefaultTerminalFactory pour créer un terminal Swing
@@ -69,24 +58,71 @@ public class MenuCréerPersonnage {
             WindowBasedTextGUI textGUI = new MultiWindowTextGUI(screen);
             BasicWindow window = new BasicWindow("Menu Création");
             // Création du contenu de la fenêtre (panel avec un bouton)
+
+
+
             Panel panel = new Panel();
-
             /**
-             * Méthode pour créer un perso de type Archer
+             * Méthode pour nous créer un perso
              */
-            panel.addComponent(new Button("Archer", () -> {
-                Archer archerTest = new Archer("archerTest");
-                dao.ajouterPersonnagePourUser(pseudo,archerTest);
+            panel.addComponent(new Button("Archer", () ->
+            {
+                // Création d'un panel pour la saisie du nom
+                Label label = new Label("Entrez le pseudo pour votre Archer :");
+                TextBox textBox = new TextBox();
+                panel.addComponent(label);
+                panel.addComponent(textBox);
+                textBox.takeFocus();
+                panel.addComponent(new Button("Confirmer", () ->
+                {
+                    String name = textBox.getText();
+                    if (name != null && !name.isEmpty())
+                    {
+                        Archer archer = new Archer(name);
+                        dao.ajouterPersonnagePourUser(dbkey, pseudo, archer);
+                        window.close();
+                    }
+                }));
             }));
 
-            panel.addComponent(new Button("Knight", () -> {
-                Knight KnightTest = new Knight("KnightTest");
-                dao.ajouterPersonnagePourUser(pseudo,KnightTest);
+            panel.addComponent(new Button("Knight", () ->
+            {
+                // Création d'un panel pour la saisie du nom
+                Label label = new Label("Entrez le pseudo pour votre Knight :");
+                TextBox textBox = new TextBox();
+                panel.addComponent(label);
+                panel.addComponent(textBox);
+                textBox.takeFocus();
+                panel.addComponent(new Button("Confirmer", () ->
+                {
+                    String name = textBox.getText();
+                    if (name != null && !name.isEmpty())
+                    {
+                        Knight knight = new Knight(name);
+                        dao.ajouterPersonnagePourUser(dbkey, pseudo, knight);
+                        window.close();
+                    }
+                }));
             }));
 
-            panel.addComponent(new Button("Orc", () -> {
-                Orc OrcTest = new Orc("OrcTest");
-                dao.ajouterPersonnagePourUser(pseudo,OrcTest);
+            panel.addComponent(new Button("Orc", () ->
+            {
+                // Création d'un panel pour la saisie du nom
+                Label label = new Label("Entrez le pseudo pour votre Orc :");
+                TextBox textBox = new TextBox();
+                panel.addComponent(label);
+                panel.addComponent(textBox);
+                textBox.takeFocus();
+                panel.addComponent(new Button("Confirmer", () ->
+                {
+                    String name = textBox.getText();
+                    if (name != null && !name.isEmpty())
+                    {
+                        Orc orc = new Orc(name);
+                        dao.ajouterPersonnagePourUser(dbkey, pseudo, orc);
+                        window.close();
+                    }
+                }));
             }));
 
             /**
@@ -118,7 +154,7 @@ public class MenuCréerPersonnage {
                 selectionPanel.addComponent(new Button("Confirmer", () -> {
                     CharacterType selected = comboBox.getSelectedItem();
                     if (selected != null) {
-                        dao.DeleteCharacters(mongoDatabase, selected.getId());
+                        dao.DeleteCharacters(selected.getId());
                         MessageDialog.showMessageDialog(textGUI, "Succès", "Personnage supprimé : " + selected.getName());
 
                         // Retour en arrière après suppression //
@@ -172,5 +208,6 @@ public class MenuCréerPersonnage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }
