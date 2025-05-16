@@ -19,6 +19,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -26,6 +27,7 @@ import java.util.Random;
 public class Magasin {
 
     private MongoCollection<Document> itemsCollection;
+    private final MongoCollection<Document> charactersCollection;
     private static final double PRIX_MIN = 10.0;
     private static final double PRIX_MAX = 500.0;
     private MongoDatabase mongoDatabase;
@@ -38,6 +40,7 @@ public class Magasin {
     public Magasin(MongoDatabase database) {
         this.mongoDatabase = database;
         this.itemsCollection = database.getCollection("Magasin");
+        this.charactersCollection = database.getCollection("characters");
     }
 
     /**
@@ -63,28 +66,78 @@ public class Magasin {
      */
     public boolean acheterObjet(Document item, CharacterType personnage) {
         try {
-            Document characterDoc = mongoDatabase.getCollection("characters")
-                    .find(new Document("_id", personnage.getId()))
-                    .first();
-
-            if (characterDoc == null) return false;
-
-            Document inventaireDoc = characterDoc.get("inventaire", Document.class);
-            if (inventaireDoc == null) return false;
+            if (item == null || personnage == null) {
+                System.out.println("Item ou personnage invalide");
+                return false;
+            }
 
             double prix = item.getDouble("prix");
-            if (prix > personnage.getMoney()) return false;
+            double argentActuel = personnage.getMoney();
 
-            if (Inventaire.ajouterObjetDansInventaire(mongoDatabase,inventaireDoc.getObjectId("_id"), item.getObjectId("_id"))) {
-                itemsCollection.deleteOne(new Document("_id", item.getObjectId("_id")));
-                double nouvelArgent = personnage.getMoney() - prix;
-                personnage.setMoney(nouvelArgent);
-                personnage.updateMoneyInDB(mongoDatabase);
-                return true;
+            if (argentActuel < prix) {
+                System.out.println("Pas assez d'argent ! Vous avez " + argentActuel + " pièces et l'objet coûte " + prix);
+                return false;
             }
-            return false;
+
+            // Vérifier si l'inventaire existe, sinon le créer avec 5 slots vides
+            MongoCollection<Document> inventoryCollection = mongoDatabase.getCollection("inventory");
+            Document inventoryDoc = inventoryCollection.find(
+                    new Document("characterId", personnage.getId())
+            ).first();
+
+            if (inventoryDoc == null) {
+                // Créer un nouvel inventaire avec 5 slots vides
+                List<Document> emptySlots = new ArrayList<>();
+                for (int i = 0; i < 5; i++) {
+                    emptySlots.add(new Document("item", null));
+                }
+
+                inventoryDoc = new Document()
+                        .append("characterId", personnage.getId())
+                        .append("slots", emptySlots);
+
+                inventoryCollection.insertOne(inventoryDoc);
+            }
+
+            // Chercher un slot vide
+            List<Document> slots = inventoryDoc.getList("slots", Document.class);
+            boolean slotVideTrouve = false;
+            int slotIndex = 0;
+
+            for (int i = 0; i < slots.size(); i++) {
+                Document slot = slots.get(i);
+                if (slot.get("item") == null) {
+                    slotVideTrouve = true;
+                    slotIndex = i;
+                    break;
+                }
+            }
+
+            if (!slotVideTrouve) {
+                System.out.println("Inventaire plein !");
+                return false;
+            }
+
+            // Mettre à jour le slot vide avec le nouvel item
+            inventoryCollection.updateOne(
+                    new Document("characterId", personnage.getId()),
+                    new Document("$set", new Document("slots." + slotIndex + ".item", item))
+            );
+
+            // Mettre à jour l'argent du personnage
+            charactersCollection.updateOne(
+                    new Document("_id", personnage.getId()),
+                    new Document("$set", new Document("money", argentActuel - prix))
+            );
+
+            // Mise à jour locale
+            personnage.setMoney(argentActuel - prix);
+            System.out.println("Achat réussi ! Objet ajouté à l'inventaire. Argent restant : " + personnage.getMoney());
+            return true;
+
         } catch (Exception e) {
             System.out.println("Erreur lors de l'achat : " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
@@ -97,56 +150,66 @@ public class Magasin {
      * @param shopCollection La collection MongoDB du magasin où insérer l'objet.
      * @return true si la vente est réussie, false sinon.
      */
-    public boolean vendreObjet(Document item, CharacterType personnage, MongoCollection<Document> shopCollection) {
+    public boolean vendreObjet(Document item, CharacterType personnage) {
         try {
-            Document characterDoc = mongoDatabase.getCollection("characters")
-                    .find(new Document("_id", personnage.getId()))
-                    .first();
+            if (item == null || personnage == null) {
+                System.out.println("Item ou personnage invalide");
+                return false;
+            }
 
-            if (characterDoc == null) return false;
-
-            Document inventaireDoc = characterDoc.get("inventaire", Document.class);
-            if (inventaireDoc == null) return false;
-
+            // Calculer le prix de vente (80% du prix d'achat)
             double prixVente = item.getDouble("prix") * 0.8;
+            double argentActuel = personnage.getMoney();
 
-            Document inventoryDoc = mongoDatabase.getCollection("inventory")
-                    .find(new Document("_id", inventaireDoc.getObjectId("_id")))
-                    .first();
+            // Trouver et retirer l'objet de l'inventaire
+            MongoCollection<Document> inventoryCollection = mongoDatabase.getCollection("inventory");
+            Document inventoryDoc = inventoryCollection.find(
+                    new Document("characterId", personnage.getId())
+            ).first();
 
-            if (inventoryDoc == null) return false;
+            if (inventoryDoc == null) {
+                System.out.println("Erreur : Inventaire non trouvé");
+                return false;
+            }
 
             List<Document> slots = inventoryDoc.getList("slots", Document.class);
             int slotIndex = -1;
+
+            // Trouver le slot contenant l'item
             for (int i = 0; i < slots.size(); i++) {
                 Document slot = slots.get(i);
                 Document slotItem = slot.get("item", Document.class);
-                if (slotItem != null && slotItem.getObjectId("_id").equals(item.getObjectId("_id"))) {
+                if (slotItem != null && slotItem.get("_id").equals(item.get("_id"))) {
                     slotIndex = i;
                     break;
                 }
             }
 
-            if (slotIndex == -1) return false;
+            if (slotIndex == -1) {
+                System.out.println("Erreur : Item non trouvé dans l'inventaire");
+                return false;
+            }
 
-            mongoDatabase.getCollection("inventory").updateOne(
-                    new Document("_id", inventaireDoc.getObjectId("_id")),
+            // Vider le slot en mettant l'item à null
+            inventoryCollection.updateOne(
+                    new Document("characterId", personnage.getId()),
                     new Document("$set", new Document("slots." + slotIndex + ".item", null))
             );
 
-            Document nouvelObjet = new Document()
-                    .append("nom", item.getString("nom"))
-                    .append("prix", item.getDouble("prix"));
+            // Mettre à jour l'argent du personnage
+            charactersCollection.updateOne(
+                    new Document("_id", personnage.getId()),
+                    new Document("$set", new Document("money", argentActuel + prixVente))
+            );
 
-            shopCollection.insertOne(nouvelObjet);
+            // Mise à jour locale de l'argent
+            personnage.setMoney(argentActuel + prixVente);
 
-            double nouvelArgent = personnage.getMoney() + prixVente;
-            personnage.setMoney(nouvelArgent);
-            personnage.updateMoneyInDB(mongoDatabase);
-
+            System.out.println("Vente réussie ! Vous avez gagné " + prixVente + " pièces");
             return true;
+
         } catch (Exception e) {
-            System.err.println("Erreur lors de la vente : " + e.getMessage());
+            System.out.println("Erreur lors de la vente : " + e.getMessage());
             e.printStackTrace();
             return false;
         }

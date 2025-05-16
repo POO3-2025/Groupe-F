@@ -291,15 +291,17 @@ public class Combat {
                     Document inventoryDoc = inventoryCollection.find(query).first();
                     List<Document> potionsDisponibles = new ArrayList<>();
 
+                    System.out.println("ID du personnage : " + perso.getId());
+                    System.out.println("Inventaire trouvé : " + (inventoryDoc != null));
+
                     if (inventoryDoc != null) {
-                        List<Document> slots = inventoryDoc.getList("slots", Document.class);
-                        System.out.println("Nombre de slots trouvés : " + (slots != null ? slots.size() : 0));
+                        List<Document> slots = inventoryDoc.getList("items", Document.class);
+                        System.out.println("Nombre d'items trouvés : " + (slots != null ? slots.size() : 0));
 
                         if (slots != null) {
-                            for (Document slot : slots) {
-                                Document item = slot.get("item", Document.class);
-                                System.out.println("Item examiné : " + (item != null ? item.toJson() : "null"));
-                                if (item != null && "Potion".equals(item.getString("type"))) {
+                            for (Document item : slots) {
+                                System.out.println("Item trouvé : " + item.toJson());
+                                if (item != null && "Potion".equals(item.getString("categorie"))) {
                                     String nomPotion = item.getString("nom");
                                     System.out.println("Potion trouvée : " + nomPotion);
                                     potionTable.getTableModel().addRow(nomPotion);
@@ -319,7 +321,7 @@ public class Combat {
                         int selectedIndex = potionTable.getSelectedRow();
                         if (selectedIndex >= 0 && selectedIndex < potionsDisponibles.size()) {
                             Document potionSelectionnee = potionsDisponibles.get(selectedIndex);
-                            int soin = potionSelectionnee.getInteger("valeur", 0);
+                            int soin = potionSelectionnee.getInteger("soin", 0);
                             perso.setHealth(perso.getHealth() + soin);
                             pvLabel.setText("Vos PV : " + perso.getHealth());
                             MessageDialog.showMessageDialog(textGUI, "Soin",
