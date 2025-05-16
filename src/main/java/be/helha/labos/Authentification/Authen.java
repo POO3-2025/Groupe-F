@@ -37,6 +37,7 @@ public class Authen {
                     userDetails.getAuthorities()
             );
 
+            user_DAO.setUserActif(user.getId(), true);
             return jwtUtils.generateToken(auth);
         } else {
             throw new RuntimeException("Pseudo ou mot de passe invalide");

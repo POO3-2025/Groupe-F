@@ -81,9 +81,37 @@ public class Combat {
         gui.addWindowAndWait(inventaireWindow);
     }
 
+    /**
+     * Méthode qui gère le combat avec une arme
+     * @param armeSelectionnee
+     * @param perso
+     * @param botVi
+     * @param pvBot
+     * @param pvLabel
+     * @param textGUI
+     * @param window
+     * @param armeWindow
+     * @param bot
+     */
     private void gererCombatArme(Document armeSelectionnee, CharacterType perso, AtomicInteger botVi,
                                  Label pvBot, Label pvLabel, WindowBasedTextGUI textGUI,
                                  BasicWindow window, BasicWindow armeWindow, Bot bot) {
+
+        // XP gagné en fonction du niveau du perso
+        int xpGagne;
+
+        switch (perso.getLevel()) {
+            case 1 -> xpGagne = 20;
+            case 2 -> xpGagne = 30;
+            case 3 -> xpGagne = 45;
+            case 4 -> xpGagne = 70;
+            case 5 -> xpGagne = 85;
+            case 6 -> xpGagne = 110;
+            case 7 -> xpGagne = 130;
+            case 8 -> xpGagne = 150;
+            case 9 -> xpGagne = 175;
+            default -> xpGagne = 200; // valeur par défaut au cas où
+        }
 
         try {
             // Récupérer les dégâts directement depuis le document de l'arme
@@ -103,7 +131,6 @@ public class Combat {
                 int recomp = 15;
                 perso.setMoney(perso.getMoney() + recomp);
                 perso.updateMoneyInDB(mongoDatabase);
-                int xpGagne = 20;
                 perso.gainExperience(xpGagne, mongoDatabase);
                 MessageDialog.showMessageDialog(textGUI, "Victoire",
                         "Vous avez gagné ! Voici votre récompense : " + recomp + " pièces.");

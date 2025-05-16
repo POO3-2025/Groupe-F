@@ -4,8 +4,8 @@ package be.helha.labos.collection.Item;
 public class Bow extends Weapon {
     public enum BowMaterial {
         WOOD(12f, "Bois"),
-        CROSSBOW(18f, "Arbalète"),
-        ICE(15f, "Glace");
+        CROSSBOW(80f, "Arbalète"),
+        ICE(36f, "Glace");
 
         private final String material;
         private final float damage;

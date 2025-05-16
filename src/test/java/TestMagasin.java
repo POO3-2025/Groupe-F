@@ -46,7 +46,7 @@ class TestMagasin {
         database.getCollection("inventory").drop();
 
         // Création d'un personnage de test
-        testCharacter = new Knight("TestKnight");
+        testCharacter = new Knight("TestKnight",database);
         testCharacter.setMoney(1000.0);
 
         // Insertion du personnage dans la base

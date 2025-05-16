@@ -147,7 +147,6 @@ public class Magasin {
      *
      * @param item           L'objet à vendre.
      * @param personnage     Le personnage qui vend l'objet.
-     * @param shopCollection La collection MongoDB du magasin où insérer l'objet.
      * @return true si la vente est réussie, false sinon.
      */
     public boolean vendreObjet(Document item, CharacterType personnage) {
