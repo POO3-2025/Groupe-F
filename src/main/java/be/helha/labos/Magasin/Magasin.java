@@ -19,6 +19,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -26,6 +27,7 @@ import java.util.Random;
 public class Magasin {
 
     private MongoCollection<Document> itemsCollection;
+    private final MongoCollection<Document> charactersCollection;
     private static final double PRIX_MIN = 10.0;
     private static final double PRIX_MAX = 500.0;
     private MongoDatabase mongoDatabase;
@@ -38,6 +40,7 @@ public class Magasin {
     public Magasin(MongoDatabase database) {
         this.mongoDatabase = database;
         this.itemsCollection = database.getCollection("Magasin");
+        this.charactersCollection = database.getCollection("characters");
     }
 
     /**
@@ -61,65 +64,79 @@ public class Magasin {
      * @param personnage  Le personnage effectuant l'achat.
      * @return true si l'achat est réussi, false sinon.
      */
-    public boolean acheterObjet(Document item, CharacterType character) {
-        // Vérifier si le joueur a assez d'argent
-        double prix = item.getDouble("prix");
-        if (character.getMoney() < prix) {
-            return false;
-        }
-
-        // Vérifier si l'objet est disponible
-        if (!item.getBoolean("disponible", true)) {
-            return false;
-        }
-
+    public boolean acheterObjet(Document item, CharacterType personnage) {
         try {
-            // Récupérer l'inventaire du personnage
-            Document inventory = mongoDatabase.getCollection("inventory")
-                    .find(new Document("_id", character.getInventoryId()))
-                    .first();
-
-            if (inventory == null) {
+            if (item == null || personnage == null) {
+                System.out.println("Item ou personnage invalide");
                 return false;
             }
 
-            // Trouver un emplacement vide
-            List<Document> slots = inventory.getList("slots", Document.class);
-            int emptySlotIndex = -1;
+            double prix = item.getDouble("prix");
+            double argentActuel = personnage.getMoney();
+
+            if (argentActuel < prix) {
+                System.out.println("Pas assez d'argent ! Vous avez " + argentActuel + " pièces et l'objet coûte " + prix);
+                return false;
+            }
+
+            // Vérifier si l'inventaire existe, sinon le créer avec 5 slots vides
+            MongoCollection<Document> inventoryCollection = mongoDatabase.getCollection("inventory");
+            Document inventoryDoc = inventoryCollection.find(
+                    new Document("characterId", personnage.getId())
+            ).first();
+
+            if (inventoryDoc == null) {
+                // Créer un nouvel inventaire avec 5 slots vides
+                List<Document> emptySlots = new ArrayList<>();
+                for (int i = 0; i < 5; i++) {
+                    emptySlots.add(new Document("item", null));
+                }
+
+                inventoryDoc = new Document()
+                        .append("characterId", personnage.getId())
+                        .append("slots", emptySlots);
+
+                inventoryCollection.insertOne(inventoryDoc);
+            }
+
+            // Chercher un slot vide
+            List<Document> slots = inventoryDoc.getList("slots", Document.class);
+            boolean slotVideTrouve = false;
+            int slotIndex = 0;
+
             for (int i = 0; i < slots.size(); i++) {
-                if (slots.get(i).get("item") == null) {
-                    emptySlotIndex = i;
+                Document slot = slots.get(i);
+                if (slot.get("item") == null) {
+                    slotVideTrouve = true;
+                    slotIndex = i;
                     break;
                 }
             }
 
-            if (emptySlotIndex == -1) {
-                return false; // Inventaire plein
+            if (!slotVideTrouve) {
+                System.out.println("Inventaire plein !");
+                return false;
             }
 
-            // Mettre à jour l'inventaire
-            mongoDatabase.getCollection("inventory").updateOne(
-                    new Document("_id", character.getInventoryId()),
-                    new Document("$set",
-                            new Document("slots." + emptySlotIndex + ".item", item)
-                    )
+            // Mettre à jour le slot vide avec le nouvel item
+            inventoryCollection.updateOne(
+                    new Document("characterId", personnage.getId()),
+                    new Document("$set", new Document("slots." + slotIndex + ".item", item))
             );
 
             // Mettre à jour l'argent du personnage
-            character.setMoney(character.getMoney() - prix);
-            mongoDatabase.getCollection("characters").updateOne(
-                    new Document("_id", character.getId()),
-                    new Document("$set", new Document("money", character.getMoney()))
+            charactersCollection.updateOne(
+                    new Document("_id", personnage.getId()),
+                    new Document("$set", new Document("money", argentActuel - prix))
             );
 
-            // Marquer l'objet comme non disponible dans le magasin
-            itemsCollection.updateOne(
-                    new Document("_id", item.getObjectId("_id")),
-                    new Document("$set", new Document("disponible", false))
-            );
-
+            // Mise à jour locale
+            personnage.setMoney(argentActuel - prix);
+            System.out.println("Achat réussi ! Objet ajouté à l'inventaire. Argent restant : " + personnage.getMoney());
             return true;
+
         } catch (Exception e) {
+            System.out.println("Erreur lors de l'achat : " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -133,56 +150,66 @@ public class Magasin {
      * @param shopCollection La collection MongoDB du magasin où insérer l'objet.
      * @return true si la vente est réussie, false sinon.
      */
-    public boolean vendreObjet(Document item, CharacterType personnage, MongoCollection<Document> shopCollection) {
+    public boolean vendreObjet(Document item, CharacterType personnage) {
         try {
-            Document characterDoc = mongoDatabase.getCollection("characters")
-                    .find(new Document("_id", personnage.getId()))
-                    .first();
+            if (item == null || personnage == null) {
+                System.out.println("Item ou personnage invalide");
+                return false;
+            }
 
-            if (characterDoc == null) return false;
-
-            Document inventaireDoc = characterDoc.get("inventaire", Document.class);
-            if (inventaireDoc == null) return false;
-
+            // Calculer le prix de vente (80% du prix d'achat)
             double prixVente = item.getDouble("prix") * 0.8;
+            double argentActuel = personnage.getMoney();
 
-            Document inventoryDoc = mongoDatabase.getCollection("inventory")
-                    .find(new Document("_id", inventaireDoc.getObjectId("_id")))
-                    .first();
+            // Trouver et retirer l'objet de l'inventaire
+            MongoCollection<Document> inventoryCollection = mongoDatabase.getCollection("inventory");
+            Document inventoryDoc = inventoryCollection.find(
+                    new Document("characterId", personnage.getId())
+            ).first();
 
-            if (inventoryDoc == null) return false;
+            if (inventoryDoc == null) {
+                System.out.println("Erreur : Inventaire non trouvé");
+                return false;
+            }
 
             List<Document> slots = inventoryDoc.getList("slots", Document.class);
             int slotIndex = -1;
+
+            // Trouver le slot contenant l'item
             for (int i = 0; i < slots.size(); i++) {
                 Document slot = slots.get(i);
                 Document slotItem = slot.get("item", Document.class);
-                if (slotItem != null && slotItem.getObjectId("_id").equals(item.getObjectId("_id"))) {
+                if (slotItem != null && slotItem.get("_id").equals(item.get("_id"))) {
                     slotIndex = i;
                     break;
                 }
             }
 
-            if (slotIndex == -1) return false;
+            if (slotIndex == -1) {
+                System.out.println("Erreur : Item non trouvé dans l'inventaire");
+                return false;
+            }
 
-            mongoDatabase.getCollection("inventory").updateOne(
-                    new Document("_id", inventaireDoc.getObjectId("_id")),
+            // Vider le slot en mettant l'item à null
+            inventoryCollection.updateOne(
+                    new Document("characterId", personnage.getId()),
                     new Document("$set", new Document("slots." + slotIndex + ".item", null))
             );
 
-            Document nouvelObjet = new Document()
-                    .append("nom", item.getString("nom"))
-                    .append("prix", item.getDouble("prix"));
+            // Mettre à jour l'argent du personnage
+            charactersCollection.updateOne(
+                    new Document("_id", personnage.getId()),
+                    new Document("$set", new Document("money", argentActuel + prixVente))
+            );
 
-            shopCollection.insertOne(nouvelObjet);
+            // Mise à jour locale de l'argent
+            personnage.setMoney(argentActuel + prixVente);
 
-            double nouvelArgent = personnage.getMoney() + prixVente;
-            personnage.setMoney(nouvelArgent);
-            personnage.updateMoneyInDB(mongoDatabase);
-
+            System.out.println("Vente réussie ! Vous avez gagné " + prixVente + " pièces");
             return true;
+
         } catch (Exception e) {
-            System.err.println("Erreur lors de la vente : " + e.getMessage());
+            System.out.println("Erreur lors de la vente : " + e.getMessage());
             e.printStackTrace();
             return false;
         }

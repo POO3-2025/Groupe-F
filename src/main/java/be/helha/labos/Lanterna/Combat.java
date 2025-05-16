@@ -1,6 +1,8 @@
 package be.helha.labos.Lanterna;
 
 import be.helha.labos.Bot.Bot;
+import be.helha.labos.DBNosql.Connexion_DB_Nosql;
+import be.helha.labos.DBNosql.DAO_NOSQL;
 import be.helha.labos.collection.Character.CharacterType;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
@@ -9,8 +11,10 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
+import com.mongodb.client.MongoDatabase;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -25,6 +29,9 @@ public class Combat {
      */
     public void AfficherCombat(CharacterType perso, boolean type) {
         Bot bot = new Bot();
+        Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosql");
+        MongoDatabase mongoDatabase = connexionDbNosql.createDatabase();
+
         try {
             // Utilisation de DefaultTerminalFactory pour créer un terminal Swing
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
@@ -53,8 +60,19 @@ public class Combat {
                 // PV du joueur
                 Label pvLabel = new Label("Vos PV : " + perso.getHealth());
                 panel.addComponent(pvLabel);
+
                 // PV du bot
-                AtomicInteger botVi = new AtomicInteger(100); // PV du bot
+                int pvInitialBot;
+                // PV du bot en fonction du niveau du perso
+                switch (perso.getLevel()) {
+                    case 1 -> pvInitialBot = 70;
+                    case 2 -> pvInitialBot = 90;
+                    case 3 -> pvInitialBot = 120;
+                    default -> pvInitialBot = 100; // valeur par défaut au cas où
+                }
+
+                AtomicInteger botVi = new AtomicInteger(pvInitialBot);
+
 
                 Label pvBot = new Label("PV de l'adversaire : " + botVi );
                 panel.addComponent(pvBot);
@@ -64,29 +82,49 @@ public class Combat {
                     System.out.println("Vous attaquez le bot !");
                     int degats = perso.attackHitsMainNu(perso);
                     botVi.set(botVi.get() - degats); // Le bot subit des dégâts
-                    pvBot.setText("PV de l'adversaire : " + botVi);
+                    System.out.println("Le bot a pris " + degats + " de dégâts !");
 
                     if (botVi.get() <= 0) {
-                        perso.setMoney(perso.getMoney() + 15);
-                        MessageDialog.showMessageDialog(textGUI, "Victoire", "Vous avez gagné !");
+
+                        pvBot.setText("PV de l'adversaire : 0");
+
+                        int recomp = 15;
+                        perso.setMoney( perso.getMoney() + recomp); //
+                        perso.updateMoneyInDB(mongoDatabase);
+
+                        int xpGagne = 20;
+                        perso.gainExperience(xpGagne, mongoDatabase);
+
+                        MessageDialog.showMessageDialog(textGUI, "Victoire", "Vous avez gagné ! , " +
+                                "voici votre récompense : " + recomp +" pièces.");
+
+                        perso.recupererVie(mongoDatabase);
+
                         window.close();
                         return;
                     }
+                    else {
+                        pvBot.setText("PV de l'adversaire : " + botVi.get());
+                    }
 
-                    int retour = bot.jouerContreBot(perso,false); // Attaque du bot
+                    int retour = bot.jouerContreBot(perso); // Attaque du bot
                     perso.setHealth(perso.getHealth() - retour);
                     System.out.println("Le bot vous a infligé :" + retour);
                     pvLabel.setText("Vos PV : " + perso.getHealth());
 
                     if (perso.getHealth() <= 0) {
-                        MessageDialog.showMessageDialog(textGUI, "Défaite", "Vous avez perdu !");
+
+                        MessageDialog.showMessageDialog(textGUI, "Défaite", "Vous avez perdu ! " +
+                                "Vous ne gagnez rien !");
+
+                        perso.recupererVie(mongoDatabase);
                         window.close();
                     }
                     }));
 
                     panel.addComponent(new Button("Coup avec l'arme", () -> {
                     // Simuler une autre attaque
-                    int retour = bot.jouerContreBot(perso,true);
+                    int retour = bot.jouerContreBot(perso);
                     perso.setHealth(perso.getHealth() - retour);
                     pvLabel.setText("Vos PV : " + perso.getHealth());
                     }));

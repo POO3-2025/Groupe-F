@@ -22,7 +22,7 @@ public class TestUser {
         // Vérification des getters
         assertEquals("TestPseudo", user1.getPseudo());
         assertEquals("TestPassword", user1.getPassword());
-        assertEquals("TestRole",user1.getRôle());
+        assertEquals("TestRole",user1.getRole());
     }
 
     @Test
@@ -35,12 +35,12 @@ public class TestUser {
         // Modification via les setters
         user1.setPseudo("TestPseudo2");
         user1.setPassword("TestPassword2");
-        user1.setRôle("TestRole2"); // La provenance doit être setter à false avant de modifier l'état de la paire pour 'T' ou 'B'
+        user1.setRole("TestRole2"); // La provenance doit être setter à false avant de modifier l'état de la paire pour 'T' ou 'B'
 
         // Vérification des nouvelles valeurs
         assertEquals("TestPseudo2", user1.getPseudo());
         assertEquals("TestPassword2", user1.getPassword());
-        assertEquals("TestRole2",user1.getRôle());
+        assertEquals("TestRole2",user1.getRole());
     }
 
     @Test
@@ -50,5 +50,25 @@ public class TestUser {
         // Création d'un objet User
         User user1 = new User("TestPseudo", "PasswordSecret", "TestRole");
         assertEquals("PasswordSecret", user1.getPassword());
+    }
+
+    @Test
+    @DisplayName("Test de l'état actif par défaut")
+    @Order(4)
+    public void testActifParDefaut() {
+        User user = new User("pseudo", "password", "admin");
+        assertTrue(user.isActif(), "L'utilisateur doit être actif par défaut");
+    }
+
+    @Test
+    @DisplayName("Test du toString()")
+    @Order(5)
+    public void testToString() {
+        User user = new User(1, "pseudo", "motdepasse", "admin");
+        String attendu = "\n{id=1" +
+                "\n pseudo='pseudo" +
+                "\n rôle='admin" +
+                "\n actif=true}";
+        assertEquals(attendu, user.toString());
     }
 }

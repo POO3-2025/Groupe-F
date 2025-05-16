@@ -40,7 +40,7 @@ public class Boutique {
      */
     public Boutique(MongoCollection<Document> collection) {
         this.collection = collection;
-        Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosqlTest");
+        Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosql");
         this.mongoDatabase = connexionDbNosql.createDatabase();
         this.magasin = new Magasin(mongoDatabase);
     }
@@ -132,39 +132,6 @@ public class Boutique {
                               Label orRestantLabel) {
         if (objetSelectionne == null) return;
 
-        Document characterDoc = mongoDatabase.getCollection("characters")
-                .find(new Document("_id", personnage.getId()))
-                .first();
-
-        if (characterDoc == null) {
-            MessageDialog.showMessageDialog(gui, "Erreur", "Personnage introuvable.");
-            return;
-        }
-
-        Document inventaireDoc = characterDoc.get("inventaire", Document.class);
-        if (inventaireDoc == null) {
-            MessageDialog.showMessageDialog(gui, "Erreur", "Inventaire non trouvé.");
-            return;
-        }
-
-        Document fullInventaireDoc = mongoDatabase.getCollection("inventory")
-                .find(new Document("_id", inventaireDoc.getObjectId("_id")))
-                .first();
-
-        List<Document> slots = fullInventaireDoc.getList("slots", Document.class);
-        boolean inventairePlein = true;
-        for (Document slot : slots) {
-            if (slot.get("item") == null) {
-                inventairePlein = false;
-                break;
-            }
-        }
-
-        if (inventairePlein) {
-            MessageDialog.showMessageDialog(gui, "Erreur", "Votre inventaire est plein.");
-            return;
-        }
-
         double prix = objetSelectionne.getDouble("prix");
         String nom = objetSelectionne.getString("nom");
 
@@ -173,23 +140,41 @@ public class Boutique {
             return;
         }
 
-        MessageDialogButton confirmation = MessageDialog.showMessageDialog(
-                gui,
-                "Confirmation d'achat",
-                String.format("Acheter %s pour %.2f pièces ?", nom, prix),
-                MessageDialogButton.Yes,
-                MessageDialogButton.No
-        );
+        // Vérifier l'inventaire du personnage pour voir s'il est plein
+        MongoCollection<Document> inventoryCollection = mongoDatabase.getCollection("inventory");
+        Document inventoryDoc = inventoryCollection.find(
+                new Document("characterId", personnage.getId())
+        ).first();
 
-        if (confirmation == MessageDialogButton.Yes) {
+        if (inventoryDoc != null) {
+            List<Document> slots = inventoryDoc.getList("slots", Document.class);
+            boolean inventairePlein = true;
+            for (Document slot : slots) {
+                if (slot.get("item") == null) {
+                    inventairePlein = false;
+                    break;
+                }
+            }
+
+            if (inventairePlein) {
+                MessageDialog.showMessageDialog(gui, "Inventaire plein", "Impossible d'acheter, l'inventaire est plein !");
+                return;
+            }
+        }
+
+        // Demander confirmation pour l'achat seulement si l'inventaire n'est pas plein
+        MessageDialogButton reponse = MessageDialog.showMessageDialog(gui,
+                "Confirmation d'achat",
+                "Voulez-vous acheter " + nom + " pour " + prix + " pièces ?",
+                MessageDialogButton.Yes, MessageDialogButton.No);
+
+        if (reponse == MessageDialogButton.Yes) {
             if (magasin.acheterObjet(objetSelectionne, personnage)) {
                 objetsDisponibles.remove(selectedRow);
                 objetsTable.getTableModel().removeRow(selectedRow);
                 orRestantLabel.setText("Or restant : " + personnage.getMoney() + " pièces");
                 MessageDialog.showMessageDialog(gui, "Achat réussi",
                         String.format("Vous avez acheté %s pour %.2f pièces", nom, prix));
-            } else {
-                MessageDialog.showMessageDialog(gui, "Erreur", "L'achat a échoué.");
             }
         }
     }
@@ -207,23 +192,21 @@ public class Boutique {
         Table<String> inventaireTable = new Table<>("Nom", "Prix de vente");
         Label orActuelLabel = new Label("Or actuel : " + personnage.getMoney() + " pièces");
 
-        Document characterDoc = mongoDatabase.getCollection("characters")
-                .find(new Document("_id", personnage.getId()))
-                .first();
+        // Récupérer l'inventaire directement par characterId
+        MongoCollection<Document> inventoryCollection = mongoDatabase.getCollection("inventory");
+        Document inventoryDoc = inventoryCollection.find(
+                new Document("characterId", personnage.getId())
+        ).first();
 
-        if (characterDoc == null) {
-            MessageDialog.showMessageDialog(gui, "Erreur", "Personnage introuvable.");
+        if (inventoryDoc == null) {
+            MessageDialog.showMessageDialog(gui, "Erreur", "Inventaire introuvable.");
             return;
         }
 
-        Document inventaireDoc = characterDoc.get("inventaire", Document.class);
-        Document fullInventaireDoc = mongoDatabase.getCollection("inventory")
-                .find(new Document("_id", inventaireDoc.getObjectId("_id")))
-                .first();
-
-        List<Document> slots = fullInventaireDoc.getList("slots", Document.class, new ArrayList<>());
+        List<Document> slots = inventoryDoc.getList("slots", Document.class);
         List<Document> objetsVendables = new ArrayList<>();
 
+        // Remplir la table avec les objets de l'inventaire
         for (Document slot : slots) {
             Document item = slot.get("item", Document.class);
             if (item != null) {
@@ -278,7 +261,7 @@ public class Boutique {
         );
 
         if (confirmation == MessageDialogButton.Yes) {
-            if (magasin.vendreObjet(itemAVendre, personnage, collection)) {
+            if (magasin.vendreObjet(itemAVendre, personnage)) {  // Suppression du paramètre collection
                 inventaireTable.getTableModel().removeRow(selectedRow);
                 objetsVendables.remove(selectedRow);
                 orActuelLabel.setText("Or actuel : " + personnage.getMoney() + " pièces");

@@ -13,10 +13,11 @@ public class User {
     @Column(nullable = false, unique = true)
     private String pseudo;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
+
     private String password;
     private boolean actif;
-    private String rôle;
+    private String role;
 
     public User() {
     }
@@ -24,7 +25,7 @@ public class User {
     public User(String pseudo, String password,String role) {
         this.pseudo = pseudo;
         this.password = password;
-        this.rôle = role;
+        this.role = role;
         this.actif = true;
     }
 
@@ -32,7 +33,7 @@ public class User {
         this.id = id;
         this.pseudo = pseudo;
         this.password = password;
-        this.rôle = role;
+        this.role = role;
         this.actif = true;
     }
 
@@ -62,12 +63,12 @@ public class User {
         this.password = password;
     }
 
-    public String getRôle() {
-        return rôle;
+    public String getRole() {
+        return role;
     }
 
-    public void setRôle(String rôle) {
-        this.rôle = rôle;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public boolean isActif() {
@@ -83,7 +84,7 @@ public class User {
         return
                 "\n{id=" + id +
                 "\n pseudo='" + pseudo +
-                "\n role='" + rôle +
+                "\n rôle='" + role +
                 "\n actif=" + actif + "}";
     }
 }

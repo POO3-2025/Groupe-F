@@ -34,7 +34,7 @@ public class TestCharacters {
     @DisplayName("Test du constructeur et des getters de CharacterType")
     @Order(1)
     public void testCharacterTypeConstructeurEtGetters() {
-        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8, testUser);
+        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8,db, testUser);
 
         assertEquals("TestCharacter", character.getName());
         assertEquals(100, character.getHealth());
@@ -74,7 +74,7 @@ public class TestCharacters {
     @DisplayName("Test du constructeur et des méthodes spécifiques de Archer")
     @Order(3)
     public void testArcher() {
-        Archer archer = new Archer("TestArcher");
+        Archer archer = new Archer("TestArcher",db);
 
         assertEquals("TestArcher", archer.getName());
         assertEquals("Archer", archer.getTitle());
@@ -90,7 +90,7 @@ public class TestCharacters {
     @DisplayName("Test du constructeur et des méthodes spécifiques de Knight")
     @Order(4)
     public void testKnight() {
-        Knight knight = new Knight("TestKnight");
+        Knight knight = new Knight("TestKnight",db);
 
         assertEquals("TestKnight", knight.getName());
         assertEquals("Knight", knight.getTitle());
@@ -106,7 +106,7 @@ public class TestCharacters {
     @DisplayName("Test du constructeur et des méthodes spécifiques de Orc")
     @Order(5)
     public void testOrc() {
-        Orc orc = new Orc("TestOrc");
+        Orc orc = new Orc("TestOrc",db);
 
         assertEquals("TestOrc", orc.getName());
         assertEquals("Orc", orc.getTitle());
@@ -122,7 +122,7 @@ public class TestCharacters {
     @DisplayName("Test de la méthode attackHits de CharacterType")
     @Order(6)
     public void testAttackHits() {
-        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8, testUser);
+        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8,db, testUser);
         boolean attackResult = character.attackHits();
 
         // Vérifie que la méthode retourne un bool
@@ -133,8 +133,8 @@ public class TestCharacters {
     @DisplayName("Test de la méthode attackHitsMainNu de CharacterType")
     @Order(7)
     public void testAttackHitsMainNu() {
-        CharacterType attacker = new CharacterType("Attacker", 100, 10, 0.2, 0.8, testUser);
-        CharacterType target = new CharacterType("Target", 100, 5, 0.1, 0.9, testUser);
+        CharacterType attacker = new CharacterType("Attacker", 100, 10, 0.2, 0.8,db, testUser);
+        CharacterType target = new CharacterType("Target", 100, 5, 0.1, 0.9,db, testUser);
 
         int damage = attacker.attackHitsMainNu(target);
 
@@ -146,7 +146,7 @@ public class TestCharacters {
     @DisplayName("Test de la mise à jour de l'argent dans la base de données")
     @Order(9)
     public void testUpdateMoneyInDB() {
-        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8, testUser);
+        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8,db, testUser);
         character.setMoney(200.00);
 
         // Simule la mise à jour dans la base de données
@@ -161,9 +161,7 @@ public class TestCharacters {
     @Order(10)
     public void testRemoveCharacter() {
         // Insère un personnage ("test") dans la base de données avec son inventaire
-        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8, testUser);
-        character.setInventaire(new Inventaire());
-        character.getInventaire().insererDansLaBase();
+        Knight character = new Knight("TestCharacter",db);
         MongoCollection<Document> collection = db.getCollection("characters");
         collection.insertOne(new Document("_id", character.getId())
                 .append("name", character.getName())
@@ -184,7 +182,7 @@ public class TestCharacters {
     @DisplayName("Test de la méthode toString pour CharacterType")
     @Order(11)
     public void testToStringCharacterType() {
-        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8, testUser);
+        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8,db, testUser);
         String expected = "Character{name='TestCharacter', health=100, title='null', damage=10, money=100.0, user=1, dodge=0.2, precision=0.8}";
         assertEquals(expected, character.toString());
     }
@@ -193,7 +191,7 @@ public class TestCharacters {
     @DisplayName("Test de la méthode toString pour Archer")
     @Order(12)
     public void testToStringArcher() {
-        Archer archer = new Archer("TestArcher");
+        Archer archer = new Archer("TestArcher",db);
         String expected = "Archer{name='TestArcher', health=100, title='Archer', damage=5, money=100.0, user=0, dodge=0.5, precision=0.9}";
         assertEquals(expected, archer.toString());
     }

@@ -27,6 +27,9 @@ public class CharacterType {
     protected String name;
     protected String title;
     protected int health;
+    protected int maxHealth;
+    protected int experience;
+    protected int experienceToNextLevel;
     protected int idUser;
     protected int damage;
     protected double money;
@@ -34,7 +37,6 @@ public class CharacterType {
     protected Inventaire inventaire;
     protected double dodge;
     protected double precision;
-    private ObjectId inventoryId;
 
 
     private static Connexion_DB_Nosql connexionDbNosql;
@@ -56,7 +58,7 @@ public class CharacterType {
      * @param precision
      * @param user
      */
-    public CharacterType(String name, int health, int damage, double dodge, double precision,User user) {
+    public CharacterType(String name, int health, int damage, double dodge, double precision,MongoDatabase database,User user) {
         this.id = new ObjectId();
         this.name = name;
         this.health = health;
@@ -96,14 +98,6 @@ public class CharacterType {
     public ObjectId getId()
     {
         return id;
-    }
-
-    public ObjectId getInventoryId() {
-        return inventoryId;
-    }
-
-    public void setInventoryId(ObjectId inventoryId) {
-        this.inventoryId = inventoryId;
     }
 
     /**
@@ -147,6 +141,38 @@ public class CharacterType {
     }
 
     /**
+     * Méthode getter pour récuperer l'expérience actuelle du perso
+     * @return
+     */
+    public int getExperience() {
+        return experience;
+    }
+
+    /**
+     * Méthode setter pour l'expérience actuelle du perso
+     * @param experience
+     */
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
+    /**
+     * Méthode getter pour l'expérience nécéssaire afin de passer d'un niveau
+     * @return
+     */
+    public int getExperienceToNextLevel() {
+        return experienceToNextLevel;
+    }
+
+    /**
+     * Méthode setter pour l'expérience nécéssaire afin de passer d'un niveau
+     * @param experienceToNextLevel
+     */
+    public void setExperienceToNextLevel(int experienceToNextLevel) {
+        this.experienceToNextLevel = experienceToNextLevel;
+    }
+
+    /**
      * Méthode de récupération de la vie
      * @return
      */
@@ -160,6 +186,22 @@ public class CharacterType {
      */
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    /**
+     * Méthode de getter de la vie maximum
+     * @return
+     */
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    /**
+     * méthode de setter de la vie maximum
+     * @param maxHealth
+     */
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
     }
 
     /**
@@ -276,11 +318,11 @@ public class CharacterType {
     public String toString() {
         return "Character{" +
                 "name='" + name + '\'' +
-                ", health=" + health +
+                ", health=" + maxHealth +
                 ", title='" + title + '\'' +
                 ", damage=" + damage +
+                ", experience=" + experience +
                 ", money=" + money +
-                ", user=" + idUser +
                 ", dodge=" + dodge +
                 ", precision=" + precision +
                 '}';
@@ -296,21 +338,84 @@ public class CharacterType {
     }
 
     /**
-     * Méthode retirer un personnage de la DB noSQL
-     * @param characterId
+     * Méthode pour que le perso récupère toute sa vie après un combat
+     * @param mongoDatabase
      */
-    public void removeCharacter(MongoDatabase mongoDatabase,ObjectId characterId) {
-        try {
+    public void recupererVie(MongoDatabase mongoDatabase) {
+        MongoCollection<Document> collection = mongoDatabase.getCollection("characters");
 
-            // Récupération de la collection des personnages
+        // Mise à jour de l'attribut en mémoire
+        this.health = this.maxHealth;  // Suppose que tu as bien un attribut `maxHealth`
+
+        // Mise à jour dans la DB
+        Document filter = new Document("_id", this.getId());
+        Document update = new Document("$set", new Document("health", this.maxHealth));
+
+        collection.updateOne(filter, update);
+    }
+
+    /**
+     *  Ajoute l'éxpérience gagné lors d'un combat et l'enregistre dans la collecyion du perso en DB NOSQL
+     * @param amount // l'expérience en int
+     * @param mongoDatabase // la Db pour la connexion
+     */
+    public void gainExperience(int amount, MongoDatabase mongoDatabase) {
+        this.experience += amount;
+
+        if (this.experience >= this.experienceToNextLevel) {
+            levelUp(mongoDatabase);
+        }
+
+        // Mise à jour de l'XP dans la DB
+        MongoCollection<Document> collection = mongoDatabase.getCollection("characters");
+        Document filter = new Document("_id", this.getId());
+        Document update = new Document("$set", new Document("experience", this.experience));
+        collection.updateOne(filter, update);
+    }
+
+    /**
+     * Méthode permettant de passer d'un niveau si l'expérience suffit
+     * @param mongoDatabase // la Db pour la connexion
+     */
+    private void levelUp(MongoDatabase mongoDatabase) {
+        this.experience -= this.experienceToNextLevel;
+        this.level++;
+        this.experienceToNextLevel += 50; // Chaque niveau demande 50 XP en plus
+
+        // Augmenter stats du personnage
+        this.maxHealth += 20;
+        this.damage += 5;
+        this.health = this.maxHealth; // Vie pleine à la montée de niveau
+
+        // Mise à jour dans la DB
+        MongoCollection<Document> collection = mongoDatabase.getCollection("characters");
+        Document filter = new Document("_id", this.getId());
+        Document update = new Document("$set",
+                new Document("level", this.level)
+                        .append("experience", this.experience)
+                        .append("experienceToNextLevel", this.experienceToNextLevel)
+                        .append("health", this.health)
+                        .append("maxHealth", this.maxHealth)
+                        .append("damage", this.damage)
+        );
+        collection.updateOne(filter, update);
+    }
+
+    /**
+     * Méthode retirer un personnage de la DB noSQL
+     * @param characterId // L'Object ID du personnage
+     */
+    public void removeCharacter(MongoDatabase mongoDatabase, ObjectId characterId) {
+        try {
             MongoCollection<Document> charactersCollection = mongoDatabase.getCollection("characters");
 
             // Récupération du document personnage AVANT suppression
             Document characterDoc = charactersCollection.find(new Document("_id", characterId)).first();
 
             if (characterDoc != null) {
-                // Récupérer l'ID de l'inventaire à partir du champ "inventaire._id"
-                ObjectId inventoryId= characterDoc.getObjectId("inventaire");
+                // Récupérer le sous-document "inventaire"
+                Document inventaireDoc = (Document) characterDoc.get("inventaire");
+                ObjectId inventoryId = inventaireDoc.getObjectId("_id");
 
                 // Suppression du personnage
                 charactersCollection.deleteOne(new Document("_id", characterId));
@@ -333,10 +438,9 @@ public class CharacterType {
         }
     }
 
-    public Inventaire getInventaireFromDB() {
-        Connexion_DB_Nosql connexion = new Connexion_DB_Nosql("nosqlTest");
-        MongoDatabase db = connexion.createDatabase();
-        MongoCollection<Inventaire> inventaireCollection = db.getCollection("inventory", Inventaire.class);
+
+    public Inventaire getInventaireFromDB(MongoDatabase mongoDatabase) {
+        MongoCollection<Inventaire> inventaireCollection = mongoDatabase.getCollection("inventory", Inventaire.class);
         return inventaireCollection.find(eq("_id", inventaire)).first();
     }
 

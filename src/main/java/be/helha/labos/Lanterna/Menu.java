@@ -54,7 +54,7 @@ public class Menu {
             panel.addComponent(new Button("Comment jouer ?", () -> {
                 MessageDialog.showMessageDialog(textGUI, "Les règles du jeu", "Voici comment jouer : \n" +
                         "Taper l'adversaire (genre fort) ! \n" +   // les //n permettent de sauter une ligne
-                        "C'est tous ! ");
+                        "C'est tout ! ");
             }));
 
             panel.addComponent(new Button("Jouer", () -> {
