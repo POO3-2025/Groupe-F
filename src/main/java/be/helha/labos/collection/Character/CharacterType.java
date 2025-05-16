@@ -90,6 +90,40 @@ public class CharacterType {
         return perso.getDamage();
     }
 
+    public int attackHitsArme(CharacterType personnage, MongoDatabase mongoDatabase, String itemId) {
+        MongoCollection<Document> inventoryCollection = mongoDatabase.getCollection("inventory");
+        Document query = new Document("characterId", this.getId());
+        Document inventoryDoc = inventoryCollection.find(query).first();
+
+        if (inventoryDoc == null || itemId == null) {
+            return attackHitsMainNu(personnage);
+        }
+
+        @SuppressWarnings("unchecked")
+        java.util.List<Document> slots = (java.util.List<Document>) inventoryDoc.get("slots");
+        if (slots == null || slots.isEmpty()) {
+            return attackHitsMainNu(personnage);
+        }
+
+        // Chercher l'arme spécifique par son ID
+        Document armeEquipee = null;
+        for (Document slot : slots) {
+            Document item = slot.get("item", Document.class);
+            if (item != null && item.get("_id").toString().equals(itemId)) {
+                armeEquipee = item;
+                break;
+            }
+        }
+
+        // Si on trouve l'arme, utiliser ses dégâts
+        if (armeEquipee != null) {
+            int degatsArme = armeEquipee.getInteger("attack");
+            return degatsArme + new Random().nextInt(3);
+        }
+
+        return attackHitsMainNu(personnage);
+    }
+
 
     /**
      * Méthode de récupération de l'inventaire
