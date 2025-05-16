@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbe35a1e-4d15-4a05-9805-559abf65640b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/BotTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/TestDBSQL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/fileHashes/fileHashes.bin" afterDir="false" />
@@ -13,37 +15,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/UserDetailsImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/UserDetailsImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DB/User_DAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DB/User_DAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DBNosql/DAO_NOSQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DBNosql/DAO_NOSQL.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/Menu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/MenuCréerPersonnage.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/MenuCréerPersonnage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Character/Archer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Character/Archer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Character/CharacterType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Character/CharacterType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Character/Knight.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Character/Knight.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Character/Orc.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Character/Orc.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Inventaire.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Inventaire.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/main/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/main/main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/UserDetailsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/UserDetailsImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Bot/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Bot/Bot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/DB/User_DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/DB/User_DAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/DBNosql/DAO_NOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/DBNosql/DAO_NOSQL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Combat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Combat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/MenuCréerPersonnage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/MenuCréerPersonnage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/Archer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/Archer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/CharacterType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/CharacterType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/Knight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/Orc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/Orc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Inventaire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Inventaire.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Weapon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TestDAO_NOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestDAO_NOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TestUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TestUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestUserDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,6 +102,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Downloaded.Files.Path.Enabled": "false",
+    "Gradle.BotTest.executor": "Run",
+    "Gradle.BotTest.testOrcLevel1.executor": "Run",
     "Gradle.Build Groupe-F.executor": "Run",
     "Gradle.Download Sources.executor": "Run",
     "Gradle.Groupe-F [:be.helha.labos.Lanterna.Lancer.main()].executor": "Run",
@@ -137,6 +115,10 @@
     "Gradle.TestDAO_NOSQL.TestSuppressionPersoAUser.executor": "Run",
     "Gradle.TestDAO_NOSQL.executor": "Run",
     "Gradle.TestDAO_NOSQL.testAjouterPersoAUser.executor": "Run",
+    "Gradle.TestDBSQL.executor": "Run",
+    "Gradle.TestDBSQL.testConnexionExistePas.executor": "Run",
+    "Gradle.TestDBSQL.testConnexionMDP_Faux.executor": "Run",
+    "Gradle.TestDBSQL.testConnexionOk.executor": "Run",
     "Gradle.TestUser.executor": "Run",
     "Gradle.TestUserDAO.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
@@ -172,6 +154,30 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration name="BotTest.testOrcLevel1" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;BotTest.testOrcLevel1&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="TestCharacters.testRemoveCharacter" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -196,7 +202,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TestDAO_NOSQL.TestSuppressionPersoAUser" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TestDBSQL.testConnexionExistePas" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -209,7 +215,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;TestDAO_NOSQL.TestSuppressionPersoAUser&quot;" />
+            <option value="&quot;TestDBSQL.testConnexionExistePas&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -220,7 +226,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TestDAO_NOSQL.testAjouterPersoAUser" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TestDBSQL.testConnexionMDP_Faux" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -233,7 +239,31 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;TestDAO_NOSQL.testAjouterPersoAUser&quot;" />
+            <option value="&quot;TestDBSQL.testConnexionMDP_Faux&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="TestDBSQL.testConnexionOk" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;TestDBSQL.testConnexionOk&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -253,9 +283,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.TestDBSQL.testConnexionMDP_Faux" />
+        <item itemvalue="Gradle.TestDBSQL.testConnexionExistePas" />
+        <item itemvalue="Gradle.TestDBSQL.testConnexionOk" />
+        <item itemvalue="Gradle.BotTest.testOrcLevel1" />
         <item itemvalue="Gradle.TestCharacters.testRemoveCharacter" />
-        <item itemvalue="Gradle.TestDAO_NOSQL.testAjouterPersoAUser" />
-        <item itemvalue="Gradle.TestDAO_NOSQL.TestSuppressionPersoAUser" />
       </list>
     </recent_temporary>
   </component>
@@ -283,7 +315,8 @@
       <workItem from="1747068099252" duration="5578000" />
       <workItem from="1747144398817" duration="6165000" />
       <workItem from="1747160722199" duration="304000" />
-      <workItem from="1747306848774" duration="11948000" />
+      <workItem from="1747306848774" duration="12328000" />
+      <workItem from="1747404126628" duration="3837000" />
     </task>
     <servers />
   </component>
