@@ -3,10 +3,10 @@ package be.helha.labos.collection.Item;
 
 public class Sword extends Weapon {
     public enum SwordMaterial {
-        GOLD(15f, "Or"),
-        SILVER(13f, "Argent"),
-        FIRE(20f, "Feu"),
-        STEEL(10f, "Acier");
+        GOLD(75f, "Or"),
+        SILVER(55f, "Argent"),
+        FIRE(100f, "Feu"),
+        STEEL(30f, "Acier");
 
         private final String material;
         private final float damage;

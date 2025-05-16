@@ -26,7 +26,7 @@ public class User {
         this.pseudo = pseudo;
         this.password = password;
         this.role = role;
-        this.actif = true;
+        this.actif = false;
     }
 
     public User(int id ,String pseudo, String password,String role) {
@@ -34,7 +34,7 @@ public class User {
         this.pseudo = pseudo;
         this.password = password;
         this.role = role;
-        this.actif = true;
+        this.actif = false;
     }
 
 

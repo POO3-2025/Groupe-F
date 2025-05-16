@@ -184,10 +184,10 @@ public class MenuCréerPersonnage {
                     // Boucle pour récupérer les champs des persos. A Voir...
                     for (CharacterType character : characters) {
                         builder.append("- ").append(character.getName())
-                                .append(" | Type: ").append(character.getTitle())
+                                .append(" | Classe: ").append(character.getTitle())
                                 .append(" | Argent: ").append(character.getMoney())
                                 .append(" | HP: ").append(character.getMaxHealth())
-                                .append(" | XP: ").append(character.getExperience())
+                                .append(" | Précision: ").append(character.getPrecision())
                                 .append(" | DMG: ").append(character.getDamage())
                                 .append("\n");
                     }

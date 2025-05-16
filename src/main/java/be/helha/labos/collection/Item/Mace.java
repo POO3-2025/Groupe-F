@@ -10,9 +10,9 @@ public class Mace extends Weapon {
      * Enumération des différents matériaux de la masse.
      */
     public enum MaceMaterial {
-        WOOD(8f, "Bois", 1),
-        STONE(12f, "Pierre", 5),
-        DIAMOND(18f, "Diamant", 15);
+        WOOD(35f, "Bois", 1),
+        STONE(85f, "Pierre", 5),
+        DIAMOND(130f, "Diamant", 15);
 
         private final float damage;
         private final String material;

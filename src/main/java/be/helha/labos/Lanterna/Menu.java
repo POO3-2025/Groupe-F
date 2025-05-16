@@ -30,6 +30,11 @@ public class Menu {
 
         DAO_NOSQL dao = new DAO_NOSQL("nosql");
         User_DAO userDao = new User_DAO("mysql");
+        
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            userDao.deconnecterUtilisateur(pseudo);
+        }));
+
         Partie partie = new Partie();
 
         try {
@@ -105,9 +110,13 @@ public class Menu {
                 menuCréerPersonnage.afficherCréationPersonnage(pseudo);
             }));
 
-            panel.addComponent(new Button("Déconnexion", window::close)); // Ferme juste la fenêtre de menu
+            panel.addComponent(new Button("Déconnexion", ()->{
+                    userDao.deconnecterUtilisateur(pseudo);
+                    window.close();
+            })); // Ferme juste la fenêtre de menu
 
             panel.addComponent(new Button("Quitter le jeu", () -> {
+                userDao.deconnecterUtilisateur(pseudo);
                 System.exit(0);
             }));
             // Ajout du panel à la fenêtre principale
@@ -119,6 +128,8 @@ public class Menu {
             terminal.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            userDao.deconnecterUtilisateur(pseudo); // même si erreur ou fermeture
         }
     }
 }

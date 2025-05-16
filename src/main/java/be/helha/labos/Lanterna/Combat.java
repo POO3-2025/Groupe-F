@@ -81,9 +81,37 @@ public class Combat {
         gui.addWindowAndWait(inventaireWindow);
     }
 
+    /**
+     * Méthode qui gère le combat avec une arme
+     * @param armeSelectionnee
+     * @param perso
+     * @param botVi
+     * @param pvBot
+     * @param pvLabel
+     * @param textGUI
+     * @param window
+     * @param armeWindow
+     * @param bot
+     */
     private void gererCombatArme(Document armeSelectionnee, CharacterType perso, AtomicInteger botVi,
                                  Label pvBot, Label pvLabel, WindowBasedTextGUI textGUI,
                                  BasicWindow window, BasicWindow armeWindow, Bot bot) {
+
+        // XP gagné en fonction du niveau du perso
+        int xpGagne;
+
+        switch (perso.getLevel()) {
+            case 1 -> xpGagne = 20;
+            case 2 -> xpGagne = 30;
+            case 3 -> xpGagne = 45;
+            case 4 -> xpGagne = 70;
+            case 5 -> xpGagne = 85;
+            case 6 -> xpGagne = 110;
+            case 7 -> xpGagne = 130;
+            case 8 -> xpGagne = 150;
+            case 9 -> xpGagne = 175;
+            default -> xpGagne = 200; // valeur par défaut au cas où
+        }
 
         try {
             // Récupérer les dégâts directement depuis le document de l'arme
@@ -103,7 +131,6 @@ public class Combat {
                 int recomp = 15;
                 perso.setMoney(perso.getMoney() + recomp);
                 perso.updateMoneyInDB(mongoDatabase);
-                int xpGagne = 20;
                 perso.gainExperience(xpGagne, mongoDatabase);
                 MessageDialog.showMessageDialog(textGUI, "Victoire",
                         "Vous avez gagné ! Voici votre récompense : " + recomp + " pièces.");
@@ -187,11 +214,33 @@ public class Combat {
                 panel.addComponent(pvLabel);
 
                 int pvInitialBot;
+                // PV du bot en fonction du niveau du perso
                 switch (perso.getLevel()) {
                     case 1 -> pvInitialBot = 70;
                     case 2 -> pvInitialBot = 90;
-                    case 3 -> pvInitialBot = 120;
-                    default -> pvInitialBot = 100;
+                    case 3 -> pvInitialBot = 115;
+                    case 4 -> pvInitialBot = 140;
+                    case 5 -> pvInitialBot = 160;
+                    case 6 -> pvInitialBot = 180;
+                    case 7 -> pvInitialBot = 220;
+                    case 8 -> pvInitialBot = 270;
+                    case 9 -> pvInitialBot = 340;
+                    default -> pvInitialBot = 400; // valeur par défaut au cas où
+                }
+
+                // XP gagné en fonction du niveau du perso
+                int xpGagne;
+                switch (perso.getLevel()) {
+                    case 1 -> xpGagne = 20;
+                    case 2 -> xpGagne = 30;
+                    case 3 -> xpGagne = 45;
+                    case 4 -> xpGagne = 70;
+                    case 5 -> xpGagne = 85;
+                    case 6 -> xpGagne = 110;
+                    case 7 -> xpGagne = 130;
+                    case 8 -> xpGagne = 150;
+                    case 9 -> xpGagne = 175;
+                    default -> xpGagne = 200; // valeur par défaut au cas où
                 }
 
                 AtomicInteger botVi = new AtomicInteger(pvInitialBot);
@@ -209,7 +258,6 @@ public class Combat {
                         int recomp = 15;
                         perso.setMoney(perso.getMoney() + recomp);
                         perso.updateMoneyInDB(mongoDatabase);
-                        int xpGagne = 20;
                         perso.gainExperience(xpGagne, mongoDatabase);
                         MessageDialog.showMessageDialog(textGUI, "Victoire",
                                 "Vous avez gagné ! Voici votre récompense : " + recomp + " pièces.");

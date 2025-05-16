@@ -202,14 +202,50 @@ public class User_DAO{
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, pseudo);
             ResultSet rs = stmt.executeQuery();
+
             if (rs.next()) {
                 String hashed = rs.getString("Password");
+                boolean actif = rs.getBoolean("Actif");
+
+                if (actif) {
+                    // Déjà connecté
+                    System.out.println("Utilisateur déjà connecté.");
+                    return false;
+                }
+
                 return PasswordUtils.verifyPassword(password, hashed);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
+    }
+
+    /**
+     *
+     * @param userId
+     * @param actif
+     */
+    public void setUserActif(int userId, boolean actif) {
+        String sql = "UPDATE users SET Actif = ? WHERE ID = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setBoolean(1, actif);
+            stmt.setInt(2, userId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deconnecterUtilisateur(String pseudo) {
+        String sql = "UPDATE users SET Actif = false WHERE Pseudo = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, pseudo);
+            stmt.executeUpdate();
+            System.out.println("Utilisateur déconnecté.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

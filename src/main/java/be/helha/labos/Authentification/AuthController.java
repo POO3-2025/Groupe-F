@@ -67,6 +67,7 @@ public class AuthController {
     static class LoginRequest {
         private String username;
         private String password;
+        private boolean active;
 
         public String getUsername() {
             return username;
