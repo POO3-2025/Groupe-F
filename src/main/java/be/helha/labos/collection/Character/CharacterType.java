@@ -46,7 +46,6 @@ public class CharacterType {
      * Constructeur vide
      */
     public CharacterType(){
-        this.allowedWeaponType= null;
     }
 
     /**
@@ -449,6 +448,9 @@ public class CharacterType {
      * @return true si le personnage peut équiper l'arme, false sinon
      */
     public boolean canEquipWeapon(WeaponType weaponType) {
+        System.out.println("Allowed weapon type: " + this.allowedWeaponType);
+        System.out.println("Weapon type to check: " + weaponType);
+        System.out.println(getTitle());
         return this.allowedWeaponType != null && this.allowedWeaponType.equals(weaponType);
     }
 

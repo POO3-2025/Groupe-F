@@ -72,17 +72,20 @@ public class Magasin {
             }
 
             //verifie si le personnage peut acheter l'objet
-            String typeArme = item.getString("type");
-            WeaponType weaponType = WeaponType.valueOf(typeArme.toUpperCase());
-            if (!personnage.canEquipWeapon(weaponType)) {
-                System.out.println("Cette arme n'est pas compatible avec la classe du personnage !");
+            String allowedType = item.getString("allowed");
+            String itemType = item.getString("type");
+
+            // Vérifie si le personnage peut acheter l'objet
+            if (allowedType == null || (!allowedType.equalsIgnoreCase(personnage.getTitle()) && !itemType.equalsIgnoreCase("Potion")))
+            {
+                System.out.println("Cet objet ne peut pas être équipé par ce personnage !");
                 return false;
             }
 
             // Vérifie le niveau requis
             int requiredLevel = item.getInteger("requiredLevel", 0);
             if (personnage.getLevel() < requiredLevel) {
-                System.out.println("Niveau insuffisant ! Niveau requis : " + requiredLevel + ", votre niveau : " + personnage.getLevel());
+                System.out.println("Niveau du personnage insuffisant ! Niveau requis : " + requiredLevel + ", votre niveau : " + personnage.getLevel());
                 return false;
             }
 
@@ -290,7 +293,8 @@ public class Magasin {
 
                     document.append("type", "Sword")
                             .append("materiau", material.getMaterial())
-                            .append("degats", sword.getDamage());
+                            .append("degats", sword.getDamage())
+                            .append("allowed",sword.getAllowedCharacterType());
                 }
                 case 1 -> {
                     int max = 50 + random.nextInt(51);
@@ -315,7 +319,8 @@ public class Magasin {
 
                     document.append("type", "Bow")
                             .append("materiau", material.getMaterial())
-                            .append("degats", bow.getDamage());
+                            .append("degats", bow.getDamage())
+                            .append("allowed",bow.getAllowedCharacterType());
                 }
                 case 3 -> {
                     Mace.MaceMaterial[] materials = Mace.MaceMaterial.values();
@@ -327,7 +332,8 @@ public class Magasin {
 
                     document.append("type", "Mace")
                             .append("materiau", material.getMaterial())
-                            .append("degats", mace.getDamage());
+                            .append("degats", mace.getDamage())
+                            .append("allowed",mace.getAllowedCharacterType());
                 }
             }
 

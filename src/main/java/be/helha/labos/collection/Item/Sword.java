@@ -1,20 +1,43 @@
 package be.helha.labos.collection.Item;
 
+/**
+ * Classe étendue de Weapon représentant une épée dans le jeu.
+ */
 public class Sword extends Weapon {
+    /**
+     * Enumération des différents matériaux de l'épée.
+     */
     public enum SwordMaterial {
-        STEEL(10f, "Bronze", 1),
-        SILVER(20f, "Fer", 5),
-        GOLD(50f, "Or", 10),
-        FIRE(100f, "Feu", 15);
+        STEEL(10f, "Bronze", 1,
+                "Knight"),
+        SILVER(20f, "Fer", 5,
+                "Knight"),
+        GOLD(50f, "Or", 10,
+                "Knight"),
+        FIRE(100f, "Feu", 15,
+                "Knight"),;
 
+        /**
+         * Attributs de l'énumération SwordMaterial.
+         */
         private String material;
         private float damage;
         private int requiredLevel;
+        private String AllowedCharacterType;
 
-        SwordMaterial(float damage, String material, int requiredLevel) {
+        /**
+         * Constructeur de l'énumération SwordMaterial.
+         *
+         * @param damage          Dégâts infligés par l'épée.
+         * @param material        Matériau de l'épée.
+         * @param requiredLevel   Niveau requis pour utiliser l'épée.
+         * @param allowedCharacterType Type de personnage autorisé à utiliser l'épée.
+         */
+        SwordMaterial(float damage, String material, int requiredLevel, String allowedCharacterType) {
             this.damage = damage;
             this.material = material;
             this.requiredLevel = requiredLevel;
+            this.AllowedCharacterType = allowedCharacterType;
         }
 
         public String getMaterial() {
@@ -30,6 +53,9 @@ public class Sword extends Weapon {
         }
     }
 
+    /**
+     * Sous classe de Weapon représentant une épée.
+     */
     private SwordMaterial material;
 
     // Default constructor required for MongoDB
@@ -56,10 +82,14 @@ public class Sword extends Weapon {
         this.material = material;
         setDamage((int) material.getDamage());
     }
+    public String getAllowedCharacterType() {
+        return material.AllowedCharacterType;
+    }
 
     public int getRequiredLevel() {
         return material.getRequiredLevel();
     }
+
 
     public void setRequiredLevel(int requiredLevel) {
         this.material.requiredLevel = requiredLevel;
@@ -71,6 +101,7 @@ public class Sword extends Weapon {
                 weaponType.getName(),
                 material.getMaterial(),
                 getDamage(),
+                getAllowedCharacterType(),
                 getRequiredLevel());
     }
 }

@@ -1,6 +1,5 @@
 package be.helha.labos.collection.Item;
 
-import org.bson.codecs.pojo.annotations.BsonProperty;
 /**
  * Classe représentant une masse (Mace) dans le jeu.
  * La classe hérite de la classe Weapon.
@@ -10,13 +9,19 @@ public class Mace extends Weapon {
      * Enumération des différents matériaux de la masse.
      */
     public enum MaceMaterial {
-        WOOD(35f, "Bois", 1),
-        STONE(85f, "Pierre", 5),
-        DIAMOND(130f, "Diamant", 15);
-
+        WOOD(35f, "Bois", 1,
+                "Orc"),
+        STONE(85f, "Pierre", 5,
+                "Orc"),
+        DIAMOND(130f, "Diamant", 15,
+                "Orc"),;
+        /**
+         * Attributs de l'énumération MaceMaterial.
+         */
         private final float damage;
         private final String material;
         private final int level_Required;
+        private final String AllowedCharacterType;
 
         /**
          * Constructeur de l'énumération MaceMaterial.
@@ -25,10 +30,11 @@ public class Mace extends Weapon {
          * @param material        Matériau de la masse.
          * @param level_Required  Niveau requis pour utiliser la masse.
          */
-        MaceMaterial(float damage, String material, int level_Required) {
+        MaceMaterial(float damage, String material, int level_Required, String AllowedCharacterType) {
             this.damage = damage;
             this.material = material;
             this.level_Required = level_Required;
+            this.AllowedCharacterType = AllowedCharacterType;
         }
 
         /**
@@ -54,6 +60,14 @@ public class Mace extends Weapon {
          */
         public int getLevel_Required() {
             return this.level_Required;
+        }
+        /**
+         * Méthode pour obtenir le type de personnage autorisé à utiliser la masse.
+         *
+         * @return Type de personnage autorisé à utiliser la masse.
+         */
+        public String getAllowedCharacterType() {
+            return AllowedCharacterType;
         }
     }
 
@@ -91,6 +105,7 @@ public class Mace extends Weapon {
     public MaceMaterial getMaterial() {
         return material;
     }
+
     /**
      * Méthode pour définir le matériau de la masse.
      *
@@ -99,6 +114,9 @@ public class Mace extends Weapon {
     public void setMaterial(MaceMaterial material) {
         this.material = material;
         setDamage((int) material.getDamage());
+    }
+    public String getAllowedCharacterType() {
+        return material.AllowedCharacterType;
     }
     /**
      * Méthode toString pour afficher les informations de la masse
@@ -111,6 +129,7 @@ public class Mace extends Weapon {
                 weaponType.getName(),
                 material.getMaterial(),
                 getDamage(),
+                material.getAllowedCharacterType(),
                 material.getLevel_Required());
     }
 }
