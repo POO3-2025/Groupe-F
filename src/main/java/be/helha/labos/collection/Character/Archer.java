@@ -1,5 +1,6 @@
 package be.helha.labos.collection.Character;
 
+import be.helha.labos.collection.Item.WeaponType;
 import be.helha.labos.collection.Inventaire;
 import com.mongodb.client.MongoDatabase;
 
@@ -19,6 +20,7 @@ public class Archer extends CharacterType
              */
             public Archer(String name, MongoDatabase db) {
                 super();
+                this.allowedWeaponType= WeaponType.BOW;
                 this.name = name;
                 this.title = "Archer";
                 this.health = 100;

@@ -8,9 +8,8 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
-
+import be.helha.labos.collection.Item.WeaponType;
 import java.util.Random;
-
 import static com.mongodb.client.model.Filters.eq;
 
 /**
@@ -37,7 +36,7 @@ public class CharacterType {
     protected Inventaire inventaire;
     protected double dodge;
     protected double precision;
-
+    protected WeaponType allowedWeaponType;
 
     private static Connexion_DB_Nosql connexionDbNosql;
     private static MongoDatabase mongoDatabase;
@@ -47,6 +46,7 @@ public class CharacterType {
      * Constructeur vide
      */
     public CharacterType(){
+        this.allowedWeaponType= null;
     }
 
     /**
@@ -58,7 +58,7 @@ public class CharacterType {
      * @param precision
      * @param user
      */
-    public CharacterType(String name, int health, int damage, double dodge, double precision,MongoDatabase database,User user) {
+    public CharacterType(String name, int health, int damage, double dodge, double precision,MongoDatabase database,User user,WeaponType allowedWeaponType) {
         this.id = new ObjectId();
         this.name = name;
         this.health = health;
@@ -68,6 +68,7 @@ public class CharacterType {
         this.precision = precision;
         this.level = 1;
         this.money = 100.00;
+        this.allowedWeaponType = allowedWeaponType;
     }
 
     /**
@@ -345,6 +346,13 @@ public class CharacterType {
     public void setInventaire(Inventaire inventaire) {
         this.inventaire = inventaire;
     }
+    /**
+     * Méthode de récupération du type d'arme autorisé
+     * @return
+     */
+    public WeaponType getAllowedWeaponType() {
+        return allowedWeaponType;
+    }
 
     /**
      * Méthode toString pour afficher les informations du personnage
@@ -434,6 +442,16 @@ public class CharacterType {
         );
         collection.updateOne(filter, update);
     }
+
+    /**
+     * Méthode pour savoir si le personnage peut équiper une arme
+     * @param weaponType // le type d'arme
+     * @return true si le personnage peut équiper l'arme, false sinon
+     */
+    public boolean canEquipWeapon(WeaponType weaponType) {
+        return this.allowedWeaponType != null && this.allowedWeaponType.equals(weaponType);
+    }
+
 
     /**
      * Méthode retirer un personnage de la DB noSQL

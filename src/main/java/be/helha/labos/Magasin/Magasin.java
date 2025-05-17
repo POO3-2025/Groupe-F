@@ -71,6 +71,14 @@ public class Magasin {
                 return false;
             }
 
+            //verifie si le personnage peut acheter l'objet
+            String typeArme = item.getString("type");
+            WeaponType weaponType = WeaponType.valueOf(typeArme.toUpperCase());
+            if (!personnage.canEquipWeapon(weaponType)) {
+                System.out.println("Cette arme n'est pas compatible avec la classe du personnage !");
+                return false;
+            }
+
             double prix = item.getDouble("prix");
             double argentActuel = personnage.getMoney();
 
