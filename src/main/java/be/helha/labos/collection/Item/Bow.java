@@ -3,16 +3,18 @@ package be.helha.labos.collection.Item;
 
 public class Bow extends Weapon {
     public enum BowMaterial {
-        WOOD(12f, "Bois"),
-        CROSSBOW(80f, "Arbalète"),
-        ICE(36f, "Glace");
+        WOOD(12f, "Bois",1),
+        CROSSBOW(80f, "Arbalète",5),
+        ICE(36f, "Glace",15);
 
-        private final String material;
-        private final float damage;
+        private String material;
+        private float damage;
+        private int requiredLevel;
 
-        BowMaterial(float damage, String material) {
+        BowMaterial(float damage, String material,int requiredLevel) {
             this.damage = damage;
             this.material = material;
+            this.requiredLevel=requiredLevel;
         }
 
         public String getMaterial() {
@@ -27,17 +29,17 @@ public class Bow extends Weapon {
 
     private BowMaterial material;
 
+    public Bow(BowMaterial material) {
+        super((int) material.getDamage(), WeaponType.BOW);
+        this.material = material;
+    }
+
     // Default constructor required for MongoDB
     public Bow() {
         super((int) BowMaterial.WOOD.getDamage(), WeaponType.BOW);
         this.material = BowMaterial.WOOD;
     }
 
-
-    public Bow(BowMaterial material) {
-        super((int) material.getDamage(), WeaponType.BOW);
-        this.material = material;
-    }
 
     @Override
     protected String getMaterialName() {
@@ -53,11 +55,20 @@ public class Bow extends Weapon {
         setDamage((int) material.getDamage());
     }
 
+    public int getRequiredLevel() {
+        return material.requiredLevel;
+    }
+
+    public void setRequiredLevel(int requiredLevel) {
+        this.material.requiredLevel = requiredLevel;
+    }
+
     @Override
     public String toString() {
         return String.format("%s (Matériau: %s, Dégâts: %d)",
-                weaponType.getName(),
-                material.getMaterial(),
+                getName(),
+                getMaterial(),
+                getRequiredLevel(),
                 getDamage());
     }
 }

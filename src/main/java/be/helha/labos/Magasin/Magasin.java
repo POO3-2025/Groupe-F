@@ -79,6 +79,13 @@ public class Magasin {
                 return false;
             }
 
+            // Vérifie le niveau requis
+            int requiredLevel = item.getInteger("requiredLevel", 0);
+            if (personnage.getLevel() < requiredLevel) {
+                System.out.println("Niveau insuffisant ! Niveau requis : " + requiredLevel + ", votre niveau : " + personnage.getLevel());
+                return false;
+            }
+
             double prix = item.getDouble("prix");
             double argentActuel = personnage.getMoney();
 
@@ -270,12 +277,14 @@ public class Magasin {
 
             int typeAleatoire = random.nextInt(4);
 
+            int requiredLevel = 0;
             switch (typeAleatoire) {
                 case 0 -> {
                     Sword.SwordMaterial[] materials = Sword.SwordMaterial.values();
                     Sword.SwordMaterial material = materials[random.nextInt(materials.length)];
                     Sword sword = new Sword(material);
                     objet = sword;
+                    requiredLevel = material.getRequiredLevel();
                     nom = "Épée en " + material.getMaterial();
                     prix = calculerPrixArme("Sword", material.getMaterial());
 
@@ -324,6 +333,7 @@ public class Magasin {
 
             document.append("nom", nom)
                     .append("prix", prix)
+                    .append("requiredLevel", requiredLevel)
                     .append("_id", new ObjectId());
 
             itemsCollection.insertOne(document);

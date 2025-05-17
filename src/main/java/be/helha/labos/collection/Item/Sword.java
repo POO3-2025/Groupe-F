@@ -1,19 +1,20 @@
 package be.helha.labos.collection.Item;
 
-
 public class Sword extends Weapon {
     public enum SwordMaterial {
-        GOLD(75f, "Or"),
-        SILVER(55f, "Argent"),
-        FIRE(100f, "Feu"),
-        STEEL(30f, "Acier");
+        STEEL(10f, "Bronze", 1),
+        SILVER(20f, "Fer", 5),
+        GOLD(50f, "Or", 10),
+        FIRE(100f, "Feu", 15);
 
-        private final String material;
-        private final float damage;
+        private String material;
+        private float damage;
+        private int requiredLevel;
 
-        SwordMaterial(float damage, String material) {
+        SwordMaterial(float damage, String material, int requiredLevel) {
             this.damage = damage;
             this.material = material;
+            this.requiredLevel = requiredLevel;
         }
 
         public String getMaterial() {
@@ -23,21 +24,23 @@ public class Sword extends Weapon {
         public float getDamage() {
             return damage;
         }
+
+        public int getRequiredLevel() {
+            return requiredLevel;
+        }
     }
 
     private SwordMaterial material;
 
-    // Default constructor needed for MongoDB
+    // Default constructor required for MongoDB
     public Sword() {
         super((int) SwordMaterial.STEEL.getDamage(), WeaponType.SWORD);
         this.material = SwordMaterial.STEEL;
-        super.material = SwordMaterial.STEEL.material;
     }
 
     public Sword(SwordMaterial material) {
         super((int) material.getDamage(), WeaponType.SWORD);
         this.material = material;
-        super.material = material.getMaterial();
     }
 
     @Override
@@ -51,13 +54,23 @@ public class Sword extends Weapon {
 
     public void setMaterial(SwordMaterial material) {
         this.material = material;
-        super.material = material.getMaterial();
         setDamage((int) material.getDamage());
+    }
+
+    public int getRequiredLevel() {
+        return material.getRequiredLevel();
+    }
+
+    public void setRequiredLevel(int requiredLevel) {
+        this.material.requiredLevel = requiredLevel;
     }
 
     @Override
     public String toString() {
-        return String.format("%s (Matériau: %s, Dégâts: %d)",
-                weaponType.getName(), material.getMaterial(), getDamage());
+        return String.format("%s (Matériau: %s, Dégâts: %d, Niveau requis: %d)",
+                weaponType.getName(),
+                material.getMaterial(),
+                getDamage(),
+                getRequiredLevel());
     }
 }
