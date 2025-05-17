@@ -1,5 +1,6 @@
 package be.helha.labos.collection.Character;
 
+import be.helha.labos.collection.Item.WeaponType;
 import be.helha.labos.collection.Inventaire;
 import com.mongodb.client.MongoDatabase;
 
@@ -23,6 +24,7 @@ public class Orc extends CharacterType
     public Orc(String name,MongoDatabase db)
     {
         super();
+        this.allowedWeaponType= WeaponType.MACE;
         this.name = name;
         this.title="Orc";
         money = 100.00;

@@ -1,19 +1,43 @@
 package be.helha.labos.collection.Item;
 
-
+/**
+ * Classe étendue de Weapon représentant une épée dans le jeu.
+ */
 public class Sword extends Weapon {
+    /**
+     * Enumération des différents matériaux de l'épée.
+     */
     public enum SwordMaterial {
-        GOLD(75f, "Or"),
-        SILVER(55f, "Argent"),
-        FIRE(100f, "Feu"),
-        STEEL(30f, "Acier");
+        STEEL(10f, "Bronze", 1,
+                "Knight"),
+        SILVER(20f, "Fer", 5,
+                "Knight"),
+        GOLD(50f, "Or", 10,
+                "Knight"),
+        FIRE(100f, "Feu", 15,
+                "Knight"),;
 
-        private final String material;
-        private final float damage;
+        /**
+         * Attributs de l'énumération SwordMaterial.
+         */
+        private String material;
+        private float damage;
+        private int requiredLevel;
+        private String AllowedCharacterType;
 
-        SwordMaterial(float damage, String material) {
+        /**
+         * Constructeur de l'énumération SwordMaterial.
+         *
+         * @param damage          Dégâts infligés par l'épée.
+         * @param material        Matériau de l'épée.
+         * @param requiredLevel   Niveau requis pour utiliser l'épée.
+         * @param allowedCharacterType Type de personnage autorisé à utiliser l'épée.
+         */
+        SwordMaterial(float damage, String material, int requiredLevel, String allowedCharacterType) {
             this.damage = damage;
             this.material = material;
+            this.requiredLevel = requiredLevel;
+            this.AllowedCharacterType = allowedCharacterType;
         }
 
         public String getMaterial() {
@@ -23,21 +47,26 @@ public class Sword extends Weapon {
         public float getDamage() {
             return damage;
         }
+
+        public int getRequiredLevel() {
+            return requiredLevel;
+        }
     }
 
+    /**
+     * Sous classe de Weapon représentant une épée.
+     */
     private SwordMaterial material;
 
-    // Default constructor needed for MongoDB
+    // Default constructor required for MongoDB
     public Sword() {
         super((int) SwordMaterial.STEEL.getDamage(), WeaponType.SWORD);
         this.material = SwordMaterial.STEEL;
-        super.material = SwordMaterial.STEEL.material;
     }
 
     public Sword(SwordMaterial material) {
         super((int) material.getDamage(), WeaponType.SWORD);
         this.material = material;
-        super.material = material.getMaterial();
     }
 
     @Override
@@ -51,13 +80,28 @@ public class Sword extends Weapon {
 
     public void setMaterial(SwordMaterial material) {
         this.material = material;
-        super.material = material.getMaterial();
         setDamage((int) material.getDamage());
+    }
+    public String getAllowedCharacterType() {
+        return material.AllowedCharacterType;
+    }
+
+    public int getRequiredLevel() {
+        return material.getRequiredLevel();
+    }
+
+
+    public void setRequiredLevel(int requiredLevel) {
+        this.material.requiredLevel = requiredLevel;
     }
 
     @Override
     public String toString() {
-        return String.format("%s (Matériau: %s, Dégâts: %d)",
-                weaponType.getName(), material.getMaterial(), getDamage());
+        return String.format("%s (Matériau: %s, Dégâts: %d, Niveau requis: %d)",
+                weaponType.getName(),
+                material.getMaterial(),
+                getDamage(),
+                getAllowedCharacterType(),
+                getRequiredLevel());
     }
 }

@@ -1,5 +1,6 @@
 package be.helha.labos.collection.Character;
 
+import be.helha.labos.collection.Item.WeaponType;
 import be.helha.labos.collection.Inventaire;
 import com.mongodb.client.MongoDatabase;
 
@@ -21,6 +22,7 @@ public class Knight extends CharacterType {
      */
     public Knight(String name, MongoDatabase db) {
         super();
+        this.allowedWeaponType= WeaponType.SWORD;
         this.name = name;
         this.health = 150;
         this.maxHealth = 150;
