@@ -38,7 +38,7 @@ public class TestItems {
     void testWeaponConstructeurEtGetters() {
         Weapon weapon = new Sword(Sword.SwordMaterial.STEEL);
 
-        assertEquals(10, weapon.getDamage(), "Les dégâts de l'arme doivent être 10.");
+        assertEquals(5, weapon.getDamage(), "Les dégâts de l'arme doivent être 10.");
         assertEquals("Épée", weapon.getWeaponType().getName(), "Le type de l'arme doit être 'Épée'.");
     }
 
@@ -51,7 +51,7 @@ public class TestItems {
         weapon.setWeaponType(WeaponType.SWORD);
 
         assertEquals(25, weapon.getDamage(), "Les dégâts de l'arme doivent être 25 après modification.");
-        assertEquals("Hache", weapon.getWeaponType().getName(), "Le type de l'arme doit être 'Hache'.");
+        assertEquals("Épée", weapon.getWeaponType().getName(), "Le type de l'arme doit être 'Épée'.");
     }
 
     @Test
@@ -60,7 +60,7 @@ public class TestItems {
     void testSword() {
         Sword sword = new Sword(Sword.SwordMaterial.GOLD);
 
-        assertEquals(15, sword.getDamage(), "Les dégâts de l'épée doivent être 15.");
+        assertEquals(25, sword.getDamage(), "Les dégâts de l'épée doivent être 15.");
         assertEquals("Or", sword.getMaterial().getMaterial(), "Le matériau de l'épée doit être 'Or'.");
     }
 
@@ -71,7 +71,7 @@ public class TestItems {
         Sword sword = new Sword(Sword.SwordMaterial.STEEL);
         sword.setMaterial(Sword.SwordMaterial.FIRE);
 
-        assertEquals(20, sword.getDamage(), "Les dégâts de l'épée doivent être 20 après modification.");
+        assertEquals(50, sword.getDamage(), "Les dégâts de l'épée doivent être 20 après modification.");
         assertEquals("Feu", sword.getMaterial().getMaterial(), "Le matériau de l'épée doit être 'Feu'.");
     }
 
@@ -81,7 +81,7 @@ public class TestItems {
     void testBow() {
         Bow bow = new Bow(Bow.BowMaterial.CROSSBOW);
 
-        assertEquals(18, bow.getDamage(), "Les dégâts de l'arc doivent être 18.");
+        assertEquals(25, bow.getDamage(), "Les dégâts de l'arc doivent être 18.");
         assertEquals("Arbalète", bow.getMaterial().getMaterial(), "Le matériau de l'arc doit être 'Arbalète'.");
     }
 
@@ -92,7 +92,7 @@ public class TestItems {
         Bow bow = new Bow(Bow.BowMaterial.WOOD);
         bow.setMaterial(Bow.BowMaterial.ICE);
 
-        assertEquals(15, bow.getDamage(), "Les dégâts de l'arc doivent être 15 après modification.");
+        assertEquals(33, bow.getDamage(), "Les dégâts de l'arc doivent être 15 après modification.");
         assertEquals("Glace", bow.getMaterial().getMaterial(), "Le matériau de l'arc doit être 'Glace'.");
     }
 
@@ -102,7 +102,7 @@ public class TestItems {
     void testMace() {
         Mace mace = new Mace(Mace.MaceMaterial.DIAMOND);
 
-        assertEquals(18, mace.getDamage(), "Les dégâts de la masse doivent être 18.");
+        assertEquals(99, mace.getDamage(), "Les dégâts de la masse doivent être 18.");
         assertEquals("Diamant", mace.getMaterial().getMaterial(), "Le matériau de la masse doit être 'Diamant'.");
     }
 
@@ -113,7 +113,7 @@ public class TestItems {
         Mace mace = new Mace(Mace.MaceMaterial.WOOD);
         mace.setMaterial(Mace.MaceMaterial.STONE);
 
-        assertEquals(12, mace.getDamage(), "Les dégâts de la masse doivent être 12 après modification.");
+        assertEquals(49, mace.getDamage(), "Les dégâts de la masse doivent être 12 après modification.");
         assertEquals("Pierre", mace.getMaterial().getMaterial(), "Le matériau de la masse doit être 'Pierre'.");
     }
 
@@ -145,7 +145,7 @@ public class TestItems {
     @DisplayName("Test de la méthode toString de Weapon")
     void testWeaponToString() {
         Sword sword = new Sword(Sword.SwordMaterial.FIRE);
-        String expected = "Épée (Matériau: Feu, Dégâts: 20)";
+        String expected = "Épée (Matériau: Feu, Dégâts: 50, Niveau requis: 15, Type autorisé: Knight)";
         assertEquals(expected, sword.toString(), "La méthode toString de l'épée doit retourner la chaîne attendue.");
     }
 

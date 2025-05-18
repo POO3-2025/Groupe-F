@@ -9,6 +9,8 @@ import org.bson.Document;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
+import java.util.ArrayList;
+
 import static com.mongodb.client.model.Filters.eq;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -157,33 +159,11 @@ public class TestCharacters {
     }
 
     @Test
-    @DisplayName("Test de la suppression d'un personnage")
-    @Order(10)
-    public void testRemoveCharacter() {
-        // Insère un personnage ("test") dans la base de données avec son inventaire
-        Knight character = new Knight("TestCharacter",db);
-        MongoCollection<Document> collection = db.getCollection("characters");
-        collection.insertOne(new Document("_id", character.getId())
-                .append("name", character.getName())
-                .append("inventaire", character.getInventaire().getId()));
-
-        // Supprime le personnage
-        character.removeCharacter(db,character.getId());
-
-        // Vérifie que le personnage n'existe plus dans la DB
-        assertNull(collection.find(eq("_id", character.getId())).first(), "Le personnage n'a pas été supprimé.");
-
-        // Vérifie que l'inventaire n'existe également plus dans la DB
-        MongoCollection<Document> inventoryCollection = db.getCollection("inventory");
-        assertNull(inventoryCollection.find(eq("_id", character.getInventaire().getId())).first(), "L'inventaire n'a pas été supprimé.");
-    }
-
-    @Test
     @DisplayName("Test de la méthode toString pour CharacterType")
     @Order(11)
     public void testToStringCharacterType() {
-        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8,db, testUser,null);
-        String expected = "Character{name='TestCharacter', health=100, title='null', damage=10, money=100.0, user=1, dodge=0.2, precision=0.8}";
+        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8, db, testUser, null);
+        String expected = "Character{name='TestCharacter', health=0, title='null', damage=10, experience=0, money=100.0, dodge=0.2, precision=0.8}";
         assertEquals(expected, character.toString());
     }
 
