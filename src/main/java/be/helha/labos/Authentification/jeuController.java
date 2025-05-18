@@ -1,8 +1,12 @@
 package be.helha.labos.Authentification;
 
+import be.helha.labos.Authentification.Http.AuthHttpService;
+import be.helha.labos.Authentification.Http.UserHttp;
 import be.helha.labos.collection.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +21,7 @@ public class jeuController {
      * Service pour gérer les opérations liées aux utilisateurs dans le jeu.
      */
     private final jeuService jeuService;
+
 
     /**
      * Constructeur pour initialiser le service de jeu.
@@ -41,18 +46,26 @@ public class jeuController {
     /**
      * Méthode pour récupérer un utilisateur par son ID.
      *
-     * @param Id l'ID de l'utilisateur
+     * @param id l'ID de l'utilisateur
      * @return l'utilisateur correspondant à l'ID
      */
-    @GetMapping("/{Id}")
-    public ResponseEntity<User> getUserById(@PathVariable int Id) {
-        User user = jeuService.getUserById(Id);
-        if(user == null) {
-            return ResponseEntity.notFound().build();
+    @GetMapping("/user/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable int id, Authentication authentication) {
+
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+        // ADMIN peut tout voir
+        boolean isAdmin = userDetails.getAuthorities().stream()
+                .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
+
+        if (isAdmin || userDetails.getId() == id) {
+            return ResponseEntity.ok(jeuService.getUserById(id));
         }
-        else
-            return ResponseEntity.ok(user);
+
+        // Interdit aux autres
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
+
 
     /**
      * Méthode pour créer un nouvel utilisateur.
@@ -63,6 +76,18 @@ public class jeuController {
     @PostMapping
     public User createUser(@RequestBody User user) {
         return jeuService.saveUser(user);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<String> lancerJeu(@RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.replace("Bearer ", "");
+
+        try {
+            jeuService.démarrerJeu(token);
+            return ResponseEntity.ok("Jeu démarré !");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Erreur : " + e.getMessage());
+        }
     }
 
     /*@PutMapping("/{Id}")

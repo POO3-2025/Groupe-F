@@ -26,6 +26,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Combat {
     private MongoDatabase mongoDatabase;
 
+    /**
+     * Méthode qui affiche le contenue de l'inventaire du perso
+     * @param gui
+     * @param personnage
+     * @param pvLabel
+     */
     private void afficherInventaire(WindowBasedTextGUI gui, CharacterType personnage, Label pvLabel) {
         BasicWindow inventaireWindow = new BasicWindow("Sélection d'objet");
         Panel inventairePanel = new Panel(new LinearLayout(Direction.VERTICAL));
@@ -113,6 +119,21 @@ public class Combat {
             default -> xpGagne = 200; // valeur par défaut au cas où
         }
 
+        // récompense du joueurs en fonction du niveau
+        int recom;
+        switch (perso.getLevel()) {
+            case 1 -> recom = 15;
+            case 2 -> recom = 20;
+            case 3 -> recom = 28;
+            case 4 -> recom = 40;
+            case 5 -> recom = 46;
+            case 6 -> recom = 55;
+            case 7 -> recom = 64;
+            case 8 -> recom = 72;
+            case 9 -> recom = 84;
+            default -> recom = 100; // valeur par défaut au cas où
+        }
+
         try {
             // Récupérer les dégâts directement depuis le document de l'arme
             int degats = armeSelectionnee.getInteger("degats", 0);
@@ -128,12 +149,12 @@ public class Combat {
 
             if (vieBot <= 0) {
                 pvBot.setText("PV de l'adversaire : 0");
-                int recomp = 15;
-                perso.setMoney(perso.getMoney() + recomp);
+
+                perso.setMoney(perso.getMoney() + recom);
                 perso.updateMoneyInDB(mongoDatabase);
                 perso.gainExperience(xpGagne, mongoDatabase);
                 MessageDialog.showMessageDialog(textGUI, "Victoire",
-                        "Vous avez gagné ! Voici votre récompense : " + recomp + " pièces.");
+                        "Vous avez gagné ! Voici votre récompense : " + recom + " pièces.");
                 perso.recupererVie(mongoDatabase);
                 window.close();
                 armeWindow.close();
@@ -189,7 +210,11 @@ public class Combat {
         }
     }
 
-    public void AfficherCombat(CharacterType perso, boolean type) {
+    /**
+     * Logique qui affiche tous le combat
+     * @param perso le personnage
+     */
+    public void AfficherCombat(CharacterType perso) {
         Bot bot = new Bot();
         Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosql");
         mongoDatabase = connexionDbNosql.createDatabase();
@@ -205,7 +230,7 @@ public class Combat {
             screen.startScreen();
             WindowBasedTextGUI textGUI = new MultiWindowTextGUI(screen);
 
-            if (type) {
+
                 BasicWindow window = new BasicWindow("Partie en solo");
                 Panel panel = new Panel();
                 panel.setLayoutManager(new LinearLayout(Direction.VERTICAL));
@@ -226,6 +251,21 @@ public class Combat {
                     case 8 -> pvInitialBot = 270;
                     case 9 -> pvInitialBot = 340;
                     default -> pvInitialBot = 400; // valeur par défaut au cas où
+                }
+
+                // récompense du joueurs en fonction du niveau
+                int recom;
+                switch (perso.getLevel()) {
+                    case 1 -> recom = 15;
+                    case 2 -> recom = 20;
+                    case 3 -> recom = 28;
+                    case 4 -> recom = 40;
+                    case 5 -> recom = 46;
+                    case 6 -> recom = 55;
+                    case 7 -> recom = 64;
+                    case 8 -> recom = 72;
+                    case 9 -> recom = 84;
+                    default -> recom = 100; // valeur par défaut au cas où
                 }
 
                 // XP gagné en fonction du niveau du perso
@@ -255,12 +295,11 @@ public class Combat {
 
                     if (botVi.get() <= 0) {
                         pvBot.setText("PV de l'adversaire : 0");
-                        int recomp = 15;
-                        perso.setMoney(perso.getMoney() + recomp);
+                        perso.setMoney(perso.getMoney() + recom);
                         perso.updateMoneyInDB(mongoDatabase);
                         perso.gainExperience(xpGagne, mongoDatabase);
                         MessageDialog.showMessageDialog(textGUI, "Victoire",
-                                "Vous avez gagné ! Voici votre récompense : " + recomp + " pièces.");
+                                "Vous avez gagné ! Voici votre récompense : " + recom + " pièces.");
                         perso.recupererVie(mongoDatabase);
                         window.close();
                         return;
@@ -388,15 +427,6 @@ public class Combat {
                 textGUI.addWindowAndWait(window);
                 screen.stopScreen();
                 terminal.close();
-            } else {
-                BasicWindow window = new BasicWindow("Partie Multijoueur");
-                Panel panel = new Panel();
-                panel.addComponent(new Button("Retour", window::close));
-                window.setComponent(panel);
-                textGUI.addWindowAndWait(window);
-                screen.stopScreen();
-                terminal.close();
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }

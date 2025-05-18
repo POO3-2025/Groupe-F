@@ -131,7 +131,8 @@ public class User_DAO{
                         rs.getInt("ID"),
                         rs.getString("Pseudo"),              // Pseudo
                         rs.getString("Password"),            // Mot de passe
-                        rs.getString("Role")
+                        rs.getString("Role"),
+                        rs.getBoolean("Actif")
                 );
             }
         } catch (SQLException e) {
@@ -158,7 +159,8 @@ public class User_DAO{
                         rs.getInt("ID"),
                         rs.getString("Pseudo"),              // Pseudo
                         rs.getString("Password"),            // Mot de passe
-                        rs.getString("Role")
+                        rs.getString("Role"),
+                        rs.getBoolean("Actif")
                 );
             }
         } catch (SQLException e) {
@@ -181,7 +183,8 @@ public class User_DAO{
                         rs.getInt("ID"),
                         rs.getString("Pseudo"),
                         rs.getString("Password"),
-                        rs.getString("Role")
+                        rs.getString("Role"),
+                        rs.getBoolean("Actif")
                 );
                 users.add(user);
             }
@@ -198,7 +201,7 @@ public class User_DAO{
      * @return true si l'utilisateur a été identifié sinon false
      */
     public boolean verifierConnexion(String pseudo, String password) {
-        String sql = "SELECT Password FROM Users WHERE Pseudo = ?";
+        String sql = "SELECT ID, Password, Actif FROM Users WHERE Pseudo = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, pseudo);
             ResultSet rs = stmt.executeQuery();
@@ -208,12 +211,17 @@ public class User_DAO{
                 boolean actif = rs.getBoolean("Actif");
 
                 if (actif) {
-                    // Déjà connecté
+                    // ⚠️ Déjà connecté
                     System.out.println("Utilisateur déjà connecté.");
                     return false;
                 }
 
-                return PasswordUtils.verifyPassword(password, hashed);
+                if (PasswordUtils.verifyPassword(password, hashed)) {
+                    // ✅ Authentifié → Mettre Actif = true
+                    int userId = rs.getInt("ID");
+                    setUserActif(userId, true);
+                    return true;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -8,13 +8,13 @@ public class Sword extends Weapon {
      * Enumération des différents matériaux de l'épée.
      */
     public enum SwordMaterial {
-        STEEL(10f, "Bronze", 1,
+        STEEL(15f, "Bronze", 1,
                 "Knight"),
-        SILVER(25f, "Fer", 5,
+        SILVER(45f, "Fer", 5,
                 "Knight"),
-        GOLD(55f, "Or", 10,
+        GOLD(80f, "Or", 10,
                 "Knight"),
-        FIRE(111f, "Feu", 15,
+        FIRE(130f, "Feu", 15,
                 "Knight"),;
 
         /**

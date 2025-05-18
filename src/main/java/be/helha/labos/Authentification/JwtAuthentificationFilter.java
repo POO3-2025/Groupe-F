@@ -3,6 +3,8 @@ package be.helha.labos.Authentification;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,9 +23,11 @@ import java.util.stream.Collectors;
 public class JwtAuthentificationFilter extends OncePerRequestFilter {
 
     private final JwtUtils jwtUtils;
+    private final UserDetailsService userDetailsService;
 
-    public JwtAuthentificationFilter(JwtUtils jwtUtils) {
+    public JwtAuthentificationFilter(JwtUtils jwtUtils,UserDetailsService userDetailsService) {
         this.jwtUtils = jwtUtils;
+        this.userDetailsService = userDetailsService;
     }
 
     /**
@@ -44,19 +48,21 @@ public class JwtAuthentificationFilter extends OncePerRequestFilter {
         if (jwtToken != null && jwtUtils.validateJwtToken(jwtToken)) {
             String username = jwtUtils.getUsernameFromJwtToken(jwtToken);
 
-            List<GrantedAuthority> authorities = jwtUtils.getRolesFromJwtToken(jwtToken).stream()
-                    .map(SimpleGrantedAuthority::new)
-                    .collect(Collectors.toList());
-
-
             if (username != null) {
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
                 // Créer une authentification basée sur le token
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                        username, null, authorities);
+                        userDetails,
+                        null,
+                        userDetails.getAuthorities());
+
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
+
+        System.out.println("Token valide ? " + jwtUtils.validateJwtToken(jwtToken));
 
         chain.doFilter(request, response);
     }

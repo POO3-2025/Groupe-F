@@ -77,4 +77,10 @@ public class TestDAO_NOSQL {
             dao.ajouterPersonnagePourUser(dbkeySQL, "Inexistant", archer);
         });
     }
+
+    @AfterEach
+    void tearDownEach() {
+        dbTest.getCollection("characters").drop();
+        dbTest.getCollection("inventory").drop();
+    }
 }

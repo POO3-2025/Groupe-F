@@ -380,7 +380,7 @@ public class CharacterType {
 
     /**
      * Méthode pour que le perso récupère toute sa vie après un combat
-     * @param mongoDatabase
+     * @param mongoDatabase La DB de connexion
      */
     public void recupererVie(MongoDatabase mongoDatabase) {
         MongoCollection<Document> collection = mongoDatabase.getCollection("characters");
@@ -397,8 +397,8 @@ public class CharacterType {
 
     /**
      *  Ajoute l'éxpérience gagné lors d'un combat et l'enregistre dans la collecyion du perso en DB NOSQL
-     * @param amount // l'expérience en int
-     * @param mongoDatabase // la Db pour la connexion
+     * @param amount  l'expérience en int
+     * @param mongoDatabase  la Db pour la connexion
      */
     public void gainExperience(int amount, MongoDatabase mongoDatabase) {
         this.experience += amount;
@@ -416,7 +416,7 @@ public class CharacterType {
 
     /**
      * Méthode permettant de passer d'un niveau si l'expérience suffit
-     * @param mongoDatabase // la Db pour la connexion
+     * @param mongoDatabase  la Db pour la connexion
      */
     private void levelUp(MongoDatabase mongoDatabase) {
         this.experience -= this.experienceToNextLevel;
@@ -425,7 +425,7 @@ public class CharacterType {
 
         // Augmenter stats du personnage
         this.maxHealth += 20;
-        this.damage += 5;
+        this.damage += 10;
         this.health = this.maxHealth; // Vie pleine à la montée de niveau
 
         // Mise à jour dans la DB

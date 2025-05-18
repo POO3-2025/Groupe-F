@@ -4,7 +4,9 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,8 +26,20 @@ import java.util.stream.Collectors;
  * Elle permet de générer, valider et extraire des informations à partir des tokens JWT.
  */
 public class JwtUtils {
-    private SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
-    private final int jwtExpirationMs = 3600000;   // Durée en millisecondes (1 heure)
+
+    private final SecretKey key;
+    private final int jwtExpirationMs = 3600000; // période de validité du token (1 heure)
+
+    /**
+     * Constructeur avec une clé fixe
+     */
+    public JwtUtils() {
+        // cette clé est absente pour des raisons de confidentialité
+        // Vous pouvez générer une clé de 64 caractères via un site web et la placé dans les "".
+        String secret = ""; // clé secrete
+        byte[] keyBytes = Base64.getEncoder().encode(secret.getBytes());
+        this.key = Keys.hmacShaKeyFor(keyBytes);
+    }
 
     /**
      * Méthode pour générer un token JWT à partir de l'authentification de l'utilisateur.

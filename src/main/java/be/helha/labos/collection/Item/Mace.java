@@ -12,9 +12,9 @@ public class Mace extends Weapon {
     public enum MaceMaterial {
         WOOD(35f, "Bois", 1,
                 "Orc"),
-        STONE(70f, "Pierre", 5,
+        STONE(95f, "Pierre", 5,
                 "Orc"),
-        DIAMOND(199f, "Diamant", 15,
+        DIAMOND(200f, "Diamant", 15,
                 "Orc"),;
         /**
          * Attributs de l'énumération MaceMaterial.

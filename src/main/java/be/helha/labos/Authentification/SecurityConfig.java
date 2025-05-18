@@ -19,7 +19,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(securedEnabled = true)
+@EnableMethodSecurity(prePostEnabled = true, securedEnabled = true)
 /**
  * Configuration de sécurité pour l'application.
  * Elle configure les filtres de sécurité, l'authentification et la gestion des sessions.
@@ -41,13 +41,13 @@ public class SecurityConfig  {
                 .csrf(csrf -> csrf.disable()) // Désactiver CSRF pour les tests (facultatif pour les APIs REST)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login").permitAll() // Permettre un accès libre à /login
-                        //.requestMatchers("/jeu/**").authenticated() // Nécessite un JWT
+                        .requestMatchers("/jeu/**").authenticated() // Nécessite un JWT
                         .anyRequest().authenticated() // Toute autre requête nécessite une authentification
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(org.springframework.security.config.http.SessionCreationPolicy.STATELESS))
                 .addFilterBefore(
-                        new JwtAuthentificationFilter(jwtUtils),
+                        new JwtAuthentificationFilter(jwtUtils,customUserDetailsService),
                         UsernamePasswordAuthenticationFilter.class)
         ;
 
@@ -71,9 +71,9 @@ public class SecurityConfig  {
         AuthenticationManagerBuilder authenticationManagerBuilder =
                 http.getSharedObject(AuthenticationManagerBuilder.class);
 
-        // Utilisez votre service de chargement d'utilisateur
+        // service de chargement d'utilisateur
         authenticationManagerBuilder.userDetailsService(customUserDetailsService)
-                .passwordEncoder(passwordEncoder()); // Assurez-vous d'utiliser un passwordEncoder ici
+                .passwordEncoder(passwordEncoder());
 
         return authenticationManagerBuilder.build();
     }

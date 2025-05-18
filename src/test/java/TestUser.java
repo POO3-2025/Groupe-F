@@ -55,20 +55,20 @@ public class TestUser {
     @Test
     @DisplayName("Test de l'état actif par défaut")
     @Order(4)
-    public void testActifParDefaut() {
+    public void testNonActifParDefaut() {
         User user = new User("pseudo", "password", "admin");
-        assertTrue(user.isActif(), "L'utilisateur doit être actif par défaut");
+        assertTrue(!(user.isActif()), "L'utilisateur doit être inactif par défaut");
     }
 
     @Test
     @DisplayName("Test du toString()")
     @Order(5)
     public void testToString() {
-        User user = new User(1, "pseudo", "motdepasse", "admin");
+        User user = new User(1, "pseudo", "motdepasse", "admin",false);
         String attendu = "\n{id=1" +
                 "\n pseudo='pseudo" +
                 "\n rôle='admin" +
-                "\n actif=true}";
+                "\n actif=false}";
         assertEquals(attendu, user.toString());
     }
 }

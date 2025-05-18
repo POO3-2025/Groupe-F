@@ -28,6 +28,7 @@ public class main {
 
         Connexion_DB_Nosql connexionDbNosql = new Connexion_DB_Nosql("nosql");
         MongoDatabase mongoDatabase = connexionDbNosql.createDatabase();
+        MongoCollection<CharacterType> Charactercollection = mongoDatabase.getCollection("characters", CharacterType.class);
 
         User_DAO daoUser = new User_DAO("mysql");
         DAO_NOSQL daoNosql = new DAO_NOSQL("nosql");
@@ -72,6 +73,8 @@ public class main {
 
             Archer archer = new Archer("archer",mongoDatabase);
             daoNosql.ajouterPersonnagePourUser("mysql",nouvelUser.getPseudo(), archer);
+
+          //  Charactercollection.insertOne(archer);
 
             Sword sword = new Sword();
             Sword fireSword = new Sword(Sword.SwordMaterial.FIRE);

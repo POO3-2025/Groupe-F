@@ -41,7 +41,7 @@ public class Menu {
             // Utilisation de DefaultTerminalFactory pour créer un terminal Swing
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
             // Spécifiez les dimensions ici
-            terminalFactory.setInitialTerminalSize(new TerminalSize(120, 24));
+            terminalFactory.setInitialTerminalSize(new TerminalSize(160, 38));
             // Ajout du SwingTerminal dans un SwingTerminalFrame
             SwingTerminalFrame terminal = terminalFactory.createSwingTerminal();
             terminal.setVisible(true);

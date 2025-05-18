@@ -19,16 +19,22 @@ public class UserDetailsImpl implements UserDetails {
      *
      * @param user l'utilisateur à partir duquel créer les détails
      */
+    private final int id;
     private final String pseudo;
     private final String password;
     private final boolean actif;
     private final String role;
 
     public UserDetailsImpl(User user) {
+        this.id = user.getId();
         this.pseudo = user.getPseudo();
         this.password = user.getPassword();
         this.actif = user.isActif();
-        this.role = user.getRole();
+        this.role = "ROLE_" + user.getRole();
+    }
+
+    public int getId() {
+        return id;
     }
 
     /**

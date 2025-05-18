@@ -1,6 +1,9 @@
 package be.helha.labos.collection.Item;
 
 public enum WeaponType {
+    /**
+     * Enum qui donne le type d'arme
+     */
     SWORD("Épée", "Tranchant"),
     BOW("Arc", "Perforant"),
     MACE("Masse", "Contondant");
@@ -9,6 +12,11 @@ public enum WeaponType {
     private final String damageType;
 
 
+    /**
+     * Contructeur de base
+     * @param name Nom de l'arme
+     * @param damageType Type de dégâts
+     */
     WeaponType(String name, String damageType) {
         this.name = name;
         this.damageType = damageType;
