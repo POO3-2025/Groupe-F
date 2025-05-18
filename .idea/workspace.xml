@@ -12,10 +12,13 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.11/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Mace$MaceMaterial.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Mace$MaceMaterial.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Bow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Bow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BotTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BotTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestCharacters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestCharacters.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/TestItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestItems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestMagasin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestMagasin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,6 +120,7 @@
     "Gradle.TestDBSQL.testConnexionExistePas.executor": "Run",
     "Gradle.TestDBSQL.testConnexionMDP_Faux.executor": "Run",
     "Gradle.TestDBSQL.testConnexionOk.executor": "Run",
+    "Gradle.TestItems (1).executor": "Run",
     "Gradle.TestItems.executor": "Run",
     "Gradle.TestItems.testBow.executor": "Run",
     "Gradle.TestItems.testBowSetters.executor": "Run",
@@ -126,6 +130,7 @@
     "Gradle.TestItems.testSwordSetters.executor": "Run",
     "Gradle.TestItems.testWeaponSetters.executor": "Run",
     "Gradle.TestItems.testWeaponToString.executor": "Run",
+    "Gradle.TestMagasin.executor": "Run",
     "Gradle.TestUser.executor": "Run",
     "Gradle.TestUserDAO.executor": "Run",
     "Gradle.test_game_1 [:be.helha.labos.Lanterna.Lancer.main()].executor": "Run",
@@ -144,7 +149,7 @@
     "Spring Boot.ServerAuthApplication.executor": "Run",
     "Spring Boot.SpringApiJeuApplication.executor": "Run",
     "com.codeium.enabled": "true",
-    "git-widget-placeholder": "feature/characters",
+    "git-widget-placeholder": "feature/Authentification",
     "last_opened_file_path": "C:/Users/akina/Desktop/Documents cours/POO 3/Labos/Groupe-F/Groupe-F/src/main/java/be/helha/labos/Authentification",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -162,7 +167,7 @@
       <recent name="be.helha.labos.Authentification" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.TestItems.testBowSetters">
+  <component name="RunManager">
     <configuration name="Lancer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="be.helha.labos.Lanterna.Lancer" />
       <module name="test_game_1.main" />
@@ -279,6 +284,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Lancer" />
+      <item itemvalue="Gradle.TestItems" />
+      <item itemvalue="Gradle.TestItems.testBow" />
+      <item itemvalue="Gradle.TestItems.testBowSetters" />
+      <item itemvalue="Gradle.TestItems.testWeaponToString" />
+      <item itemvalue="Spring Boot.SpringApiJeuApplication" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.TestItems.testBowSetters" />

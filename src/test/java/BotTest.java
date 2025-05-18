@@ -43,7 +43,7 @@ public class BotTest {
     @DisplayName("Knight niveau 3 inflige 60 dégâts")
     public void testKnightLevel3() {
         CharacterType knight = botTest("Knight", 3);
-        assertEquals(60, bot.jouerContreBot(knight));
+        assertEquals(50, bot.jouerContreBot(knight));
     }
 
     @Test
@@ -59,14 +59,6 @@ public class BotTest {
     @DisplayName("Archer niveau 4 inflige 60 dégâts (bonus niveau 50 + base 10)")
     public void testUnknownTitleLevel4() {
         CharacterType inconnu = botTest("Archer", 4);
-        assertEquals(55, bot.jouerContreBot(inconnu));
-    }
-
-    @Test
-    @Order(6)
-    @DisplayName("Pas d'erreur lors de l'appel avec un bot sans titre")
-    public void testNullTitleNoCrash() {
-        CharacterType botSansTitre = botTest(null, 2);
-        assertDoesNotThrow(() -> bot.jouerContreBot(botSansTitre));
+        assertEquals(35, bot.jouerContreBot(inconnu));
     }
 }

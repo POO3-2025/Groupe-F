@@ -36,7 +36,7 @@ public class JwtUtils {
     public JwtUtils() {
         // cette clé est absente pour des raisons de confidentialité
         // Vous pouvez générer une clé de 64 caractères via un site web et la placé dans les "".
-        String secret = "Upx~,bO'@p,I6c<KL%DukH!Bt|,6&-O+d(@h|QKB$rcef>iYt+%D}=8\\`q@ks[%5"; // clé secrete
+        String secret = ""; // clé secrete
         byte[] keyBytes = Base64.getEncoder().encode(secret.getBytes());
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }

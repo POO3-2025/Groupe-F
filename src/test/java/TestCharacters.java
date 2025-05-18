@@ -32,7 +32,7 @@ public class TestCharacters {
         testUser.setId(1); // ID USER fictif
     }
 
-    /*@Test
+    @Test
     @DisplayName("Test du constructeur et des getters de CharacterType")
     @Order(1)
     public void testCharacterTypeConstructeurEtGetters() {
@@ -174,5 +174,5 @@ public class TestCharacters {
         Archer archer = new Archer("TestArcher",db);
         String expected = "Archer{name='TestArcher', health=100, title='Archer', damage=5, money=100.0, user=0, dodge=0.5, precision=0.9}";
         assertEquals(expected, archer.toString());
-    }*/
+    }
 }
