@@ -18,9 +18,6 @@ public class chests {
 
     /**
      * Attributs de la classe chests
-     * @JsonProperty est utilisé pour indiquer que cet attribut doit être sérialisé/désérialisé avec ce nom
-     * @ObjectId est un identifiant unique généré par MongoDB
-     * @param id l'identifiant du coffre
      */
     @JsonProperty("_id")
     protected ObjectId id;
@@ -97,7 +94,6 @@ public class chests {
     /**
      * Méthode pour obtenir l'ID du coffre.
      * Cette méthode permet de rajouter un item dans un coffre d'un user
-     * @return ID du coffre.
      */
     public static void putItemsInChest(ObjectId chestId, ObjectId itemsId, boolean remove) {
         try {
