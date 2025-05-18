@@ -8,13 +8,13 @@ public class Sword extends Weapon {
      * Enumération des différents matériaux de l'épée.
      */
     public enum SwordMaterial {
-        STEEL(10f, "Bronze", 1,
+        STEEL(5f, "Bronze", 1,
                 "Knight"),
         SILVER(20f, "Fer", 5,
                 "Knight"),
-        GOLD(50f, "Or", 10,
+        GOLD(25f, "Or", 10,
                 "Knight"),
-        FIRE(100f, "Feu", 15,
+        FIRE(50f, "Feu", 15,
                 "Knight"),;
 
         /**
@@ -97,11 +97,11 @@ public class Sword extends Weapon {
 
     @Override
     public String toString() {
-        return String.format("%s (Matériau: %s, Dégâts: %d, Niveau requis: %d)",
+        return String.format("%s (Matériau: %s, Dégâts: %d, Niveau requis: %d, Type autorisé: %s)",
                 weaponType.getName(),
                 material.getMaterial(),
                 getDamage(),
-                getAllowedCharacterType(),
-                getRequiredLevel());
+                getRequiredLevel(),
+                getAllowedCharacterType());
     }
 }

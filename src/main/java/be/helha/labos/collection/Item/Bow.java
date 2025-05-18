@@ -11,9 +11,9 @@ public class Bow extends Weapon {
     public enum BowMaterial {
         WOOD(12f, "Bois",1,
                 "Archer"),
-        CROSSBOW(80f, "Arbalète",5,
+        CROSSBOW(25f, "Arbalète",5,
                 "Archer"),
-        ICE(36f, "Glace",15,"Archer"),;
+        ICE(33f, "Glace",15,"Archer"),;
 
         /**
          * attributs de l'énumération BowMaterial.
