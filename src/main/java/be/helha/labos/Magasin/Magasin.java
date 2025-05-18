@@ -76,8 +76,9 @@ public class Magasin {
             String itemType = item.getString("type");
 
             // Vérifie si le personnage peut acheter l'objet
-            if (allowedType == null || (!allowedType.equalsIgnoreCase(personnage.getTitle()) && !itemType.equalsIgnoreCase("Potion")))
+          if (!itemType.equalsIgnoreCase("Potion") && !allowedType.equalsIgnoreCase(personnage.getTitle()))
             {
+                System.out.println(itemType + " allowed: " + allowedType);
                 System.out.println("Cet objet ne peut pas être équipé par ce personnage !");
                 return false;
             }

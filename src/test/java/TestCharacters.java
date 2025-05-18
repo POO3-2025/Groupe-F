@@ -34,7 +34,7 @@ public class TestCharacters {
     @DisplayName("Test du constructeur et des getters de CharacterType")
     @Order(1)
     public void testCharacterTypeConstructeurEtGetters() {
-        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8,db, testUser);
+        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8,db, testUser,null);
 
         assertEquals("TestCharacter", character.getName());
         assertEquals(100, character.getHealth());
@@ -122,7 +122,7 @@ public class TestCharacters {
     @DisplayName("Test de la méthode attackHits de CharacterType")
     @Order(6)
     public void testAttackHits() {
-        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8,db, testUser);
+        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8,db, testUser,null);
         boolean attackResult = character.attackHits();
 
         // Vérifie que la méthode retourne un bool
@@ -133,8 +133,8 @@ public class TestCharacters {
     @DisplayName("Test de la méthode attackHitsMainNu de CharacterType")
     @Order(7)
     public void testAttackHitsMainNu() {
-        CharacterType attacker = new CharacterType("Attacker", 100, 10, 0.2, 0.8,db, testUser);
-        CharacterType target = new CharacterType("Target", 100, 5, 0.1, 0.9,db, testUser);
+        CharacterType attacker = new CharacterType("Attacker", 100, 10, 0.2, 0.8,db, testUser,null);
+        CharacterType target = new CharacterType("Target", 100, 5, 0.1, 0.9,db, testUser,null);
 
         int damage = attacker.attackHitsMainNu(target);
 
@@ -146,7 +146,7 @@ public class TestCharacters {
     @DisplayName("Test de la mise à jour de l'argent dans la base de données")
     @Order(9)
     public void testUpdateMoneyInDB() {
-        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8,db, testUser);
+        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8,db, testUser,null);
         character.setMoney(200.00);
 
         // Simule la mise à jour dans la base de données
@@ -182,7 +182,7 @@ public class TestCharacters {
     @DisplayName("Test de la méthode toString pour CharacterType")
     @Order(11)
     public void testToStringCharacterType() {
-        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8,db, testUser);
+        CharacterType character = new CharacterType("TestCharacter", 100, 10, 0.2, 0.8,db, testUser,null);
         String expected = "Character{name='TestCharacter', health=100, title='null', damage=10, money=100.0, user=1, dodge=0.2, precision=0.8}";
         assertEquals(expected, character.toString());
     }
