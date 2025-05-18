@@ -5,6 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbe35a1e-4d15-4a05-9805-559abf65640b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/Http/AuthHttpService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/Http/UserHttp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11/fileHashes/fileHashes.bin" afterDir="false" />
@@ -13,24 +16,35 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/AuthController$LoginRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/AuthController$LoginRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/AuthController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/Authen.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/Authen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/JwtUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/JwtUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/UserDetailsImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/UserDetailsImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DB/User_DAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/DB/User_DAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Magasin/Magasin.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Magasin/Magasin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Mace$MaceMaterial.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Mace$MaceMaterial.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/AuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/Authen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/Authen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/CustomUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/CustomUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/JwtAuthentificationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/JwtAuthentificationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/JwtUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/UserDetailsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/UserDetailsImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/jeuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/jeuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/jeuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/jeuService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/DB/User_DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/DB/User_DAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Http/HttpService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Combat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Combat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Inscription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Inscription.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Magasin/Magasin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Magasin/Magasin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Bow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Bow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Mace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Mace.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Sword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Sword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Partie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Partie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/TestMagasin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestMagasin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestUserDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,62 +124,73 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Gradle.BotTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.BotTest.testOrcLevel1.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Build Groupe-F.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Groupe-F [:be.helha.labos.Lanterna.Lancer.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Groupe-F [:be.helha.labos.Magasin.TestMagasin.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Groupe-F [:be.helha.labos.main.main.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Groupe-F [:be.helha.labos.main.main_Characters.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TestCharacters.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TestCharacters.testRemoveCharacter.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TestDAO_NOSQL.TestSuppressionPersoAUser.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TestDAO_NOSQL.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TestDAO_NOSQL.testAjouterPersoAUser.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TestDBSQL.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TestDBSQL.testConnexionExistePas.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TestDBSQL.testConnexionMDP_Faux.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TestDBSQL.testConnexionOk.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TestUser.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TestUserDAO.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ServerAuthApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.SpringApiJeuApplication.executor&quot;: &quot;Run&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/Authentification&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/akina/Desktop/Documents cours/POO 3/Labos/Groupe-F/Groupe-F/src/main/java/be/helha/labos/Authentification&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Gradle.BotTest.executor": "Run",
+    "Gradle.BotTest.testOrcLevel1.executor": "Run",
+    "Gradle.Build Groupe-F.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.Groupe-F [:be.helha.labos.Lanterna.Lancer.main()].executor": "Run",
+    "Gradle.Groupe-F [:be.helha.labos.Magasin.TestMagasin.main()].executor": "Run",
+    "Gradle.Groupe-F [:be.helha.labos.main.main.main()].executor": "Run",
+    "Gradle.Groupe-F [:be.helha.labos.main.main_Characters.main()].executor": "Run",
+    "Gradle.TestCharacters.executor": "Run",
+    "Gradle.TestCharacters.testRemoveCharacter.executor": "Run",
+    "Gradle.TestDAO_NOSQL.TestSuppressionPersoAUser.executor": "Run",
+    "Gradle.TestDAO_NOSQL.executor": "Run",
+    "Gradle.TestDAO_NOSQL.testAjouterPersoAUser.executor": "Run",
+    "Gradle.TestDBSQL.executor": "Run",
+    "Gradle.TestDBSQL.testConnexionExistePas.executor": "Run",
+    "Gradle.TestDBSQL.testConnexionMDP_Faux.executor": "Run",
+    "Gradle.TestDBSQL.testConnexionOk.executor": "Run",
+    "Gradle.TestUser.executor": "Run",
+    "Gradle.TestUser.testNonActifParDefaut.executor": "Run",
+    "Gradle.TestUser.testToString.executor": "Run",
+    "Gradle.TestUserDAO.executor": "Run",
+    "Gradle.TestUserDAO.testGetUserByPseudo.executor": "Debug",
+    "Gradle.TestUserDAO.testVerifierAuthentification.executor": "Debug",
+    "Gradle.TestUserDAO.testVerifierAuthentificationInvalide.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.ServerAuthApplication.executor": "Run",
+    "Spring Boot.SpringApiJeuApplication.executor": "Run",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "feature/Authentification",
+    "last_opened_file_path": "C:/Users/akina/Desktop/Documents cours/POO 3/Labos/Groupe-F/Groupe-F/src/main/java/be/helha/labos/Spring",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\akina\Desktop\Documents cours\POO 3\Labos\Groupe-F\Groupe-F\src\main\java\be\helha\labos\Spring" />
+      <recent name="C:\Users\akina\Desktop\Documents cours\POO 3\Labos\Groupe-F\Groupe-F\src\main\resources" />
+      <recent name="C:\Users\akina\Desktop\Documents cours\POO 3\Labos\Groupe-F\Groupe-F\src\main\java\be\helha\labos\Authentification\Http" />
       <recent name="C:\Users\akina\Desktop\Documents cours\POO 3\Labos\Groupe-F\Groupe-F\src\main\java\be\helha\labos\Authentification" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\akina\Desktop\Documents cours\POO 3\Labos\Groupe-F\Groupe-F\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="be.helha.labos.Authentification" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="BotTest.testOrcLevel1" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TestUserDAO.testGetUserByPseudo" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -178,7 +203,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;BotTest.testOrcLevel1&quot;" />
+            <option value="&quot;TestUserDAO.testGetUserByPseudo&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -189,7 +214,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TestCharacters.testRemoveCharacter" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TestUserDAO.testVerifierAuthentification" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -202,7 +227,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;TestCharacters.testRemoveCharacter&quot;" />
+            <option value="&quot;TestUserDAO.testVerifierAuthentification&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -213,7 +238,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TestDBSQL.testConnexionExistePas" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TestUserDAO.testVerifierAuthentificationInvalide" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -226,7 +251,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;TestDBSQL.testConnexionExistePas&quot;" />
+            <option value="&quot;TestUserDAO.testVerifierAuthentificationInvalide&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -237,7 +262,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TestDBSQL.testConnexionMDP_Faux" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TestUser.testNonActifParDefaut" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -250,7 +275,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;TestDBSQL.testConnexionMDP_Faux&quot;" />
+            <option value="&quot;TestUser.testNonActifParDefaut&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -261,7 +286,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TestDBSQL.testConnexionOk" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TestUser.testToString" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -274,7 +299,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;TestDBSQL.testConnexionOk&quot;" />
+            <option value="&quot;TestUser.testToString&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -292,13 +317,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Gradle.TestUser.testNonActifParDefaut" />
+      <item itemvalue="Gradle.TestUser.testToString" />
+      <item itemvalue="Gradle.TestUserDAO.testGetUserByPseudo" />
+      <item itemvalue="Gradle.TestUserDAO.testVerifierAuthentification" />
+      <item itemvalue="Gradle.TestUserDAO.testVerifierAuthentificationInvalide" />
+      <item itemvalue="Spring Boot.SpringApiJeuApplication" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.TestDBSQL.testConnexionMDP_Faux" />
-        <item itemvalue="Gradle.TestDBSQL.testConnexionExistePas" />
-        <item itemvalue="Gradle.TestDBSQL.testConnexionOk" />
-        <item itemvalue="Gradle.BotTest.testOrcLevel1" />
-        <item itemvalue="Gradle.TestCharacters.testRemoveCharacter" />
+        <item itemvalue="Gradle.TestUserDAO.testVerifierAuthentificationInvalide" />
+        <item itemvalue="Gradle.TestUserDAO.testVerifierAuthentification" />
+        <item itemvalue="Gradle.TestUserDAO.testGetUserByPseudo" />
+        <item itemvalue="Gradle.TestUser.testToString" />
+        <item itemvalue="Gradle.TestUser.testNonActifParDefaut" />
       </list>
     </recent_temporary>
   </component>
@@ -328,6 +361,13 @@
       <workItem from="1747160722199" duration="304000" />
       <workItem from="1747306848774" duration="12328000" />
       <workItem from="1747404126628" duration="3837000" />
+      <workItem from="1747486544782" duration="5798000" />
+      <workItem from="1747494879188" duration="5829000" />
+      <workItem from="1747506040102" duration="1700000" />
+      <workItem from="1747510681666" duration="1258000" />
+      <workItem from="1747517162699" duration="5846000" />
+      <workItem from="1747559609682" duration="3911000" />
+      <workItem from="1747571768339" duration="7447000" />
     </task>
     <servers />
   </component>

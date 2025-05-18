@@ -37,6 +37,9 @@ public class Authen {
                     userDetails.getAuthorities()
             );
 
+            if(!user_DAO.verifierConnexion(pseudo,motDePasse)){
+                throw new RuntimeException("Utilisateur déjà connecté !");
+            } 
             user_DAO.setUserActif(user.getId(), true);
             return jwtUtils.generateToken(auth);
         } else {

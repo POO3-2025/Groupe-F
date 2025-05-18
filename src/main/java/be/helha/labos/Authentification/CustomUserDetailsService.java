@@ -1,6 +1,7 @@
 package be.helha.labos.Authentification;
 
 import be.helha.labos.DB.Connexion_DB;
+import be.helha.labos.DB.User_DAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -39,16 +40,22 @@ public class CustomUserDetailsService implements UserDetailsService {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE Pseudo = ?");
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
+            User_DAO userDao = new User_DAO("mysql");
 
             if (rs.next()) {
+                int id = rs.getInt("id");
+                String pseudo = rs.getString("pseudo");
                 String password = rs.getString("password");
                 String role = rs.getString("role");
 
-                return User.builder()
-                        .username(username)
-                        .password(password)
-                        .authorities(Collections.singletonList(new SimpleGrantedAuthority("Role :" + role)))
-                        .build();
+                be.helha.labos.collection.User user = new be.helha.labos.collection.User();
+                user.setId(id);
+                user.setPseudo(pseudo);
+                user.setPassword(password);
+                user.setRole(role);
+                user.setActif(true);
+
+                return new UserDetailsImpl(user);
             } else {
                 throw new UsernameNotFoundException("Utilisateur non trouvé : " + username);
             }

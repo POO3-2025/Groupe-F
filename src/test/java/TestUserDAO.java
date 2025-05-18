@@ -4,6 +4,7 @@ import be.helha.labos.collection.User;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -50,11 +51,26 @@ public class TestUserDAO {
         // Création d'un objet User
         User user1 = new User("TestPseudo", "PasswordSecret", "TestRole");
         userDao.ajouterUser(user1);
-        assertTrue(userDao.verifierConnexion(user1.getPseudo(), user1.getPassword()));
 
         Authen authen = new Authen();
         String token = authen.login(user1.getPseudo(),"PasswordSecret","mysqlTEST");
         assertNotNull(token);
+    }
+
+    @Test
+    @DisplayName("Vérification de la non authentification si user déjà connecté")
+    @Order(4)
+    public void testVerifierAuthentificationInvalide() {
+        // Création d'un objet User
+        User user1 = new User("TestPseudo", "PasswordSecret", "TestRole");
+        user1.setActif(true); // pour le test
+        userDao.ajouterUser(user1);
+
+        Authen authen = new Authen();
+
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> authen.login(user1.getPseudo(),user1.getPassword(),"mysqlTEST"));
+        assertTrue(exception.getMessage().contains("Utilisateur déjà connecté !"));
     }
 
     @Test

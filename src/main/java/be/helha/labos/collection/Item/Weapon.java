@@ -10,6 +10,11 @@ public abstract class Weapon extends Item {
         super();
     }
 
+    /**
+     * Constructeur de base
+     * @param damage degâts de l'arme
+     * @param weaponType Type de l'arme
+     */
     public Weapon(int damage, WeaponType weaponType)
     {
         this.damage = damage;
@@ -18,6 +23,9 @@ public abstract class Weapon extends Item {
 
     protected abstract String getMaterialName();
 
+    /**
+     * Méthode d'attaque
+     */
     public void attack() {
         System.out.printf("Vous infligez %d dégâts avec %s en %s !", getDamage(), weaponType.getName(), getMaterialName()); // Méthode abstraite à implémenter
     }

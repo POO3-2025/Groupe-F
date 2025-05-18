@@ -55,7 +55,7 @@ public class Partie {
             Panel panel = new Panel();
 
             panel.addComponent(new Button("Jouer en solo", () -> {
-               combat.AfficherCombat(personnage,true);
+               combat.AfficherCombat(personnage);
             }));
 
 
