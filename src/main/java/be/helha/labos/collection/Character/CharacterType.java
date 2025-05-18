@@ -425,7 +425,7 @@ public class CharacterType {
 
         // Augmenter stats du personnage
         this.maxHealth += 20;
-        this.damage += 5;
+        this.damage += 10;
         this.health = this.maxHealth; // Vie pleine à la montée de niveau
 
         // Mise à jour dans la DB

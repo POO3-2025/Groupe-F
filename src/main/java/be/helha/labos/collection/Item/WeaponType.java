@@ -6,8 +6,7 @@ public enum WeaponType {
      */
     SWORD("Épée", "Tranchant"),
     BOW("Arc", "Perforant"),
-    MACE("Masse", "Contondant"),
-    AXE("Hache", "Tranchant"); // Pas utilisé
+    MACE("Masse", "Contondant");
 
     private final String name;
     private final String damageType;
