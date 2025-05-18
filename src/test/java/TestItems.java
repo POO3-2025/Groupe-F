@@ -48,7 +48,7 @@ public class TestItems {
     void testWeaponSetters() {
         Weapon weapon = new Sword(Sword.SwordMaterial.STEEL);
         weapon.setDamage(25);
-        weapon.setWeaponType(WeaponType.AXE);
+        weapon.setWeaponType(WeaponType.SWORD);
 
         assertEquals(25, weapon.getDamage(), "Les dégâts de l'arme doivent être 25 après modification.");
         assertEquals("Hache", weapon.getWeaponType().getName(), "Le type de l'arme doit être 'Hache'.");

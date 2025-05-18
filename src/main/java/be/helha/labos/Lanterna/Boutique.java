@@ -2,6 +2,7 @@ package be.helha.labos.Lanterna;
 
 import be.helha.labos.DBNosql.Connexion_DB_Nosql;
 import be.helha.labos.collection.Character.CharacterType;
+import be.helha.labos.collection.Item.WeaponType;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
@@ -134,9 +135,23 @@ public class Boutique {
 
         double prix = objetSelectionne.getDouble("prix");
         String nom = objetSelectionne.getString("nom");
+        String type = objetSelectionne.getString("type");
+        System.out.println("Type de l'objet : " + type);
+        String typeCharacter = objetSelectionne.getString("allowed");
+        int requiredLevel = objetSelectionne.getInteger("requiredLevel", 0);
 
         if (prix > personnage.getMoney()) {
             MessageDialog.showMessageDialog(gui, "Erreur", "Fonds insuffisants.");
+            return;
+        }
+        // Vérifier si le personnage peut utiliser l'objet
+        if (!type.equalsIgnoreCase("Potion") && !typeCharacter.equalsIgnoreCase(personnage.getTitle())) {
+            MessageDialog.showMessageDialog(gui, "Erreur", "Votre classe ne peut pas utiliser cet objet !");
+            return;
+        }
+
+        if (personnage.getLevel() < requiredLevel) {
+            MessageDialog.showMessageDialog(gui, "Erreur", "Niveau insuffisant ! Niveau requis : " + requiredLevel);
             return;
         }
 
