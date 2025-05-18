@@ -32,24 +32,62 @@ public class Bot {
      */
     public int jouerContreBot(CharacterType bot) {
 
-
         int baseDamage = baseDamageByTitle.getOrDefault(bot.getTitle(), 10);
 
-        // Dégats selon le niveau
-        int levelBonus = switch (bot.getLevel()) {
-            case 1 -> 0;
-            case 2 -> 20;
-            case 3 -> 35;
-            case 4 -> 45;
-            case 5 -> 60;
-            case 6 -> 70;
-            case 7 -> 90;
-            case 8 -> 100;
-            case 9 -> 115;
-            case 10 -> 130;
-            default -> 180;
-        };
-
-        return baseDamage + levelBonus;
+        switch (bot.getTitle()){
+            case "Knight":
+                // Dégats selon le niveau
+                int levelBonus = switch (bot.getLevel()) {
+                    case 1 -> 0;
+                    case 2 -> 15;
+                    case 3 -> 25;
+                    case 4 -> 40;
+                    case 5 -> 60;
+                    case 6 -> 75;
+                    case 7 -> 85;
+                    case 8 -> 100;
+                    case 9 -> 120;
+                    case 10 -> 150;
+                    default -> 180;
+                };
+               baseDamage += levelBonus;
+        }
+        switch (bot.getTitle()){
+            case "Orc":
+                // Dégats selon le niveau
+                int levelBonus = switch (bot.getLevel()) {
+                    case 1 -> 0;
+                    case 2 -> 20;
+                    case 3 -> 45;
+                    case 4 -> 55;
+                    case 5 -> 70;
+                    case 6 -> 90;
+                    case 7 -> 100;
+                    case 8 -> 120;
+                    case 9 -> 140;
+                    case 10 -> 170;
+                    default -> 200;
+                };
+                baseDamage += levelBonus;
+        }
+        switch (bot.getTitle()){
+            case "Archer":
+                // Dégats selon le niveau
+                int levelBonus = switch (bot.getLevel()) {
+                    case 1 -> 0;
+                    case 2 -> 10;
+                    case 3 -> 15;
+                    case 4 -> 25;
+                    case 5 -> 35;
+                    case 6 -> 44;
+                    case 7 -> 52;
+                    case 8 -> 60;
+                    case 9 -> 70;
+                    case 10 -> 82;
+                    default -> 100;
+                };
+                baseDamage += levelBonus;
+        }
+        return baseDamage;
     }
 }
