@@ -76,8 +76,9 @@ public class Magasin {
             String itemType = item.getString("type");
 
             // Vérifie si le personnage peut acheter l'objet
-            if (allowedType == null || (!allowedType.equalsIgnoreCase(personnage.getTitle()) && !itemType.equalsIgnoreCase("Potion")))
+          if (!itemType.equalsIgnoreCase("Potion") && !allowedType.equalsIgnoreCase(personnage.getTitle()))
             {
+                System.out.println(itemType + " allowed: " + allowedType);
                 System.out.println("Cet objet ne peut pas être équipé par ce personnage !");
                 return false;
             }
@@ -278,7 +279,7 @@ public class Magasin {
             Document document = new Document();
             double prix = 0;
 
-            int typeAleatoire = random.nextInt(4);
+            int typeAleatoire = random.nextInt(5);
 
             int requiredLevel = 0;
             switch (typeAleatoire) {
@@ -287,7 +288,7 @@ public class Magasin {
                     Sword.SwordMaterial material = materials[random.nextInt(materials.length)];
                     Sword sword = new Sword(material);
                     objet = sword;
-                    requiredLevel = material.getRequiredLevel();
+                    requiredLevel = sword.getRequiredLevel();
                     nom = "Épée en " + material.getMaterial();
                     prix = calculerPrixArme("Sword", material.getMaterial());
 
@@ -302,6 +303,7 @@ public class Magasin {
                     Potion potion = new Potion(max, contenu);
                     objet = potion;
                     nom = "Potion (" + contenu + "/" + max + ")";
+                    requiredLevel = 1;
                     prix = 10 + ((double) contenu / max) * 40;
                     prix = calculerPrixArme("Potion", "none");
 
@@ -314,6 +316,7 @@ public class Magasin {
                     Bow.BowMaterial material = materials[random.nextInt(materials.length)];
                     Bow bow = new Bow(material);
                     objet = bow;
+                    requiredLevel = bow.getRequiredLevel();
                     nom = "Arc en " + material.getMaterial();
                     prix = calculerPrixArme("Bow", material.getMaterial());
 
@@ -327,13 +330,33 @@ public class Magasin {
                     Mace.MaceMaterial material = materials[random.nextInt(materials.length)];
                     Mace mace = new Mace(material);
                     objet = mace;
-                    nom = "Masse en " + material.getMaterial();
+                    nom = "Masse en " + mace.getMaterial();
+                    requiredLevel = mace.getMaterial().getLevel_Required();
                     prix = calculerPrixArme("Mace", material.getMaterial());
 
                     document.append("type", "Mace")
                             .append("materiau", material.getMaterial())
                             .append("degats", mace.getDamage())
                             .append("allowed",mace.getAllowedCharacterType());
+                }
+                case 4 -> {
+                    int maxSize = 10; // Taille maximale du coffre
+                    List<Document> slots = new ArrayList<>();
+                    for (int j = 0; j < maxSize; j++) {
+                        slots.add(new Document("slot_number", j + 1).append("item", null));
+                    }
+
+                    // Création du coffre
+                    nom = "Coffre en bois";
+                    requiredLevel=1;
+                    document.append("type", "Chest")
+                            .append("maxSize", maxSize)
+                            .append("slots", slots)
+                            .append("prix", 30.0)
+                            .append("_id", new ObjectId());
+
+
+                    System.out.println("Coffre généré : Coffre (Prix : 100.0)");
                 }
             }
 

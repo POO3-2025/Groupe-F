@@ -136,7 +136,6 @@ public class Boutique {
         double prix = objetSelectionne.getDouble("prix");
         String nom = objetSelectionne.getString("nom");
         String type = objetSelectionne.getString("type");
-        System.out.println("Type de l'objet : " + type);
         String typeCharacter = objetSelectionne.getString("allowed");
         int requiredLevel = objetSelectionne.getInteger("requiredLevel", 0);
 

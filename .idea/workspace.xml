@@ -13,23 +13,18 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/JwtUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Authentification/JwtUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/MenuCréerPersonnage.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Lanterna/MenuCréerPersonnage.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Magasin/Magasin.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/Magasin/Magasin.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Mace$MaceMaterial.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Mace$MaceMaterial.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Mace.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Mace.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/MenuCréerPersonnage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/MenuCréerPersonnage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Partie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Partie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/CharacterType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Character/CharacterType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Boutique.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Lanterna/Boutique.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Magasin/Magasin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Magasin/Magasin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Bow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Bow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/WeaponType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/WeaponType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/main/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Mace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Mace.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Sword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/collection/Item/Sword.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/TestCharacters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestCharacters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TestDAO_NOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestDAO_NOSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestItems.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/TestMagasin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestMagasin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -123,6 +118,8 @@
     "Gradle.Groupe-F [:be.helha.labos.main.main_Characters.main()].executor": "Run",
     "Gradle.TestCharacters.executor": "Run",
     "Gradle.TestCharacters.testRemoveCharacter.executor": "Run",
+    "Gradle.TestCharacters.testToStringArcher.executor": "Run",
+    "Gradle.TestCharacters.testToStringCharacterType.executor": "Run",
     "Gradle.TestDAO_NOSQL.TestSuppressionPersoAUser.executor": "Run",
     "Gradle.TestDAO_NOSQL.executor": "Run",
     "Gradle.TestDAO_NOSQL.testAjouterPersoAUser.executor": "Run",
@@ -131,10 +128,14 @@
     "Gradle.TestDBSQL.testConnexionMDP_Faux.executor": "Run",
     "Gradle.TestDBSQL.testConnexionOk.executor": "Run",
     "Gradle.TestItems.executor": "Run",
-    "Gradle.TestMagasin.executor": "Debug",
-    "Gradle.TestMagasin.testAcheterObjet.executor": "Run",
-    "Gradle.TestMagasin.testAfficherObjetsDisponibles.executor": "Run",
-    "Gradle.TestMagasin.testVendreObjet.executor": "Debug",
+    "Gradle.TestItems.testBow.executor": "Run",
+    "Gradle.TestItems.testBowSetters.executor": "Run",
+    "Gradle.TestItems.testMace.executor": "Run",
+    "Gradle.TestItems.testMaceSetters.executor": "Run",
+    "Gradle.TestItems.testSword.executor": "Run",
+    "Gradle.TestItems.testSwordSetters.executor": "Run",
+    "Gradle.TestItems.testWeaponSetters.executor": "Run",
+    "Gradle.TestItems.testWeaponToString.executor": "Run",
     "Gradle.TestUser.executor": "Run",
     "Gradle.TestUserDAO.executor": "Run",
     "Gradle.test_game_1 [:be.helha.labos.Lanterna.Lancer.main()].executor": "Run",
@@ -153,7 +154,7 @@
     "Spring Boot.ServerAuthApplication.executor": "Run",
     "Spring Boot.SpringApiJeuApplication.executor": "Run",
     "com.codeium.enabled": "true",
-    "git-widget-placeholder": "feature/Authentification",
+    "git-widget-placeholder": "Merging feature/Authentification",
     "last_opened_file_path": "C:/Users/akina/Desktop/Documents cours/POO 3/Labos/Groupe-F/Groupe-F/src/main/java/be/helha/labos/Authentification",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -171,21 +172,8 @@
       <recent name="be.helha.labos.Authentification" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="TestMagasin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="be.helha.labos.Magasin.TestMagasin" />
-      <module name="test_game_1.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="be.helha.labos.Magasin.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestDAO_NOSQL.TestSuppressionPersoAUser" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.TestItems.testWeaponToString">
+    <configuration name="TestItems.testBow" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -198,7 +186,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;TestDAO_NOSQL.TestSuppressionPersoAUser&quot;" />
+            <option value="&quot;TestItems.testBow&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -209,7 +197,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TestMagasin.testAcheterObjet" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TestItems.testBowSetters" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -222,7 +210,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;TestMagasin.testAcheterObjet&quot;" />
+            <option value="&quot;TestItems.testBowSetters&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -233,7 +221,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TestMagasin.testAfficherObjetsDisponibles" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TestItems.testMace" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -246,7 +234,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;TestMagasin.testAfficherObjetsDisponibles&quot;" />
+            <option value="&quot;TestItems.testMace&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -257,7 +245,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TestMagasin.testVendreObjet" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TestItems.testMaceSetters" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -270,7 +258,31 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;TestMagasin.testVendreObjet&quot;" />
+            <option value="&quot;TestItems.testMaceSetters&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="TestItems.testWeaponToString" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;TestItems.testWeaponToString&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -289,20 +301,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.TestMagasin" />
-      <item itemvalue="Gradle.TestDAO_NOSQL.TestSuppressionPersoAUser" />
-      <item itemvalue="Gradle.TestMagasin.testAcheterObjet" />
-      <item itemvalue="Gradle.TestMagasin.testAfficherObjetsDisponibles" />
-      <item itemvalue="Gradle.TestMagasin.testVendreObjet" />
+      <item itemvalue="Gradle.TestItems.testBow" />
+      <item itemvalue="Gradle.TestItems.testBowSetters" />
+      <item itemvalue="Gradle.TestItems.testMace" />
+      <item itemvalue="Gradle.TestItems.testMaceSetters" />
+      <item itemvalue="Gradle.TestItems.testWeaponToString" />
       <item itemvalue="Spring Boot.SpringApiJeuApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.TestMagasin.testVendreObjet" />
-        <item itemvalue="Gradle.TestMagasin.testAcheterObjet" />
-        <item itemvalue="Gradle.TestMagasin.testAfficherObjetsDisponibles" />
-        <item itemvalue="Gradle.TestDAO_NOSQL.TestSuppressionPersoAUser" />
-        <item itemvalue="Application.TestMagasin" />
+        <item itemvalue="Gradle.TestItems.testWeaponToString" />
+        <item itemvalue="Gradle.TestItems.testMaceSetters" />
+        <item itemvalue="Gradle.TestItems.testMace" />
+        <item itemvalue="Gradle.TestItems.testBowSetters" />
+        <item itemvalue="Gradle.TestItems.testBow" />
       </list>
     </recent_temporary>
   </component>
@@ -332,7 +344,6 @@
       <workItem from="1747160722199" duration="304000" />
       <workItem from="1747306848774" duration="12328000" />
       <workItem from="1747404126628" duration="3837000" />
-      <workItem from="1747590330770" duration="2420000" />
     </task>
     <servers />
   </component>

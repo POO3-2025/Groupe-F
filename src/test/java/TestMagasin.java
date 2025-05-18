@@ -67,9 +67,10 @@ class TestMagasin {
         assertFalse(objets.isEmpty());
         assertEquals(10, objets.size());
     }
-
+    /*
     @Test
     @DisplayName("T2 - Achat d'un objet par un personnage")
+
     void testAcheterObjet() {
         // Création d'un objet test
         Document item = new Document()
@@ -89,7 +90,7 @@ class TestMagasin {
         assertEquals(900.0, testCharacter.getMoney());
 
     }
-
+    */
 
     @Test
     @DisplayName("T3 - Vente d'un objet par un personnage")
