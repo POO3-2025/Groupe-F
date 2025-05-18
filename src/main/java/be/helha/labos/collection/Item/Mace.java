@@ -5,6 +5,7 @@ package be.helha.labos.collection.Item;
  * La classe hérite de la classe Weapon.
  */
 public class Mace extends Weapon {
+
     /**
      * Enumération des différents matériaux de la masse.
      */
@@ -18,10 +19,10 @@ public class Mace extends Weapon {
         /**
          * Attributs de l'énumération MaceMaterial.
          */
-        private final float damage;
-        private final String material;
-        private final int level_Required;
-        private final String AllowedCharacterType;
+        private float damage;
+        private String material;
+        private int level_Required;
+        private String AllowedCharacterType;
 
         /**
          * Constructeur de l'énumération MaceMaterial.
@@ -30,6 +31,10 @@ public class Mace extends Weapon {
          * @param material        Matériau de la masse.
          * @param level_Required  Niveau requis pour utiliser la masse.
          */
+
+
+
+
         MaceMaterial(float damage, String material, int level_Required, String AllowedCharacterType) {
             this.damage = damage;
             this.material = material;
@@ -58,6 +63,8 @@ public class Mace extends Weapon {
          *
          * @return Niveau requis pour utiliser la masse.
          */
+
+
         public int getLevel_Required() {
             return this.level_Required;
         }
