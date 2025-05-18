@@ -14,17 +14,16 @@ import java.util.List;
  */
 public class UserDetailsImpl implements UserDetails {
 
-    /**
-     * Constructeur de la classe UserDetailsImpl.
-     *
-     * @param user l'utilisateur à partir duquel créer les détails
-     */
+
     private final int id;
     private final String pseudo;
     private final String password;
     private final boolean actif;
     private final String role;
-
+    /**
+     * Constructeur de la classe UserDetailsImpl.
+     *
+     */
     public UserDetailsImpl(User user) {
         this.id = user.getId();
         this.pseudo = user.getPseudo();

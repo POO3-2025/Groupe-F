@@ -15,6 +15,7 @@
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Mace$MaceMaterial.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/helha/labos/collection/Item/Mace$MaceMaterial.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/helha/labos/Authentification/JwtUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BotTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BotTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/TestCharacters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestCharacters.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/TestItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestItems.java" afterDir="false" />
